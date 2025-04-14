@@ -14,7 +14,7 @@
 
 int loop(window_t *win)
 {
-    if (win->window == NULL)
+    if (win->window == nullptr)
         return EPI_FAIL;
     while (sfRenderWindow_isOpen(win->window)) {
         if (sfClock_getElapsedTime(win->clock).microseconds <= ELAPSED_TIME)

@@ -21,7 +21,7 @@ int project(void)
     sfVector2i fps_bits = {FPS, BITS};
     int status = EPI_SUCESS;
 
-    if (window == NULL)
+    if (window == nullptr)
         return EPI_FAIL;
     memset(window, 1, sizeof(window_t));
     window->clock = sfClock_create();
