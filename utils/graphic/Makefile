@@ -17,7 +17,8 @@ RM			?=	rm -rf
 # BINARY CREATION
 #
 
-SRC 		= 		make_window.c
+SRC 		= 		make_window.c			\
+					get_pos.c
 
 OBJ			=		$(SRC:.c=.o)
 
