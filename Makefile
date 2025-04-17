@@ -36,11 +36,17 @@ CFLAGS		=		-Wall -Wextra -Wpedantic -iquote include -std=c2x
 CPPFLAGS	+=		-lcsfml-audio -lcsfml-graphics
 CPPFLAGS	+=		-lcsfml-network -lcsfml-system -lcsfml-window -lm
 
-DEBUG_FLAGS		=	-g3
+DEBUG_FLAGS		=	-g3 -fsanitise=address
 
 LDLIBS +=	-lmy -lgraphic
 
 LDFLAGS	+=	-Lutils/
+
+UT_SRC =
+
+UT_NAME	=	unit_tests
+
+UT_FLAGS	=	--coverage -lcriterion
 
 all:		$(NAME)
 
@@ -58,6 +64,9 @@ clean:
 	@make -C utils/graphic clean
 	@echo "\n"
 	$(RM) $(OBJ)
+	@find -name "*~" -delete -o -name "#*#" -delete
+	@find -name "*.gcda" -delete -o -name "*.gcno" -delete
+
 
 fclean: clean
 	@echo "\n"
@@ -66,6 +75,7 @@ fclean: clean
 	@make -C utils/graphic fclean
 	@echo "\n"
 	$(RM) -f $(NAME)
+	@find -name "coding-style-reports.log" -delete
 
 re:	fclean all
 	@echo "\n"
@@ -84,18 +94,18 @@ debug:	debug_comp clean
 	@make -C utils/graphic debug
 
 tests_run:
-	@echo "Hello, we are happy to say that we didn't have any tests"
-#	@make -C utils/my tests_run
-#	@echo "\n"
-#	@make -C utils/graphic tests_run
-#	@echo "\n"
-#	@mkdir -p tests
-#	@if [ ! -f tests/*.c ]; then \
-#		echo "Error: tests/*.c not found"; \
-#		exit 1; \
-#	fi
-#	@gcc -o unit_tests $(SRC) tests/*.c --coverage -lcriterion -Iinclude
-#	./unit_tests
+#	@echo "Hello, we are happy to say that we didn't have any tests" # Hell nah
+	@make -C utils/my tests_run
+	@echo "\n"
+	@make -C utils/graphic tests_run
+	@echo "\n"
+	@mkdir -p tests
+	@if [ ! -f $(UT_SRC) ]; then \
+		echo "Error: tests not found"; \
+		exit 1; \
+	fi
+	$(CC) -o $(UT_NAME) $(UT_SRC) $(UT_FLAGS) $(CFLAGS) $(CPPFLAGS)
+	./unit_tests
 
 coverage: tests_run
 	@echo "\n"
@@ -103,11 +113,20 @@ coverage: tests_run
 	@echo "\n"
 	@make -C utils/graphic coverage
 	@echo "\n"
-	gcovr
+	gcovr --exclude test/
 	@find -name "*.gcda" -delete -o -name "*.gcno" -delete
-	@find -name "unit_tests"	-delete
+	@find -name $(UT_NAME) -delete
 
 coding_style: fclean
 	coding-style . .
 	@cat coding-style-reports.log
-	@rm -f "coding-style-reports.log";
+	@$(RM) -f "coding-style-reports.log";
+
+.PHONY: all				\
+		re				\
+		fclean			\
+		clean			\
+		tests_run 		\
+		coverage 		\
+		coding_style	\
+		final_check
