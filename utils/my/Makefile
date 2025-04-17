@@ -21,7 +21,8 @@ RM			?=	rm -rf
 
 SRC 		= 		arraylen.c								\
 					my_strcmp.c								\
-					my_strlen.c
+					my_strlen.c								\
+					file_to_str.c
 
 OBJ			=		$(SRC:.c=.o)
 
