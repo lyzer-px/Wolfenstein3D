@@ -44,11 +44,7 @@ fclean: clean
 
 re:	fclean all
 
-debug_comp:		$(OBJ)
-		$(AR) rc $(NAME) $(OBJ)
-		cp $(NAME) ../
-
-debug:	debug_comp clean
+debug:	all clean
 
 tests_run:
 	@echo "Hello, we are happy to say that we didn't have any tests"

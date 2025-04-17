@@ -17,7 +17,10 @@ RM			?=	rm -rf
 # BINARY CREATION
 #
 
-SRC 		= 		make_window.c			\
+SRC 		= 		make_window.c				\
+					create_button.c				\
+					del_tab_button.c			\
+					draw_button.c				\
 					get_pos.c
 
 OBJ			=		$(SRC:.c=.o)
@@ -41,11 +44,7 @@ fclean: clean
 
 re:	fclean all
 
-debug_comp:		$(OBJ)
-		$(AR) rc $(NAME) $(OBJ)
-		cp $(NAME) ../
-
-debug:	debug_comp clean
+debug:	all clean
 
 tests_run:
 	@echo "Hello, we are happy to say that we didn't have any tests"
