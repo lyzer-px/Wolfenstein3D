@@ -31,6 +31,7 @@ HEADER	=	libgraphic.h
 
 CFLAGS		=		-Wall -Wextra -Wpedantic
 
+UT_SRC =	tests/graphics_test.c
 
 UT_NAME	=	graphics_tests
 

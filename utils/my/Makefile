@@ -32,7 +32,8 @@ HEADER	=	libmy.h
 
 CFLAGS		=		-Wall -Wextra -Wpedantic
 
-UT_SRC =
+UT_SRC =	tests/my_test.c		\
+			my_strlen.c
 
 UT_NAME	=	my_tests
 

@@ -42,7 +42,8 @@ LDLIBS +=	-lmy -lgraphic
 
 LDFLAGS	+=	-Lutils/
 
-UT_SRC =
+UT_SRC =	tests/wolfenstein_test.c		\
+			src/print_help.c
 
 UT_NAME	=	unit_tests
 
