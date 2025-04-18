@@ -30,39 +30,36 @@ NAME		=		libgraphic.a
 
 HEADER	=	libgraphic.h
 
+CFLAGS		=		-Wall -Wextra -Wpedantic
+
+UT_SRC =	tests/graphics_test.c
+
+UT_NAME	=	graphics_tests
+
+UT_FLAGS	=	--coverage -lcriterion
+
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
 		$(AR) rc $(NAME) $(OBJ)
 		cp $(NAME) ../..
 		cp $(HEADER) ../../include/
+#	@ranlib $(LIB_NAME)
 
 clean:
 	$(RM) $(OBJ)
+	@find -name "*~" -delete -o -name "#*#" -delete
+	@find -name "*.gcda" -delete -o -name "*.gcno" -delete
 
 fclean: clean
-	$(RM) -f $(NAME) ../../$(NAME)
+	$(RM) -f $(NAME) ../../$(NAME) $(UT_NAME)
+	@find -name "coding-style-reports.log" -delete
 
 re:	fclean all
 
 debug:	re clean
 
-tests_run:
-	@echo "Hello, we are happy to say that we didn't have any tests"
-#	@mkdir -p tests
-#	@if [ ! -f tests/*.c ]; then \
-#		echo "Error: tests/*.c not found"; \
-#		exit 1; \
-#	fi
-#	@gcc -o unit_tests $(SRC) tests/*.c --coverage -lcriterion -Iinclude
-#	./unit_tests
-
-coverage: tests_run
-	gcovr
-	@find -name "*.gcda" -delete -o -name "*.gcno" -delete
-	@find -name "unit_tests"	-delete
-
-coding_style:
-	coding-style . .
-	@cat coding-style-reports.log
-	@rm -f "coding-style-reports.log";
+.PHONY: all				\
+		re				\
+		fclean			\
+		clean
