@@ -16,4 +16,6 @@ int my_strlen(char const *str);
 
 int arraylen(void **tab);
 
+char *file_to_str(const char *file_name);
+
 #endif /* LIBMY_H */
