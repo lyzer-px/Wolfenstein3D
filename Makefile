@@ -43,7 +43,9 @@ LDLIBS +=	-lmy -lgraphic
 LDFLAGS	+=	-Lutils/
 
 UT_SRC =	tests/wolfenstein_test.c		\
-			src/print_help.c
+			src/print_help.c				\
+			tests/my_test.c					\
+			utils/my/my_strlen.c
 
 UT_NAME	=	unit_tests
 
@@ -96,20 +98,10 @@ debug:	debug_comp clean
 
 tests_run:
 #	@echo "Hello, we are happy to say that we didn't have any tests" # Hell nah
-	@make -C utils/my tests_run
-	@echo "\n"
-	@make -C utils/graphic tests_run
-	@echo "\n"
-	@mkdir -p tests
 	$(CC) -o $(UT_NAME) $(UT_SRC) $(UT_FLAGS) $(CFLAGS) $(CPPFLAGS)
 	./$(UT_NAME)
 
 coverage: tests_run
-	@echo "\n"
-	@make -C utils/my coverage
-	@echo "\n"
-	@make -C utils/graphic coverage
-	@echo "\n"
 	gcovr --exclude test/
 	@find -name "*.gcda" -delete -o -name "*.gcno" -delete
 	@find -name $(UT_NAME) -delete

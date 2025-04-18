@@ -60,25 +60,7 @@ re:	fclean all
 
 debug:	all clean
 
-tests_run:
-	$(CC) -o $(UT_NAME) $(UT_SRC) $(UT_FLAGS) $(CFLAGS)
-	./$(UT_NAME)
-
-coverage: tests_run
-	gcovr --exclude test/
-	@find -name "*.gcda" -delete -o -name "*.gcno" -delete
-	@find -name $(UT_NAME) -delete
-
-coding_style: fclean
-	coding-style . .
-	@cat coding-style-reports.log
-	@$(RM) -f "coding-style-reports.log";
-
 .PHONY: all				\
 		re				\
 		fclean			\
-		clean			\
-		tests_run 		\
-		coverage 		\
-		coding_style	\
-		final_check
+		clean
