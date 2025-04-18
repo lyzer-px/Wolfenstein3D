@@ -33,18 +33,18 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ)
 	$(AR) rc $(NAME) $(OBJ)
-	cp $(NAME) ../
+	cp $(NAME) ../..
 	cp $(HEADER) ../../include/
 
 clean:
 	$(RM) $(OBJ)
 
 fclean: clean
-	$(RM) -f $(NAME) ../$(NAME)
+	$(RM) -f $(NAME) ../../$(NAME)
 
 re:	fclean all
 
-debug:	all clean
+debug:	re clean
 
 tests_run:
 	@echo "Hello, we are happy to say that we didn't have any tests"

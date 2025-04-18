@@ -25,7 +25,10 @@ SRC 		= 		main.c											\
 					src/loop.c										\
 					src/check_env.c									\
 					src/project.c									\
-					src/print_help.c
+					src/print_help.c								\
+					src/draw_floor_and_ceiling.c					\
+					src/init_player.c								\
+					src/is_wall.c
 
 OBJ			=		$(SRC:.c=.o)
 
@@ -36,11 +39,11 @@ CFLAGS		=		-Wall -Wextra -Wpedantic -iquote include -std=c2x
 CPPFLAGS	+=		-lcsfml-audio -lcsfml-graphics
 CPPFLAGS	+=		-lcsfml-network -lcsfml-system -lcsfml-window -lm
 
-DEBUG		=	-g3
+DEBUG_FLAGS		=	-g3
 
 LDLIBS +=	-lmy -lgraphic
 
-LDFLAGS	+=	-L.
+LDFLAGS	+=	-Lutils/
 
 all:		$(NAME)
 
@@ -50,7 +53,7 @@ $(NAME):	$(OBJ)
 	@echo "\n"
 	@make -C utils/graphic all
 	@echo "\n"
-	$(CC) $(OBJ) -o $(NAME) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
+	$(CC) $(OBJ) -o $(NAME)  $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
 
 clean:
 	@make -C utils/my clean
@@ -74,15 +77,14 @@ re:	fclean all
 	@make -C utils/graphic re
 
 debug_comp:		$(OBJ)
-	$(CC) $(OBJ) -o $(NAME) $(DEBUG) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
+	$(CC) $(OBJ) -o $(NAME)  $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)	\
+	$(DEBUG_FLAGS)
 
-debug:
+debug:	debug_comp clean
 	@echo "\n"
 	@make -C utils/my debug
 	@echo "\n"
 	@make -C utils/graphic debug
-	@make debug_comp
-	@make clean
 
 tests_run:
 	@echo "Hello, we are happy to say that we didn't have any tests"

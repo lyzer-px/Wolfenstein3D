@@ -12,7 +12,7 @@
 #include "project_funct.h"
 #include "macro.h"
 
-int loop(window_t *win)
+int loop(window_t *win, int **map)
 {
     if (win->window == NULL)
         return EPI_FAIL;
@@ -21,6 +21,7 @@ int loop(window_t *win)
             continue;
         handle_event(win);
         sfRenderWindow_clear(win->window, sfBlack);
+        draw_floor_and_ceiling(win->window);
         sfRenderWindow_display(win->window);
         sfClock_restart(win->clock);
     }

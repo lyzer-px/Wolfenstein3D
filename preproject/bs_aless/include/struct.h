@@ -18,4 +18,14 @@ typedef struct window_s {
     bool full_screen;
 } window_t;
 
+typedef struct {
+    float x;
+    float y;
+    float angle;
+} Player_t;
+
+    # define TILE_SIZE 64
+    # define MAP_WIDTH 8
+    # define MAP_HEIGHT 8
+
 #endif /* STRUCT */

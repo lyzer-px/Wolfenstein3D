@@ -12,7 +12,7 @@
 ** INCLUDE
 */
 
-    #include <SFML/Graphics.h>
+    #include <math.h>
 
 /*
 ** Always usefull
@@ -25,23 +25,20 @@
 ** Main
 */
 
-    #define NAME_WIN ("Wolf3d")
-    #define DIM_X (1920 / 2)
-    #define DIM_Y (1080 / 2)
+    #define NAME_WIN ("Boostrap Wolf3D")
+    #define DIM_X (800)
+    #define DIM_Y (600)
     #define FPS (60)
     #define BITS (32)
-    #define STYLE_WIND ((sfUint32)sfResize | sfClose)
-    #define STYLE_FULL ((sfUint32)sfFullscreen)
 
     #define DISPLAY_CHECK ("DISPLAY=:")
 
     #define ELAPSED_TIME (1000)
 
-/*
-** Libs
-*/
+    #define GREY ((sfColor){118, 118, 118, 225})
 
-    #define END_STR ('\0')
+    #define FOV ( M_PI / 3)
+    #define NUM_RAYS 800
 
 /*
 ** Error Print For User
