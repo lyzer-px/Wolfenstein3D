@@ -10,5 +10,8 @@
 void print_help(void)
 {
     printf("Usage:\n\tWolf3D");
+    printf("Command:\n");
+    printf("\t- F11: Fullscreen Button\n");
+    printf("\t- Escap: Quit\n");
     return;
 }
