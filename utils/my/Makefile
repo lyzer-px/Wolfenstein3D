@@ -30,6 +30,8 @@ NAME		=		libmy.a
 
 HEADER	=	libmy.h
 
+CFLAGS		=		-Wall -Wextra -Wpedantic
+
 UT_SRC =
 
 UT_NAME	=	my_tests
@@ -58,13 +60,8 @@ re:	fclean all
 debug:	all clean
 
 tests_run:
-	@mkdir -p tests
-	@if [ ! -f $(UT_SRC) ]; then \
-		echo "Error: tests not found"; \
-		exit 1; \
-	fi
-	$(CC) -o $(UT_NAME) $(UT_SRC) $(UT_FLAGS)
-	./unit_tests
+	$(CC) -o $(UT_NAME) $(UT_SRC) $(UT_FLAGS) $(CFLAGS)
+	./$(UT_NAME)
 
 coverage: tests_run
 	gcovr --exclude test/

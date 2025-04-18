@@ -29,9 +29,10 @@ NAME		=		libgraphic.a
 
 HEADER	=	libgraphic.h
 
-UT_SRC =
+CFLAGS		=		-Wall -Wextra -Wpedantic
 
-UT_NAME	=	my_tests
+
+UT_NAME	=	graphics_tests
 
 UT_FLAGS	=	--coverage -lcriterion
 
@@ -57,13 +58,8 @@ re:	fclean all
 debug:	all clean
 
 tests_run:
-	@mkdir -p tests
-	@if [ ! -f $(UT_SRC) ]; then \
-		echo "Error: tests not found"; \
-		exit 1; \
-	fi
-	$(CC) -o $(UT_NAME) $(UT_SRC) $(UT_FLAGS)
-	./unit_tests
+	$(CC) -o $(UT_NAME) $(UT_SRC) $(UT_FLAGS) $(CFLAGS)
+	./$(UT_NAME)
 
 coverage: tests_run
 	gcovr --exclude test/

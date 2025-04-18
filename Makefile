@@ -100,12 +100,8 @@ tests_run:
 	@make -C utils/graphic tests_run
 	@echo "\n"
 	@mkdir -p tests
-	@if [ ! -f $(UT_SRC) ]; then \
-		echo "Error: tests not found"; \
-		exit 1; \
-	fi
 	$(CC) -o $(UT_NAME) $(UT_SRC) $(UT_FLAGS) $(CFLAGS) $(CPPFLAGS)
-	./unit_tests
+	./$(UT_NAME)
 
 coverage: tests_run
 	@echo "\n"
