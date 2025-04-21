@@ -16,7 +16,6 @@ typedef struct window_s {
     sfClock *clock;
     sfEvent event;
     bool full_screen;
-    int frame;
 } window_t;
 
 #endif /* STRUCT */

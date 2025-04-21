@@ -19,6 +19,7 @@ RM			?=	rm -rf
 
 SRC 		= 		make_window.c				\
 					create_button.c				\
+					make_a_new_style_window.c 	\
 					del_tab_button.c			\
 					draw_button.c				\
 					get_pos.c
@@ -41,7 +42,7 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ)
 	$(AR) rc $(NAME) $(OBJ)
-	cp $(NAME) ../
+	cp $(NAME) ../..
 	cp $(HEADER) ../../include/
 #	@ranlib $(LIB_NAME)
 
@@ -51,12 +52,12 @@ clean:
 	@find -name "*.gcda" -delete -o -name "*.gcno" -delete
 
 fclean: clean
-	$(RM) -f $(NAME) ../$(NAME) $(UT_NAME)
+	$(RM) -f $(NAME) ../../$(NAME) $(UT_NAME)
 	@find -name "coding-style-reports.log" -delete
 
 re:	fclean all
 
-debug:	all clean
+debug:	re clean
 
 .PHONY: all				\
 		re				\

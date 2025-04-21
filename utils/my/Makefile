@@ -43,7 +43,7 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ)
 	$(AR) rc $(NAME) $(OBJ)
-	cp $(NAME) ../
+	cp $(NAME) ../..
 	cp $(HEADER) ../../include/
 #	@ranlib $(LIB_NAME)
 
@@ -53,7 +53,7 @@ clean:
 	@find -name "*.gcda" -delete -o -name "*.gcno" -delete
 
 fclean: clean
-	$(RM) -f $(NAME) ../$(NAME) $(UT_NAME)
+	$(RM) -f $(NAME) ../../$(NAME) $(UT_NAME)
 	@find -name "coding-style-reports.log" -delete
 
 re:	fclean all

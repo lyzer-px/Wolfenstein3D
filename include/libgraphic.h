@@ -9,6 +9,7 @@
     #define LIBGRAPHIC_H
 
     #include <SFML/Graphics.h>
+    #include "struct.h"
 
 typedef struct button_s {
     sfTexture *texture;
@@ -30,6 +31,7 @@ static const button_tab_t tab_button[] = {
 };
 
 sfRenderWindow *make_window(sfVector2i dimensions,
-    int bits, char *name);
+    int bits, char *name, sfUint32 style);
+void make_a_new_style_window(window_t *win);
 
 #endif /* LIBGRAPHIC_H */
