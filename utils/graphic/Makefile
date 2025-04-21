@@ -21,6 +21,7 @@ SRC 		= 		make_window.c				\
 					create_button.c				\
 					del_tab_button.c			\
 					draw_button.c				\
+					make_a_new_style_window.c	\
 					get_pos.c
 
 OBJ			=		$(SRC:.c=.o)
@@ -40,9 +41,9 @@ UT_FLAGS	=	--coverage -lcriterion
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-	$(AR) rc $(NAME) $(OBJ)
-	cp $(NAME) ../
-	cp $(HEADER) ../../include/
+		$(AR) rc $(NAME) $(OBJ)
+		cp $(NAME) ../..
+		cp $(HEADER) ../../include/
 #	@ranlib $(LIB_NAME)
 
 clean:
@@ -51,12 +52,12 @@ clean:
 	@find -name "*.gcda" -delete -o -name "*.gcno" -delete
 
 fclean: clean
-	$(RM) -f $(NAME) ../$(NAME) $(UT_NAME)
+	$(RM) -f $(NAME) ../../$(NAME) $(UT_NAME)
 	@find -name "coding-style-reports.log" -delete
 
 re:	fclean all
 
-debug:	all clean
+debug:	re clean
 
 .PHONY: all				\
 		re				\

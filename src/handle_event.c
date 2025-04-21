@@ -7,6 +7,7 @@
 
 #include "struct.h"
 #include "project_funct.h"
+#include "libgraphic.h"
 
 void handle_event(window_t *win)
 {
@@ -14,5 +15,8 @@ void handle_event(window_t *win)
         if (win->event.type == sfEvtClosed
             || sfKeyboard_isKeyPressed(sfKeyEscape))
             sfRenderWindow_close(win->window);
+        if (win->event.type == sfEvtKeyPressed &&
+                win->event.key.code == sfKeyF11)
+            make_a_new_style_window(win);
     }
 }

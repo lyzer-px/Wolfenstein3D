@@ -40,7 +40,7 @@ DEBUG_FLAGS		=	-g3 -fsanitise=address
 
 LDLIBS +=	-lmy -lgraphic
 
-LDFLAGS	+=	-Lutils/
+LDFLAGS	+=	-L.
 
 UT_SRC =	tests/wolfenstein_test.c		\
 			src/print_help.c				\
@@ -59,7 +59,7 @@ $(NAME):	$(OBJ)
 	@echo "\n"
 	@make -C utils/graphic all
 	@echo "\n"
-	$(CC) $(OBJ) -o $(NAME)  $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
+	$(CC) $(OBJ) -o $(NAME) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
 
 clean:
 	@make -C utils/my clean
@@ -87,14 +87,15 @@ re:	fclean all
 	@make -C utils/graphic re
 
 debug_comp:		$(OBJ)
-	$(CC) $(OBJ) -o $(NAME)  $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)	\
-	$(DEBUG_FLAGS)
+	$(CC) $(OBJ) -o $(NAME) $(DEBUG) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
 
-debug:	debug_comp clean
+debug:
 	@echo "\n"
 	@make -C utils/my debug
 	@echo "\n"
 	@make -C utils/graphic debug
+	@make debug_comp
+	@make clean
 
 tests_run:
 #	@echo "Hello, we are happy to say that we didn't have any tests" # Hell nah
