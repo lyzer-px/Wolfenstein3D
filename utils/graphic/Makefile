@@ -22,6 +22,7 @@ SRC 		= 		make_window.c				\
 					make_a_new_style_window.c 	\
 					del_tab_button.c			\
 					draw_button.c				\
+					make_a_new_style_window.c	\
 					get_pos.c
 
 OBJ			=		$(SRC:.c=.o)

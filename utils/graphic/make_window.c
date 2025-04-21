@@ -5,7 +5,9 @@
 ** make_window.c
 */
 
+#include <stdlib.h>
 #include <SFML/Graphics.h>
+#include "macro.h"
 
 #include <stdlib.h>
 #include <SFML/Graphics.h>
