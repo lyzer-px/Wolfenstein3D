@@ -14,6 +14,9 @@ int init_program(window_t *win)
 {
     int status = EPI_SUCESS;
 
+    win->full_screen = false;
+    win->frame = FPS;
+    sfRenderWindow_setFramerateLimit(win->window, win->frame);
     if (status == EPI_SUCESS)
         status = loop(win);
     return status;

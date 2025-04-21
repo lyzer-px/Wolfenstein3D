@@ -23,10 +23,8 @@ int project(void)
     if (window == NULL)
         return EPI_FAIL;
     memset(window, 1, sizeof(window_t));
-    window->frame = FPS;
     window->clock = sfClock_create();
     window->window = make_window(dimensions, BITS, NAME_WIN, STYLE_WIND);
-    window->full_screen = false;
     status = init_program(window);
     sfClock_destroy(window->clock);
     sfRenderWindow_destroy(window->window);

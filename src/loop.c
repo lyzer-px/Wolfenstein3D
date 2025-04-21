@@ -17,7 +17,6 @@ int loop(window_t *win)
     if (win->window == NULL)
         return EPI_FAIL;
     while (sfRenderWindow_isOpen(win->window)) {
-        sfRenderWindow_setFramerateLimit(win->window, win->frame);
         if (sfClock_getElapsedTime(win->clock).microseconds <= ELAPSED_TIME)
             continue;
         handle_event(win);
