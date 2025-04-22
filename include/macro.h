@@ -34,6 +34,8 @@
     #define STYLE_WIND ((sfUint32)sfResize | sfClose)
     #define STYLE_FULL ((sfUint32)sfFullscreen)
 
+    #define NB_SCENE (1)
+
     #define DISPLAY_CHECK ("DISPLAY=:")
 
     #define ELAPSED_TIME (1000)

@@ -22,12 +22,20 @@ static window_t *create_window(void)
     if (window == NULL)
         return NULL;
     memset(window, 1, sizeof(window_t));
+    window->color = sfBlack;
     window->clock = sfClock_create();
     window->full_screen = false;
     window->frame = FPS;
     window->window = make_window(dimensions, BITS, NAME_WIN, STYLE_WIND);
     sfRenderWindow_setFramerateLimit(window->window, window->frame);
     return window;
+}
+
+static void destroy_window(window_t **window)
+{
+    sfClock_destroy((*window)->clock);
+    sfRenderWindow_destroy((*window)->window);
+    free((*window));
 }
 
 static game_t *init_game(void)
@@ -41,19 +49,20 @@ static game_t *init_game(void)
         free(game);
         return NULL;
     }
+    game->nb_scene = NB_SCENE;
+    game->tab_scene = malloc(sizeof(scene_t) * game->nb_scene);
+    if (game->tab_scene == NULL) {
+        destroy_window(&game->window);
+        free(game);
+        return NULL;
+    }
     return game;
-}
-
-static void destroy_window(window_t **window)
-{
-    sfClock_destroy((*window)->clock);
-    sfRenderWindow_destroy((*window)->window);
-    free((*window));
 }
 
 static void destroy_game(game_t **game)
 {
     destroy_window(&((*game)->window));
+    free((*game)->tab_scene);
     free((*game));
 }
 

@@ -31,6 +31,7 @@ typedef struct scene_s {
     int id_scene;
     sfTexture *background_texture;
     sfSprite *background_sprite;
+    void (*function_event)(sfRenderWindow *);
     struct composant_t *begin;
 } scene_t;
 
