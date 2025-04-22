@@ -11,11 +11,11 @@
     #include <SFML/Graphics.h>
     #include "struct.h"
 
-int init_program(window_t *win);
+int init_scene(game_t *game);
 
 void handle_event(window_t *win);
 
-int loop(window_t *win);
+int loop(game_t *game);
 
 int project(void);
 

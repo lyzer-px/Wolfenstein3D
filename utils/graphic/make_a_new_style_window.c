@@ -24,4 +24,5 @@ void make_a_new_style_window(window_t *win)
     sfRenderWindow_destroy(win->window);
     win->full_screen = !win->full_screen;
     win->window = window;
+    sfRenderWindow_setFramerateLimit(win->window, win->frame);
 }

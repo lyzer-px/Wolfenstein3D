@@ -25,6 +25,7 @@
 ** Main
 */
 
+
     #define NAME_WIN ("Wolf3d")
     #define DIM_X (1920 / 2)
     #define DIM_Y (1080 / 2)

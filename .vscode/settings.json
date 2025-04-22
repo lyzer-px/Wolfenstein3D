@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "project_funct.h": "c",
+        "struct.h": "c",
+        "string.h": "c",
+        "macro.h": "c"
+    }
+}

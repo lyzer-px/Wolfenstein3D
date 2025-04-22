@@ -10,11 +10,11 @@
 #include "struct.h"
 #include "project_funct.h"
 
-int init_program(window_t *win)
+int init_scene(game_t *game)
 {
-    int status = EPI_SUCESS;
+    int status = 0;
 
     if (status == EPI_SUCESS)
-        status = loop(win);
+        status = loop(game);
     return status;
 }
