@@ -9,6 +9,7 @@ on:
       - 'ga-ignore-*'
 jobs:
   check_coding_style:
+      if: github.repository != ${{ vars.MIRROR_URL }} || github.event.name == 'push'
       runs-on: ubuntu-latest
       container:
         image: ghcr.io/epitech/coding-style-checker:latest
@@ -40,7 +41,6 @@ jobs:
 
   push_to_mirror:
       needs: [run_tests, check_coding_style]
-      if: github.repository != ${{ vars.MIRROR_URL }} || github.event.name == 'push'
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@main
