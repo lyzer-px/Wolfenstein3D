@@ -25,7 +25,6 @@
 ** Main
 */
 
-
     #define NAME_WIN ("Wolf3d")
     #define DIM_X (1920 / 2)
     #define DIM_Y (1080 / 2)
@@ -51,6 +50,5 @@
 */
 
     #define ER_ENV ("The environment does not allow the window to be opened\n")
-
 
 #endif /* MACRO_H */

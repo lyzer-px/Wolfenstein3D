@@ -9,10 +9,6 @@
 #include <SFML/Graphics.h>
 #include "macro.h"
 
-#include <stdlib.h>
-#include <SFML/Graphics.h>
-#include "macro.h"
-
 sfRenderWindow *make_window(sfVector2i dimensions,
     int bits, char *name, sfUint32 style)
 {
