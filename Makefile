@@ -98,7 +98,6 @@ debug:
 	@make clean
 
 tests_run:
-#	@echo "Hello, we are happy to say that we didn't have any tests" # Hell nah
 	$(CC) -o $(UT_NAME) $(UT_SRC) $(UT_FLAGS) $(CFLAGS) $(CPPFLAGS)
 	./$(UT_NAME)
 
