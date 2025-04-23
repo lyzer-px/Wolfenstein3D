@@ -44,6 +44,8 @@ typedef struct layer_s {
     struct composant_s *composant;
     // the next layer of the scene
     struct layer_s *next;
+    // is the print or not
+    bool view : 1;
 } layer_t;
 
 typedef struct scene_s {

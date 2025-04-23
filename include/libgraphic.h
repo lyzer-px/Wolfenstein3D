@@ -59,13 +59,16 @@ void add_element_to_scene(void *element,
     void (*function_display)(sfRenderWindow *, void *, sfRenderStates *),
     void (*function_destroy)(void *), composant_t **begin_scene);
 
-// Add an created composant to a layer of a scene, according to id
-void add_a_composant_to_layer(composant_t *composant, scene_t *scene, int id);
+// Create a layer to the scene
+void create_layer(scene_t **scene);
 
 // Create an composant but it's not in a layer (yes the composant just exist)
 composant_t *create_composant(void *element,
     void (*function_display)(sfRenderWindow *, void *, sfRenderStates *),
     void (*function_destroy)(void *));
+
+// Add an created composant to a layer of a scene, according to id
+void add_a_composant_to_layer(composant_t *composant, scene_t *scene, int id);
 
 // draw each composant of scene
 void draw_composant_of_scene(sfRenderWindow *window, scene_t *scene);
