@@ -16,7 +16,7 @@ void draw_composant_of_scene(sfRenderWindow *window, scene_t *scene)
         return;
     while (layer != NULL) {
         composant = layer->composant;
-        while (composant != NULL) {
+        while (composant != NULL && layer->view == true) {
             composant->function_display(window, composant->element, NULL);
             composant = composant->next;
         }

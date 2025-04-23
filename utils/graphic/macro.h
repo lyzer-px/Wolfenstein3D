@@ -18,28 +18,36 @@
 ** Always usefull
 */
 
-    #define NB_SCENE (2)
+    #define EPI_FAIL (84)
+    #define EPI_SUCESS (0)
 
 /*
 ** Main
 */
 
+// Window information
     #define NAME_WIN ("Wolf3d")
     #define DIM_X (1920 / 2)
     #define DIM_Y (1080 / 2)
     #define FPS (60)
     #define BITS (32)
-    #define STYLE_WIND ((sfUint32)sfResize | sfClose)
-    #define STYLE_FULL ((sfUint32) sfClose | sfFullscreen)
 
-    #define DISPLAY_CHECK ("DISPLAY=:")
+    #define STYLE_WIND ((sfUint32)sfResize | sfClose)
+    #define STYLE_FULL ((sfUint32)sfFullscreen)
 
     #define ELAPSED_TIME (1000)
+
+// Scene information
+    #define NB_SCENE (2)
 
 /*
 ** Libs
 */
 
+// Env information
+    #define DISPLAY_CHECK ("DISPLAY=:")
+
+// Text information
     #define END_STR ('\0')
 
 /*
