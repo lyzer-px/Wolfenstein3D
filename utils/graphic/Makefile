@@ -30,6 +30,7 @@ SRC 		= 		make_window.c				\
 					destroy_game.c				\
 					init_tab_scene.c			\
 					destroy_window.c			\
+					rev_composant.c				\
 					change_the_mode_window.c
 
 OBJ			=		$(SRC:.c=.o)

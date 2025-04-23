@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include "struct.h"
+#include "libgraphic.h"
 
 void add_element_to_scene(void *element,
     void (*function_display)(sfRenderWindow *, void *, sfRenderStates *),
@@ -16,10 +17,12 @@ void add_element_to_scene(void *element,
 
     if (new_composant == NULL)
         return;
+    rev_composant(begin_scene);
     new_composant->id = ((*begin_scene) != NULL ? (*begin_scene)->id + 1 : 0);
     new_composant->element = element;
     new_composant->function_display = function_display;
     new_composant->function_destroy = function_destroy;
     new_composant->next = *begin_scene;
     *begin_scene = new_composant;
+    rev_composant(begin_scene);
 }

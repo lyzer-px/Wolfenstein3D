@@ -51,6 +51,9 @@ scene_t **init_tab_scene(int nb_scene);
 // Create a struct game (everything is already update)
 game_t *init_game(void);
 
+// Reverse the list of composant
+void rev_composant(composant_t **begin);
+
 // Add an element to a scene (begin_scene is the begin of composants in scene)
 void add_element_to_scene(void *element,
     void (*function_display)(sfRenderWindow *, void *, sfRenderStates *),
