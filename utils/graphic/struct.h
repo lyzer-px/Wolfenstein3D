@@ -31,7 +31,7 @@ typedef struct composant_s {
 typedef struct scene_s {
     int id_scene;
     bool pause;
-    void (*function_event)(sfRenderWindow *);
+    void (*function_event)(window_t *);
     struct composant_s *begin;
 } scene_t;
 

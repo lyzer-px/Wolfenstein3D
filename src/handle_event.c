@@ -9,7 +9,7 @@
 #include "project_funct.h"
 #include "libgraphic.h"
 
-void handle_event(window_t *win)
+void handle_event(window_t *win, scene_t *scene)
 {
     while (sfRenderWindow_pollEvent(win->window, &win->event)) {
         if (win->event.type == sfEvtClosed
@@ -18,5 +18,8 @@ void handle_event(window_t *win)
         if (win->event.type == sfEvtKeyPressed &&
             win->event.key.code == sfKeyF11)
             change_the_mode_window(win);
+        if (scene != NULL) {
+            scene->function_event(win);
+        }
     }
 }

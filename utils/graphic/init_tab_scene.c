@@ -8,6 +8,12 @@
 #include <stdlib.h>
 #include "struct.h"
 
+static void void_function(window_t *window)
+{
+    (void)window;
+    return;
+}
+
 scene_t **init_tab_scene(int nb_scene)
 {
     scene_t **tab = malloc(sizeof(scene_t *) * (nb_scene + 1));
@@ -19,7 +25,7 @@ scene_t **init_tab_scene(int nb_scene)
         if (tab[i] == NULL)
             return NULL;
         tab[i]->begin = NULL;
-        tab[i]->function_event = NULL;
+        tab[i]->function_event = void_function;
         tab[i]->id_scene = i + 1;
         tab[i]->pause = true;
     }

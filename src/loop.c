@@ -21,7 +21,7 @@ int loop(game_t *game)
         if (sfClock_getElapsedTime(game->window->clock).microseconds
             <= ELAPSED_TIME)
             continue;
-        handle_event(game->window);
+        handle_event(game->window, game->tab_scene[game->actual_scene]);
         sfRenderWindow_clear(game->window->window, sfBlack);
         draw_composant_of_scene(game->window->window,
                 game->tab_scene[game->actual_scene]);
