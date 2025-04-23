@@ -59,6 +59,9 @@ void add_element_to_scene(void *element,
     void (*function_display)(sfRenderWindow *, void *, sfRenderStates *),
     void (*function_destroy)(void *), composant_t **begin_scene);
 
+// Create a layer to the scene
+void create_layer(scene_t **scene);
+
 // Create an composant but it's not in a layer (yes the composant just exist)
 composant_t *create_composant(void *element,
     void (*function_display)(sfRenderWindow *, void *, sfRenderStates *),
