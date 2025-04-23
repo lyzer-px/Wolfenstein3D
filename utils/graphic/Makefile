@@ -19,10 +19,18 @@ RM			?=	rm -rf
 
 SRC 		= 		make_window.c				\
 					create_button.c				\
-					make_a_new_style_window.c 	\
+					change_the_mode_window.c 	\
 					del_tab_button.c			\
 					draw_button.c				\
-					make_a_new_style_window.c
+					create_window.c				\
+					init_game.c					\
+					add_an_element_to_scene.c	\
+					destroy_tab_scene.c			\
+					draw_composant_of_scene.c	\
+					destroy_game.c				\
+					init_tab_scene.c			\
+					destroy_window.c			\
+					change_the_mode_window.c
 
 OBJ			=		$(SRC:.c=.o)
 

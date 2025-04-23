@@ -21,6 +21,7 @@ typedef struct window_s {
 } window_t;
 
 typedef struct composant_s {
+    int id;
     void *element;
     void (*function_display)(sfRenderWindow *, void *, sfRenderStates *);
     void (*function_destroy)(void *);

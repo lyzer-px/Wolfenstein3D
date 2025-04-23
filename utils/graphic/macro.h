@@ -18,6 +18,8 @@
 ** Always usefull
 */
 
+    #define NB_SCENE (1)
+
 
 /*
 ** Main

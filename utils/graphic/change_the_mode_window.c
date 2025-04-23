@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2024
 ** Wolfenstein3D
 ** File description:
-** make_a_new_style_window.c
+** change_the_mode_window.c
 */
 
 #include <SFML/Graphics.h>
@@ -12,7 +12,7 @@
 #include "struct.h"
 #include "macro.h"
 
-void make_a_new_style_window(window_t *win)
+void change_the_mode_window(window_t *win)
 {
     sfRenderWindow *window;
     sfVector2i dimensions = {DIM_X, DIM_Y};

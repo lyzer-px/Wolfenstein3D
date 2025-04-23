@@ -17,6 +17,6 @@ void handle_event(window_t *win)
             sfRenderWindow_close(win->window);
         if (win->event.type == sfEvtKeyPressed &&
             win->event.key.code == sfKeyF11)
-            make_a_new_style_window(win);
+            change_the_mode_window(win);
     }
 }
