@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "struct.h": "c",
-        "graphics.h": "c",
-        "libgraphic.h": "c"
-    }
-}
