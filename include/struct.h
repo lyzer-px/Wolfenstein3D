@@ -22,21 +22,20 @@ typedef struct window_s {
 
 typedef struct composant_s {
     void *element;
-    void (*function_display)(sfRenderWindow *, void *);
+    void (*function_display)(sfRenderWindow *, void *, sfRenderStates *);
     void (*function_destroy)(void *);
     struct composant_s *next;
 } composant_t;
 
 typedef struct scene_s {
     int id_scene;
-    sfTexture *background_texture;
-    sfSprite *background_sprite;
     void (*function_event)(sfRenderWindow *);
-    struct composant_t *begin;
+    struct composant_s *begin;
 } scene_t;
 
 typedef struct game_s {
     int nb_scene;
+    int actual_scene;
     struct scene_s **tab_scene;
     struct window_s *window;
 } game_t;

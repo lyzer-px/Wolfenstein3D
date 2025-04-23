@@ -50,12 +50,14 @@ static game_t *init_game(void)
         return NULL;
     }
     game->nb_scene = NB_SCENE;
-    game->tab_scene = malloc(sizeof(scene_t) * game->nb_scene);
+    game->actual_scene = NB_SCENE - 1;
+    game->tab_scene = malloc(sizeof(scene_t) * (game->nb_scene + 1));
     if (game->tab_scene == NULL) {
         destroy_window(&game->window);
         free(game);
         return NULL;
     }
+    game->tab_scene[game->nb_scene] = NULL;
     return game;
 }
 

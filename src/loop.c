@@ -12,16 +12,30 @@
 #include "project_funct.h"
 #include "macro.h"
 
+static void draw_composant(sfRenderWindow *window, scene_t *scene)
+{
+    composant_t *begin = scene->begin;
+
+    if (scene == NULL)
+        return;
+    while (begin != NULL) {
+        begin->function_display(window, begin->element, NULL);
+        begin = begin->next;
+    }
+}
+
 int loop(game_t *game)
 {
     if (game->window->window == NULL)
         return EPI_FAIL;
     while (sfRenderWindow_isOpen(game->window->window)) {
         if (sfClock_getElapsedTime(game->window->clock).microseconds
-                <= ELAPSED_TIME)
+            <= ELAPSED_TIME)
             continue;
         handle_event(game->window);
         sfRenderWindow_clear(game->window->window, sfBlack);
+        draw_composant(game->window->window,
+                game->tab_scene[game->actual_scene]);
         sfRenderWindow_display(game->window->window);
         sfClock_restart(game->window->clock);
     }
