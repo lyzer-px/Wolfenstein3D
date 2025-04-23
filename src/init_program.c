@@ -29,7 +29,6 @@ static void init_menu(scene_t *scene, sfColor color)
     layer_t *layer = scene->layer;
     layer_t *tmp = NULL;
     sfRectangleShape *rect_tmp = NULL;
-    int y = 0;
 
     for (int y = 0; y < 3; y++) {
         tmp = malloc(sizeof(layer_t));

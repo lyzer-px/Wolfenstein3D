@@ -28,6 +28,7 @@ typedef struct composant_s {
 } composant_t;
 
 typedef struct layer_s {
+    int id;
     struct composant_s *composant;
     struct layer_s *next;
 } layer_t;

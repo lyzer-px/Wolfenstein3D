@@ -27,6 +27,5 @@ void handle_event(game_t *g)
         if ((g->tab_scene[g->actual_scene]) != NULL) {
             g->tab_scene[g->actual_scene]->function_event(g->window);
         }
-        printf("%d / %d\n", g->actual_scene, g->nb_scene);
     }
 }
