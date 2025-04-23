@@ -13,7 +13,7 @@
 
 int init_scene(game_t *game);
 
-void handle_event(window_t *win, scene_t *scene);
+void handle_event(game_t *g);
 
 int loop(game_t *game);
 

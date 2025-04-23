@@ -18,7 +18,7 @@
 ** Always usefull
 */
 
-    #define NB_SCENE (1)
+    #define NB_SCENE (2)
 
 /*
 ** Main

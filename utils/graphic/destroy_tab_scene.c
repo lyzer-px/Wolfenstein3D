@@ -10,13 +10,19 @@
 
 static void free_scene(scene_t **scene)
 {
-    composant_t *tmp = NULL;
+    layer_t *tmp_layer = NULL;
+    composant_t *tmp_comp = NULL;
 
-    while ((*scene)->begin != NULL) {
-        tmp = (*scene)->begin;
-        (*scene)->begin = (*scene)->begin->next;
-        tmp->function_destroy(tmp->element);
-        free(tmp);
+    while ((*scene)->layer != NULL) {
+        tmp_layer = (*scene)->layer;
+        while ((*scene)->layer->composant != NULL) {
+            tmp_comp = (*scene)->layer->composant;
+            (*scene)->layer->composant = (*scene)->layer->composant->next;
+            tmp_comp->function_destroy(tmp_comp->element);
+            free(tmp_comp);
+        }
+        (*scene)->layer = (*scene)->layer->next;
+        free(tmp_layer);
     }
     free(*scene);
 }

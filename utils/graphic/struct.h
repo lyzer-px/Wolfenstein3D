@@ -14,7 +14,6 @@
 typedef struct window_s {
     bool full_screen : 1;
     int frame;
-    sfColor color;
     sfRenderWindow *window;
     sfClock *clock;
     sfEvent event;
@@ -28,11 +27,16 @@ typedef struct composant_s {
     struct composant_s *next;
 } composant_t;
 
+typedef struct layer_s {
+    struct composant_s *composant;
+    struct layer_s *next;
+} layer_t;
+
 typedef struct scene_s {
     int id_scene;
     bool pause;
     void (*function_event)(window_t *);
-    struct composant_s *begin;
+    struct layer_s *layer;
 } scene_t;
 
 typedef struct game_s {

@@ -18,10 +18,7 @@ RM			?=	rm -rf
 #
 
 SRC 		= 		make_window.c				\
-					create_button.c				\
 					change_the_mode_window.c 	\
-					del_tab_button.c			\
-					draw_button.c				\
 					create_window.c				\
 					init_game.c					\
 					add_an_element_to_scene.c	\

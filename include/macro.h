@@ -33,7 +33,7 @@
     #define STYLE_WIND ((sfUint32)sfResize | sfClose)
     #define STYLE_FULL ((sfUint32)sfFullscreen)
 
-    #define NB_SCENE (1)
+    #define NB_SCENE (2)
 
     #define DISPLAY_CHECK ("DISPLAY=:")
 

@@ -9,12 +9,17 @@
 
 void draw_composant_of_scene(sfRenderWindow *window, scene_t *scene)
 {
-    composant_t *begin = scene->begin;
+    layer_t *layer = scene->layer;
+    composant_t *composant = NULL;
 
     if (scene == NULL)
         return;
-    while (begin != NULL) {
-        begin->function_display(window, begin->element, NULL);
-        begin = begin->next;
+    while (layer != NULL) {
+        composant = layer->composant;
+        while (composant != NULL) {
+            composant->function_display(window, composant->element, NULL);
+            composant = composant->next;
+        }
+        layer = layer->next;
     }
 }

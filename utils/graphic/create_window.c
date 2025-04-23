@@ -19,7 +19,6 @@ window_t *create_window(void)
     if (window == NULL)
         return NULL;
     memset(window, 1, sizeof(window_t));
-    window->color = sfBlack;
     window->clock = sfClock_create();
     window->full_screen = false;
     window->frame = FPS;

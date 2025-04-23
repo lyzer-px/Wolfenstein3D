@@ -24,7 +24,7 @@ scene_t **init_tab_scene(int nb_scene)
         tab[i] = malloc(sizeof(scene_t));
         if (tab[i] == NULL)
             return NULL;
-        tab[i]->begin = NULL;
+        tab[i]->layer = NULL;
         tab[i]->function_event = void_function;
         tab[i]->id_scene = i + 1;
         tab[i]->pause = true;
