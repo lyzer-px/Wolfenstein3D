@@ -48,13 +48,15 @@ typedef struct layer_s {
     bool view : 1;
 } layer_t;
 
+typedef struct game_s game_t;
+
 typedef struct scene_s {
     // id to know which scene is it
     int id_scene;
     // is the scene in pause (true or false)
     bool pause;
     // a function where each event of the scene is
-    void (*function_event)(game_t *);
+    void (*function_event)(struct game_s *);
     // a linked list where all the layer are
     struct layer_s *layer;
 } scene_t;

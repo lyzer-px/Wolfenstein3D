@@ -8,9 +8,9 @@
 #include <stdlib.h>
 #include "struct.h"
 
-static void void_function(window_t *window)
+static void void_function(game_t *game)
 {
-    (void)window;
+    (void)game;
     return;
 }
 
