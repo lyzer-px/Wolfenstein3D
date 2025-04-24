@@ -31,8 +31,9 @@ OBJ			=		$(SRC:.c=.o)
 
 NAME		=		wolf3d
 
-CFLAGS		=		-Wall -Wextra -Wpedantic -Werror -iquote include -std=c99
+CFLAGS		=		-Wall -Wextra -Wpedantic -Werror -std=c99
 
+CPPFLAGS	+=		-iquote include
 CPPFLAGS	+=		-lcsfml-audio -lcsfml-graphics
 CPPFLAGS	+=		-lcsfml-network -lcsfml-system -lcsfml-window -lm
 
