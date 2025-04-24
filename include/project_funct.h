@@ -11,16 +11,22 @@
     #include <SFML/Graphics.h>
     #include "struct.h"
 
+// Initialise/Load all scene
 int init_scene(game_t *game);
 
+// Main Handle Event (we call inside the event's function for each scene)
 void handle_event(game_t *g);
 
+// The game loop
 int loop(game_t *game);
 
+// Main function, that calls all other function
 int project(void);
 
+// Print help for the user
 void print_help(void);
 
+// Function that check if we can play or not, according to the env
 int check_env(char **env);
 
 #endif /* PROJECT_H */

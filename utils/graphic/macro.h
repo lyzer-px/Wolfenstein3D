@@ -26,6 +26,7 @@
 */
 
 // Window information
+
     #define NAME_WIN ("Wolf3d")
     #define DIM_X (1920 / 2)
     #define DIM_Y (1080 / 2)
@@ -38,6 +39,7 @@
     #define ELAPSED_TIME (1000)
 
 // Scene information
+
     #define NB_SCENE (2)
 
 /*
@@ -45,9 +47,11 @@
 */
 
 // Env information
+
     #define DISPLAY_CHECK ("DISPLAY=:")
 
 // Text information
+
     #define END_STR ('\0')
 
 /*

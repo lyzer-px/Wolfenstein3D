@@ -54,7 +54,7 @@ typedef struct scene_s {
     // is the scene in pause (true or false)
     bool pause;
     // a function where each event of the scene is
-    void (*function_event)(window_t *);
+    void (*function_event)(game_t *);
     // a linked list where all the layer are
     struct layer_s *layer;
 } scene_t;
