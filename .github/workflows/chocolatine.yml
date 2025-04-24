@@ -35,6 +35,23 @@ jobs:
         - run: make clean
         - run: for binary in "${{ vars.EXECUTABLES }}"; do if [ ! -x $binary ]; then exit 1; fi; done
 
+  memory_leak_check:
+    name: Memory Leak Check
+    runs-on: ubuntu-latest
+    container: epitechcontent/epitest-docker
+    needs: [check_program_compilation]
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@main
+      - name: Build binary
+        run: make re
+      - name: Run Valgrind on wolf3d
+        run: valgrind --leak-check=full   \
+              --show-leak-kinds=all       \
+              --errors-for-leak-kinds=all \
+              --error-exitcode=1          \
+              ./wolf3d
+
   run_tests:
       needs: [check_program_compilation, check_coding_style]
       runs-on: ubuntu-latest
