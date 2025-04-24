@@ -25,7 +25,7 @@ void handle_event(game_t *g)
                 g->window->event.key.code == sfKeyEnter)
             g->actual_scene += (g->actual_scene + 1) >= g->nb_scene ? 0 : 1;
         if ((g->tab_scene[g->actual_scene]) != NULL) {
-            g->tab_scene[g->actual_scene]->function_event(g->window);
+            g->tab_scene[g->actual_scene]->function_event(g);
         }
     }
 }
