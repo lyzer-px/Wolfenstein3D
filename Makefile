@@ -31,12 +31,12 @@ OBJ			=		$(SRC:.c=.o)
 
 NAME		=		wolf3d
 
-CFLAGS		=		-Wall -Wextra -Wpedantic -Werror -iquote include -std=c2x
+CFLAGS		=		-Wall -Wextra -Wpedantic -Werror -iquote include -std=c99
 
 CPPFLAGS	+=		-lcsfml-audio -lcsfml-graphics
 CPPFLAGS	+=		-lcsfml-network -lcsfml-system -lcsfml-window -lm
 
-DEBUG_FLAGS		=	-g3 -fsanitise=address
+DEBUG_FLAGS		=	-g3 -fsanitize=address
 
 LDLIBS +=	-lmy -lgraphic
 
@@ -118,5 +118,4 @@ coding_style: fclean
 		clean			\
 		tests_run 		\
 		coverage 		\
-		coding_style	\
-		final_check
+		coding_style
