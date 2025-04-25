@@ -44,7 +44,6 @@ LDLIBS +=	-lmy -lgraphic
 LDFLAGS	+=	-L.
 
 UT_SRC =	tests/wolfenstein_test.c		\
-			src/print_help.c				\
 			tests/my_test.c					\
 			utils/my/my_strlen.c
 
