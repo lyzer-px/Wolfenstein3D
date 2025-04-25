@@ -10,32 +10,32 @@ on:
 
 jobs:
   check_coding_style:
-      name: Check Coding Style
-      if: github.repository != ${{ vars.MIRROR_URL }} || github.event.name == 'push'
-      runs-on: ubuntu-latest
-      container:
-        image: ghcr.io/epitech/coding-style-checker:latest
-      steps:
-        - name: Checkout Repository
-          uses: actions/checkout@main
-        - name: run coding-style-checker.sh
-          run: check.sh $(pwd) $(pwd)
-        - name: looking for style errors
-          run: if [ -s coding-style-reports.log ]; then while read lign; do echo "::error::$lign"; done < coding-style-reports.log; exit 2; fi
+    name: Check Coding Style
+    if: github.repository != ${{ vars.MIRROR_URL }} || github.event.name == 'push'
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/epitech/coding-style-checker:latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@main
+      - name: run coding-style-checker.sh
+        run: check.sh $(pwd) $(pwd)
+      - name: looking for style errors
+        run: if [ -s coding-style-reports.log ]; then while read lign; do echo "::error::$lign"; done < coding-style-reports.log; exit 2; fi
 
   check_program_compilation:
-      name: Check Compilation
-      runs-on: ubuntu-latest
-      container:  epitechcontent/epitest-docker
-      timeout-minutes: 2
-      steps:
-        - name: Checkout Repository
-          uses: actions/checkout@main
-        - name: Build binary
-          run: make
-          run: make clean
-        - name: Check Binary
-          run: for binary in "${{ vars.EXECUTABLES }}"; do if [ ! -x $binary ]; then exit 1; fi; done
+    name: Check Compilation
+    runs-on: ubuntu-latest
+    container:  epitechcontent/epitest-docker
+    timeout-minutes: 2
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@main
+      - name: Build binary
+        run: make
+      - run: make clean
+      - name: Check Binary
+        run: for binary in "${{ vars.EXECUTABLES }}"; do if [ ! -x $binary ]; then exit 1; fi; done
 
   memory_leak_check:
     name: Memory Leak Check
@@ -55,17 +55,17 @@ jobs:
               ./wolf3d
 
   run_tests:
-      name: Run Unit Tests
-      needs: [check_program_compilation, check_coding_style]
-      runs-on: ubuntu-latest
-      container:  epitechcontent/epitest-docker
-      timeout-minutes: 2
-      steps:
-        - name: Checkout Repository
-          uses: actions/checkout@main
-        - run: make tests_run
+    name: Run Unit Tests
+    needs: [check_program_compilation, check_coding_style]
+    runs-on: ubuntu-latest
+    container:  epitechcontent/epitest-docker
+    timeout-minutes: 2
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@main
+      - run: make tests_run
 
-check_coverage:
+  check_coverage:
     name: Check Coverage
     needs: [run_tests]
     runs-on: ubuntu-latest
@@ -81,15 +81,15 @@ check_coverage:
         run: find . -name "*.gcda" -delete -o -name "*.gcno" -delete
 
   push_to_mirror:
-      needs: [run_tests, check_coding_style]
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout Repository
-          uses: actions/checkout@main
-        - run: git fetch --unshallow
-        - uses: pixta-dev/repository-mirroring-action@v1
-          with:
-            target_repo_url:
-              ${{ vars.MIRROR_URL }}
-            ssh_private_key:
-              ${{ secrets.GIT_SSH_PRIVATE_KEY }}
+    needs: [run_tests, check_coding_style]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@main
+      - run: git fetch --unshallow
+      - uses: pixta-dev/repository-mirroring-action@v1
+        with:
+          target_repo_url:
+            ${{ vars.MIRROR_URL }}
+          ssh_private_key:
+            ${{ secrets.GIT_SSH_PRIVATE_KEY }}
