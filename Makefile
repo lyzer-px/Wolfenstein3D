@@ -37,7 +37,7 @@ CPPFLAGS	+=		-iquote include
 CPPFLAGS	+=		-lcsfml-audio -lcsfml-graphics
 CPPFLAGS	+=		-lcsfml-network -lcsfml-system -lcsfml-window -lm
 
-DEBUG_FLAGS		=	-g3 -fsanitize=address
+DEBUG_FLAGS		=	-g3
 
 LDLIBS +=	-lmy -lgraphic
 
