@@ -17,20 +17,26 @@ RM			?=	rm -rf
 # BINARY CREATION
 #
 
-SRC 		= 		make_window.c				\
-					change_the_mode_window.c 	\
-					create_window.c				\
-					init_game.c					\
-					add_an_element_to_scene.c	\
-					destroy_tab_scene.c			\
-					draw_composant_of_scene.c	\
-					destroy_game.c				\
-					init_tab_scene.c			\
-					destroy_window.c			\
-					rev_composant.c				\
-					add_composant_to_layer.c	\
-					create_composant.c			\
-					change_the_mode_window.c
+SRC 		= 		add_an_element_to_scene.c		\
+					add_composant_to_layer.c		\
+					change_the_mode_window.c		\
+					clean_game.c					\
+					clean_layer.c					\
+					clean_scene.c					\
+					create_composant.c				\
+					create_layer.c					\
+					create_window.c					\
+					destroy_layer.c					\
+					destroy_composant.c				\
+					destroy_game.c					\
+					destroy_scene.c					\
+					destroy_tab_scene.c				\
+					destroy_window.c				\
+					draw_composant_of_scene.c		\
+					init_game.c						\
+					init_tab_scene.c				\
+					make_window.c					\
+					rev_composant.c
 
 OBJ			=		$(SRC:.c=.o)
 

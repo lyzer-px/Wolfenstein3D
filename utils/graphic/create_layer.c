@@ -14,7 +14,7 @@ void create_layer(scene_t **scene)
 
     new_layer = malloc(sizeof(layer_t));
     if (new_layer == NULL)
-        return NULL;
+        return;
     new_layer->composant = NULL;
     new_layer->next = (*scene)->layer;
     new_layer->view = true;

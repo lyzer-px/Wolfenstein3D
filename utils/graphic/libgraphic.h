@@ -73,6 +73,24 @@ void add_a_composant_to_layer(composant_t *composant, scene_t *scene, int id);
 // draw each composant of scene
 void draw_composant_of_scene(sfRenderWindow *window, scene_t *scene);
 
+// Remove all composant of a layer
+void clean_layer(layer_t *layer);
+
+// Clean a scene
+void clean_scene(scene_t *scene);
+
+// Clean a game
+void clean_game(game_t *game);
+
+// destroy a composant
+void destroy_composant(composant_t **composant);
+
+// Destroy a layer
+void destroy_layer(layer_t **layer);
+
+// Destoy a scene
+void destroy_scene(scene_t **scene);
+
 // Destroy a struct game
 void destroy_game(game_t **game);
 
