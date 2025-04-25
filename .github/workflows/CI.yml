@@ -37,8 +37,8 @@ jobs:
       - name: Check Binary
         run: for binary in "${{ vars.EXECUTABLES }}"; do if [ ! -x $binary ]; then exit 1; fi; done
 
-  memory_leak_check:
-    name: Memory Leak Check
+  check_memory_leak:
+    name: Check Memory Leak
     runs-on: ubuntu-latest
     container: epitechcontent/epitest-docker
     needs: [check_program_compilation]
@@ -48,15 +48,11 @@ jobs:
       - name: Build binary
         run: make re
       - name: Run Valgrind on wolf3d
-        run: valgrind --leak-check=full   \
-              --show-leak-kinds=all       \
-              --errors-for-leak-kinds=all \
-              --error-exitcode=1          \
-              ./wolf3d
+        run: valgrind --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all --error-exitcode=1 ./wolf3d
 
   run_tests:
     name: Run Unit Tests
-    needs: [check_program_compilation, check_coding_style]
+    needs: [check_program_compilation]
     runs-on: ubuntu-latest
     container:  epitechcontent/epitest-docker
     timeout-minutes: 2
@@ -81,7 +77,7 @@ jobs:
         run: find . -name "*.gcda" -delete -o -name "*.gcno" -delete
 
   push_to_mirror:
-    needs: [run_tests, check_coding_style]
+    needs: [run_tests, check_coding_style, check_memory_leak]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
