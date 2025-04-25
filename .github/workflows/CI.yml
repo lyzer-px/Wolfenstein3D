@@ -31,9 +31,11 @@ jobs:
       steps:
         - name: Checkout Repository
           uses: actions/checkout@main
-        - run: make
-        - run: make clean
-        - run: for binary in "${{ vars.EXECUTABLES }}"; do if [ ! -x $binary ]; then exit 1; fi; done
+        - name: Build binary
+          run: make
+          run: make clean
+        - name: Check Binary
+          run: for binary in "${{ vars.EXECUTABLES }}"; do if [ ! -x $binary ]; then exit 1; fi; done
 
   memory_leak_check:
     name: Memory Leak Check
