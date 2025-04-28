@@ -9,6 +9,7 @@
     #define LIBGRAPHIC_H
 
     #include <SFML/Graphics.h>
+    #include <SFML/Audio.h>
     #include "struct.h"
 
 typedef struct button_s {
@@ -44,5 +45,8 @@ void draw_rectangle(sfRenderWindow *window, sfVector2f position,
 void draw_circle(sfRenderWindow *wind, sfVector2f center, float radius);
 void update_sprite_rect(sfSprite *sprite, sprite_rect_t *sprite_rect,
     sfClock *clock, double nb_seconds);
+sfSprite *create_sprite(char *texture_path);
+sfText *create_text(sfFont *font, char *string, int size);
+sfMusic *create_music(const char *music_path);
 
 #endif /* LIBGRAPHIC_H */

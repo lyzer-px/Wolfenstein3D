@@ -24,7 +24,8 @@ SRC 		= 		make_window.c				\
 					make_a_new_style_window.c	\
 					get_pos.c					\
 					draw_shape.c				\
-					update_sprite_rect.c
+					update_sprite_rect.c		\
+					create_object.c
 
 OBJ			=		$(SRC:.c=.o)
 
