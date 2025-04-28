@@ -48,5 +48,6 @@ void update_sprite_rect(sfSprite *sprite, sprite_rect_t *sprite_rect,
 sfSprite *create_sprite(char *texture_path);
 sfText *create_text(sfFont *font, char *string, int size);
 sfMusic *create_music(const char *music_path);
+sfVector2f *get_movement(sfVector2f *start, sfVector2f *end);
 
 #endif /* LIBGRAPHIC_H */
