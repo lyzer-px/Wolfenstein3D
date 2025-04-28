@@ -25,8 +25,7 @@ SRC 		= 		main.c											\
 					src/loop.c										\
 					src/check_env.c									\
 					src/project.c									\
-					src/print_help.c								\
-					update_sprite_rect.c
+					src/print_help.c
 
 OBJ			=		$(SRC:.c=.o)
 
