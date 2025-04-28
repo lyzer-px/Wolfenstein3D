@@ -7,7 +7,7 @@
 
 #include <SFML/Graphics.h>
 
-static void draw_rectangle(sfRenderWindow *window, sfVector2f position,
+void draw_rectangle(sfRenderWindow *window, sfVector2f position,
     sfVector2f size)
 {
     sfRectangleShape *square = sfRectangleShape_create();
@@ -19,7 +19,7 @@ static void draw_rectangle(sfRenderWindow *window, sfVector2f position,
     sfRectangleShape_destroy(square);
 }
 
-static void draw_circle(sfRenderWindow *wind, sfVector2f center, float radius)
+void draw_circle(sfRenderWindow *wind, sfVector2f center, float radius)
 {
     sfCircleShape *circle = sfCircleShape_create();
 
