@@ -49,5 +49,6 @@ sfSprite *create_sprite(char *texture_path);
 sfText *create_text(sfFont *font, char *string, int size);
 sfMusic *create_music(const char *music_path);
 sfVector2f *get_movement(sfVector2f *start, sfVector2f *end);
+float get_distance(sfVector2f *point_a, sfVector2f *point_b);
 
 #endif /* LIBGRAPHIC_H */

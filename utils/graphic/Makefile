@@ -26,7 +26,8 @@ SRC 		= 		make_window.c				\
 					draw_shape.c				\
 					update_sprite_rect.c		\
 					create_object.c				\
-					get_movement.c
+					get_movement.c				\
+					get_distance.c
 
 OBJ			=		$(SRC:.c=.o)
 
