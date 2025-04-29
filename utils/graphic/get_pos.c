@@ -25,8 +25,8 @@
 
 #include <SFML/Graphics.h>
 
-sfVector2f get_position(sfVector3f pos, float *angle,
-    sfVector2f translation, int zoom)
-{
-    return translation;
-}
+//sfVector2f get_position(sfVector3f pos, float *angle,
+//    sfVector2f translation, int zoom)
+//{
+//    return translation;
+//}
