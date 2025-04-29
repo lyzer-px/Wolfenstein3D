@@ -55,9 +55,9 @@ UT_FLAGS	=	--coverage -lcriterion
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-	$(AR) rc $(NAME) $(OBJ)
-	cp $(NAME) ../..
-	cp $(HEADER) ../../include/
+	@$(AR) rc $(NAME) $(OBJ)
+	@cp $(NAME) ../..
+	@cp $(HEADER) ../../include/
 #	@ranlib $(LIB_NAME)
 
 clean:
