@@ -31,8 +31,11 @@ OBJ			=		$(SRC:.c=.o)
 
 NAME		=		wolf3d
 
-CFLAGS		=		-Wall -Wextra -Wpedantic -iquote include
+CFLAGS		=		-Wall -Wextra -Wpedantic -iquote include \
+              -std=c99
 
+
+CPPFLAGS	+=		-iquote include
 CPPFLAGS	+=		-lcsfml-audio -lcsfml-graphics
 CPPFLAGS	+=		-lcsfml-network -lcsfml-system -lcsfml-window -lm
 
@@ -43,7 +46,6 @@ LDLIBS +=	-lmy -lgraphic
 LDFLAGS	+=	-L.
 
 UT_SRC =	tests/wolfenstein_test.c		\
-			src/print_help.c				\
 			tests/my_test.c					\
 			utils/my/my_strlen.c
 
@@ -117,5 +119,4 @@ coding_style: fclean
 		clean			\
 		tests_run 		\
 		coverage 		\
-		coding_style	\
-		final_check
+		coding_style
