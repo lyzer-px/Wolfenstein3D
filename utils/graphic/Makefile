@@ -30,7 +30,7 @@ NAME		=		libgraphic.a
 
 HEADER	=	libgraphic.h
 
-CFLAGS		=		-Wall -Wextra -Wpedantic
+CFLAGS		=		-Wall -Wextra -Wpedantic -Werror
 
 UT_SRC =	tests/graphics_test.c
 
