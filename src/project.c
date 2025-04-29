@@ -20,6 +20,6 @@ int project(void)
     int status = EPI_SUCESS;
 
     status = init_scene(game);
-    destroy_game(&game);
+    destroy_game(game);
     return status;
 }

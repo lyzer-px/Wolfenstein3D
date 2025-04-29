@@ -60,7 +60,7 @@ void add_element_to_scene(void *element,
     void (*function_destroy)(void *), composant_t **begin_scene);
 
 // Create a layer to the scene
-void create_layer(scene_t **scene);
+void create_layer(scene_t *scene);
 
 // Create an composant but it's not in a layer (yes the composant just exist)
 composant_t *create_composant(void *element,
@@ -83,21 +83,21 @@ void clean_scene(scene_t *scene);
 void clean_game(game_t *game);
 
 // destroy a composant
-void destroy_composant(composant_t **composant);
+void destroy_composant(composant_t *composant);
 
 // Destroy a layer
-void destroy_layer(layer_t **layer);
+void destroy_layer(layer_t *layer);
 
 // Destoy a scene
-void destroy_scene(scene_t **scene);
+void destroy_scene(scene_t *scene);
 
 // Destroy a struct game
-void destroy_game(game_t **game);
+void destroy_game(game_t *game);
 
 // Destroy a tab of scene
 void free_tab_scene(game_t *game);
 
 // Destroy a struct window_t
-void destroy_window(window_t **window);
+void destroy_window(window_t *window);
 
 #endif /* LIBGRAPHIC_H */

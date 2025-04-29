@@ -9,9 +9,9 @@
 #include "libgraphic.h"
 #include "struct.h"
 
-void destroy_layer(layer_t **layer)
+void destroy_layer(layer_t *layer)
 {
-    clean_layer(*layer);
+    clean_layer(layer);
     free(layer);
     return;
 }

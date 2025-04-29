@@ -8,9 +8,9 @@
 #include <stdlib.h>
 #include "struct.h"
 
-void destroy_composant(composant_t **composant)
+void destroy_composant(composant_t *composant)
 {
-    (*composant)->function_destroy((*composant)->element);
-    free(*composant);
+    composant->function_destroy(composant->element);
+    free(composant);
     return;
 }

@@ -11,6 +11,6 @@
 void clean_game(game_t *game)
 {
     for (int i = 0; i < game->nb_scene; i++)
-        destroy_scene(&(game->tab_scene[i]));
-    destroy_window(&(game->window));
+        destroy_scene(game->tab_scene[i]);
+    destroy_window(game->window);
 }

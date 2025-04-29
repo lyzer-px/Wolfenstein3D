@@ -9,9 +9,9 @@
 #include "struct.h"
 #include "libgraphic.h"
 
-void destroy_game(game_t **game)
+void destroy_game(game_t *game)
 {
-    destroy_window(&((*game)->window));
-    free_tab_scene(*game);
-    free((*game));
+    destroy_window(game->window);
+    free_tab_scene(game);
+    free(game);
 }

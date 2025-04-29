@@ -25,7 +25,7 @@ game_t *init_game(void)
     game->actual_scene = NB_SCENE - 1;
     game->tab_scene = init_tab_scene(game->nb_scene);
     if (game->tab_scene == NULL) {
-        destroy_window(&game->window);
+        destroy_window(game->window);
         free(game);
         return NULL;
     }

@@ -12,6 +12,6 @@
 void free_tab_scene(game_t *game)
 {
     for (int i = 0; i < game->nb_scene; i++)
-        destroy_scene(&(game->tab_scene[i]));
+        destroy_scene(game->tab_scene[i]);
     free(game->tab_scene);
 }
