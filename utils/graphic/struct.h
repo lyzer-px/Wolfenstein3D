@@ -1,6 +1,6 @@
 /*
-** EPITECH PROJECT, 2024
-** lib
+** EPITECH PROJECT, 2025
+** WolF3D
 ** File description:
 ** struct.h
 */

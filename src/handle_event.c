@@ -1,6 +1,6 @@
 /*
-** EPITECH PROJECT, 2024
-** name
+** EPITECH PROJECT, 2025
+** Wolf3D
 ** File description:
 ** handle_event.c
 */

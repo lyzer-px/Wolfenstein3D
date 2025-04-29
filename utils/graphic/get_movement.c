@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** Wolf3D
 ** File description:
 ** Return a vector which represents a step in a direction.

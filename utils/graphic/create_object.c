@@ -1,8 +1,8 @@
 /*
-** EPITECH PROJECT, 2024
-** my_hunter -> create_object
+** EPITECH PROJECT, 2025
+** Wolf3D
 ** File description:
-** Create object for my_hunter
+** Create SFML object
 */
 
 #include <SFML/Audio.h>

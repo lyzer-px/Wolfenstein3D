@@ -1,6 +1,6 @@
 /*
-** EPITECH PROJECT, 2024
-** Wolf
+** EPITECH PROJECT, 2025
+** Wolf3D
 ** File description:
 ** libgraphic.h
 */
