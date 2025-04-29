@@ -48,7 +48,7 @@ jobs:
       - name: Build binary
         run: make re
       - name: Run Valgrind on wolf3d
-        run: valgrind --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all --error-exitcode=1 ./wolf3d
+        run: valgrind --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all --error-exitcode=1 --nogui ./wolf3d
 
   run_tests:
     name: Run Unit Tests
