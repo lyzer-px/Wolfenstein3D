@@ -33,7 +33,7 @@ static void init_menu(scene_t *scene, sfColor *color)
         create_layer(scene);
         for (int i = 0; i < 3; i++) {
             rect_tmp = create_rect((sfVector2f){50 * (i + y), 50 * (i + y)},
-            (sfVector2f){40 * (i + y), 40 * (i + y)}, color);
+                (sfVector2f){40 * (i + y), 40 * (i + y)}, color);
             add_element_to_scene(rect_tmp, sfRenderWindow_drawRectangleShape,
                 sfRectangleShape_destroy, &scene->layer->composant);
         }
