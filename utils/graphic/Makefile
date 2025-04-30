@@ -17,12 +17,26 @@ RM			?=	rm -rf
 # BINARY CREATION
 #
 
-SRC 		= 		make_window.c				\
-					create_button.c				\
-					del_tab_button.c			\
-					draw_button.c				\
-					make_a_new_style_window.c	\
-					get_pos.c
+SRC 		= 		add_an_element_to_scene.c		\
+					add_composant_to_layer.c		\
+					change_the_mode_window.c		\
+					clean_game.c					\
+					clean_layer.c					\
+					clean_scene.c					\
+					create_composant.c				\
+					create_layer.c					\
+					create_window.c					\
+					destroy_layer.c					\
+					destroy_composant.c				\
+					destroy_game.c					\
+					destroy_scene.c					\
+					destroy_tab_scene.c				\
+					destroy_window.c				\
+					draw_composant_of_scene.c		\
+					init_game.c						\
+					init_tab_scene.c				\
+					make_window.c					\
+					rev_composant.c
 
 OBJ			=		$(SRC:.c=.o)
 
@@ -41,9 +55,9 @@ UT_FLAGS	=	--coverage -lcriterion
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-		$(AR) rc $(NAME) $(OBJ)
-		cp $(NAME) ../..
-		cp $(HEADER) ../../include/
+	@$(AR) rc $(NAME) $(OBJ)
+	@cp $(NAME) ../..
+	@cp $(HEADER) ../../include/
 #	@ranlib $(LIB_NAME)
 
 clean:

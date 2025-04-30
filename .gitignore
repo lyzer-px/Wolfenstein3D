@@ -1,0 +1,10 @@
+.vscode
+unit_test*
+*.gcno
+*.gcda
+*.o
+*.a
+*.out
+*.sh
+*~
+\#*\#

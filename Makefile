@@ -31,13 +31,15 @@ OBJ			=		$(SRC:.c=.o)
 
 NAME		=		wolf3d
 
-CFLAGS		=		-Wall -Wextra -Wpedantic -Werror -std=c99
+CFLAGS		=		-Wall -Wextra -Wpedantic -iquote include \
+              -std=c99
+
 
 CPPFLAGS	+=		-iquote include
 CPPFLAGS	+=		-lcsfml-audio -lcsfml-graphics
 CPPFLAGS	+=		-lcsfml-network -lcsfml-system -lcsfml-window -lm
 
-DEBUG_FLAGS		=	-g3
+DEBUG		=	-g3
 
 LDLIBS +=	-lmy -lgraphic
 
@@ -98,7 +100,6 @@ debug:
 	@make clean
 
 tests_run:
-#	@echo "Hello, we are happy to say that we didn't have any tests" # Hell nah
 	$(CC) -o $(UT_NAME) $(UT_SRC) $(UT_FLAGS) $(CFLAGS) $(CPPFLAGS)
 	./$(UT_NAME)
 
