@@ -19,10 +19,9 @@ void init_ray(player_t *player)
     player->ray = sfRectangleShape_create();
     if (player->ray == nullptr)
         return;
-    sfRectangleShape_setSize(player->ray,
-        sfRectangleShape_getSize(player->hitbox));
+    sfRectangleShape_setSize(player->ray, (sfVector2f){1, 1});
     sfRectangleShape_setFillColor(player->ray, sfBlue);
-    sfRectangleShape_setOrigin(player->ray, (sfVector2f){10, 10});
+    sfRectangleShape_setOrigin(player->ray, (sfVector2f){2, 2});
 }
 
 void init_hitbox(player_t *player)
