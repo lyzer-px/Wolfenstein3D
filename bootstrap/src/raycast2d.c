@@ -24,38 +24,41 @@ void init_player(player_t *player)
     player->pos.y = 300;
 }
 
-static void draw_rect(sfRenderWindow *window, float distance,
-    sfRectangleShape *rect)
-{
-    sfRectangleShape_setSize(rect, (sfVector2f){0, (TILE_SIZE / distance ) * (MAP_WIDTH / 2)});
-    sfRectangleShape_setFillColor(sfWhite);
-    sfRectangleShape_setPosition()
-
-}
-
-void cast_single_ray(player_t *player, float angle,
-    sfRenderWindow *window, sfRectangleShape *rect)
+float cast_single_ray(player_t *player, float angle)
 {
     sfVector2f ray_direction = {- sinf(RAD(angle)), cosf(RAD(angle))};
     sfVector2f ray_pos = player->pos;
-    float distance = 0;
 
     while (!is_wall((int)ray_pos.x / TILE_SIZE, (int)ray_pos.y / TILE_SIZE)) {
         ray_pos.x += ray_direction.x;
         ray_pos.y += ray_direction.y;
     }
-    distance = (sqrtf(SQUARED(ray_pos.x - player->pos.x) +
+    return (sqrtf(SQUARED(ray_pos.x - player->pos.x) +
     SQUARED(ray_pos.y - player->pos.y))) * cosf(player->angle - angle);
-    draw_rect(window, distance, rect);
+}
+
+static void set_rect(player_t *player, float distance, sfRectangleShape * rect, size_t ray_idx)
+{
+    float rect_height = (TILE_SIZE / distance) * (SCREEN_WIDTH / 2);
+    sfRectangleShape_setSize(rect, (sfVector2f){10, rect_height});
+    sfRectangleShape_setFillColor(rect, sfWhite);
+    sfRectangleShape_setPosition(rect, (sfVector2f){ray_idx * TILE_SIZE, (SCREEN_HEIGHT - rect_height) / 2});
 }
 
 static void update_player(player_t *player, sfRenderWindow *window,
     sfRectangleShape *rect)
 {
+    float distance = 0;
+    float angle;
+
     if (player == nullptr || window == nullptr)
         return;
-    for (size_t i = 0; i < DEG(FOV); i++)
-        cast_single_ray(player, (player->angle - DEG(FOV / 2) + i), window, rect);
+    for (size_t i = 0; i < DEG(FOV); i++) {
+        angle = (player->angle - DEG(FOV / 2) + i);
+        distance = cast_single_ray(player, angle);
+        set_rect(player, distance, rect, angle);
+        sfRenderWindow_drawRectangleShape(window, rect, nullptr);
+    }
     player_fwd(player);
     if (is_wall((int)(player->pos.x / TILE_SIZE),
         (int)(player->pos.y / TILE_SIZE))) {
@@ -102,7 +105,7 @@ static void draw_bg(sfRenderWindow *window, sfRectangleShape *bg)
 
 int init_game(void)
 {
-    sfVideoMode mode = {800, 600, 32};
+    sfVideoMode mode = {SCREEN_WIDTH, SCREEN_HEIGHT, 32};
     sfRenderWindow *window = sfRenderWindow_create(mode, "bswolf",
         sfClose | sfResize, NULL);
     sfEvent event;
