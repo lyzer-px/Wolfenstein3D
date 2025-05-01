@@ -37,12 +37,13 @@ float cast_single_ray(player_t *player, float angle)
     SQUARED(ray_pos.y - player->pos.y))) * cosf(player->angle - angle);
 }
 
-static void set_rect(player_t *player, float distance, sfRectangleShape * rect, size_t ray_idx)
+static void set_rect(player_t *player, float distance, sfRectangleShape *rect, size_t ray_idx)
 {
     float rect_height = (TILE_SIZE / distance) * (SCREEN_WIDTH / 2);
+
     sfRectangleShape_setSize(rect, (sfVector2f){10, rect_height});
     sfRectangleShape_setFillColor(rect, sfWhite);
-    sfRectangleShape_setPosition(rect, (sfVector2f){ray_idx * TILE_SIZE, (SCREEN_HEIGHT - rect_height) / 2});
+    sfRectangleShape_setPosition(rect, (sfVector2f){(ray_idx * TILE_SIZE) / 7, (SCREEN_HEIGHT - rect_height) / 2});
 }
 
 static void update_player(player_t *player, sfRenderWindow *window,
@@ -53,10 +54,10 @@ static void update_player(player_t *player, sfRenderWindow *window,
 
     if (player == nullptr || window == nullptr)
         return;
-    for (size_t i = 0; i < DEG(FOV); i++) {
+    for (size_t i = -DEG(FOV); i < DEG(FOV); i++) {
         angle = (player->angle - DEG(FOV / 2) + i);
         distance = cast_single_ray(player, angle);
-        set_rect(player, distance, rect, angle);
+        set_rect(player, distance, rect, i);
         sfRenderWindow_drawRectangleShape(window, rect, nullptr);
     }
     player_fwd(player);
@@ -109,7 +110,7 @@ int init_game(void)
     sfRenderWindow *window = sfRenderWindow_create(mode, "bswolf",
         sfClose | sfResize, NULL);
     sfEvent event;
-    player_t player = {0};
+    player_t player = {};
     sfRectangleShape *bg = create_bg(mode, (sfVector2f){mode.width, mode.height / 2});
     sfRectangleShape *rect = create_bg(mode, (sfVector2f){1, 1});
 
