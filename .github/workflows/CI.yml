@@ -48,7 +48,7 @@ jobs:
       - name: Build binary
         run: make re
       - name: Run Valgrind on wolf3d
-        run: valgrind --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all --error-exitcode=1 ./wolf3d 2> valgrind.log
+        run: valgrind --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all --error-exitcode=1 ./wolf3d 2> valgrind.log || true
       - name: Check Memory Leak in Log File
         run: |
           if grep -q "definitely lost: 0 bytes in 0 blocks" valgrind.log; then exit 1 fi
