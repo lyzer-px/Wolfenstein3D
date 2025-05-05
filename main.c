@@ -21,5 +21,5 @@ int main(int argc, char **argv, char **env)
         return EPI_FAIL;
     if (check_env(env) == EPI_FAIL)
         return EPI_FAIL;
-     return project();
+    return project();
 }

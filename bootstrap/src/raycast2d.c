@@ -96,13 +96,16 @@ static sfRectangleShape *create_bg(sfVideoMode mode, sfVector2f size)
 
 static void draw_bg(sfRenderWindow *window, sfRectangleShape *bg)
 {
+    float size = 0;
+
     if (window == nullptr || bg == nullptr)
         return;
+    size = sfRenderWindow_getSize(window).y;
     sfRectangleShape_setPosition(bg, (sfVector2f){0, 0});
     sfRectangleShape_setFillColor(bg, sfCyan);
     sfRenderWindow_drawRectangleShape(window, bg, nullptr);
     sfRectangleShape_setPosition(bg,
-        (sfVector2f){0, sfRenderWindow_getSize(window).y / 2});
+        (sfVector2f){0, size / 2});
     sfRectangleShape_setFillColor(bg, sfGreen);
     sfRenderWindow_drawRectangleShape(window, bg, nullptr);
 }
