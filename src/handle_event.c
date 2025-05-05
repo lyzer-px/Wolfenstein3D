@@ -9,6 +9,12 @@
 #include "project_funct.h"
 #include "libgraphic.h"
 
+static bool is_button_clicked(sfRectangleShape *button, sfVector2i mouse)
+{
+    sfFloatRect bounds = sfRectangleShape_getGlobalBounds(button);
+    return sfFloatRect_contains(&bounds, mouse.x, mouse.y);
+}
+
 void handle_event(game_t *g)
 {
     while (sfRenderWindow_pollEvent(g->window->window, &(g->window->event))) {
