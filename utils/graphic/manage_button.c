@@ -44,3 +44,14 @@ void destroy_button(void *element)
     sfSprite_destroy(button->sprite);
     free(button);
 }
+
+sfFloatRect get_button_hitbox(button_tab_t button)
+{
+    sfFloatRect hitbox;
+
+    hitbox.left = (float)button.pos.x;
+    hitbox.top = (float)button.pos.y;
+    hitbox.width = (float)button.rect.width;
+    hitbox.height = (float)button.rect.height;
+    return hitbox;
+}

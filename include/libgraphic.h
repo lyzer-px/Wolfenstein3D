@@ -113,4 +113,7 @@ void display_button(sfRenderWindow *win, void *element,
 // Destroy a button
 void destroy_button(void *element);
 
+// Get the hitbox of a button
+sfFloatRect get_button_hitbox(button_tab_t button);
+
 #endif /* LIBGRAPHIC_H */
