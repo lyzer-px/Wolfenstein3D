@@ -110,6 +110,41 @@ static void draw_bg(sfRenderWindow *window, sfRectangleShape *bg)
     sfRenderWindow_drawRectangleShape(window, bg, nullptr);
 }
 
+static void draw_map(sfRenderWindow *window, sfRectangleShape **bounds)
+{
+    for (size_t i = 0; bounds[i] != nullptr; i++)
+        sfRenderWindow_drawRectangleShape(window, bounds[i], NULL);
+}
+
+static void init_tile(sfRectangleShape *tile, size_t i, size_t j)
+{
+    sfRectangleShape_setFillColor(tile, map[i][j] ? sfWhite : sfBlack);
+    sfRectangleShape_setOutlineColor(tile, (sfColor){125, 125, 125, 255});
+    sfRectangleShape_setOutlineThickness(tile, 1);
+    sfRectangleShape_setSize(tile, (sfVector2f){TILE_SIZE, TILE_SIZE});
+    sfRectangleShape_setPosition(tile,
+        (sfVector2f){j * TILE_SIZE, i * TILE_SIZE});
+}
+
+static sfRectangleShape **init_map(void)
+{
+    sfRectangleShape **bounds = malloc(sizeof(sfRectangleShape *) *
+        (MAP_HEIGHT * MAP_WIDTH) + 1);
+    size_t k = 0;
+
+    if (bounds == nullptr)
+        return nullptr;
+    for (size_t i = 0; i < MAP_HEIGHT; i++) {
+        for (size_t j = 0; j < MAP_WIDTH; j++) {
+            bounds[k] = sfRectangleShape_create();
+            init_tile(bounds[k], i, j);
+            k++;
+        }
+    }
+    bounds[k] = nullptr;
+    return bounds;
+}
+
 int init_game(void)
 {
     sfVideoMode mode = {SCREEN_WIDTH, SCREEN_HEIGHT, 32};
@@ -117,6 +152,7 @@ int init_game(void)
         sfClose | sfResize, NULL);
     sfEvent event;
     player_t player = {};
+    sfRectangleShape **bounds = init_map();
     sfRectangleShape *bg = create_bg(mode,
         (sfVector2f){mode.width, mode.height / 2});
     sfRectangleShape *rect = create_bg(mode, (sfVector2f){1, 1});
@@ -128,6 +164,7 @@ int init_game(void)
         sfRenderWindow_clear(window, sfBlack);
         draw_bg(window, bg);
         update_player(&player, window, rect);
+        draw_map(window, bounds);
         catch_events(window, event);
         sfRenderWindow_display(window);
     }
