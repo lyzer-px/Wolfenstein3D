@@ -26,6 +26,12 @@ typedef struct button_tab_s {
 
     #define SIZE_TAB_BUTTON 4
 
+typedef enum {
+    CONTINUE,
+    SAVE,
+    EXIT
+}button_id_t;
+
 static const button_tab_t tab_button[] = {
     {"assets/buttons/Continue 192x48.png", {0, 0, 192, 48}, {100, 100}},
     {"assets/buttons/Save 192x48.png", {0, 0, 192, 48}, {100, 200}},

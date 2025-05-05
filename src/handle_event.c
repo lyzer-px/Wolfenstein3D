@@ -23,7 +23,7 @@ void handle_event(game_t *g)
 {
     while (sfRenderWindow_pollEvent(g->window->window, &(g->window->event))) {
         if (g->window->event.type == sfEvtClosed || (g->actual_scene == 0 &&
-            is_button_clicked(&tab_button[2],
+            is_button_clicked(&tab_button[EXIT],
             sfMouse_getPositionRenderWindow(g->window->window), &g->window->event)))
             sfRenderWindow_close(g->window->window);
         if (sfKeyboard_isKeyPressed(sfKeyEscape))
