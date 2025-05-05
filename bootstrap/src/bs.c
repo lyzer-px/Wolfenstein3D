@@ -66,4 +66,3 @@ void player_repel(player_t *player)
         player->pos.y += direction.y * PLAYER_SPEED;
     }
 }
-
