@@ -9,18 +9,22 @@
 #include "project_funct.h"
 #include "libgraphic.h"
 
-static bool is_button_clicked(button_tab_t *button, sfVector2i mouse)
+static bool is_button_clicked(button_tab_t *button,
+    sfVector2i mouse, sfEvent *event)
 {
     sfFloatRect bounds = get_button_hitbox(*button);
 
-    return sfFloatRect_contains(&bounds, mouse.x, mouse.y);
+    return sfFloatRect_contains(&bounds, mouse.x, mouse.y) &&
+    (event->type == sfEvtMouseButtonPressed &&
+    event->mouseButton.button == sfMouseLeft);
 }
 
 void handle_event(game_t *g)
 {
     while (sfRenderWindow_pollEvent(g->window->window, &(g->window->event))) {
         if (g->window->event.type == sfEvtClosed || (g->actual_scene == 0 &&
-            is_button_clicked(&tab_button[1], sfMouse_getPosition(g->window))))
+            is_button_clicked(&tab_button[2],
+            sfMouse_getPositionRenderWindow(g->window->window), &g->window->event)))
             sfRenderWindow_close(g->window->window);
         if (sfKeyboard_isKeyPressed(sfKeyEscape))
             g->actual_scene = 0;
