@@ -45,8 +45,6 @@ int init_scene(game_t *game)
     int status = 0;
 
     init_pause_menu(game->tab_scene[0]);
-    init_menu(game->tab_scene[1], &sfGreen);
-    init_menu(game->tab_scene[2], &sfRed);
     if (status == EPI_SUCESS)
         status = loop(game);
     return status;

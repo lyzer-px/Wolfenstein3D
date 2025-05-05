@@ -42,7 +42,7 @@
 
     // WARNING - When you want to add an scene you need to make a +1 in the
     // include/macro.h and utils/graphic/macro.h
-    #define NB_SCENE (3)
+    #define NB_SCENE (1)
 
 /*
 ** Libs
