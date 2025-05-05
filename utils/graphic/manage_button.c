@@ -55,3 +55,12 @@ sfFloatRect get_button_hitbox(button_tab_t button)
     hitbox.height = (float)button.rect.height;
     return hitbox;
 }
+
+bool is_button_clicked(button_tab_t *button, sfVector2i mouse, sfEvent *event)
+{
+    sfFloatRect bounds = get_button_hitbox(*button);
+
+    return sfFloatRect_contains(&bounds, mouse.x, mouse.y) &&
+    (event->type == sfEvtMouseButtonPressed &&
+    event->mouseButton.button == sfMouseLeft);
+}
