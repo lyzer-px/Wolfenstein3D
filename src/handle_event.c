@@ -15,7 +15,7 @@ void handle_event(game_t *g)
         if (g->window->event.type == sfEvtClosed)
             sfRenderWindow_close(g->window->window);
         if (sfKeyboard_isKeyPressed(sfKeyEscape))
-            g->actual_scene = 0;
+            g->actual_scene = PAUSE_MENU;
         if (g->window->event.type == sfEvtKeyPressed &&
                 g->window->event.key.code == sfKeyF11)
             change_the_mode_window(g->window);
