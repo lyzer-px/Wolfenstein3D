@@ -12,8 +12,8 @@
     #include <SFML/Graphics/RectangleShape.h>
     #include <stdbool.h>
 
-    #define FOV (M_PI / 3)
-    #define NUM_RAYS 800
+    #define FOV (M_PI / 2)
+    #define NUM_RAYS 60
     #define M_PI		3.14159265358979323846
     #define TILE_SIZE 64
     #define MAP_WIDTH 8
@@ -24,6 +24,8 @@
     #define SQUARED(a) ((a) * (a))
     #define PLAYER_SPEED 0.1
     #define ON_INT_MAP(a, b) ((int)(a) / TILE_SIZE, (int)(b) / TILE_SIZE)
+    #define SCREEN_WIDTH 800
+    #define SCREEN_HEIGHT 600
 
 static const int map[MAP_HEIGHT][MAP_WIDTH] = {
     {1, 1, 1, 1, 1, 1, 1, 1},
