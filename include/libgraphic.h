@@ -27,6 +27,9 @@ typedef struct button_tab_s {
     #define SIZE_TAB_BUTTON 4
 
 static const button_tab_t tab_button[] = {
+    {"assets/buttons/Continue 192x48.png", {0, 0, 192, 48}, {100, 100}},
+    {"assets/buttons/Save 192x48.png", {0, 0, 192, 48}, {100, 200}},
+    {"assets/buttons/Exit 192x48.png", {0, 0, 192, 48}, {100, 300}},
     {NULL, {0, 0, 0, 0}, {0, 0}}
 };
 
@@ -99,5 +102,8 @@ void free_tab_scene(game_t *game);
 
 // Destroy a struct window_t
 void destroy_window(window_t *window);
+
+// Create a button
+button_t *create_button(const button_tab_t *def);
 
 #endif /* LIBGRAPHIC_H */

@@ -36,7 +36,8 @@ SRC 		= 		add_an_element_to_scene.c		\
 					init_game.c						\
 					init_tab_scene.c				\
 					make_window.c					\
-					rev_composant.c
+					rev_composant.c					\
+					create_button.c
 
 OBJ			=		$(SRC:.c=.o)
 
