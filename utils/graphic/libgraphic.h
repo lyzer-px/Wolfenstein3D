@@ -106,4 +106,11 @@ void destroy_window(window_t *window);
 // Create a button
 button_t *create_button(const button_tab_t *def);
 
+// Display a button
+void display_button(sfRenderWindow *win, void *element,
+    sfRenderStates *states);
+
+// Destroy a button
+void destroy_button(void *element);
+
 #endif /* LIBGRAPHIC_H */

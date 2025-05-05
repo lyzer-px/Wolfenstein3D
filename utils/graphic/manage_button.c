@@ -28,3 +28,19 @@ button_t *create_button(const button_tab_t *def)
     button->pos = def->pos;
     return button;
 }
+
+void display_button(sfRenderWindow *win, void *element, sfRenderStates *states)
+{
+    button_t *button = (button_t *)element;
+
+    sfRenderWindow_drawSprite(win, button->sprite, states);
+}
+
+void destroy_button(void *element)
+{
+    button_t *button = (button_t *)element;
+
+    sfTexture_destroy(button->texture);
+    sfSprite_destroy(button->sprite);
+    free(button);
+}
