@@ -29,4 +29,8 @@ void print_help(void);
 // Function that check if we can play or not, according to the env
 int check_env(char **env);
 
+
+// Initialise pause menu
+void init_pause_menu(scene_t *scene);
+
 #endif /* PROJECT_H */
