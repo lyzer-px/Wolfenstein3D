@@ -34,7 +34,7 @@
     #define BITS (32)
 
     #define STYLE_WIND ((sfUint32)sfResize | sfClose)
-    #define STYLE_FULL ((sfUint32)sfFullscreen)
+    #define STYLE_FULL ((sfUint32)sfResize | sfClose | sfFullscreen)
 
     #define ELAPSED_TIME (1000)
 

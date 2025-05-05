@@ -26,7 +26,6 @@ static sfRectangleShape *create_rect(sfVector2f pos,
 
 static void init_menu(scene_t *scene, sfColor *color)
 {
-    composant_t *tmp;
     sfRectangleShape *rect_tmp = NULL;
 
     for (int y = 1; y < 4; y++) {

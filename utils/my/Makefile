@@ -53,7 +53,7 @@ clean:
 	@find -name "*.gcda" -delete -o -name "*.gcno" -delete
 
 fclean: clean
-	$(RM) -f $(NAME) ../../$(NAME) $(UT_NAME)
+	$(RM) $(NAME) ../../$(NAME) $(UT_NAME)
 	@find -name "coding-style-reports.log" -delete
 
 re:	fclean all

@@ -61,7 +61,7 @@ typedef struct scene_s {
     struct layer_s *layer;
 } scene_t;
 
-typedef struct game_s {
+struct game_s {
     // how many scene do we have (if you  want to change it we have an macro)
     int nb_scene;
     // which scene do we show
@@ -70,6 +70,6 @@ typedef struct game_s {
     struct scene_s **tab_scene;
     // stuct window where we have each window's information
     struct window_s *window;
-} game_t;
+};
 
 #endif /* STRUCT_H */

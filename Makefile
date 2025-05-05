@@ -111,7 +111,7 @@ coverage: tests_run
 coding_style: fclean
 	coding-style . .
 	@cat coding-style-reports.log
-	@$(RM) -f "coding-style-reports.log";
+	@$(RM) "coding-style-reports.log";
 
 .PHONY: all				\
 		re				\
