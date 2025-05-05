@@ -12,6 +12,7 @@
 static bool is_button_clicked(sfRectangleShape *button, sfVector2i mouse)
 {
     sfFloatRect bounds = sfRectangleShape_getGlobalBounds(button);
+
     return sfFloatRect_contains(&bounds, mouse.x, mouse.y);
 }
 
