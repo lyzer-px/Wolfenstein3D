@@ -12,8 +12,7 @@
 void handle_event(game_t *g)
 {
     while (sfRenderWindow_pollEvent(g->window->window, &(g->window->event))) {
-        if (g->window->event.type == sfEvtClosed
-                || sfKeyboard_isKeyPressed(sfKeyEscape))
+        if (g->window->event.type == sfEvtClosed)
             sfRenderWindow_close(g->window->window);
         if (g->window->event.type == sfEvtKeyPressed &&
                 g->window->event.key.code == sfKeyF11)
