@@ -19,7 +19,7 @@ void init_player(player_t *player)
         return;
     init_hitbox(player);
     init_ray(player);
-    player->angle = fmod(0, 2 * M_PI);
+    player->angle = 0;
     player->pos.x = 400;
     player->pos.y = 300;
 }
@@ -34,7 +34,7 @@ float cast_single_ray(player_t *player, float angle)
         ray_pos.y += ray_direction.y;
     }
     return (sqrtf(SQUARED(ray_pos.x - player->pos.x) +
-    SQUARED(ray_pos.y - player->pos.y))) * cosf(player->angle - angle);
+    SQUARED(ray_pos.y - player->pos.y))) * cosf(RAD(player->angle - angle));
 }
 
 static void set_rect(player_t *player, float distance, sfRectangleShape *rect,
@@ -44,7 +44,7 @@ static void set_rect(player_t *player, float distance, sfRectangleShape *rect,
 
     sfRectangleShape_setSize(rect, (sfVector2f){10, rect_height});
     sfRectangleShape_setFillColor(rect, sfWhite);
-    sfRectangleShape_setPosition(rect, (sfVector2f){(ray_idx * TILE_SIZE) / 7,
+    sfRectangleShape_setPosition(rect, (sfVector2f){(ray_idx * RECT_SIZE) / 7,
         (SCREEN_HEIGHT - rect_height) / 2});
 }
 
@@ -56,7 +56,7 @@ static void update_player(player_t *player, sfRenderWindow *window,
 
     if (player == nullptr || window == nullptr)
         return;
-    for (size_t i = -DEG(FOV); i < DEG(FOV); i++) {
+    for (double i = -DEG(FOV); i < DEG(FOV); i++) {
         angle = (player->angle - DEG(FOV / 2) + i);
         distance = cast_single_ray(player, angle);
         set_rect(player, distance, rect, i);
@@ -164,7 +164,7 @@ int init_game(void)
         sfRenderWindow_clear(window, sfBlack);
         draw_bg(window, bg);
         update_player(&player, window, rect);
-        draw_map(window, bounds);
+        //draw_map(window, bounds);
         catch_events(window, event);
         sfRenderWindow_display(window);
     }
