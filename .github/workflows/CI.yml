@@ -80,7 +80,7 @@ jobs:
         run: find . -name "*.gcda" -delete -o -name "*.gcno" -delete
 
   push_to_mirror:
-    needs: [check_coding_style]
+    needs: [check_coding_style, run_tests, check_memory_leak]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
