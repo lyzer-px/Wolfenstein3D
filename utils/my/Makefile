@@ -56,6 +56,7 @@ $(NAME):	$(OBJ)
 	@$(AR) rc $(NAME) $(OBJ)
 	@cp $(NAME) ../..
 	@cp $(HEADER) ../../include/
+	@cp $(HEADER) ../graphic/
 #	@ranlib $(LIB_NAME)
 
 clean:
