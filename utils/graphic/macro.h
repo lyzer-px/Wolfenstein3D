@@ -56,6 +56,14 @@
 
     #define END_STR ('\0')
 
+// Configuration file
+
+enum TYPE_INSTRUCTION {
+    ID = 0,
+    PATH_TEXTURE,
+    NB_ARG_CONFIG,
+};
+
 /*
 ** Error Print For User
 */

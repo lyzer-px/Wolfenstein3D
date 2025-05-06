@@ -1,0 +1,16 @@
+/*
+** EPITECH PROJECT, 2024
+** Wolfenstein3D
+** File description:
+** destroy_ressource.c
+*/
+
+#include <stdlib.h>
+#include "struct.h"
+
+void destroy_ressource(ressource_t **ressource)
+{
+    free(*ressource);
+    *ressource = NULL;
+    return;
+}

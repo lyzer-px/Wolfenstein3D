@@ -13,5 +13,6 @@ void destroy_game(game_t *game)
 {
     destroy_window(game->window);
     free_tab_scene(game);
+    destroy_all_ressource(&game->ressource);
     free(game);
 }
