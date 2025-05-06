@@ -27,8 +27,8 @@ void init_ray(player_t *player)
 void init_hitbox(player_t *player)
 {
     sfRectangleShape_setFillColor(player->hitbox, sfRed);
-    sfRectangleShape_setOrigin(player->hitbox, (sfVector2f){10, 10});
-    sfRectangleShape_setSize(player->hitbox, (sfVector2f){20, 20});
+    sfRectangleShape_setSize(player->hitbox, (sfVector2f){10, 10});
+    sfRectangleShape_setOrigin(player->hitbox, (sfVector2f){5, 5});
     sfRectangleShape_setPosition(player->hitbox, (sfVector2f){400, 300});
     sfRectangleShape_setRotation(player->hitbox, player->angle);
 }
