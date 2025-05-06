@@ -51,11 +51,14 @@ typedef struct tile_s {
     bool wall;
 } tile_t;
 
-void init_hitbox(player_t *player);
 sfBool is_wall(int x, int y);
-void init_ray(player_t *player);
 int init_game(void);
 void player_fwd(player_t *player);
 void player_repel(player_t *player);
-
+void init_ray(player_t *player);
+int init_player(player_t *player);
+void init_tile(sfRectangleShape *tile, size_t i, size_t j);
+void init_hitbox(player_t *player);
+void init_ray(player_t *player);
+sfRectangleShape **init_map(void);
 #endif

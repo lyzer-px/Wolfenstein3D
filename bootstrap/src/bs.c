@@ -14,25 +14,6 @@ sfBool is_wall(int x, int y)
     return map[y][x];
 }
 
-void init_ray(player_t *player)
-{
-    player->ray = sfRectangleShape_create();
-    if (player->ray == nullptr)
-        return;
-    sfRectangleShape_setSize(player->ray, (sfVector2f){1, 1});
-    sfRectangleShape_setFillColor(player->ray, sfBlue);
-    sfRectangleShape_setOrigin(player->ray, (sfVector2f){2, 2});
-}
-
-void init_hitbox(player_t *player)
-{
-    sfRectangleShape_setFillColor(player->hitbox, sfRed);
-    sfRectangleShape_setSize(player->hitbox, (sfVector2f){10, 10});
-    sfRectangleShape_setOrigin(player->hitbox, (sfVector2f){5, 5});
-    sfRectangleShape_setPosition(player->hitbox, (sfVector2f){400, 300});
-    sfRectangleShape_setRotation(player->hitbox, player->angle);
-}
-
 void player_fwd(player_t *player)
 {
     sfVector2f direction = {- sinf(RAD(player->angle)),

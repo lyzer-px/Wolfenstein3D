@@ -10,20 +10,6 @@
 #include <SFML/Graphics.h>
 #include "bs.h"
 
-void init_player(player_t *player)
-{
-    if (player == nullptr)
-        return;
-    player->hitbox = sfRectangleShape_create();
-    if (player->hitbox == nullptr)
-        return;
-    init_hitbox(player);
-    init_ray(player);
-    player->angle = 0;
-    player->pos.x = 40;
-    player->pos.y = 30;
-}
-
 float cast_single_ray(player_t *player, float angle, sfRectangleShape *rect,
     sfRenderWindow *window)
 {
@@ -82,7 +68,8 @@ static void update_player(player_t *player, sfRenderWindow *window,
     for (double i = 0; i < DEG(FOV); i++) {
         angle = (player->angle - DEG(FOV / 2) + i);
         prep_2d_ray(rect);
-        distance = cast_single_ray(player, angle, rect, window) * cosf(RAD(player->angle) - RAD(angle));
+        distance = cast_single_ray(player, angle, rect, window)
+        * cosf(RAD(player->angle) - RAD(angle));
         set_rect(distance, rect, i);
         sfRenderWindow_drawRectangleShape(window, rect, nullptr);
     }
@@ -94,7 +81,7 @@ static void update_player(player_t *player, sfRenderWindow *window,
     }
 }
 
-static void catch_events(sfRenderWindow *window, sfEvent event)
+void catch_events(sfRenderWindow *window, sfEvent event)
 {
     while (sfRenderWindow_pollEvent(window, &event)) {
         if (event.type == sfEvtClosed)
@@ -102,7 +89,7 @@ static void catch_events(sfRenderWindow *window, sfEvent event)
     }
 }
 
-static int end_game(sfRenderWindow *window)
+int end_game(sfRenderWindow *window)
 {
     sfRenderWindow_destroy(window);
     return EXIT_SUCCESS;
@@ -132,35 +119,6 @@ static void draw_bg(sfRenderWindow *window, sfRectangleShape *bg)
     sfRenderWindow_drawRectangleShape(window, bg, nullptr);
 }
 
-static void init_tile(sfRectangleShape *tile, size_t i, size_t j)
-{
-    sfRectangleShape_setFillColor(tile, map[i][j] ? sfWhite : sfBlack);
-    sfRectangleShape_setOutlineColor(tile, (sfColor){125, 125, 125, 255});
-    sfRectangleShape_setOutlineThickness(tile, 1);
-    sfRectangleShape_setSize(tile, (sfVector2f){TILE_SIZE, TILE_SIZE});
-    sfRectangleShape_setPosition(tile,
-        (sfVector2f){j * TILE_SIZE, i * TILE_SIZE});
-}
-
-static sfRectangleShape **init_map(void)
-{
-    sfRectangleShape **bounds = malloc(sizeof(sfRectangleShape *) *
-        (MAP_HEIGHT * MAP_WIDTH) + 1);
-    size_t k = 0;
-
-    if (bounds == nullptr)
-        return nullptr;
-    for (size_t i = 0; i < MAP_HEIGHT; i++) {
-        for (size_t j = 0; j < MAP_WIDTH; j++) {
-            bounds[k] = sfRectangleShape_create();
-            init_tile(bounds[k], i, j);
-            k++;
-        }
-    }
-    bounds[k] = nullptr;
-    return bounds;
-}
-
 int init_game(void)
 {
     sfVideoMode mode = {SCREEN_WIDTH, SCREEN_HEIGHT, 32};
@@ -173,9 +131,8 @@ int init_game(void)
         (sfVector2f){mode.width, mode.height / 2});
     sfRectangleShape *rect = create_bg(mode, (sfVector2f){1, 1});
 
-    if (window == nullptr || bg == nullptr)
+    if (window == nullptr || bg == nullptr || init_player(&player) < 0)
         return EXIT_FAILURE;
-    init_player(&player);
     while (sfRenderWindow_isOpen(window)) {
         sfRenderWindow_clear(window, sfBlack);
         draw_bg(window, bg);

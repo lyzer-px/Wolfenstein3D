@@ -9,7 +9,8 @@ CC ?= gcc
 
 SRC 	=	src/main.c 						\
 			src/bs.c						\
-			src/raycast2d.c
+			src/raycast2d.c					\
+			src/inits.c
 
 NAME	=	bswolf
 
