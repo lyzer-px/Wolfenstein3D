@@ -20,8 +20,8 @@ void init_player(player_t *player)
     init_hitbox(player);
     init_ray(player);
     player->angle = fmod(0, 2 * M_PI);
-    player->pos.x = 40;
-    player->pos.y = 30;
+    player->pos.x = 400;
+    player->pos.y = 300;
 }
 
 float cast_single_ray(player_t *player, float angle)
@@ -40,11 +40,11 @@ float cast_single_ray(player_t *player, float angle)
 static void set_rect(player_t *player, float distance, sfRectangleShape *rect,
     size_t ray_idx)
 {
-    float rect_height = (RECT_SIZE / distance) * (SCREEN_WIDTH / 2);
+    float rect_height = (TILE_SIZE / distance) * (SCREEN_WIDTH / 2);
 
     sfRectangleShape_setSize(rect, (sfVector2f){10, rect_height});
     sfRectangleShape_setFillColor(rect, sfWhite);
-    sfRectangleShape_setPosition(rect, (sfVector2f){(ray_idx * RECT_SIZE) / 7,
+    sfRectangleShape_setPosition(rect, (sfVector2f){(ray_idx * TILE_SIZE) / 7,
         (SCREEN_HEIGHT - rect_height) / 2});
 }
 
@@ -56,7 +56,7 @@ static void update_player(player_t *player, sfRenderWindow *window,
 
     if (player == nullptr || window == nullptr)
         return;
-    for (double i = -DEG(FOV); i < DEG(FOV); i++) {
+    for (size_t i = -DEG(FOV); i < DEG(FOV); i++) {
         angle = (player->angle - DEG(FOV / 2) + i);
         distance = cast_single_ray(player, angle);
         set_rect(player, distance, rect, i);
@@ -68,8 +68,6 @@ static void update_player(player_t *player, sfRenderWindow *window,
         player_repel(player);
         return;
     }
-    sfRectangleShape_setPosition(player->hitbox, player->pos);
-    sfRectangleShape_setRotation(player->hitbox, player->angle);
 }
 
 static void catch_events(sfRenderWindow *window, sfEvent event)
@@ -112,12 +110,10 @@ static void draw_bg(sfRenderWindow *window, sfRectangleShape *bg)
     sfRenderWindow_drawRectangleShape(window, bg, nullptr);
 }
 
-static void draw_map(player_t *player, sfRenderWindow *window,
-    sfRectangleShape **bounds)
+static void draw_map(sfRenderWindow *window, sfRectangleShape **bounds)
 {
     for (size_t i = 0; bounds[i] != nullptr; i++)
         sfRenderWindow_drawRectangleShape(window, bounds[i], NULL);
-    sfRenderWindow_drawRectangleShape(window, player->hitbox, nullptr);
 }
 
 static void init_tile(sfRectangleShape *tile, size_t i, size_t j)
@@ -168,7 +164,7 @@ int init_game(void)
         sfRenderWindow_clear(window, sfBlack);
         draw_bg(window, bg);
         update_player(&player, window, rect);
-        draw_map(&player, window, bounds);
+        draw_map(window, bounds);
         catch_events(window, event);
         sfRenderWindow_display(window);
     }
