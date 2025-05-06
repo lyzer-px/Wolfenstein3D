@@ -28,7 +28,6 @@ void init_hitbox(player_t *player)
     sfRectangleShape_setRotation(player->hitbox, player->angle);
 }
 
-
 int init_player(player_t *player)
 {
     if (player == nullptr)
