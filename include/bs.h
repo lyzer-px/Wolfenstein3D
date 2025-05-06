@@ -15,7 +15,8 @@
     #define FOV (M_PI / 2)
     #define NUM_RAYS 60
     #define M_PI		3.14159265358979323846
-    #define TILE_SIZE 64
+    #define TILE_SIZE 20
+    #define RECT_SIZE 64
     #define MAP_WIDTH 8
     #define MAP_HEIGHT 8
     #define TILE_THICKNESS 10
