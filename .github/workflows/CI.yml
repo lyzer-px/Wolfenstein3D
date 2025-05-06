@@ -37,44 +37,47 @@ jobs:
       - name: Check Binary
         run: for binary in "${{ vars.EXECUTABLES }}"; do if [ ! -x $binary ]; then exit 1; fi; done
 
-#  check_memory_leak:
-#    name: Check Memory Leak
-#    runs-on: ubuntu-latest
-#    container: epitechcontent/epitest-docker
-#    needs: [check_program_compilation]
-#    steps:
-#      - name: Checkout Repository
-#        uses: actions/checkout@main
-#      - name: Build binary
-#        run: make re
-#      - name: Run Valgrind on wolf3d
-#        run: valgrind --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all --error-exitcode=1 ./wolf3d
-#
-#  run_tests:
-#    name: Run Unit Tests
-#    needs: [check_program_compilation]
-#    runs-on: ubuntu-latest
-#    container:  epitechcontent/epitest-docker
-#    timeout-minutes: 2
-#    steps:
-#      - name: Checkout Repository
-#        uses: actions/checkout@main
-#      - run: make tests_run
-#
-#  check_coverage:
-#    name: Check Coverage
-#    needs: [run_tests]
-#    runs-on: ubuntu-latest
-#    container: epitechcontent/epitest-docker
-#    steps:
-#      - name: Checkout Repository
-#        uses: actions/checkout@main
-#      - name: Build Tests Binary
-#        run: make tests_run
-#      - name: Generate Coverage Report
-#        run: gcovr --exclude tests/ --fail-under-line 50
-#      - name: Clean coverage files
-#        run: find . -name "*.gcda" -delete -o -name "*.gcno" -delete
+  check_memory_leak:
+    name: Check Memory Leak
+    runs-on: ubuntu-latest
+    container: epitechcontent/epitest-docker
+    needs: [check_program_compilation]
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@main
+      - name: Build binary
+        run: make re
+      - name: Run Valgrind on wolf3d
+        run: valgrind --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all --error-exitcode=1 ./wolf3d 2> valgrind.log || true
+      - name: Check Memory Leak in Log File
+        run: |
+          if grep -q "definitely lost: 0 bytes in 0 blocks" valgrind.log && grep -q "indirectly lost: 0 bytes in 0 blocks" valgrind.log && grep -q "possibly lost: 0 bytes in 0 blocks" valgrind.log; then exit 1; fi
+
+  run_tests:
+    name: Run Unit Tests
+    needs: [check_program_compilation]
+    runs-on: ubuntu-latest
+    container:  epitechcontent/epitest-docker
+    timeout-minutes: 2
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@main
+      - run: make tests_run
+
+  check_coverage:
+    name: Check Coverage
+    needs: [run_tests]
+    runs-on: ubuntu-latest
+    container: epitechcontent/epitest-docker
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@main
+      - name: Build Tests Binary
+        run: make tests_run
+      - name: Generate Coverage Report
+        run: gcovr --exclude tests/ --fail-under-line 50
+      - name: Clean coverage files
+        run: find . -name "*.gcda" -delete -o -name "*.gcno" -delete
 
   push_to_mirror:
     needs: [check_coding_style]
