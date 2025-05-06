@@ -34,7 +34,7 @@ float cast_single_ray(player_t *player, float angle)
         ray_pos.y += ray_direction.y;
     }
     return (sqrtf(SQUARED(ray_pos.x - player->pos.x) +
-    SQUARED(ray_pos.y - player->pos.y))) * cosf(RAD(player->angle - angle));
+    SQUARED(ray_pos.y - player->pos.y)));
 }
 
 static void set_rect(player_t *player, float distance, sfRectangleShape *rect,
@@ -42,6 +42,8 @@ static void set_rect(player_t *player, float distance, sfRectangleShape *rect,
 {
     float rect_height = (TILE_SIZE / distance) * (SCREEN_WIDTH / 2);
 
+    if (rect_height < 0)
+        rect_height = SCREEN_HEIGHT;
     sfRectangleShape_setSize(rect, (sfVector2f){10, rect_height});
     sfRectangleShape_setFillColor(rect, sfWhite);
     sfRectangleShape_setPosition(rect, (sfVector2f){(ray_idx * RECT_SIZE) / 7,
@@ -58,7 +60,7 @@ static void update_player(player_t *player, sfRenderWindow *window,
         return;
     for (double i = -DEG(FOV); i < DEG(FOV); i++) {
         angle = (player->angle - DEG(FOV / 2) + i);
-        distance = cast_single_ray(player, angle);
+        distance = cast_single_ray(player, angle) * cosf(RAD(player->angle) - RAD(angle));
         set_rect(player, distance, rect, i);
         sfRenderWindow_drawRectangleShape(window, rect, nullptr);
     }
@@ -100,12 +102,11 @@ static void draw_bg(sfRenderWindow *window, sfRectangleShape *bg)
 
     if (window == nullptr || bg == nullptr)
         return;
-    size = sfRenderWindow_getSize(window).y;
     sfRectangleShape_setPosition(bg, (sfVector2f){0, 0});
     sfRectangleShape_setFillColor(bg, sfCyan);
     sfRenderWindow_drawRectangleShape(window, bg, nullptr);
     sfRectangleShape_setPosition(bg,
-        (sfVector2f){0, size / 2});
+        (sfVector2f){0, SCREEN_HEIGHT / 2});
     sfRectangleShape_setFillColor(bg, sfGreen);
     sfRenderWindow_drawRectangleShape(window, bg, nullptr);
 }
