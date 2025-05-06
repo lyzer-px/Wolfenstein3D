@@ -11,18 +11,22 @@
 #include "struct.h"
 #include "project_funct.h"
 #include "macro.h"
+#include "libgraphic.h"
 
-int loop(window_t *win)
+int loop(game_t *game)
 {
-    if (win->window == NULL)
+    if (game->window->window == NULL)
         return EPI_FAIL;
-    while (sfRenderWindow_isOpen(win->window)) {
-        if (sfClock_getElapsedTime(win->clock).microseconds <= ELAPSED_TIME)
+    while (sfRenderWindow_isOpen(game->window->window)) {
+        if (sfClock_getElapsedTime(game->window->clock).microseconds
+            <= ELAPSED_TIME)
             continue;
-        handle_event(win);
-        sfRenderWindow_clear(win->window, sfBlack);
-        sfRenderWindow_display(win->window);
-        sfClock_restart(win->clock);
+        handle_event(game);
+        sfRenderWindow_clear(game->window->window, sfBlack);
+        draw_composant_of_scene(game->window->window,
+                game->tab_scene[game->actual_scene]);
+        sfRenderWindow_display(game->window->window);
+        sfClock_restart(game->window->clock);
     }
     return EPI_SUCESS;
 }

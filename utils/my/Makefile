@@ -42,9 +42,9 @@ UT_FLAGS	=	--coverage -lcriterion
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-	$(AR) rc $(NAME) $(OBJ)
-	cp $(NAME) ../..
-	cp $(HEADER) ../../include/
+	@$(AR) rc $(NAME) $(OBJ)
+	@cp $(NAME) ../..
+	@cp $(HEADER) ../../include/
 #	@ranlib $(LIB_NAME)
 
 clean:
@@ -53,7 +53,7 @@ clean:
 	@find -name "*.gcda" -delete -o -name "*.gcno" -delete
 
 fclean: clean
-	$(RM) -f $(NAME) ../../$(NAME) $(UT_NAME)
+	$(RM) $(NAME) ../../$(NAME) $(UT_NAME)
 	@find -name "coding-style-reports.log" -delete
 
 re:	fclean all
