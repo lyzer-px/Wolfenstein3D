@@ -27,8 +27,7 @@ enum type_id {
     VOID,
 };
 
-typedef struct struct_strtype_s
-{
+typedef struct struct_strtype_s {
     char *str;
     int type;
 } struct_strtype_t;
