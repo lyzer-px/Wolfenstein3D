@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2025
-** minishell.c
+** libmy
 ** File description:
 ** parse_user_input.c
 */

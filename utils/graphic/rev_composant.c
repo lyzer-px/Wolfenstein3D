@@ -19,4 +19,5 @@ void rev_composant(composant_t **begin)
         (*begin) = next_begin;
     }
     *begin = new_begin;
+    return;
 }

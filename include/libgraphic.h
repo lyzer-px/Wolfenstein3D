@@ -76,6 +76,15 @@ void add_ressource(ressource_t **begin, ressource_t *new_ressource);
 void create_ressource_link(ressource_t **begin, char *id,
     void *element, int type);
 
+// Create a ressource already in the struct game
+void create_a_ressource_in_the_game(game_t *game, char *id,
+    void *element, int type);
+
+// Search a ressource from an id (if id is doesn't exist the function return
+// NULL)
+ressource_t *find_a_ressouce_from_id(ressource_t *begin, char *id);
+
+
 // Destroy a ressource
 void destroy_ressource(ressource_t **ressource);
 

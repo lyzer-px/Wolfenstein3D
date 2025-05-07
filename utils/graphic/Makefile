@@ -17,30 +17,33 @@ RM			?=	rm -rf
 # BINARY CREATION
 #
 
-SRC 		= 		add_an_element_to_scene.c			\
-					add_composant_to_layer.c			\
-					add_ressource.c						\
-					change_the_mode_window.c			\
-					clean_game.c						\
-					clean_layer.c						\
-					clean_scene.c						\
-					create_composant.c					\
-					create_layer.c						\
-					create_ressource.c					\
-					create_ressource_link.c				\
-					create_window.c						\
-					destroy_all_ressource.c				\
-					destroy_composant.c					\
-					destroy_game.c						\
-					destroy_layer.c						\
-					destroy_ressource.c					\
-					destroy_scene.c						\
-					destroy_tab_scene.c					\
-					destroy_window.c					\
-					draw_composant_of_scene.c			\
-					init_game.c							\
-					init_tab_scene.c					\
-					make_window.c						\
+SRC 		= 		add_an_element_to_scene.c				\
+					add_composant_to_layer.c				\
+					add_ressource.c							\
+					change_the_mode_window.c				\
+					clean_game.c							\
+					clean_layer.c							\
+					clean_scene.c							\
+					create_composant.c						\
+					create_composant_from_id_ressource.c	\
+					create_layer.c							\
+					create_a_ressource_in_the_game.c		\
+					create_ressource.c						\
+					create_ressource_link.c					\
+					create_window.c							\
+					destroy_all_ressource.c					\
+					destroy_composant.c						\
+					destroy_game.c							\
+					destroy_layer.c							\
+					destroy_ressource.c						\
+					destroy_scene.c							\
+					destroy_tab_scene.c						\
+					destroy_window.c						\
+					draw_composant_of_scene.c				\
+					find_a_ressouce_from_id.c				\
+					init_game.c								\
+					init_tab_scene.c						\
+					make_window.c							\
 					rev_composant.c
 
 OBJ			=		$(SRC:.c=.o)
