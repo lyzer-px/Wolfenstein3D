@@ -16,4 +16,5 @@ void clean_scene(scene_t *scene)
         clean_layer(layer);
         layer = layer->next;
     }
+    return;
 }

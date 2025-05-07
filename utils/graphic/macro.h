@@ -56,6 +56,39 @@
 
     #define END_STR ('\0')
 
+// Configuration file
+
+    #define PATH_FILE_CONIG ("assets/loader.config")
+    #define SEPARATOR_CONFIG_FILE ("; \n\t")
+    // each line need to be format like that:
+    //TYPE; "NAME"; "FILE_PATH";
+enum FORMAT_FILE_INDEX {
+    TYPE = 0,
+    NAME,
+    FILE_PATH,
+    SIZE_LINE
+};
+
+    #define READ_FILE ("r")
+
+    #define CONFIG_CIRCLE ("CIRCLE")
+    #define CONFIG_CONVEX ("CONVEX")
+    #define CONFIG_FONT ("FONT")
+    #define CONFIG_IMAGE ("IMAGE")
+    #define CONFIG_RECTANGLE ("RECTANGLE")
+    #define CONFIG_SPRITE ("SPRITE")
+    #define CONFIG_TEXT ("TEXT")
+    #define CONFIG_TEXTURE ("TEXTURE")
+    #define CONFIG_TRANSFORM ("TRANSFORM")
+    #define CONFIG_VERTEXARRAY ("VERTEXARRAY")
+    #define CONFIG_VIEW ("VIEW")
+
+enum TYPE_INSTRUCTION {
+    ID = 0,
+    PATH_TEXTURE,
+    NB_ARG_CONFIG,
+};
+
 /*
 ** Error Print For User
 */
