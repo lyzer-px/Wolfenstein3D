@@ -95,8 +95,7 @@ int end_game(sfRenderWindow *window)
     return EXIT_SUCCESS;
 }
 
-static sfRectangleShape *create_bg([[maybe_unused]] sfVideoMode mode,
-    sfVector2f size)
+static sfRectangleShape *create_bg(sfVector2f size)
 {
     sfRectangleShape *bg = sfRectangleShape_create();
 
@@ -127,9 +126,8 @@ int init_game(void)
     sfEvent event;
     player_t player = {};
     sfRectangleShape **bounds = init_map();
-    sfRectangleShape *bg = create_bg(mode,
-        (sfVector2f){mode.width, mode.height / 2});
-    sfRectangleShape *rect = create_bg(mode, (sfVector2f){1, 1});
+    sfRectangleShape *bg = create_bg((sfVector2f){mode.width, mode.height / 2});
+    sfRectangleShape *rect = create_bg((sfVector2f){1, 1});
 
     if (window == nullptr || bg == nullptr || init_player(&player) < 0)
         return EXIT_FAILURE;
