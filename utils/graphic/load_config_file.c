@@ -57,5 +57,6 @@ void load_config_file(game_t *game)
         free(line);
         free_tab(arg);
     }
+    fclose(fd);
     return;
 }
