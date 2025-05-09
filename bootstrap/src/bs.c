@@ -11,6 +11,8 @@
 
 sfBool is_wall(int x, int y)
 {
+    if ((x < 0 || y < 0) || (x > MAP_WIDTH || y > MAP_HEIGHT))
+        return sfFalse;
     return map[y][x];
 }
 
