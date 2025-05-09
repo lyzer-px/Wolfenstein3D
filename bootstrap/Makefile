@@ -16,7 +16,9 @@ NAME	=	bswolf
 
 VPATH	=	../include
 
-CFLAGS	+=	-Wall -Wextra -pedantic -std=c2x
+C23		=	-std=c2x -D_POSIX_C_SOURCE=202311L
+
+CFLAGS	+=	-Wall -Wextra -pedantic $(C23)
 
 CSFMLIBS	=	-lcsfml-system -lcsfml-window -lcsfml-graphics -lcsfml-audio
 
