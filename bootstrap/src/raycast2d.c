@@ -16,7 +16,7 @@ float cast_single_ray(player_t *player, float angle, sfRectangleShape *rect,
     sfVector2f ray_direction = {- sinf(RAD(angle)), cosf(RAD(angle))};
     sfVector2f ray_pos = player->pos;
 
-    while (!is_wall((int)ray_pos.x / TILE_SIZE, (int)ray_pos.y / TILE_SIZE)) {
+    while (!is_wall(ON_INT_MAP(ray_pos.x), ON_INT_MAP(ray_pos.y))) {
         ray_pos.x += ray_direction.x;
         ray_pos.y += ray_direction.y;
         sfRectangleShape_setPosition(rect, ray_pos);
