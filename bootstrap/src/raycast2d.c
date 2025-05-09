@@ -126,7 +126,8 @@ int init_game(void)
     sfEvent event;
     player_t player = {};
     sfRectangleShape **bounds = init_map();
-    sfRectangleShape *bg = create_bg((sfVector2f){mode.width, mode.height / 2});
+    sfRectangleShape *bg = create_bg((sfVector2f){mode.width,
+        mode.height / 2});
     sfRectangleShape *rect = create_bg((sfVector2f){1, 1});
 
     if (window == nullptr || bg == nullptr || init_player(&player) < 0)
