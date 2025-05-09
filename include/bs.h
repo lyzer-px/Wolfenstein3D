@@ -12,20 +12,26 @@
     #include <SFML/Graphics/RectangleShape.h>
     #include <stdbool.h>
 
-    #define FOV (M_PI / 2)
-    #define NUM_RAYS 60
-    #define M_PI		3.14159265358979323846
-    #define TILE_SIZE 10
-    #define PLAYER_SIZE 10
-    #define RECT_SIZE 64
+    #define FOV (M_PI / 2) // The Field of view in radians
+    #define M_PI 3.14159265358979323846
+    #define RAD(i) (i * (M_PI / 180)) // Degrees to radians
+    #define DEG(i) (i * (180 / M_PI)) // Radians to degrees
+    #define SQUARED(a) ((a) * (a)) // does x ^ 2
+
+
+    #define TILE_SIZE 10 // the size of tiles in the minimap
+    #define PLAYER_SIZE 10 // the size of the player's rectangle on minimap
+    #define RECT_SIZE 64 // the size of the rectangles used to make walls
     #define MAP_WIDTH 16
     #define MAP_HEIGHT 16
-    #define TILE_THICKNESS 10
-    #define RAD(i) (i * (M_PI / 180))
-    #define DEG(i) (i * (180 / M_PI))
-    #define SQUARED(a) ((a) * (a))
+    #define TILE_THICKNESS 10 // The thickness of tile outlines
+
     #define PLAYER_SPEED 0.1
-    #define ON_INT_MAP(a, b) ((int)(a) / TILE_SIZE, (int)(b) / TILE_SIZE)
+
+    // Transposes real coords on the int map
+    #define ON_INT_MAP(a) (((int)(a) / TILE_SIZE))
+    //
+
     #define SCREEN_WIDTH 800
     #define SCREEN_HEIGHT 600
 
@@ -61,13 +67,20 @@ typedef struct tile_s {
 } tile_t;
 
 sfBool is_wall(int x, int y);
-int init_game(void);
-void player_fwd(player_t *player);
+int init_game(void); // Launches the game
+void player_fwd(player_t *player); // player angle and directional input
+
+// function to negate movement when collision happens
 void player_repel(player_t *player);
-void init_ray(player_t *player);
-int init_player(player_t *player);
+//
+
+void init_ray(player_t *player); // Inits ray propreties
+int init_player(player_t *player); // Inits player stats
+
+// Creates a tile for the minimap
 void init_tile(sfRectangleShape *tile, size_t i, size_t j);
-void init_hitbox(player_t *player);
-void init_ray(player_t *player);
-sfRectangleShape **init_map(void);
+//
+
+void init_hitbox(player_t *player); // Inits player hitbox on minimap
+sfRectangleShape **init_map(void); // Inits the map to be shown on the screen
 #endif
