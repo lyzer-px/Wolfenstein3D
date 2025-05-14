@@ -17,7 +17,7 @@ ressource_t *create_ressource(char *id, void *element, int type)
         return NULL;
     ressource->id = id;
     ressource->element = element;
-    ressource->setposition = (functions_by_type[type]).setposition;
+    ressource->setposition = (functions_by_type[type]).set_position;
     ressource->display = (functions_by_type[type]).display;
     ressource->destroy = (functions_by_type[type]).destroy;
     ressource->next = NULL;
