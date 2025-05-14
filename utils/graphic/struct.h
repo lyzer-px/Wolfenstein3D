@@ -65,7 +65,7 @@ typedef struct scene_s {
     // id to know which scene is it
     int id_scene;
     // is the scene in pause (true or false)
-    bool pause;
+    bool pause : 1;
     // a function where each event of the scene is
     void (*function_event)(struct game_s *);
     // a linked list where all the layer are

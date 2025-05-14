@@ -66,6 +66,12 @@ void destroy_window(window_t *window);
 
         // RESSOURCES
 
+// Find a type by a str formated
+int find_type(char *str);
+
+// Create an element by the type and a filename
+void *create_element(int type, char *filename);
+
 // Create a ressource (the type is in a enum called type_id)
 ressource_t *create_ressource(char *id, void *element, int type);
 
@@ -83,7 +89,6 @@ void create_a_ressource_in_the_game(game_t *game, char *id,
 // Search a ressource from an id (if id is doesn't exist the function return
 // NULL)
 ressource_t *find_a_ressouce_from_id(ressource_t *begin, char *id);
-
 
 // Destroy a ressource
 void destroy_ressource(ressource_t **ressource);
