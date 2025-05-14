@@ -21,6 +21,14 @@
     #define EPI_FAIL (84)
     #define EPI_SUCESS (0)
 
+    #define STDIN 0
+    #define STDOUT 1
+    #define STDERR 2
+
+    #define TRUE 1
+    #define FALSE 0
+    #define ERROR -1
+
 /*
 ** Main
 */

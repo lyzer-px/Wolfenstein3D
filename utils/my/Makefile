@@ -22,7 +22,10 @@ RM			?=	rm -rf
 SRC 		= 		arraylen.c								\
 					my_strcmp.c								\
 					my_strlen.c								\
-					file_to_str.c
+					file_to_str.c							\
+					concat_array.c							\
+					print_error.c							\
+					write_in_file.c							\
 
 OBJ			=		$(SRC:.c=.o)
 
