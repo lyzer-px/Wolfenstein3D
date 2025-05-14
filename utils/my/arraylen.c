@@ -1,13 +1,13 @@
 /*
 ** EPITECH PROJECT, 2024
-** wolf3d
+** robot_factory
 ** File description:
 ** arraylen.c
 */
 
 #include <stddef.h>
 
-int arraylen(void **tab)
+int arraylen(char **tab)
 {
     int i = 0;
 
