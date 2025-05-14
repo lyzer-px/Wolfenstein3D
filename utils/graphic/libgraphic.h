@@ -90,7 +90,6 @@ void create_a_ressource_in_the_game(game_t *game, char *id,
 // NULL)
 ressource_t *find_a_ressouce_from_id(ressource_t *begin, char *id);
 
-
 // Destroy a ressource
 void destroy_ressource(ressource_t **ressource);
 

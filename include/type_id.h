@@ -48,7 +48,6 @@ static const struct struct_strtype_s str_to_type_tab[] = {
 struct associative_tab_function_s {
     void *(*creation)(void);
     void *(*creation_fromfile)(char *);
-    void (*setposition)(void *, sfVector2f);
     void (*display)(sfRenderWindow *, void *, sfRenderStates *);
     void (*destroy)(void *);
 } associative_tab_function_t;
