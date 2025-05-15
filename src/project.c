@@ -19,6 +19,7 @@ int project(void)
     game_t *game = init_game();
     int status = EPI_SUCESS;
 
+    load_config_file(game);
     status = init_scene(game);
     destroy_game(game);
     return status;

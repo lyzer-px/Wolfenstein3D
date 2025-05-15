@@ -7,6 +7,7 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 #include "libmy.h"
 
 static int is_sep(char c, char *separator)
@@ -44,14 +45,18 @@ static void reformat_user_input(char *str)
 
 char **parse_user_input(char *input, int *i, char *separator)
 {
+    char *copy = strdup(input);
     char **tab = NULL;
 
-    if (input == NULL || format_user_input(input, separator) == 84) {
+    if (copy == NULL || format_user_input(copy, separator) == 84) {
+        free(copy);
         *i = 84;
         return NULL;
     }
-    tab = my_str_to_word_array(input, separator);
+    tab = my_str_to_word_array(copy, separator);
     for (*i = 0; tab[*i] != NULL; *i += 1)
         reformat_user_input(tab[*i]);
+    free(copy);
+    *i = 0;
     return tab;
 }

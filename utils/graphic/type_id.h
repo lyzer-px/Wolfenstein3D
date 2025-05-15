@@ -34,6 +34,7 @@ typedef struct struct_strtype_s {
 
 static const struct struct_strtype_s str_to_type_tab[] = {
     {CONFIG_CIRCLE, CIRCLESHAPE},
+    {CONFIG_FONT, FONT},
     {CONFIG_IMAGE, IMAGE},
     {CONFIG_RECTANGLE, RECTANGLESHAPE},
     {CONFIG_SPRITE, SPRITE},
@@ -45,7 +46,7 @@ static const struct struct_strtype_s str_to_type_tab[] = {
     {NULL, -1}
 };
 
-struct associative_tab_function_s {
+typedef struct associative_tab_function_s {
     void *(*creation)(void);
     void *(*creation_fromfile)(char *);
     void (*set_position)(void *, sfVector2f);

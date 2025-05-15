@@ -5,6 +5,8 @@
 ** destroy_all_ressource.c
 */
 
+#include <stdio.h>
+
 #include "struct.h"
 #include "libgraphic.h"
 

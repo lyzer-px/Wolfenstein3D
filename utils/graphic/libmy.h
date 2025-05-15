@@ -16,7 +16,7 @@ bool is_in(char const character, char const *str);
 
 char *my_strndup(char const *s, int len);
 
-char **my_str_to_word_array(char *s, char *separator);
+char **my_str_to_word_array(char const *str, char *delim);
 
 int my_strlen(char const *str);
 
@@ -35,8 +35,6 @@ int arraylen(char **tab);
 char **libcat(char **tab, char *str);
 
 char **my_libdup(char **tab);
-
-char **my_str_to_word_array(char *str, char *l);
 
 char **parse_user_input(char *input, int *i, char *separator);
 

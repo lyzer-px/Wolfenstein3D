@@ -13,8 +13,8 @@
 static int is_alpha(char a, char *delim)
 {
     if (is_in(a, delim) && a != '\0' && a != '\n' && a != '\t')
-        return true;
-    return false;
+        return false;
+    return true;
 }
 
 static int char_count(char const *str, char *delim)

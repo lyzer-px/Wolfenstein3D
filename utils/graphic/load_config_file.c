@@ -8,12 +8,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stddef.h>
+#include <unistd.h>
 #include "struct.h"
 #include "macro.h"
 #include "libmy.h"
 #include "type_id.h"
 #include "libgraphic.h"
-
 
 static int add_ressource_from_tab(game_t *game, char **arg)
 {
@@ -28,7 +28,7 @@ static int add_ressource_from_tab(game_t *game, char **arg)
         return EPI_FAIL;
     element = create_element(type, arg[FILE_PATH]);
     if (element == NULL) {
-        dprintf("Error: got a problem to create the element\n", arg[NAME]);
+        dprintf(STDERR_FILENO, "Error: cannot create %s\n", arg[NAME]);
         return EPI_FAIL;
     }
     ressource = create_ressource(arg[NAME], element, type);
@@ -44,8 +44,8 @@ void load_config_file(game_t *game)
     char *line = NULL;
     char **arg = NULL;
 
-    if (fd == -1) {
-        dprintf("Error: No file \"%s\" found\n", PATH_FILE_CONIG);
+    if (fd == NULL) {
+        dprintf(STDERR_FILENO, "Error: No file %s found\n", PATH_FILE_CONIG);
         return;
     }
     while (getline(&line, &size, fd) != -1) {
@@ -53,9 +53,9 @@ void load_config_file(game_t *game)
         if (status == EPI_SUCESS)
             status = add_ressource_from_tab(game, arg);
         if (status != EPI_SUCESS)
-            dprintf("Error: Line is wrong \"%s\"\n", line);
-        free(line);
+            dprintf(STDERR_FILENO, "Error: Line is wrong \"%s\"\n", line);
         free_tab(arg);
     }
+    free(line);
     fclose(fd);
 }

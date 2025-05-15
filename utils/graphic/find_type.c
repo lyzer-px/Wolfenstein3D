@@ -5,6 +5,8 @@
 ** find_type.c
 */
 
+#include <stdio.h>
+
 #include <stddef.h>
 #include "type_id.h"
 #include "macro.h"

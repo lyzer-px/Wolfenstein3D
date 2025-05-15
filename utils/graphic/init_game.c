@@ -22,6 +22,7 @@ game_t *init_game(void)
         return NULL;
     }
     game->nb_scene = NB_SCENE;
+    game->ressource = NULL;
     game->actual_scene = NB_SCENE - 1;
     game->tab_scene = init_tab_scene(game->nb_scene);
     if (game->tab_scene == NULL) {
