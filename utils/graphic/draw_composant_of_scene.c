@@ -20,7 +20,7 @@ void draw_composant_of_scene(sfRenderWindow *window, scene_t *scene)
         composant = layer->composant;
         while (composant != NULL && layer->view == true) {
             composant->ressource->setposition(composant->ressource->element,
-                *composant->pos);
+                composant->pos);
             composant->ressource->display(window,
                 composant->ressource->element, NULL);
             composant = composant->next;

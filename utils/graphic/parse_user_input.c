@@ -47,7 +47,10 @@ char **parse_user_input(char *input, int *i, char *separator)
 {
     char *copy = strdup(input);
     char **tab = NULL;
+    int len_copy = my_strlen(copy);
 
+    if (copy[len_copy - 1] == '\n')
+        copy[len_copy - 1] = '\0';
     if (copy == NULL || format_user_input(copy, separator) == 84) {
         free(copy);
         *i = 84;

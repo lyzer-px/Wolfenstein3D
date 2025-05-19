@@ -52,7 +52,17 @@ SRC 		= 		arraylen.c												\
 					init_tab_scene.c										\
 					make_window.c							            	\
 					load_config_file.c										\
-					rev_composant.c
+					rev_composant.c											\
+					my_encapsulation/circle.c								\
+					my_encapsulation/font.c									\
+					my_encapsulation/image.c								\
+					my_encapsulation/rectangleshape.c						\
+					my_encapsulation/sprite.c								\
+					my_encapsulation/text.c									\
+					my_encapsulation/texture.c								\
+					my_encapsulation/transformable.c						\
+					my_encapsulation/vertexarray.c							\
+					my_encapsulation/view.c
 
 OBJ			=		$(SRC:.c=.o)
 
@@ -61,7 +71,8 @@ NAME		=		libgraphic.a
 HEADER	=	libgraphic.h		\
           macro.h			  	\
           struct.h		 	 	\
-          type_id.h
+          type_id.h				\
+		  my_encapsulation.h
 
 CFLAGS		=		-Wall -Wextra -Wpedantic -Werror
 
