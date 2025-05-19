@@ -7,8 +7,8 @@
 
 #include <stdlib.h>
 #include <stddef.h>
-#include "../libgraphic.h"
-#include "../struct.h"
+#include "libgraphic.h"
+#include "struct.h"
 
 void clean_layer(layer_t *layer)
 {

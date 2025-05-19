@@ -9,11 +9,11 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <unistd.h>
-#include "../struct.h"
-#include "../macro.h"
-#include "../libmy.h"
-#include "../type_id.h"
-#include "../libgraphic.h"
+#include "struct.h"
+#include "macro.h"
+#include "libmy.h"
+#include "type_id.h"
+#include "libgraphic.h"
 
 static int add_ressource_from_tab(game_t *game, char **arg)
 {

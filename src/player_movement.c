@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 #include <SFML/Graphics.h>
-#include "bs.h"
+#include "rendering.h"
 
 sfBool is_wall(int x, int y)
 {

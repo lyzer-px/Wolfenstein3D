@@ -6,7 +6,7 @@
 */
 
 #include <stdlib.h>
-#include "../struct.h"
+#include "struct.h"
 
 component_t *create_component(sfVector2f *pos, ressource_t *ressource)
 {

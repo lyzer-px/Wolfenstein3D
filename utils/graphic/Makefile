@@ -74,7 +74,9 @@ HEADER	=	libgraphic.h		\
           type_id.h				\
 		  my_encapsulation.h
 
-CFLAGS		=		-Wall -Wextra -Wpedantic -Werror
+CFLAGS		=		-Wall -Wextra -Wpedantic -g3
+
+CPPFLAGS	=		-iquote .
 
 UT_SRC =	tests/graphics_test.c
 

@@ -6,9 +6,10 @@
 */
 
 #include <stdlib.h>
-#include "../struct.h"
-#include "../macro.h"
-#include "../libgraphic.h"
+#include "struct.h"
+#include "macro.h"
+#include "rendering.h"
+#include "libgraphic.h"
 
 game_t *init_game(void)
 {
@@ -21,6 +22,12 @@ game_t *init_game(void)
         free(game);
         return NULL;
     }
+    game->bounds = init_map();
+    if (game->bounds == NULL)
+        return NULL;
+    game->player = calloc(1, sizeof(player_t));
+    init_player(game->player);
+    init_ray(game->player);
     game->nb_scene = NB_SCENE;
     game->ressource = NULL;
     game->actual_scene = MENU;

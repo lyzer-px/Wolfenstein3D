@@ -5,7 +5,7 @@
 ** rev_linkedlist.c
 */
 
-#include "../struct.h"
+#include "struct.h"
 
 void rev_component(component_t **begin)
 {

@@ -7,8 +7,8 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "../struct.h"
-#include "../type_id.h"
+#include "struct.h"
+#include "type_id.h"
 
 ressource_t *create_ressource(char *id, void *element, int type)
 {

@@ -72,7 +72,17 @@ typedef struct scene_s {
     struct layer_s *layer;
 } scene_t;
 
+typedef struct player_s {
+    sfVector2f pos;
+    float angle;
+    sfRectangleShape *hitbox;
+    sfRectangleShape *ray;
+} player_t;
+
 struct game_s {
+    player_t *player;
+    sfRectangleShape **bounds;
+    sfRectangleShape *rect;
     // how many scene do we have (if you  want to change it we have an macro)
     int nb_scene;
     // which scene do we show

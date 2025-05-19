@@ -6,7 +6,7 @@
 */
 
 #include <stdio.h>
-#include "../libgraphic.h"
+#include "libgraphic.h"
 
 void create_ressource_link(ressource_t **begin, char *id,
     void *element, int type)

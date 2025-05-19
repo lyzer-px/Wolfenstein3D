@@ -5,7 +5,7 @@
 ** draw_component_of_scene.c
 */
 
-#include "../struct.h"
+#include "struct.h"
 
 static void put_element_on_window(sfRenderWindow *window, component_t *compo)
 {

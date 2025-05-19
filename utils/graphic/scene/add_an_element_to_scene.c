@@ -6,8 +6,8 @@
 */
 
 #include <stdlib.h>
-#include "../struct.h"
-#include "../libgraphic.h"
+#include "struct.h"
+#include "libgraphic.h"
 
 void add_element_to_scene(sfVector2f *pos, ressource_t *ressource,
     component_t **begin)

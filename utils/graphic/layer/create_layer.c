@@ -6,7 +6,7 @@
 */
 
 #include <stdlib.h>
-#include "../struct.h"
+#include "struct.h"
 
 void create_layer(scene_t *scene)
 {

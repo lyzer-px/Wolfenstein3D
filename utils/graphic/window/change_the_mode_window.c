@@ -8,9 +8,9 @@
 #include <SFML/Graphics.h>
 #include <string.h>
 #include <stdlib.h>
-#include "../libgraphic.h"
-#include "../struct.h"
-#include "../macro.h"
+#include "libgraphic.h"
+#include "struct.h"
+#include "macro.h"
 
 void change_the_mode_window(window_t *win)
 {

@@ -19,7 +19,7 @@ static void create_scenes(game_t *game)
 
 int init_scene(game_t *game)
 {
-    int status = 0;
+    int status = EPI_SUCESS;
 
     create_scenes(game);
     if (status == EPI_SUCESS)

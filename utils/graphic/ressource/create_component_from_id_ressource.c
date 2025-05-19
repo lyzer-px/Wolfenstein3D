@@ -5,8 +5,8 @@
 ** create_component_from_id_ressource.c
 */
 
-#include "../struct.h"
-#include "../libgraphic.h"
+#include "struct.h"
+#include "libgraphic.h"
 
 component_t *create_component_from_id_ressource(ressource_t *begin, char *id,
     sfVector2f *pos)

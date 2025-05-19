@@ -5,8 +5,8 @@
 ** add_component_to_layer.c
 */
 
-#include "../struct.h"
-#include "../libgraphic.h"
+#include "struct.h"
+#include "libgraphic.h"
 
 void add_a_component_to_layer(component_t *component, scene_t *scene, int id)
 {
