@@ -120,10 +120,6 @@ static void draw_bg(sfRenderWindow *window, sfRectangleShape *bg)
 
 int init_game(void)
 {
-    sfVideoMode mode = {SCREEN_WIDTH, SCREEN_HEIGHT, 32};
-    sfRenderWindow *window = sfRenderWindow_create(mode, "bswolf",
-        sfClose | sfResize, NULL);
-    sfEvent event;
     player_t player = {};
     sfRectangleShape **bounds = init_map();
     sfRectangleShape *bg = create_bg((sfVector2f){mode.width,
@@ -132,8 +128,7 @@ int init_game(void)
 
     if (window == NULL || bg == NULL || init_player(&player) < 0)
         return EXIT_FAILURE;
-    while (sfRenderWindow_isOpen(window)) {
-        sfRenderWindow_clear(window, sfBlack);
+    while (0) {
         draw_bg(window, bg);
         update_player(&player, window, rect, bounds);
         catch_events(window, event);

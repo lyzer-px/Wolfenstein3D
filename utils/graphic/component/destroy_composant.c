@@ -2,16 +2,16 @@
 ** EPITECH PROJECT, 2024
 ** Wolfenstein3D
 ** File description:
-** destroy_composant.c
+** destroy_component.c
 */
 
 #include <stdlib.h>
 #include "../struct.h"
 
-void destroy_composant(composant_t *composant)
+void destroy_component(component_t *component)
 {
-    if (composant->pos != NULL)
-        free(composant->pos);
-    free(composant);
+    if (component->pos != NULL)
+        free(component->pos);
+    free(component);
     return;
 }

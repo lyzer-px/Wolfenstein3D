@@ -21,7 +21,7 @@ void handle_event(game_t *g);
 int loop(game_t *game);
 
 // Main function, that calls all other function
-int project(void);
+int Wolf3d(void);
 
 // Print help for the user
 void print_help(void);

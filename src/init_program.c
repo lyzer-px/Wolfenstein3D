@@ -13,6 +13,7 @@
 
 static void create_scenes(game_t *game)
 {
+    create_game_scene(game);
     create_error_scene(game);
 }
 

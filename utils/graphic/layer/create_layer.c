@@ -14,7 +14,7 @@ void create_layer(scene_t *scene)
 
     if (new_layer == NULL)
         return;
-    new_layer->composant = NULL;
+    new_layer->component = NULL;
     new_layer->next = scene->layer;
     new_layer->view = true;
     new_layer->id = new_layer->next == NULL ? 1 : new_layer->next->id + 1;

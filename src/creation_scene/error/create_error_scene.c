@@ -32,10 +32,10 @@ static void create_layer_scene_error(scene_t *scene, ressource_t *begin)
     cpy_middle->x = 0;
     cpy_middle->y = 0;
     create_layer(scene);
-    scene->layer->composant = create_composant(middle,
+    scene->layer->component = create_component(middle,
         find_a_ressouce_from_id(begin, TEXT_ERROR));
     create_layer(scene);
-    scene->layer->composant = create_composant(cpy_middle,
+    scene->layer->component = create_component(cpy_middle,
         find_a_ressouce_from_id(begin, BG_ERROR));
 }
 

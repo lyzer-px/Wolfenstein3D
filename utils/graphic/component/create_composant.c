@@ -2,20 +2,20 @@
 ** EPITECH PROJECT, 2024
 ** Wolfenstein3D
 ** File description:
-** create_composant.c
+** create_component.c
 */
 
 #include <stdlib.h>
 #include "../struct.h"
 
-composant_t *create_composant(sfVector2f *pos, ressource_t *ressource)
+component_t *create_component(sfVector2f *pos, ressource_t *ressource)
 {
-    composant_t *new_composant = malloc(sizeof(composant_t));
+    component_t *new_component = malloc(sizeof(component_t));
 
-    if (new_composant == NULL)
+    if (new_component == NULL)
         return NULL;
-    new_composant->next = NULL;
-    new_composant->pos = pos;
-    new_composant->ressource = ressource;
-    return new_composant;
+    new_component->next = NULL;
+    new_component->pos = pos;
+    new_component->ressource = ressource;
+    return new_component;
 }

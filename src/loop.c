@@ -23,7 +23,7 @@ int loop(game_t *game)
             continue;
         handle_event(game);
         sfRenderWindow_clear(game->window->window, sfBlack);
-        draw_composant_of_scene(game->window->window,
+        draw_component_of_scene(game->window->window,
                 game->tab_scene[game->actual_scene]);
         sfRenderWindow_display(game->window->window);
         sfClock_restart(game->window->clock);
