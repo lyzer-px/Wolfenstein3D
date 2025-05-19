@@ -19,7 +19,6 @@ void draw_composant_of_scene(sfRenderWindow *window, scene_t *scene)
     while (layer != NULL) {
         composant = layer->composant;
         while (composant != NULL && layer->view == true) {
-            printf("%s\n", composant->ressource->id);
             composant->ressource->setposition(composant->ressource->element,
                 *composant->pos);
             composant->ressource->display(window,
