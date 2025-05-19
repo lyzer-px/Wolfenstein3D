@@ -10,6 +10,8 @@
 
 void destroy_composant(composant_t *composant)
 {
+    if (composant->pos != NULL)
+        free(composant->pos);
     free(composant);
     return;
 }

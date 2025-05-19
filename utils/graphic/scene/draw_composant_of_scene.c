@@ -7,6 +7,15 @@
 
 #include "../struct.h"
 
+static void put_element_on_window(sfRenderWindow *window, composant_t *compo)
+{
+    if (compo->ressource->setposition != NULL && compo->pos != NULL &&
+            compo->ressource->element != NULL)
+        compo->ressource->setposition(compo->ressource->element, compo->pos);
+    if (compo->ressource->display != NULL && compo->ressource->element != NULL)
+        compo->ressource->display(window, compo->ressource->element, NULL);
+}
+
 void draw_composant_of_scene(sfRenderWindow *window, scene_t *scene)
 {
     layer_t *layer = scene->layer;
@@ -17,10 +26,7 @@ void draw_composant_of_scene(sfRenderWindow *window, scene_t *scene)
     while (layer != NULL) {
         composant = layer->composant;
         while (composant != NULL && layer->view == true) {
-            composant->ressource->setposition(composant->ressource->element,
-                composant->pos);
-            composant->ressource->display(window,
-                composant->ressource->element, NULL);
+            put_element_on_window(window, composant);
             composant = composant->next;
         }
         layer = layer->next;
