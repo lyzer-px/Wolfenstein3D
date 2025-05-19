@@ -27,6 +27,5 @@ void draw_composant_of_scene(sfRenderWindow *window, scene_t *scene)
         }
         layer = layer->next;
     }
-    printf("\n");
     return;
 }
