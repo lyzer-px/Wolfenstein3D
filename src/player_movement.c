@@ -21,7 +21,7 @@ void player_fwd(player_t *player)
     sfVector2f direction = {- sinf(RAD(player->angle)),
         cosf(RAD(player->angle))};
 
-    if (player == nullptr)
+    if (player == NULL)
         return;
     if (sfKeyboard_isKeyPressed(sfKeyZ)) {
         player->pos.x += direction.x * PLAYER_SPEED;
@@ -41,7 +41,7 @@ void player_repel(player_t *player)
     sfVector2f direction = {- sinf(RAD(player->angle)),
         cosf(RAD(player->angle))};
 
-    if (player == nullptr)
+    if (player == NULL)
         return;
     if (sfKeyboard_isKeyPressed(sfKeyZ)) {
         player->pos.x -= direction.x * PLAYER_SPEED;

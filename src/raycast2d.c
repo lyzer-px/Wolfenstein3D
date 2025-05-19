@@ -20,7 +20,7 @@ float cast_single_ray(player_t *player, float angle, sfRectangleShape *rect,
         ray_pos.x += ray_direction.x;
         ray_pos.y += ray_direction.y;
         sfRectangleShape_setPosition(rect, ray_pos);
-        sfRenderWindow_drawRectangleShape(window, rect, nullptr);
+        sfRenderWindow_drawRectangleShape(window, rect, NULL);
     }
     return (sqrtf(SQUARED(ray_pos.x - player->pos.x) +
     SQUARED(ray_pos.y - player->pos.y)));
@@ -49,11 +49,11 @@ static void prep_2d_ray(sfRectangleShape *ray)
 static void draw_minimap(sfRenderWindow *window, player_t *player,
     sfRectangleShape **bounds)
 {
-    for (size_t i = 0; bounds[i] != nullptr; i++)
+    for (size_t i = 0; bounds[i] != NULL; i++)
         sfRenderWindow_drawRectangleShape(window, bounds[i], NULL);
     sfRectangleShape_setPosition(player->hitbox, player->pos);
     sfRectangleShape_setRotation(player->hitbox, player->angle);
-    sfRenderWindow_drawRectangleShape(window, player->hitbox, nullptr);
+    sfRenderWindow_drawRectangleShape(window, player->hitbox, NULL);
 }
 
 static void update_player(player_t *player, sfRenderWindow *window,
@@ -62,7 +62,7 @@ static void update_player(player_t *player, sfRenderWindow *window,
     float distance = 0;
     float angle;
 
-    if (player == nullptr || window == nullptr)
+    if (player == NULL || window == NULL)
         return;
     draw_minimap(window, player, bounds);
     for (double i = 0; i < DEG(FOV); i++) {
@@ -71,7 +71,7 @@ static void update_player(player_t *player, sfRenderWindow *window,
         distance = cast_single_ray(player, angle, rect, window)
         * cosf(RAD(player->angle) - RAD(angle));
         set_rect(distance, rect, i);
-        sfRenderWindow_drawRectangleShape(window, rect, nullptr);
+        sfRenderWindow_drawRectangleShape(window, rect, NULL);
     }
     player_fwd(player);
     if (is_wall((int)(player->pos.x / TILE_SIZE),
@@ -99,23 +99,23 @@ static sfRectangleShape *create_bg(sfVector2f size)
 {
     sfRectangleShape *bg = sfRectangleShape_create();
 
-    if (bg == nullptr)
-        return nullptr;
+    if (bg == NULL)
+        return NULL;
     sfRectangleShape_setSize(bg, size);
     return bg;
 }
 
 static void draw_bg(sfRenderWindow *window, sfRectangleShape *bg)
 {
-    if (window == nullptr || bg == nullptr)
+    if (window == NULL || bg == NULL)
         return;
     sfRectangleShape_setPosition(bg, (sfVector2f){0, 0});
     sfRectangleShape_setFillColor(bg, sfCyan);
-    sfRenderWindow_drawRectangleShape(window, bg, nullptr);
+    sfRenderWindow_drawRectangleShape(window, bg, NULL);
     sfRectangleShape_setPosition(bg,
         (sfVector2f){0, SCREEN_HEIGHT / 2});
     sfRectangleShape_setFillColor(bg, sfGreen);
-    sfRenderWindow_drawRectangleShape(window, bg, nullptr);
+    sfRenderWindow_drawRectangleShape(window, bg, NULL);
 }
 
 int init_game(void)
@@ -130,7 +130,7 @@ int init_game(void)
         mode.height / 2});
     sfRectangleShape *rect = create_bg((sfVector2f){1, 1});
 
-    if (window == nullptr || bg == nullptr || init_player(&player) < 0)
+    if (window == NULL || bg == NULL || init_player(&player) < 0)
         return EXIT_FAILURE;
     while (sfRenderWindow_isOpen(window)) {
         sfRenderWindow_clear(window, sfBlack);

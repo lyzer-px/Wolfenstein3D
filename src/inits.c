@@ -12,7 +12,7 @@
 void init_ray(player_t *player)
 {
     player->ray = sfRectangleShape_create();
-    if (player->ray == nullptr)
+    if (player->ray == NULL)
         return;
     sfRectangleShape_setSize(player->ray, (sfVector2f){1, 1});
     sfRectangleShape_setFillColor(player->ray, sfBlue);
@@ -32,10 +32,10 @@ void init_hitbox(player_t *player)
 
 int init_player(player_t *player)
 {
-    if (player == nullptr)
+    if (player == NULL)
         return -1;
     player->hitbox = sfRectangleShape_create();
-    if (player->hitbox == nullptr)
+    if (player->hitbox == NULL)
         return -1;
     init_hitbox(player);
     init_ray(player);
@@ -61,8 +61,8 @@ sfRectangleShape **init_map(void)
         (MAP_HEIGHT * MAP_WIDTH) + 1);
     size_t k = 0;
 
-    if (bounds == nullptr)
-        return nullptr;
+    if (bounds == NULL)
+        return NULL;
     for (size_t i = 0; i < MAP_HEIGHT; i++) {
         for (size_t j = 0; j < MAP_WIDTH; j++) {
             bounds[k] = sfRectangleShape_create();
@@ -70,6 +70,6 @@ sfRectangleShape **init_map(void)
             k++;
         }
     }
-    bounds[k] = nullptr;
+    bounds[k] = NULL;
     return bounds;
 }
