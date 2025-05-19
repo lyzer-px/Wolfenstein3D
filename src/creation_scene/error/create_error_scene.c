@@ -5,6 +5,7 @@
 ** create_error_scene.c
 */
 
+#include <stdlib.h>
 #include "struct.h"
 #include "macro.h"
 #include "libgraphic.h"
@@ -19,13 +20,22 @@ static void create_ressource_error_scene(game_t *game)
 
 static void create_layer_scene_error(scene_t *scene, ressource_t *begin)
 {
-    sfVector2f middle = {DIM_X / 2, DIM_Y / 2};
+    sfVector2f *middle = malloc(sizeof(sfVector2f));
+    sfVector2f *cpy_middle = malloc(sizeof(sfVector2f));
 
+    if (middle == NULL)
+        return;
+    middle->x = 0;
+    middle->y = 0;
+    if (cpy_middle == NULL)
+        return;
+    cpy_middle->x = 0;
+    cpy_middle->y = 0;
     create_layer(scene);
-    scene->layer->composant = create_composant(&middle,
+    scene->layer->composant = create_composant(middle,
         find_a_ressouce_from_id(begin, TEXT_ERROR));
     create_layer(scene);
-    scene->layer->composant = create_composant(&middle,
+    scene->layer->composant = create_composant(cpy_middle,
         find_a_ressouce_from_id(begin, BG_ERROR));
 }
 
