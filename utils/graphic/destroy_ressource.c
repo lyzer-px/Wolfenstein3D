@@ -10,6 +10,8 @@
 
 void destroy_ressource(ressource_t **ressource)
 {
+    (*ressource)->destroy((*ressource)->element);
+    free((*ressource)->id);
     free(*ressource);
     *ressource = NULL;
     return;
