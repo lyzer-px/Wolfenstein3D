@@ -30,7 +30,7 @@ typedef struct ressource_s {
     // the ressource
     void *element;
     // how to set the position
-    void (*setposition)(void *, sfVector2f);
+    void (*setposition)(void *, sfVector2f *);
     // how to display the ressource
     void (*display)(sfRenderWindow *, void *, sfRenderStates *);
     // how to destroy the ressource

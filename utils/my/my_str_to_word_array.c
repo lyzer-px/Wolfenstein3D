@@ -1,62 +1,79 @@
 /*
 ** EPITECH PROJECT, 2024
-** robot_factory
-** File description:
 ** my_str_to_word_array.c
+** File description:
+** splits a string into words with non alpha chars as separators
 */
 
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
+#include <stdbool.h>
 #include "libmy.h"
 
-static int find_word_len(char const *str, char const *separator)
+static int is_alpha(char a, char *delim)
+{
+    if (is_in(a, delim) && a != '\0' && a != '\n' && a != '\t')
+        return true;
+    return false;
+}
+
+static int char_count(char const *str, char *delim)
 {
     int i = 0;
 
-    while (!is_in(str[i], separator) && str[i])
+    while (is_alpha(str[i], delim))
         i++;
     return i;
 }
 
-static int count_str(char *s, char *separator)
+static int word_count(char const *str, char *delim)
 {
-    int count = 0;
+    int words = 0;
 
-    for (int j = 0; s[j]; j++)
-        if (!is_in(s[j], separator)) {
-            j += find_word_len(s + j, separator);
-            count += 1;
+    for (int i = 0; i < my_strlen(str); i++)
+        if (is_alpha(str[i], delim)) {
+            i += char_count(&str[i], delim);
+            words++;
         }
-    return count;
+    return words;
 }
 
-static char *add_word(char *s, char *separator, int *i)
+static char *get_word(char const *src, char *delim)
 {
-    int size_w = find_word_len(s + *i, separator);
-    char *res = my_strndup(s + *i, size_w);
+    char *dest;
+    int i = 0;
+    int char_counter = char_count(src, delim);
 
-    *i += size_w;
-    return res;
+    dest = malloc(sizeof(char) * (char_counter + 1));
+    while (i < char_counter) {
+        dest[i] = src[i];
+        i++;
+    }
+    dest[i] = '\0';
+    return dest;
 }
 
-char **my_str_to_word_array(char *s, char *separator)
+static const char *next(int i, char const *str, char **end_array, char *delim)
+{
+    for (int j = 0; str[j]; j++)
+        if (is_alpha(str[j], delim)) {
+            end_array[i] = get_word(&str[j], delim);
+            str = str + j + char_count(&str[j], delim);
+            return str;
+        }
+    return str;
+}
+
+char **my_str_to_word_array(char const *str, char *delim)
 {
     int i = 0;
-    int nb = 0;
-    int count = count_str(s, separator);
-    char **tab = malloc((sizeof(char *) * (count + 1)));
+    int array_height = word_count(str, delim);
+    char **end_array = malloc(sizeof(char *) * (array_height + 1));
 
-    if (tab == NULL)
-        return NULL;
-    for (int j = 0; s[j] != '\0' || !is_in(s[j], "#\n"); j++)
-        if (!is_in(s[j], separator)) {
-            tab[nb] = add_word(s, separator, &j);
-            nb++;
-            i = j;
-        }
-    if (nb != count)
-        tab[nb] = add_word(s, separator, &i);
-    tab[nb] = NULL;
-    return tab;
+    while (i < array_height) {
+        str = next(i, str, end_array, delim);
+        i++;
+    }
+    end_array[i] = NULL;
+    return end_array;
 }

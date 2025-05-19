@@ -30,6 +30,7 @@ SRC 		= 	my_strcmp.c											\
 				my_libdup.c											\
 				arraylen.c											\
 				libcat.c											\
+				file_to_str.c										\
 				my_str_to_word_array.c								\
 				parse_user_input.c									\
 				del_last_char.c										\
@@ -56,6 +57,7 @@ $(NAME):	$(OBJ)
 	@$(AR) rc $(NAME) $(OBJ)
 	@cp $(NAME) ../..
 	@cp $(HEADER) ../../include/
+	@cp $(NAME) ../graphic/
 	@cp $(HEADER) ../graphic/
 #	@ranlib $(LIB_NAME)
 
@@ -65,7 +67,7 @@ clean:
 	@find -name "*.gcda" -delete -o -name "*.gcno" -delete
 
 fclean: clean
-	$(RM) $(NAME) ../../$(NAME) $(UT_NAME)
+	$(RM) $(NAME) ../../$(NAME) $(UT_NAME) ../graphic/$(NAME)
 	@find -name "coding-style-reports.log" -delete
 
 re:	fclean all

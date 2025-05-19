@@ -11,10 +11,10 @@
     #include <stdbool.h>
     #include <SFML/Graphics.h>
     #include "macro.h"
+    #include "my_encapsulation.h"
 
 enum type_id {
     CIRCLESHAPE = 0,
-    CONVEXSHAPE,
     FONT,
     IMAGE,
     RECTANGLESHAPE,
@@ -34,6 +34,7 @@ typedef struct struct_strtype_s {
 
 static const struct struct_strtype_s str_to_type_tab[] = {
     {CONFIG_CIRCLE, CIRCLESHAPE},
+    {CONFIG_FONT, FONT},
     {CONFIG_IMAGE, IMAGE},
     {CONFIG_RECTANGLE, RECTANGLESHAPE},
     {CONFIG_SPRITE, SPRITE},
@@ -45,10 +46,10 @@ static const struct struct_strtype_s str_to_type_tab[] = {
     {NULL, -1}
 };
 
-struct associative_tab_function_s {
+typedef struct associative_tab_function_s {
     void *(*creation)(void);
     void *(*creation_fromfile)(char *);
-    void (*set_position)(void *, sfVector2f);
+    void (*set_position)(void *, sfVector2f *);
     void (*display)(sfRenderWindow *, void *, sfRenderStates *);
     void (*destroy)(void *);
 } associative_tab_function_t;
@@ -56,75 +57,63 @@ struct associative_tab_function_s {
 static const struct associative_tab_function_s functions_by_type[] = {
     {(void *(*)(void))sfCircleShape_create,
         NULL,
-        (void (*)(void *, sfVector2f))sfCircleShape_setPosition,
-        (void (*)(sfRenderWindow *, void *, sfRenderStates *))
-        sfRenderWindow_drawCircleShape,
-        (void (*)(void *))sfCircleShape_destroy},
-
-    {(void *(*)(void))sfConvexShape_create,
-        NULL,
-        (void (*)(void *, sfVector2f))sfConvexShape_setPosition,
-        (void (*)(sfRenderWindow *, void *, sfRenderStates *))
-        sfRenderWindow_drawConvexShape,
-        (void (*)(void *))sfConvexShape_destroy},
+        set_position_circle,
+        draw_circle,
+        destroy_circle},
 
     {NULL,
         (void *(*)(char *))sfFont_createFromFile,
         NULL,
         NULL,
-        (void (*)(void *))sfFont_destroy},
+        destroy_font},
 
     {NULL,
         (void *(*)(char *))sfImage_createFromFile,
         NULL,
         NULL,
-        (void (*)(void *))sfImage_destroy},
+        destroy_image},
 
     {(void *(*)(void))sfRectangleShape_create,
         NULL,
-        (void (*)(void *, sfVector2f))sfRectangleShape_setPosition,
-        (void (*)(sfRenderWindow *, void *, sfRenderStates *))
-        sfRenderWindow_drawRectangleShape,
-        (void (*)(void *))sfRectangleShape_destroy},
+        set_position_rectangleshape,
+        draw_rectangleshape,
+        destroy_rectangleshape},
 
     {(void *(*)(void))sfSprite_create,
         NULL,
-        (void (*)(void *, sfVector2f))sfSprite_setPosition,
-        (void (*)(sfRenderWindow *, void *, sfRenderStates *))
-        sfRenderWindow_drawSprite,
-        (void (*)(void *))sfSprite_destroy},
+        set_position_sprite,
+        draw_sprite,
+        destroy_sprite},
 
     {(void *(*)(void))sfText_create,
         NULL,
-        (void (*)(void *, sfVector2f))sfText_setPosition,
-        (void (*)(sfRenderWindow *, void *, sfRenderStates *))
-        sfRenderWindow_drawText,
-        (void (*)(void *))sfText_destroy},
+        set_position_text,
+        draw_text,
+        destroy_text},
 
     {NULL,
         NULL,
         NULL,
         NULL,
-        (void (*)(void *))sfTexture_destroy},
+        destroy_texture},
 
     {(void *(*)(void))sfTransformable_create,
         NULL,
-        (void (*)(void *, sfVector2f))sfTransformable_setPosition,
+        set_position_transformable,
         NULL,
-        (void (*)(void *))sfTransformable_destroy},
+        destroy_transformable},
 
     {(void *(*)(void))sfVertexArray_create,
         NULL,
         NULL,
-        (void (*)(sfRenderWindow *, void *, sfRenderStates *))
-        sfRenderWindow_drawVertexArray,
-        (void (*)(void *))sfVertexArray_destroy},
+        draw_vertexarray,
+        destroy_vertexarray},
 
     {(void *(*)(void))sfView_create,
         NULL,
         NULL,
         NULL,
-        (void (*)(void *))sfView_destroy},
+        destroy_view},
 
     {NULL,
         NULL,

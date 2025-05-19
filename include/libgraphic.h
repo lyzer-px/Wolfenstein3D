@@ -48,6 +48,9 @@ void free_tab_scene(game_t *game);
 // Destroy a struct game
 void destroy_game(game_t *game);
 
+// Create all ressource by the config file
+void load_config_file(game_t *game);
+
         // WINDOW
 
 // Create a window on which to draw

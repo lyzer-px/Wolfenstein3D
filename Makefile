@@ -19,13 +19,17 @@ RM			?=	rm -rf
 # BINARY CREATION
 #
 
-SRC 		= 		main.c											\
-					src/handle_event.c								\
-					src/init_program.c								\
-					src/loop.c										\
-					src/check_env.c									\
-					src/project.c									\
-					src/print_help.c
+SRC 		= 		main.c												\
+					src/handle_event.c									\
+					src/init_program.c									\
+					src/loop.c											\
+					src/check_env.c										\
+					src/project.c										\
+					src/print_help.c									\
+					src/creation_scene/error/create_backgound_error.c	\
+					src/creation_scene/error/create_error_scene.c		\
+					src/creation_scene/error/create_text_error.c
+
 
 OBJ			=		$(SRC:.c=.o)
 
@@ -80,7 +84,7 @@ fclean: clean
 	@make -C utils/graphic fclean
 	@echo "\n"
 	$(RM) -f $(NAME)
-	@find -name "coding-style-reports.log" -delete
+	@find -name "coding-style-re./libgraphic.aports.log" -delete
 
 re:	fclean all
 	@echo "\n"

@@ -44,17 +44,14 @@ static void reformat_user_input(char *str)
 
 char **parse_user_input(char *input, int *i, char *separator)
 {
-    char *copy = my_strdup(input);
     char **tab = NULL;
 
-    if (copy == NULL || format_user_input(copy, separator) == 84) {
-        free(copy);
+    if (input == NULL || format_user_input(input, separator) == 84) {
         *i = 84;
         return NULL;
     }
-    tab = my_str_to_word_array(copy, separator);
+    tab = my_str_to_word_array(input, separator);
     for (*i = 0; tab[*i] != NULL; *i += 1)
         reformat_user_input(tab[*i]);
-    free(copy);
     return tab;
 }

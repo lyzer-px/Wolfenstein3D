@@ -21,6 +21,22 @@
     #define EPI_FAIL (84)
     #define EPI_SUCESS (0)
 
+// Scene information
+
+    // WARNING - When you want to add an scene you need to make a +1 in the
+    // include/macro.h and utils/graphic/macro.h
+
+enum name_scene {
+    ERROR_SCENE = 0,
+    MENU,
+    CHOICE_OF_SAVE,
+    SETTING,
+    GAME,
+    INVENTORY,
+    SAVE,
+    NB_SCENE,
+};
+
 /*
 ** Main
 */
@@ -38,11 +54,24 @@
 
     #define ELAPSED_TIME (1000)
 
-// Scene information
+/*
+** ID of element in the game
+*/
 
-    // WARNING - When you want to add an scene you need to make a +1 in the
-    // include/macro.h and utils/graphic/macro.h
-    #define NB_SCENE (3)
+        // Font
+    #define FONT_HORROR ("Font horror")
+
+        // Scene error
+    #define BG_ERROR ("background_error")
+    #define TEXT_ERROR ("text_error")
+
+/*
+** Error on the window
+*/
+
+    #define ERROR_TEXT_404 ("Error: We found a problem. (Error 404)")
+
+
 
 /*
 ** Libs
