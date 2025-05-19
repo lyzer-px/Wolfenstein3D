@@ -1,0 +1,28 @@
+/*
+** EPITECH PROJECT, 2024
+** Wolfenstein3D
+** File description:
+** create_window.c
+*/
+
+#include <string.h>
+#include <stdlib.h>
+#include "../struct.h"
+#include "../macro.h"
+#include "../libgraphic.h"
+
+window_t *create_window(void)
+{
+    window_t *window = malloc(sizeof(window_t));
+    sfVector2i dimensions = {DIM_X, DIM_Y};
+
+    if (window == NULL)
+        return NULL;
+    memset(window, 1, sizeof(window_t));
+    window->clock = sfClock_create();
+    window->full_screen = false;
+    window->frame = FPS;
+    window->window = make_window(dimensions, BITS, NAME_WIN, STYLE_WIND);
+    sfRenderWindow_setFramerateLimit(window->window, window->frame);
+    return window;
+}
