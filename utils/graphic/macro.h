@@ -28,6 +28,12 @@
 
 enum name_scene {
     ERROR_SCENE = 0,
+    MENU,
+    CHOICE_OF_SAVE,
+    SETTING,
+    GAME,
+    INVENTORY,
+    SAVE,
     NB_SCENE,
 };
 
