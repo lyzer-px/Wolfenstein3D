@@ -17,33 +17,63 @@ RM			?=	rm -rf
 # BINARY CREATION
 #
 
-SRC 		= 		add_an_element_to_scene.c		\
-					add_composant_to_layer.c		\
-					change_the_mode_window.c		\
-					clean_game.c					\
-					clean_layer.c					\
-					clean_scene.c					\
-					create_composant.c				\
-					create_layer.c					\
-					create_window.c					\
-					destroy_layer.c					\
-					destroy_composant.c				\
-					destroy_game.c					\
-					destroy_scene.c					\
-					destroy_tab_scene.c				\
-					destroy_window.c				\
-					draw_composant_of_scene.c		\
-					init_game.c						\
-					init_tab_scene.c				\
-					make_window.c					\
-					rev_composant.c					\
+SRC 		= 		component/create_composant.c						    \
+					component/create_element.c						   		\
+					component/destroy_composant.c						    \
+					component/rev_composant.c								\
+					game/clean_game.c							            \
+					game/destroy_game.c							          	\
+					game/init_game.c								       	\
+					helpfull/arraylen.c										\
+					helpfull/parse_user_input.c								\
+					helpfull/my_str_to_word_array.c							\
+					helpfull/is_in.c										\
+					helpfull/free_tab.c										\
+					layer/add_composant_to_layer.c				    		\
+					layer/clean_layer.c							            \
+					layer/create_layer.c					          		\
+					layer/destroy_layer.c							        \
+					my_encapsulation/circle.c								\
+					my_encapsulation/font.c									\
+					my_encapsulation/image.c								\
+					my_encapsulation/rectangleshape.c						\
+					my_encapsulation/sprite.c								\
+					my_encapsulation/text.c									\
+					my_encapsulation/texture.c								\
+					my_encapsulation/transformable.c						\
+					my_encapsulation/vertexarray.c							\
+					my_encapsulation/view.c									\
+					ressource/add_ressource.c					     		\
+					ressource/create_composant_from_id_ressource.c			\
+					ressource/create_a_ressource_in_the_game.c		  		\
+					ressource/create_ressource.c						    \
+					ressource/create_ressource_link.c						\
+					ressource/destroy_ressource.c						    \
+					ressource/destroy_all_ressource.c					    \
+					ressource/find_a_ressouce_from_id.c						\
+					ressource_loader/load_config_file.c						\
+					scene/add_an_element_to_scene.c							\
+					scene/clean_scene.c							           	\
+					scene/destroy_scene.c							        \
+					scene/destroy_tab_scene.c						  	    \
+					scene/draw_composant_of_scene.c				      		\
+					scene/init_tab_scene.c									\
+					type/find_type.c								        \
+					window/change_the_mode_window.c				      		\
+					window/create_window.c							        \
+					window/destroy_window.c						          	\
+					window/make_window.c									\
 					manage_button.c
 
 OBJ			=		$(SRC:.c=.o)
 
 NAME		=		libgraphic.a
 
-HEADER	=	libgraphic.h
+HEADER	=	libgraphic.h		\
+          macro.h			  	\
+          struct.h		 	 	\
+          type_id.h				\
+		  my_encapsulation.h
 
 CFLAGS		=		-Wall -Wextra -Wpedantic -Werror
 
@@ -67,7 +97,7 @@ clean:
 	@find -name "*.gcda" -delete -o -name "*.gcno" -delete
 
 fclean: clean
-	$(RM) -f $(NAME) ../../$(NAME) $(UT_NAME)
+	$(RM) $(NAME) ../../$(NAME) $(UT_NAME)
 	@find -name "coding-style-reports.log" -delete
 
 re:	fclean all
@@ -75,6 +105,6 @@ re:	fclean all
 debug:	re clean
 
 .PHONY: all				\
-		re				\
-		fclean			\
+		re			    \
+		fclean	  		\
 		clean

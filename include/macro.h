@@ -21,6 +21,22 @@
     #define EPI_FAIL (84)
     #define EPI_SUCESS (0)
 
+// Scene information
+
+    // WARNING - When you want to add an scene you need to make a +1 in the
+    // include/macro.h and utils/graphic/macro.h
+
+enum name_scene {
+    ERROR_SCENE = 0,
+    MENU,
+    CHOICE_OF_SAVE,
+    SETTING,
+    GAME,
+    INVENTORY,
+    SAVE,
+    NB_SCENE,
+};
+
 /*
 ** Main
 */
@@ -34,15 +50,28 @@
     #define BITS (32)
 
     #define STYLE_WIND ((sfUint32)sfResize | sfClose)
-    #define STYLE_FULL ((sfUint32)sfFullscreen)
+    #define STYLE_FULL ((sfUint32)sfResize | sfClose | sfFullscreen)
 
     #define ELAPSED_TIME (1000)
 
-// Scene information
+/*
+** ID of element in the game
+*/
 
-    // WARNING - When you want to add an scene you need to make a +1 in the
-    // include/macro.h and utils/graphic/macro.h
-    #define NB_SCENE (1)
+        // Font
+    #define FONT_HORROR ("Font horror")
+
+        // Scene error
+    #define BG_ERROR ("background_error")
+    #define TEXT_ERROR ("text_error")
+
+/*
+** Error on the window
+*/
+
+    #define ERROR_TEXT_404 ("Error: We found a problem. (Error 404)")
+
+
 
 /*
 ** Libs
@@ -55,6 +84,39 @@
 // Text information
 
     #define END_STR ('\0')
+
+// Configuration file
+
+    #define PATH_FILE_CONIG ("assets/loader.config")
+    #define SEPARATOR_CONFIG_FILE ("; \n\t")
+    // each line need to be format like that:
+    //TYPE; "NAME"; "FILE_PATH";
+enum FORMAT_FILE_INDEX {
+    TYPE = 0,
+    NAME,
+    FILE_PATH,
+    SIZE_LINE
+};
+
+    #define READ_FILE ("r")
+
+    #define CONFIG_CIRCLE ("CIRCLE")
+    #define CONFIG_CONVEX ("CONVEX")
+    #define CONFIG_FONT ("FONT")
+    #define CONFIG_IMAGE ("IMAGE")
+    #define CONFIG_RECTANGLE ("RECTANGLE")
+    #define CONFIG_SPRITE ("SPRITE")
+    #define CONFIG_TEXT ("TEXT")
+    #define CONFIG_TEXTURE ("TEXTURE")
+    #define CONFIG_TRANSFORM ("TRANSFORM")
+    #define CONFIG_VERTEXARRAY ("VERTEXARRAY")
+    #define CONFIG_VIEW ("VIEW")
+
+enum TYPE_INSTRUCTION {
+    ID = 0,
+    PATH_TEXTURE,
+    NB_ARG_CONFIG,
+};
 
 /*
 ** Error Print For User

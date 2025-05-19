@@ -29,6 +29,18 @@ void print_help(void);
 // Function that check if we can play or not, according to the env
 int check_env(char **env);
 
+/*
+** Scene creation
+*/
+
+    // Scene Error
+// Creation of a scene that look like (Error 404: not found)
+void create_error_scene(game_t *game);
+
+void create_backgound_error_ressource(game_t *game);
+
+void create_text_error_ressource(game_t *game);
+
 
 // Initialise pause menu
 void init_pause_menu(scene_t *scene);

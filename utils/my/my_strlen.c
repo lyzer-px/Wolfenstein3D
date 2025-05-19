@@ -1,17 +1,17 @@
 /*
-** EPITECH PROJECT, 2024
-** wolf3d
+** EPITECH PROJECT, 2025
+** robot_factory
 ** File description:
 ** my_strlen.c
 */
 
 #include <stddef.h>
 
-int my_strlen(char *str)
+int my_strlen(char const *str)
 {
     int i = 0;
 
-    if (str == NULL)
+    if (!str)
         return i;
     while (str[i] != '\0')
         i++;

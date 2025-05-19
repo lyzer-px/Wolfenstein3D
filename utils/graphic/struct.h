@@ -24,15 +24,26 @@ typedef struct window_s {
     sfEvent event;
 } window_t;
 
-typedef struct composant_s {
-    // id to know which composant is it
-    int id;
-    // the composant
+typedef struct ressource_s {
+    // id to know which ressource is it
+    char *id;
+    // the ressource
     void *element;
-    // how to display the composant
-    void (*function_display)(sfRenderWindow *, void *, sfRenderStates *);
-    // how to destroy the composant
-    void (*function_destroy)(void *);
+    // how to set the position
+    void (*setposition)(void *, sfVector2f *);
+    // how to display the ressource
+    void (*display)(sfRenderWindow *, void *, sfRenderStates *);
+    // how to destroy the ressource
+    void (*destroy)(void *);
+    // next ressource
+    struct ressource_s *next;
+} ressource_t;
+
+typedef struct composant_s {
+    // The ressource that you want to draw
+    ressource_t *ressource;
+    // The position of the ressource
+    sfVector2f *pos;
     // next composant
     struct composant_s *next;
 } composant_t;
@@ -54,14 +65,14 @@ typedef struct scene_s {
     // id to know which scene is it
     int id_scene;
     // is the scene in pause (true or false)
-    bool pause;
+    bool pause : 1;
     // a function where each event of the scene is
     void (*function_event)(struct game_s *);
     // a linked list where all the layer are
     struct layer_s *layer;
 } scene_t;
 
-typedef struct game_s {
+struct game_s {
     // how many scene do we have (if you  want to change it we have an macro)
     int nb_scene;
     // which scene do we show
@@ -70,6 +81,8 @@ typedef struct game_s {
     struct scene_s **tab_scene;
     // stuct window where we have each window's information
     struct window_s *window;
-} game_t;
+    // all ressource
+    struct ressource_s *ressource;
+};
 
 #endif /* STRUCT_H */
