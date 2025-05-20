@@ -58,7 +58,7 @@ void init_tile(sfRectangleShape *tile, size_t i, size_t j)
 sfRectangleShape **init_map(void)
 {
     sfRectangleShape **bounds = malloc(sizeof(sfRectangleShape *) *
-        (MAP_HEIGHT * MAP_WIDTH) + 1);
+        ((MAP_HEIGHT + 1) * MAP_WIDTH) + 1);
     size_t k = 0;
 
     if (bounds == NULL)

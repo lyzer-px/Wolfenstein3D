@@ -22,6 +22,8 @@ typedef struct window_s {
     sfClock *clock;
     // event on the window
     sfEvent event;
+    // every information of the window in it
+    sfVideoMode *mode;
 } window_t;
 
 typedef struct ressource_s {

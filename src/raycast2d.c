@@ -104,16 +104,3 @@ sfRectangleShape *create_bg(sfVector2f size)
     sfRectangleShape_setSize(bg, size);
     return bg;
 }
-
-static void draw_bg(sfRenderWindow *window, sfRectangleShape *bg)
-{
-    if (window == NULL || bg == NULL)
-        return;
-    sfRectangleShape_setPosition(bg, (sfVector2f){0, 0});
-    sfRectangleShape_setFillColor(bg, sfCyan);
-    sfRenderWindow_drawRectangleShape(window, bg, NULL);
-    sfRectangleShape_setPosition(bg,
-        (sfVector2f){0, SCREEN_HEIGHT / 2});
-    sfRectangleShape_setFillColor(bg, sfGreen);
-    sfRenderWindow_drawRectangleShape(window, bg, NULL);
-}

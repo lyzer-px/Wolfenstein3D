@@ -23,6 +23,13 @@ window_t *create_window(void)
     window->full_screen = false;
     window->frame = FPS;
     window->window = make_window(dimensions, BITS, NAME_WIN, STYLE_WIND);
+    window->mode = malloc(sizeof(sfVideoMode));
+    if (window->mode == NULL) {
+        destroy_window(window);
+        return NULL;
+    }
+    memset(window->mode, 1, sizeof(sfVideoMode));
+    *(window->mode) = sfVideoMode_getDesktopMode();
     sfRenderWindow_setFramerateLimit(window->window, window->frame);
     return window;
 }
