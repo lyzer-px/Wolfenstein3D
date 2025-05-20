@@ -30,7 +30,7 @@ game_t *init_game(void)
     init_ray(game->player);
     game->nb_scene = NB_SCENE;
     game->ressource = NULL;
-    game->actual_scene = MENU;
+    game->actual_scene = GAME;
     game->tab_scene = init_tab_scene(game->nb_scene);
     if (game->tab_scene == NULL) {
         destroy_window(game->window);

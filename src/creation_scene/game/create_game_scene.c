@@ -24,13 +24,13 @@ static void create_game_retangles(game_t *game)
     sfRectangleShape_setSize(background, size);
     sfRectangleShape_setSize(tile, (sfVector2f){TILE_SIZE, TILE_SIZE});
     sfRectangleShape_setFillColor(background, sfCyan);
-    sfRectangleShape_setFillColor(background, sfBlack);
-
+    sfRectangleShape_setFillColor(tile, sfBlack);
+    game->tab_scene[GAME]->layer->component = create_component(&(sfVector2f){0, 0}, find_a_ressouce_from_id(game->ressource, "game_background"));
 }
 
 void create_game_scene(game_t *game)
 {
     create_layer(game->tab_scene[GAME]);
-    game->tab_scene[GAME]->function_event = update_player;
+    // game->tab_scene[GAME]->function_event = update_player;
     create_game_retangles(game);
 }
