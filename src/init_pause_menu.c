@@ -5,16 +5,25 @@
 ** init_pause_menu.c
 */
 
+#include <stdlib.h>
 #include "libgraphic.h"
 
 static void add_button_to_menu(scene_t *scene, button_tab_t button_def)
 {
+    ressource_t *ressource = malloc(sizeof(ressource_t));
     button_t *button = create_button(&button_def);
 
     if (button == NULL)
         return;
-    add_element_to_scene(button, display_button, destroy_button,
-        &scene->layer->composant);
+    if (ressource == NULL) {
+        free(button);
+        return;
+    }
+    ressource->destroy = destroy_button;
+    ressource->display = display_button;
+    ressource->element = button;
+    ressource->setposition = sfSprite_setPosition;
+    add_element_to_scene(&button->pos, ressource, &scene->layer->composant);
 }
 
 void handle_pause_menu_event(game_t *g)

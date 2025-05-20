@@ -33,7 +33,7 @@ enum name_scene {
     SETTING,
     GAME,
     INVENTORY,
-    SAVE,
+    SAVE_SCENE,
     NB_SCENE,
 };
 

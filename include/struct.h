@@ -61,10 +61,6 @@ typedef struct layer_s {
 
 typedef struct game_s game_t;
 
-typedef enum scene_id_s {
-    PAUSE_MENU
-} scene_id_t;
-
 typedef struct scene_s {
     // id to know which scene is it
     int id_scene;

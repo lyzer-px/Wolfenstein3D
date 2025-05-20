@@ -10,7 +10,7 @@
 #include "struct.h"
 #include "project_funct.h"
 #include "libgraphic.h"
-
+/*
 static sfRectangleShape *create_rect(sfVector2f pos,
     sfVector2f size, sfColor *color)
 {
@@ -38,7 +38,7 @@ static void init_menu(scene_t *scene, sfColor *color)
                 sfRectangleShape_destroy, &scene->layer->composant);
         }
     }
-}
+}*/
 
 static void create_scenes(game_t *game)
 {
