@@ -56,7 +56,8 @@ sfFloatRect get_button_hitbox(button_tab_t button)
     return hitbox;
 }
 
-bool is_button_clicked(button_tab_t *button, sfVector2i mouse, sfEvent *event)
+bool is_button_clicked(const button_tab_t *button, sfVector2i mouse,
+    sfEvent *event)
 {
     sfFloatRect bounds = get_button_hitbox(*button);
 

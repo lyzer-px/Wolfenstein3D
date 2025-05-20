@@ -15,13 +15,13 @@ typedef struct button_s {
     sfTexture *texture;
     sfSprite *sprite;
     sfIntRect area;
-    sfVector2i pos;
+    sfVector2f pos;
 } button_t;
 
 typedef struct button_tab_s {
     char *path_sprite;
     sfIntRect rect;
-    sfVector2i pos;
+    sfVector2f pos;
 } button_tab_t;
 
     #define SIZE_TAB_BUTTON 4
@@ -180,6 +180,7 @@ void destroy_button(void *element);
 sfFloatRect get_button_hitbox(button_tab_t button);
 
 // Check if a buttin is clicked
-bool is_button_clicked(button_tab_t *button, sfVector2i mouse, sfEvent *event);
+bool is_button_clicked(const button_tab_t *button, sfVector2i mouse,
+    sfEvent *event);
 
 #endif /* LIBGRAPHIC_H */
