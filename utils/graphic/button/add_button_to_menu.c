@@ -31,5 +31,5 @@ void add_button_to_menu(scene_t *scene, button_tab_t button_def)
     ressource->display = display_button;
     ressource->element = button;
     ressource->setposition = set_button_pos;
-    add_element_to_scene(&button->pos, ressource, &scene->layer->component);
+    add_element_to_scene(button->pos, ressource, &scene->layer->component);
 }

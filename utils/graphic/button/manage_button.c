@@ -12,9 +12,12 @@
 button_t *create_button(const button_tab_t *def)
 {
     button_t *button = malloc(sizeof(button_t));
+    sfVector2f *pos = malloc(sizeof(sfVector2f));
 
-    if (!button)
+    if (button == NULL || pos == NULL)
         return NULL;
+    pos->x = def->pos.x;
+    pos->y = def->pos.y;
     button->texture = sfTexture_createFromFile(def->path_sprite, NULL);
     if (!button->texture) {
         free(button);
@@ -25,7 +28,7 @@ button_t *create_button(const button_tab_t *def)
     sfSprite_setTextureRect(button->sprite, def->rect);
     sfSprite_setPosition(button->sprite, (sfVector2f){def->pos.x, def->pos.y});
     button->area = def->rect;
-    button->pos = def->pos;
+    button->pos = pos;
     return button;
 }
 

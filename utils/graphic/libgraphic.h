@@ -15,7 +15,7 @@ typedef struct button_s {
     sfTexture *texture;
     sfSprite *sprite;
     sfIntRect area;
-    sfVector2f pos;
+    sfVector2f *pos;
 } button_t;
 
 typedef struct button_tab_s {
