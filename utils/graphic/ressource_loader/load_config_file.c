@@ -33,14 +33,14 @@ static int add_ressource_from_tab(game_t *game, char **arg)
     }
     ressource = create_ressource(arg[NAME], element, type);
     add_ressource(&(game->ressource), ressource);
-    return EPI_SUCESS;
+    return EPI_SUCCESS;
 }
 
 void load_config_file(game_t *game)
 {
     FILE *fd = fopen(PATH_FILE_CONIG, READ_FILE);
     size_t size = 0;
-    int status = EPI_SUCESS;
+    int status = EPI_SUCCESS;
     char *line = NULL;
     char **arg = NULL;
 
@@ -50,9 +50,9 @@ void load_config_file(game_t *game)
     }
     while (getline(&line, &size, fd) != -1) {
         arg = parse_user_input(line, &status, SEPARATOR_CONFIG_FILE);
-        if (status == EPI_SUCESS)
+        if (status == EPI_SUCCESS)
             status = add_ressource_from_tab(game, arg);
-        if (status != EPI_SUCESS)
+        if (status != EPI_SUCCESS)
             dprintf(STDERR_FILENO, "Error: Line is wrong \"%s\"\n", line);
         free_tab(arg);
     }

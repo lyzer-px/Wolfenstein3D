@@ -19,7 +19,7 @@
 */
 
     #define EPI_FAIL (84)
-    #define EPI_SUCESS (0)
+    #define EPI_SUCCESS (0)
 
 // Scene information
 
@@ -30,10 +30,11 @@ enum name_scene {
     ERROR_SCENE = 0,
     MENU,
     CHOICE_OF_SAVE,
+    PAUSE_MENU,
     SETTING,
     GAME,
     INVENTORY,
-    SAVE,
+    SAVE_SCENE,
     NB_SCENE,
 };
 

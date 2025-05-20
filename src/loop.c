@@ -28,5 +28,5 @@ int loop(game_t *game)
         sfRenderWindow_display(game->window->window);
         sfClock_restart(game->window->clock);
     }
-    return EPI_SUCESS;
+    return EPI_SUCCESS;
 }
