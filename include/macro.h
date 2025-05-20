@@ -37,6 +37,8 @@ enum name_scene {
     NB_SCENE,
 };
 
+    #define SCENE_START (MENU)
+
 /*
 ** Main
 */
