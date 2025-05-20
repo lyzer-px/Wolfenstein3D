@@ -49,10 +49,10 @@ typedef enum {
 }button_start_menu_id_t;
 
 static const button_tab_t button_start_menu[] = {
-    {"assets/buttons/Start 192x48.png", {0, 0, 192, 48}, {432, 100}},
-    {"assets/buttons/Save 192x48.png", {0, 0, 192, 48}, {432, 200}},
-    {"assets/buttons/Settings 192x48.png", {0, 0, 192, 48}, {432, 300}},
-    {"assets/buttons/Exit 192x48.png", {0, 0, 192, 48}, {432, 400}},
+    {"assets/buttons/Start 192x48.png", {0, 0, 192, 48}, {380, 100}},
+    {"assets/buttons/Save 192x48.png", {0, 0, 192, 48}, {380, 200}},
+    {"assets/buttons/Settings 192x48.png", {0, 0, 192, 48}, {380, 300}},
+    {"assets/buttons/Exit 192x48.png", {0, 0, 192, 48}, {380, 400}},
     {NULL, {0, 0, 0, 0}, {0, 0}}
 };
 
@@ -130,9 +130,9 @@ void destroy_all_ressource(ressource_t **ressource_begin);
 // initialise a tab's scene
 scene_t **init_tab_scene(int nb_scene);
 
-// Add an element to a scene (begin_scene is the begin of composants in scene)
+// Add an element to a scene (begin_scene is the begin of components in scene)
 void add_element_to_scene(sfVector2f *pos, ressource_t *ressource,
-    composant_t **begin);
+    component_t **begin);
 
 // Clean a scene
 void clean_scene(scene_t *scene);
@@ -145,7 +145,7 @@ void destroy_scene(scene_t *scene);
 // Create a layer to the scene
 void create_layer(scene_t *scene);
 
-// Remove all composant of a layer
+// Remove all component of a layer
 void clean_layer(layer_t *layer);
 
 // Destroy a layer
@@ -153,20 +153,20 @@ void destroy_layer(layer_t *layer);
 
         // COMPONENT
 
-// Reverse the list of composant
-void rev_composant(composant_t **begin);
+// Reverse the list of component
+void rev_component(component_t **begin);
 
-// Create an composant but it's not in a layer (yes the composant just exist)
-composant_t *create_composant(sfVector2f *pos, ressource_t *ressource);
+// Create an component but it's not in a layer (yes the component just exist)
+component_t *create_component(sfVector2f *pos, ressource_t *ressource);
 
-// Add an created composant to a layer of a scene, according to id
-void add_a_composant_to_layer(composant_t *composant, scene_t *scene, int id);
+// Add an created component to a layer of a scene, according to id
+void add_a_component_to_layer(component_t *component, scene_t *scene, int id);
 
-// draw each composant of scene
-void draw_composant_of_scene(sfRenderWindow *window, scene_t *scene);
+// draw each component of scene
+void draw_component_of_scene(sfRenderWindow *window, scene_t *scene);
 
-// destroy a composant
-void destroy_composant(composant_t *composant);
+// destroy a component
+void destroy_component(component_t *component);
 
 // Destroy a layer
 void destroy_layer(layer_t *layer);

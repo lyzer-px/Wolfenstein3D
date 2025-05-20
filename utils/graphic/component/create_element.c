@@ -6,8 +6,8 @@
 */
 
 #include <stdio.h>
-#include "../type_id.h"
-#include "../macro.h"
+#include "type_id.h"
+#include "macro.h"
 
 void *create_element(int type, char *filename)
 {

@@ -39,20 +39,20 @@ typedef struct ressource_s {
     struct ressource_s *next;
 } ressource_t;
 
-typedef struct composant_s {
+typedef struct component_s {
     // The ressource that you want to draw
     ressource_t *ressource;
     // The position of the ressource
     sfVector2f *pos;
-    // next composant
-    struct composant_s *next;
-} composant_t;
+    // next component
+    struct component_s *next;
+} component_t;
 
 typedef struct layer_s {
     // id to know which layer is it
     int id;
-    // an linked list, where each composant of the layer is
-    struct composant_s *composant;
+    // an linked list, where each component of the layer is
+    struct component_s *component;
     // the next layer of the scene
     struct layer_s *next;
     // is the print or not
@@ -72,7 +72,17 @@ typedef struct scene_s {
     struct layer_s *layer;
 } scene_t;
 
+typedef struct player_s {
+    sfVector2f pos;
+    float angle;
+    sfRectangleShape *hitbox;
+    sfRectangleShape *ray;
+} player_t;
+
 struct game_s {
+    player_t *player;
+    sfRectangleShape **bounds;
+    sfRectangleShape *rect;
     // how many scene do we have (if you  want to change it we have an macro)
     int nb_scene;
     // which scene do we show

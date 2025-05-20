@@ -21,7 +21,7 @@ void handle_event(game_t *g);
 int loop(game_t *game);
 
 // Main function, that calls all other function
-int project(void);
+int wolf3d(void);
 
 // Print help for the user
 void print_help(void);
@@ -32,6 +32,7 @@ int check_env(char **env);
 /*
 ** Scene creation
 */
+void create_game_scene(game_t *game);
 
     // Scene Error
 // Creation of a scene that look like (Error 404: not found)

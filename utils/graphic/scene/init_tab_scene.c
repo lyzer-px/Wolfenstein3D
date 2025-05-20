@@ -6,7 +6,7 @@
 */
 
 #include <stdlib.h>
-#include "../struct.h"
+#include "struct.h"
 
 static void void_function(game_t *game)
 {

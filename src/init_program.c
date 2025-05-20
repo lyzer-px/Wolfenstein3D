@@ -42,6 +42,7 @@ static void init_menu(scene_t *scene, sfColor *color)
 
 static void create_scenes(game_t *game)
 {
+    create_game_scene(game);
     create_error_scene(game);
     init_pause_menu(game->tab_scene[PAUSE_MENU]);
     init_start_menu(game->tab_scene[MENU]);
@@ -49,7 +50,7 @@ static void create_scenes(game_t *game)
 
 int init_scene(game_t *game)
 {
-    int status = 0;
+    int status = EPI_SUCESS;
 
     create_scenes(game);
     if (status == EPI_SUCCESS)

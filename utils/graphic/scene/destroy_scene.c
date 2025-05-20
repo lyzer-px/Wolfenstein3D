@@ -6,8 +6,8 @@
 */
 
 #include <stdlib.h>
-#include "../libgraphic.h"
-#include "../struct.h"
+#include "libgraphic.h"
+#include "struct.h"
 
 void destroy_scene(scene_t *scene)
 {
