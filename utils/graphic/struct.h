@@ -77,6 +77,8 @@ typedef struct player_s {
     float angle;
     sfRectangleShape *hitbox;
     sfRectangleShape *ray;
+    sfCircleShape *bloom;
+    bool flashlight_on;
 } player_t;
 
 struct game_s {
