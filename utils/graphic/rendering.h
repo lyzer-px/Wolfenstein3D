@@ -28,6 +28,7 @@
     #define TILE_THICKNESS 10 // The thickness of tile outlines
 
     #define PLAYER_SPEED 0.1
+    #define ROTATION_SPEED 0.2
 
     // Transposes real coords on the int map
     #define ON_INT_MAP(a) (((int)(a) / TILE_SIZE))

@@ -30,8 +30,8 @@ void player_fwd(player_t *player)
         player->pos.x -= direction.x * PLAYER_SPEED;
         player->pos.y -= direction.y * PLAYER_SPEED;
     }
-    player->angle -= sfKeyboard_isKeyPressed(sfKeyQ) * PLAYER_SPEED;
-    player->angle += sfKeyboard_isKeyPressed(sfKeyD) * PLAYER_SPEED;
+    player->angle -= sfKeyboard_isKeyPressed(sfKeyQ) * ROTATION_SPEED;
+    player->angle += sfKeyboard_isKeyPressed(sfKeyD) * ROTATION_SPEED;
     player->angle = player->angle > 360 ? 0 : player->angle;
     player->angle = player->angle < 0 ? 360 : player->angle;
 }

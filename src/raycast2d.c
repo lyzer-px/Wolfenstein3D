@@ -28,15 +28,16 @@ float cast_single_ray(player_t *player, float angle, sfRectangleShape *rect,
 }
 
 static void set_rect(float distance, sfRectangleShape *rect,
-    size_t ray_idx)
+    double ray_idx)
 {
     float rect_height = (TILE_SIZE / distance) * (SCREEN_WIDTH / 2);
 
+    rect_height = rect_height > SCREEN_HEIGHT ? SCREEN_HEIGHT : rect_height;
     if (rect_height < 0)
         rect_height = SCREEN_HEIGHT;
-    sfRectangleShape_setSize(rect, (sfVector2f){10, rect_height});
+    sfRectangleShape_setSize(rect, (sfVector2f){2, rect_height});
     sfRectangleShape_setFillColor(rect, sfWhite);
-    sfRectangleShape_setPosition(rect, (sfVector2f){(ray_idx * RECT_SIZE) / 7,
+    sfRectangleShape_setPosition(rect, (sfVector2f){(ray_idx * RECT_SIZE) / 6,
         (SCREEN_HEIGHT - rect_height) / 2});
 }
 
@@ -65,7 +66,7 @@ void tick_game(game_t *game)
     if (game->player == NULL || game->window->window == NULL)
         return;
     draw_minimap(game->window->window, game->player, game->bounds);
-    for (double i = 0; i < DEG(FOV); i++) {
+    for (double i = 0; i < DEG(FOV); i += 0.1) {
         angle = (game->player->angle - DEG(FOV / 2) + i);
         prep_2d_ray(game->rect);
         distance = cast_single_ray(game->player, angle,
