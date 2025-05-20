@@ -63,7 +63,8 @@ SRC 		= 		component/create_composant.c						    \
 					window/create_window.c							        \
 					window/destroy_window.c						          	\
 					window/make_window.c									\
-					manage_button.c
+					button/add_button_to_menu.c								\
+					button/manage_button.c
 
 OBJ			=		$(SRC:.c=.o)
 

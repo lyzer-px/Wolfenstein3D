@@ -6,8 +6,8 @@
 */
 
 #include <stdlib.h>
-#include "struct.h"
-#include "libgraphic.h"
+#include "../struct.h"
+#include "../libgraphic.h"
 
 button_t *create_button(const button_tab_t *def)
 {

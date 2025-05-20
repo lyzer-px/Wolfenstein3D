@@ -183,4 +183,7 @@ sfFloatRect get_button_hitbox(button_tab_t button);
 bool is_button_clicked(const button_tab_t *button, sfVector2i mouse,
     sfEvent *event);
 
+// Add button to a menu
+void add_button_to_menu(scene_t *scene, button_tab_t button_def);
+
 #endif /* LIBGRAPHIC_H */

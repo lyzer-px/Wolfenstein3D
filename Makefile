@@ -29,7 +29,7 @@ SRC 		= 		main.c												\
 					src/creation_scene/error/create_backgound_error.c	\
 					src/creation_scene/error/create_error_scene.c		\
 					src/creation_scene/error/create_text_error.c		\
-					src/init_pause_menu.c
+					src/creation_scene/menu/init_pause_menu.c
 
 OBJ			=		$(SRC:.c=.o)
 
