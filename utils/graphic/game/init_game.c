@@ -11,13 +11,7 @@
 #include "rendering.h"
 #include "libgraphic.h"
 
-static void *nfree(void *ptr)
-{
-    free(ptr);
-    return NULL;
-}
-
-static int fill_fields(game_t *game)
+static void fill_fields(game_t *game)
 {
     game->rect = sfRectangleShape_create();
     if (game->rect == NULL)
@@ -26,6 +20,12 @@ static int fill_fields(game_t *game)
     game->ressource = NULL;
     game->actual_scene = GAME;
     game->tab_scene = init_tab_scene(game->nb_scene);
+}
+
+static void *nfree(void *ptr)
+{
+    free(ptr);
+    return NULL;
 }
 
 game_t *init_game(void)
@@ -43,9 +43,11 @@ game_t *init_game(void)
     game->player = calloc(1, sizeof(player_t));
     init_player(game->player);
     init_ray(game->player);
-    if (game->tab_scene == NULL)
+    fill_fields(game);
+    if (game->tab_scene == NULL) {
         destroy_window(game->window);
         return nfree(game);
+    }
     game->tab_scene[game->nb_scene] = NULL;
     return game;
 }
