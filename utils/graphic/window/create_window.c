@@ -28,7 +28,6 @@ window_t *create_window(void)
         destroy_window(window);
         return NULL;
     }
-    memset(window->mode, 1, sizeof(sfVideoMode));
     *(window->mode) = sfVideoMode_getDesktopMode();
     sfRenderWindow_setFramerateLimit(window->window, window->frame);
     return window;
