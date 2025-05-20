@@ -28,6 +28,7 @@ game_t *init_game(void)
     game->player = calloc(1, sizeof(player_t));
     init_player(game->player);
     init_ray(game->player);
+    game->rect = sfRectangleShape_create();
     game->nb_scene = NB_SCENE;
     game->ressource = NULL;
     game->actual_scene = GAME;

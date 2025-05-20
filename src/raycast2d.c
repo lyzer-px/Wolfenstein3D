@@ -23,7 +23,7 @@ float cast_single_ray(player_t *player, float angle, sfRectangleShape *rect,
         sfRenderWindow_drawRectangleShape(window, rect, NULL);
     }
     return (sqrtf(SQUARED(ray_pos.x - player->pos.x) +
-    SQUARED(ray_pos.y - player->pos.y)));
+    SQUARED(ray_pos.y - player->pos.y))) * cosf(RAD(player->angle) - RAD(angle));
 }
 
 static void set_rect(float distance, sfRectangleShape *rect,
@@ -67,16 +67,15 @@ void update_player(game_t *game)
     for (double i = 0; i < DEG(FOV); i++) {
         angle = (game->player->angle - DEG(FOV / 2) + i);
         prep_2d_ray(game->rect);
-        distance = cast_single_ray(game->player, game->player->angle,
-            game->rect, game->window->window)
-        * cosf(RAD(game->player->angle) - RAD(angle));
+        distance = cast_single_ray(game->player, angle,
+            game->rect, game->window->window);
         set_rect(distance, game->rect, i);
         sfRenderWindow_drawRectangleShape(game->window->window,
             game->rect, NULL);
     }
     player_fwd(game->player);
     if (is_wall(ON_INT_MAP(game->player->pos.x),
-        ON_INT_MAP(game->player->pos.x)))
+        ON_INT_MAP(game->player->pos.y)))
         player_repel(game->player);
 }
 

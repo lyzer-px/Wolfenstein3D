@@ -21,13 +21,13 @@
 
 
     #define TILE_SIZE 10 // the size of tiles in the minimap
-    #define PLAYER_SIZE 10 // the size of the player's rectangle on minimap
+    #define PLAYER_SIZE 5 // the size of the player's rectangle on minimap
     #define RECT_SIZE 64 // the size of the rectangles used to make walls
     #define MAP_WIDTH 16
     #define MAP_HEIGHT 16
     #define TILE_THICKNESS 10 // The thickness of tile outlines
 
-    #define PLAYER_SPEED 0.1
+    #define PLAYER_SPEED 0.5
 
     // Transposes real coords on the int map
     #define ON_INT_MAP(a) (((int)(a) / TILE_SIZE))
