@@ -39,7 +39,7 @@ OBJ			=		$(SRC:.c=.o)
 
 NAME		=		wolf3d
 
-CFLAGS		=		-Wall -Wextra -Wpedantic -g3 \
+CFLAGS		=		-Wall -Wextra -Wpedantic  \
               -std=c99
 
 

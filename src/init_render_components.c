@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include <SFML/Graphics.h>
+#include "macro.h"
 #include "rendering.h"
 
 void init_ray(player_t *player)
@@ -36,6 +37,9 @@ int init_player(player_t *player)
         return -1;
     player->hitbox = sfRectangleShape_create();
     if (player->hitbox == NULL)
+    return -1;
+    player->bloom = sfCircleShape_create();
+    if (player->bloom == NULL)
         return -1;
     init_hitbox(player);
     init_ray(player);

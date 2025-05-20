@@ -9,6 +9,9 @@
 #include <stdio.h>
 #include <SFML/Graphics.h>
 #include "rendering.h"
+#include "macro.h"
+
+const sfColor sfGrey = {190, 190, 190, 255};
 
 float cast_single_ray(player_t *player, float angle, sfRectangleShape *rect,
     sfRenderWindow *window)
@@ -35,8 +38,8 @@ static void set_rect(float distance, sfRectangleShape *rect,
     rect_height = rect_height > SCREEN_HEIGHT ? SCREEN_HEIGHT : rect_height;
     if (rect_height < 0)
         rect_height = SCREEN_HEIGHT;
-    sfRectangleShape_setSize(rect, (sfVector2f){2, rect_height});
-    sfRectangleShape_setFillColor(rect, sfWhite);
+    sfRectangleShape_setSize(rect, (sfVector2f){3, rect_height});
+    sfRectangleShape_setFillColor(rect, sfGrey);
     sfRectangleShape_setPosition(rect, (sfVector2f){(ray_idx * RECT_SIZE) / 6,
         (SCREEN_HEIGHT - rect_height) / 2});
 }
@@ -58,6 +61,34 @@ static void draw_minimap(sfRenderWindow *window, player_t *player,
     sfRenderWindow_drawRectangleShape(window, player->hitbox, NULL);
 }
 
+static void draw_bloom(sfRenderWindow *window, sfCircleShape *circle)
+{
+    float radius = 150;
+    sfColor sfLighted = {181, 144, 45, 100};
+
+    sfCircleShape_setFillColor(circle, sfLighted);
+    for (size_t i = 1; i != 3; i++) {
+        sfCircleShape_setRadius(circle, radius * i);
+        sfCircleShape_setOrigin(circle, (sfVector2f){(radius * i),
+            (radius * i)});
+        sfCircleShape_setPosition(circle, (sfVector2f){(DIM_X / 2),
+            (DIM_Y / 2) + 25});
+        sfLighted.a -= 30;
+        sfRenderWindow_drawCircleShape(window, circle, NULL);
+    }
+}
+
+static void handle_exceptions(game_t *game)
+{
+    if (sfKeyboard_isKeyPressed(sfKeyF))
+        game->player->flashlight_on = !game->player->flashlight_on;
+    if (is_wall(ON_INT_MAP(game->player->pos.x),
+        ON_INT_MAP(game->player->pos.y)))
+        player_repel(game->player);
+    if (game->player->flashlight_on)
+        draw_bloom(game->window->window, game->player->bloom);
+}
+
 void tick_game(game_t *game)
 {
     float distance = 0;
@@ -66,7 +97,7 @@ void tick_game(game_t *game)
     if (game->player == NULL || game->window->window == NULL)
         return;
     draw_minimap(game->window->window, game->player, game->bounds);
-    for (double i = 0; i < DEG(FOV); i += 0.1) {
+    for (double i = 0; i < DEG(FOV); i += 0.25) {
         angle = (game->player->angle - DEG(FOV / 2) + i);
         prep_2d_ray(game->rect);
         distance = cast_single_ray(game->player, angle,
@@ -76,17 +107,7 @@ void tick_game(game_t *game)
             game->rect, NULL);
     }
     player_fwd(game->player);
-    if (is_wall(ON_INT_MAP(game->player->pos.x),
-        ON_INT_MAP(game->player->pos.y)))
-        player_repel(game->player);
-}
-
-void catch_events(sfRenderWindow *window, sfEvent event)
-{
-    while (sfRenderWindow_pollEvent(window, &event)) {
-        if (event.type == sfEvtClosed)
-            sfRenderWindow_close(window);
-    }
+    handle_exceptions(game);
 }
 
 int end_game(sfRenderWindow *window)
@@ -103,17 +124,4 @@ sfRectangleShape *create_bg(sfVector2f size)
         return NULL;
     sfRectangleShape_setSize(bg, size);
     return bg;
-}
-
-static void draw_bg(sfRenderWindow *window, sfRectangleShape *bg)
-{
-    if (window == NULL || bg == NULL)
-        return;
-    sfRectangleShape_setPosition(bg, (sfVector2f){0, 0});
-    sfRectangleShape_setFillColor(bg, sfCyan);
-    sfRenderWindow_drawRectangleShape(window, bg, NULL);
-    sfRectangleShape_setPosition(bg,
-        (sfVector2f){0, SCREEN_HEIGHT / 2});
-    sfRectangleShape_setFillColor(bg, sfGreen);
-    sfRenderWindow_drawRectangleShape(window, bg, NULL);
 }
