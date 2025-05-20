@@ -49,10 +49,10 @@ typedef enum {
 }button_start_menu_id_t;
 
 static const button_tab_t button_start_menu[] = {
-    {"assets/buttons/Start 192x48.png", {0, 0, 192, 48}, {864, 100}},
-    {"assets/buttons/Save 192x48.png", {0, 0, 192, 48}, {864, 200}},
-    {"assets/buttons/Settings 192x48.png", {0, 0, 192, 48}, {864, 300}},
-    {"assets/buttons/Exit 192x48.png", {0, 0, 192, 48}, {864, 400}},
+    {"assets/buttons/Start 192x48.png", {0, 0, 192, 48}, {432, 100}},
+    {"assets/buttons/Save 192x48.png", {0, 0, 192, 48}, {432, 200}},
+    {"assets/buttons/Settings 192x48.png", {0, 0, 192, 48}, {432, 300}},
+    {"assets/buttons/Exit 192x48.png", {0, 0, 192, 48}, {432, 400}},
     {NULL, {0, 0, 0, 0}, {0, 0}}
 };
 

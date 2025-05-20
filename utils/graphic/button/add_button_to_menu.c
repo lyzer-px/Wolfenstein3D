@@ -9,9 +9,11 @@
 #include "../libgraphic.h"
 #include "../macro.h"
 
-void set_button_pos(void *sprite, sfVector2f *pos)
+void set_button_pos(void *ressource, sfVector2f *pos)
 {
-    sfSprite_setPosition((sfSprite *)sprite, *pos);
+    button_t *button = (button_t *)ressource;
+
+    sfSprite_setPosition(button->sprite, *pos);
 }
 
 void add_button_to_menu(scene_t *scene, button_tab_t button_def)
