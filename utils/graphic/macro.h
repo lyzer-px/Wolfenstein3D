@@ -19,7 +19,7 @@
 */
 
     #define EPI_FAIL (84)
-    #define EPI_SUCESS (0)
+    #define EPI_SUCCESS (0)
 
 // Scene information
 

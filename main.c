@@ -15,7 +15,7 @@ int main(int argc, char **argv, char **env)
     if ((argc == 2 && !my_strcmp("-h", argv[1])) ||
         (argc == 2 && !my_strcmp("-help", argv[1]))) {
         print_help();
-        return EPI_SUCESS;
+        return EPI_SUCCESS;
     }
     if (argc != 1)
         return EPI_FAIL;

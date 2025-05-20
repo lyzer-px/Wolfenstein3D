@@ -52,7 +52,7 @@ int init_scene(game_t *game)
     int status = 0;
 
     create_scenes(game);
-    if (status == EPI_SUCESS)
+    if (status == EPI_SUCCESS)
         status = loop(game);
     return status;
 }

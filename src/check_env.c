@@ -16,7 +16,7 @@ int check_env(char **env)
 
     for (int i = 0; env[i] != NULL; i++)
         if (!my_strncmp(DISPLAY_CHECK, env[i], len))
-            return EPI_SUCESS;
+            return EPI_SUCCESS;
     printf(ER_ENV);
     return EPI_FAIL;
 }
