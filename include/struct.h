@@ -81,6 +81,17 @@ typedef struct player_s {
     sfRectangleShape *ray;
 } player_t;
 
+typedef struct settings_s {
+    // true if the music is playing
+    bool music_played;
+    // true if the audio effect is playing
+    bool fxaudio_played;
+    // is a percentage (100 the music is at maximum)
+    short music_nb;
+    // is a percentage (100 the audio effect is at maximum)
+    short fxaudio_nb;
+} settings_t;
+
 struct game_s {
     player_t *player;
     sfRectangleShape **bounds;
@@ -91,6 +102,8 @@ struct game_s {
     int actual_scene;
     // an array with all scene in it (all texture are create before the loop)
     struct scene_s **tab_scene;
+    // stuct which have all information of the setting of the game
+    settings_t *settings;
     // stuct window where we have each window's information
     struct window_s *window;
     // all ressource
