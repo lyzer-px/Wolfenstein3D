@@ -18,7 +18,7 @@ static void fill_fields(game_t *game)
         return;
     game->nb_scene = NB_SCENE;
     game->ressource = NULL;
-    game->actual_scene = GAME;
+    game->actual_scene = SCENE_START;
     game->tab_scene = init_tab_scene(game->nb_scene);
 }
 
@@ -26,6 +26,30 @@ static void *nfree(void *ptr)
 {
     free(ptr);
     return NULL;
+}
+
+static void init_settings(game_t *game)
+{
+    game->settings = malloc(sizeof(settings_t));
+    if (game->settings == NULL)
+        return;
+    game->settings->fxaudio_nb = 100;
+    game->settings->music_nb = 100;
+    game->settings->fxaudio_played = true;
+    game->settings->music_played = true;
+    return;
+}
+
+static void init_for_raycast(game_t *game)
+{
+    game->bounds = init_map();
+    if (game->bounds == NULL)
+        return;
+    game->player = calloc(1, sizeof(player_t));
+    init_player(game->player);
+    init_ray(game->player);
+    fill_fields(game);
+    return;
 }
 
 game_t *init_game(void)
@@ -37,13 +61,8 @@ game_t *init_game(void)
     game->window = create_window();
     if (game->window == NULL)
         return nfree(game);
-    game->bounds = init_map();
-    if (game->bounds == NULL)
-        return NULL;
-    game->player = calloc(1, sizeof(player_t));
-    init_player(game->player);
-    init_ray(game->player);
-    fill_fields(game);
+    init_for_raycast(game);
+    init_settings(game);
     if (game->tab_scene == NULL) {
         destroy_window(game->window);
         return nfree(game);

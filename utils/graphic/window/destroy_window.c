@@ -10,6 +10,7 @@
 
 void destroy_window(window_t *window)
 {
+    free(window->mode);
     sfClock_destroy(window->clock);
     sfRenderWindow_destroy(window->window);
     free(window);

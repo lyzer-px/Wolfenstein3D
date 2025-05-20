@@ -11,6 +11,9 @@
 #include "rendering.h"
 #include "struct.h"
 
+const sfColor sfNightSky = {11, 2, 64, 255};
+const sfColor sfNightGround = {4, 64, 2, 255};
+
 static void create_game_retangles(game_t *game, sfVector2f *size,
     sfVector2f *pos_bottom, sfVector2f *pos_top)
 {
@@ -23,8 +26,8 @@ static void create_game_retangles(game_t *game, sfVector2f *size,
         (void *)background_bottom, RECTANGLESHAPE);
     sfRectangleShape_setSize(background_top, *size);
     sfRectangleShape_setSize(background_bottom, *size);
-    sfRectangleShape_setFillColor(background_top, sfCyan);
-    sfRectangleShape_setFillColor(background_bottom, sfGreen);
+    sfRectangleShape_setFillColor(background_top, sfNightSky);
+    sfRectangleShape_setFillColor(background_bottom, sfNightGround);
     add_a_component_to_layer(create_component(pos_top,
         find_a_ressouce_from_id(game->ressource, "game_background_top")),
         game->tab_scene[GAME], game->tab_scene[GAME]->layer->id);
@@ -42,11 +45,11 @@ void create_game_scene(game_t *game)
     if (pos_bottom == NULL || pos_top == NULL || size == NULL)
         return;
     size->x = DIM_X;
-    size->y = DIM_Y / 2;
+    size->y = DIM_Y / 2 + 30;
     pos_top->x = 0;
     pos_top->y = 0;
     pos_bottom->x = 0;
-    pos_bottom->y = DIM_Y / 2;
+    pos_bottom->y = DIM_Y / 2 + 30;
     create_layer(game->tab_scene[GAME]);
     game->tab_scene[GAME]->function_event = tick_game;
     create_game_retangles(game, size, pos_bottom, pos_top);
