@@ -48,6 +48,6 @@ void create_game_scene(game_t *game)
     pos_bottom->x = 0;
     pos_bottom->y = DIM_Y / 2;
     create_layer(game->tab_scene[GAME]);
-    game->tab_scene[GAME]->function_event = update_player;
+    game->tab_scene[GAME]->function_event = tick_game;
     create_game_retangles(game, size, pos_bottom, pos_top);
 }

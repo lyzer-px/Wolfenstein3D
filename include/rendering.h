@@ -79,5 +79,5 @@ void init_tile(sfRectangleShape *tile, size_t i, size_t j);
 void init_hitbox(player_t *player); // Inits player hitbox on minimap
 sfRectangleShape **init_map(void); // Inits the map to be shown on the screen
 
-void update_player(game_t *game);
+void tick_game(game_t *game);
 #endif

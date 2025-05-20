@@ -57,7 +57,7 @@ static void draw_minimap(sfRenderWindow *window, player_t *player,
     sfRenderWindow_drawRectangleShape(window, player->hitbox, NULL);
 }
 
-void update_player(game_t *game)
+void tick_game(game_t *game)
 {
     float distance = 0;
     float angle;
