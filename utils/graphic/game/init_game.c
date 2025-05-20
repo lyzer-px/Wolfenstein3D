@@ -31,7 +31,6 @@ static void *nfree(void *ptr)
 static void init_settings(game_t *game)
 {
     game->settings = malloc(sizeof(settings_t));
-
     if (game->settings == NULL)
         return;
     game->settings->fxaudio_nb = 100;
