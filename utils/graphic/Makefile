@@ -17,10 +17,10 @@ RM			?=	rm -rf
 # BINARY CREATION
 #
 
-SRC 		= 		component/create_composant.c						    \
+SRC 		= 		component/create_component.c						    \
 					component/create_element.c						   		\
-					component/destroy_composant.c						    \
-					component/rev_composant.c								\
+					component/destroy_component.c						    \
+					component/rev_component.c								\
 					game/clean_game.c							            \
 					game/destroy_game.c							          	\
 					game/init_game.c								       	\
@@ -29,7 +29,7 @@ SRC 		= 		component/create_composant.c						    \
 					helpfull/my_str_to_word_array.c							\
 					helpfull/is_in.c										\
 					helpfull/free_tab.c										\
-					layer/add_composant_to_layer.c				    		\
+					layer/add_component_to_layer.c				    		\
 					layer/clean_layer.c							            \
 					layer/create_layer.c					          		\
 					layer/destroy_layer.c							        \
@@ -44,7 +44,7 @@ SRC 		= 		component/create_composant.c						    \
 					my_encapsulation/vertexarray.c							\
 					my_encapsulation/view.c									\
 					ressource/add_ressource.c					     		\
-					ressource/create_composant_from_id_ressource.c			\
+					ressource/create_component_from_id_ressource.c			\
 					ressource/create_a_ressource_in_the_game.c		  		\
 					ressource/create_ressource.c						    \
 					ressource/create_ressource_link.c						\
@@ -56,7 +56,7 @@ SRC 		= 		component/create_composant.c						    \
 					scene/clean_scene.c							           	\
 					scene/destroy_scene.c							        \
 					scene/destroy_tab_scene.c						  	    \
-					scene/draw_composant_of_scene.c				      		\
+					scene/draw_component_of_scene.c				      		\
 					scene/init_tab_scene.c									\
 					type/find_type.c								        \
 					window/change_the_mode_window.c				      		\
@@ -74,7 +74,9 @@ HEADER	=	libgraphic.h		\
           type_id.h				\
 		  my_encapsulation.h
 
-CFLAGS		=		-Wall -Wextra -Wpedantic -Werror
+CFLAGS		=		-Wall -Wextra -Wpedantic -g3
+
+CPPFLAGS	=		-iquote .
 
 UT_SRC =	tests/graphics_test.c
 

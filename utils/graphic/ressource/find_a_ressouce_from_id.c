@@ -7,7 +7,7 @@
 
 #include <string.h>
 #include <stdio.h>
-#include "../struct.h"
+#include "struct.h"
 
 ressource_t *find_a_ressouce_from_id(ressource_t *begin, char *id)
 {

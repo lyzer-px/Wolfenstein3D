@@ -13,12 +13,13 @@
 
 static void create_scenes(game_t *game)
 {
+    create_game_scene(game);
     create_error_scene(game);
 }
 
 int init_scene(game_t *game)
 {
-    int status = 0;
+    int status = EPI_SUCESS;
 
     create_scenes(game);
     if (status == EPI_SUCESS)

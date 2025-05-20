@@ -6,9 +6,9 @@
 */
 
 #include <stddef.h>
-#include "../type_id.h"
-#include "../macro.h"
-#include "../libmy.h"
+#include "type_id.h"
+#include "macro.h"
+#include "libmy.h"
 
 int find_type(char *str)
 {

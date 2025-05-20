@@ -6,21 +6,21 @@
 */
 
 #include <stdlib.h>
-#include "../struct.h"
-#include "../libgraphic.h"
+#include "struct.h"
+#include "libgraphic.h"
 
 void add_element_to_scene(sfVector2f *pos, ressource_t *ressource,
-    composant_t **begin)
+    component_t **begin)
 {
-    composant_t *new_composant = malloc(sizeof(composant_t));
+    component_t *new_component = malloc(sizeof(component_t));
 
-    if (new_composant == NULL)
+    if (new_component == NULL)
         return;
-    rev_composant(begin);
-    new_composant->next = *begin;
-    new_composant->ressource = ressource;
-    new_composant->pos = pos;
-    *begin = new_composant;
-    rev_composant(begin);
+    rev_component(begin);
+    new_component->next = *begin;
+    new_component->ressource = ressource;
+    new_component->pos = pos;
+    *begin = new_component;
+    rev_component(begin);
     return;
 }

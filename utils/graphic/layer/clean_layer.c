@@ -7,19 +7,19 @@
 
 #include <stdlib.h>
 #include <stddef.h>
-#include "../libgraphic.h"
-#include "../struct.h"
+#include "libgraphic.h"
+#include "struct.h"
 
 void clean_layer(layer_t *layer)
 {
-    composant_t *tmp;
+    component_t *tmp;
 
     if (layer == NULL)
         return;
-    while (layer->composant != NULL) {
-        tmp = layer->composant;
-        layer->composant = layer->composant->next;
-        destroy_composant(tmp);
+    while (layer->component != NULL) {
+        tmp = layer->component;
+        layer->component = layer->component->next;
+        destroy_component(tmp);
     }
     return;
 }

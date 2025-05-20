@@ -8,7 +8,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "../libmy.h"
+#include "libmy.h"
 
 static int is_alpha(char a, char *delim)
 {

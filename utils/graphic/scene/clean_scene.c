@@ -5,8 +5,8 @@
 ** clean_scene.c
 */
 
-#include "../struct.h"
-#include "../libgraphic.h"
+#include "struct.h"
+#include "libgraphic.h"
 
 void clean_scene(scene_t *scene)
 {

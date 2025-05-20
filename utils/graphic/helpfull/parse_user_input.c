@@ -8,7 +8,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../libmy.h"
+#include "libmy.h"
 
 static int is_sep(char c, char *separator)
 {

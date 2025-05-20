@@ -6,7 +6,7 @@
 */
 
 #include <stdlib.h>
-#include "../struct.h"
+#include "struct.h"
 
 void destroy_ressource(ressource_t **ressource)
 {

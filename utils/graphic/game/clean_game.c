@@ -5,8 +5,8 @@
 ** clean_game.c
 */
 
-#include "../struct.h"
-#include "../libgraphic.h"
+#include "struct.h"
+#include "libgraphic.h"
 
 void clean_game(game_t *game)
 {
