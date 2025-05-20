@@ -29,13 +29,30 @@ typedef struct button_tab_s {
 typedef enum {
     CONTINUE,
     SAVE,
+    SETTING_BUTTON,
     EXIT
-}button_id_t;
+}button_pause_menu_id_t;
 
-static const button_tab_t tab_button[] = {
+static const button_tab_t button_pause_menu[] = {
     {"assets/buttons/Continue 192x48.png", {0, 0, 192, 48}, {100, 100}},
-    {"assets/buttons/Save 192x48.png", {0, 0, 192, 48}, {100, 200}},
-    {"assets/buttons/Exit 192x48.png", {0, 0, 192, 48}, {100, 300}},
+    {"assets/buttons/Save Game 192x48.png", {0, 0, 192, 48}, {100, 200}},
+    {"assets/buttons/Settings 192x48.png", {0, 0, 192, 48}, {100, 300}},
+    {"assets/buttons/Exit 192x48.png", {0, 0, 192, 48}, {100, 400}},
+    {NULL, {0, 0, 0, 0}, {0, 0}}
+};
+
+typedef enum {
+    START,
+    LOAD_SAVE,
+    SETTING_BUTTON_FROM_MENU,
+    EXIT_FROM_MENU
+}button_start_menu_id_t;
+
+static const button_tab_t button_start_menu[] = {
+    {"assets/buttons/Start 192x48.png", {0, 0, 192, 48}, {864, 100}},
+    {"assets/buttons/Save 192x48.png", {0, 0, 192, 48}, {864, 200}},
+    {"assets/buttons/Settings 192x48.png", {0, 0, 192, 48}, {864, 300}},
+    {"assets/buttons/Exit 192x48.png", {0, 0, 192, 48}, {864, 400}},
     {NULL, {0, 0, 0, 0}, {0, 0}}
 };
 

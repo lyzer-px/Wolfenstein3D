@@ -44,6 +44,7 @@ static void create_scenes(game_t *game)
 {
     create_error_scene(game);
     init_pause_menu(game->tab_scene[PAUSE_MENU]);
+    init_start_menu(game->tab_scene[MENU]);
 }
 
 int init_scene(game_t *game)

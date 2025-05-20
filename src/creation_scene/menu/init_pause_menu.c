@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** name
+** Wolf3Ds
 ** File description:
 ** init_pause_menu.c
 */
@@ -11,18 +11,24 @@
 
 void handle_pause_menu_event(game_t *g)
 {
-    if (is_button_clicked(&tab_button[EXIT],
+    if (is_button_clicked(&button_pause_menu[EXIT],
         sfMouse_getPositionRenderWindow(g->window->window), &g->window->event))
         sfRenderWindow_close(g->window->window);
-    if (is_button_clicked(&tab_button[CONTINUE],
+    if (is_button_clicked(&button_pause_menu[CONTINUE],
         sfMouse_getPositionRenderWindow(g->window->window), &g->window->event))
         g->actual_scene = GAME;
+    if (is_button_clicked(&button_pause_menu[SETTING_BUTTON],
+        sfMouse_getPositionRenderWindow(g->window->window), &g->window->event))
+        g->actual_scene = SETTING;
+    if (is_button_clicked(&button_pause_menu[SETTING_BUTTON],
+        sfMouse_getPositionRenderWindow(g->window->window), &g->window->event))
+        g->actual_scene = SAVE_SCENE;
 }
 
 void init_pause_menu(scene_t *scene)
 {
     create_layer(scene);
-    for (int i = 0; tab_button[i].path_sprite != NULL; i++)
-        add_button_to_menu(scene, tab_button[i]);
+    for (int i = 0; button_pause_menu[i].path_sprite != NULL; i++)
+        add_button_to_menu(scene, button_pause_menu[i]);
     scene->function_event = handle_pause_menu_event;
 }
