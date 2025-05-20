@@ -19,24 +19,26 @@ RM			?=	rm -rf
 # BINARY CREATION
 #
 
-SRC 		= 		main.c												\
-					src/handle_event.c									\
-					src/init_program.c									\
-					src/loop.c											\
-					src/check_env.c										\
-					src/project.c										\
-					src/print_help.c									\
-					src/creation_scene/error/create_backgound_error.c	\
-					src/creation_scene/error/create_error_scene.c		\
-					src/creation_scene/error/create_text_error.c		\
-					src/creation_scene/menu/init_pause_menu.c			\
-					src/creation_scene/menu/init_start_menu.c
+SRC 		= 		main.c													\
+					src/check_env.c											\
+					src/creation_scene/error/create_backgound_error.c		\
+					src/creation_scene/error/create_error_scene.c			\
+					src/creation_scene/error/create_text_error.c			\
+					src/creation_scene/game/create_game_scene.c				\
+					src/handle_event.c										\
+					src/init_program.c										\
+					src/init_render_components.c							\
+					src/loop.c												\
+					src/player_movement.c									\
+					src/print_help.c										\
+					src/project.c											\
+					src/raycast2d.c											\
 
 OBJ			=		$(SRC:.c=.o)
 
 NAME		=		wolf3d
 
-CFLAGS		=		-Wall -Wextra -Wpedantic -iquote include \
+CFLAGS		=		-Wall -Wextra -Wpedantic -g3 \
               -std=c99
 
 

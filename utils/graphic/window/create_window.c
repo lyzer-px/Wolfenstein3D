@@ -7,9 +7,9 @@
 
 #include <string.h>
 #include <stdlib.h>
-#include "../struct.h"
-#include "../macro.h"
-#include "../libgraphic.h"
+#include "struct.h"
+#include "macro.h"
+#include "libgraphic.h"
 
 window_t *create_window(void)
 {

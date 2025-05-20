@@ -14,7 +14,7 @@
 #include "project_funct.h"
 #include "libgraphic.h"
 
-int project(void)
+int wolf3d(void)
 {
     game_t *game = init_game();
     int status = EPI_SUCESS;

@@ -2,15 +2,16 @@
 ** EPITECH PROJECT, 2024
 ** bstrapwoof
 ** File description:
-** bs.h
+** rendering.h
 */
 
-#ifndef BS_H
-    #define BS_H
+#ifndef RENDERING_H
+    #define RENDERING_H
 
     #include <math.h>
     #include <SFML/Graphics/RectangleShape.h>
     #include <stdbool.h>
+    #include "struct.h"
 
     #define FOV (M_PI / 2) // The Field of view in radians
     #define M_PI 3.14159265358979323846
@@ -27,6 +28,7 @@
     #define TILE_THICKNESS 10 // The thickness of tile outlines
 
     #define PLAYER_SPEED 0.1
+    #define ROTATION_SPEED 0.2
 
     // Transposes real coords on the int map
     #define ON_INT_MAP(a) (((int)(a) / TILE_SIZE))
@@ -54,20 +56,14 @@ static const int map[MAP_HEIGHT][MAP_WIDTH] = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 };
 
-typedef struct player_s {
-    sfVector2f pos;
-    float angle;
-    sfRectangleShape *hitbox;
-    sfRectangleShape *ray;
-} player_t;
-
 typedef struct tile_s {
     sfRectangleShape *rect;
     bool wall;
 } tile_t;
+sfRectangleShape *create_bg(sfVector2f size);
 
 sfBool is_wall(int x, int y);
-int init_game(void); // Launches the game
+int launch_game(void); // Launches the game
 void player_fwd(player_t *player); // player angle and directional input
 
 // function to negate movement when collision happens
@@ -83,4 +79,7 @@ void init_tile(sfRectangleShape *tile, size_t i, size_t j);
 
 void init_hitbox(player_t *player); // Inits player hitbox on minimap
 sfRectangleShape **init_map(void); // Inits the map to be shown on the screen
+
+void tick_game(game_t *game);
+
 #endif

@@ -12,6 +12,9 @@
 
 void handle_event(game_t *g)
 {
+    if ((g->tab_scene[g->actual_scene]) != NULL) {
+        g->tab_scene[g->actual_scene]->function_event(g);
+    }
     while (sfRenderWindow_pollEvent(g->window->window, &(g->window->event))) {
         if (g->window->event.type == sfEvtClosed)
             sfRenderWindow_close(g->window->window);
@@ -23,8 +26,5 @@ void handle_event(game_t *g)
         if (g->actual_scene >= g->nb_scene || g->actual_scene < 0 ||
             g->tab_scene[g->actual_scene] == NULL)
             g->actual_scene = ERROR_SCENE;
-        if ((g->tab_scene[g->actual_scene]) != NULL) {
-            g->tab_scene[g->actual_scene]->function_event(g);
-        }
     }
 }

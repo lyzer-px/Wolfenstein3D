@@ -5,7 +5,7 @@
 ** add_ressource.c
 */
 
-#include "../struct.h"
+#include "struct.h"
 
 void add_ressource(ressource_t **begin, ressource_t *new_ressource)
 {

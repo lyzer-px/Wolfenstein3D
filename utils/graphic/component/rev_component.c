@@ -5,12 +5,12 @@
 ** rev_linkedlist.c
 */
 
-#include "../struct.h"
+#include "struct.h"
 
-void rev_composant(composant_t **begin)
+void rev_component(component_t **begin)
 {
-    composant_t *new_begin = NULL;
-    composant_t *next_begin = NULL;
+    component_t *new_begin = NULL;
+    component_t *next_begin = NULL;
 
     while ((*begin) != NULL) {
         next_begin = (*begin)->next;

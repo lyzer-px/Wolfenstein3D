@@ -5,8 +5,8 @@
 ** destroy_all_ressource.c
 */
 
-#include "../struct.h"
-#include "../libgraphic.h"
+#include "struct.h"
+#include "libgraphic.h"
 
 void destroy_all_ressource(ressource_t **ressource_begin)
 {

@@ -6,8 +6,8 @@
 */
 
 #include <stdlib.h>
-#include "../struct.h"
-#include "../libgraphic.h"
+#include "struct.h"
+#include "libgraphic.h"
 
 void free_tab_scene(game_t *game)
 {
