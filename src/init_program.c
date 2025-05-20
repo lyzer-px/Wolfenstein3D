@@ -26,7 +26,7 @@ static sfRectangleShape *create_rect(sfVector2f pos,
 
 static void init_menu(scene_t *scene, sfColor *color)
 {
-    composant_t *tmp;
+    component_t *tmp;
     sfRectangleShape *rect_tmp = NULL;
 
     for (int y = 1; y < 4; y++) {
@@ -35,7 +35,7 @@ static void init_menu(scene_t *scene, sfColor *color)
             rect_tmp = create_rect((sfVector2f){50 * (i + y), 50 * (i + y)},
                 (sfVector2f){40 * (i + y), 40 * (i + y)}, color);
             add_element_to_scene(rect_tmp, sfRenderWindow_drawRectangleShape,
-                sfRectangleShape_destroy, &scene->layer->composant);
+                sfRectangleShape_destroy, &scene->layer->component);
         }
     }
 }*/
@@ -50,7 +50,7 @@ static void create_scenes(game_t *game)
 
 int init_scene(game_t *game)
 {
-    int status = EPI_SUCESS;
+    int status = EPI_SUCCESS;
 
     create_scenes(game);
     if (status == EPI_SUCCESS)

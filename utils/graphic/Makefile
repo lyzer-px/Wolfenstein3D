@@ -64,7 +64,8 @@ SRC 		= 		component/create_component.c						    \
 					window/destroy_window.c						          	\
 					window/make_window.c									\
 					button/add_button_to_menu.c								\
-					button/manage_button.c
+					button/manage_button.c									\
+					button/add_button_to_menu.c
 
 OBJ			=		$(SRC:.c=.o)
 
@@ -76,7 +77,7 @@ HEADER	=	libgraphic.h		\
           type_id.h				\
 		  my_encapsulation.h
 
-CFLAGS		=		-Wall -Wextra -Wpedantic -g3
+CFLAGS		=		-Wall -Wextra -Wpedantic -Werror
 
 CPPFLAGS	=		-iquote .
 

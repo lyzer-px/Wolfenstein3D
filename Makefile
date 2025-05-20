@@ -33,13 +33,14 @@ SRC 		= 		main.c													\
 					src/print_help.c										\
 					src/project.c											\
 					src/raycast2d.c											\
+					src/creation_scene/menu/init_pause_menu.c				\
+					src/creation_scene/menu/init_start_menu.c
 
 OBJ			=		$(SRC:.c=.o)
 
 NAME		=		wolf3d
 
-CFLAGS		=		-Wall -Wextra -Wpedantic -g3 \
-              -std=c99
+CFLAGS		=		-Wall -Wextra -Wpedantic -Werror
 
 
 CPPFLAGS	+=		-iquote include
