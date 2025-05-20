@@ -23,7 +23,8 @@ float cast_single_ray(player_t *player, float angle, sfRectangleShape *rect,
         sfRenderWindow_drawRectangleShape(window, rect, NULL);
     }
     return (sqrtf(SQUARED(ray_pos.x - player->pos.x) +
-    SQUARED(ray_pos.y - player->pos.y))) * cosf(RAD(player->angle) - RAD(angle));
+    SQUARED(ray_pos.y - player->pos.y))) *
+        cosf(RAD(player->angle) - RAD(angle));
 }
 
 static void set_rect(float distance, sfRectangleShape *rect,
@@ -115,19 +116,3 @@ static void draw_bg(sfRenderWindow *window, sfRectangleShape *bg)
     sfRectangleShape_setFillColor(bg, sfGreen);
     sfRenderWindow_drawRectangleShape(window, bg, NULL);
 }
-
-/* int init_game(void)
-{
-    player_t player = {};
-    sfRectangleShape **bounds = init_map();
-    sfRectangleShape *rect = create_bg((sfVector2f){1, 1});
-
-    if (window == NULL || bg == NULL || init_player(&player) < 0)
-        return EXIT_FAILURE;
-    while (0) {
-        draw_bg(window, bg);
-        update_player(&player, window, rect, bounds);
-    }
-    return end_game(window);
-}
-*/
