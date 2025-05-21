@@ -52,10 +52,10 @@ static void prep_2d_ray(sfRectangleShape *ray)
 }
 
 static void draw_minimap(sfRenderWindow *window, player_t *player,
-    sfRectangleShape **bounds)
+    sfRectangleShape **mini_map)
 {
-    for (size_t i = 0; bounds[i] != NULL; i++)
-        sfRenderWindow_drawRectangleShape(window, bounds[i], NULL);
+    for (size_t i = 0; mini_map[i] != NULL; i++)
+        sfRenderWindow_drawRectangleShape(window, mini_map[i], NULL);
     sfRectangleShape_setPosition(player->hitbox, player->pos);
     sfRectangleShape_setRotation(player->hitbox, player->angle);
     sfRenderWindow_drawRectangleShape(window, player->hitbox, NULL);
@@ -84,7 +84,7 @@ static void handle_exceptions(game_t *game)
         game->player->flashlight_on = !game->player->flashlight_on;
     if (is_wall(ON_INT_MAP(game->player->pos.x),
         ON_INT_MAP(game->player->pos.y)))
-        player_repel(game->player);
+        player_repel(game->player, game);
     if (game->player->flashlight_on)
         draw_bloom(game->window->window, game->player->bloom);
 }
@@ -96,7 +96,7 @@ void tick_game(game_t *game)
 
     if (game->player == NULL || game->window->window == NULL)
         return;
-    draw_minimap(game->window->window, game->player, game->bounds);
+    draw_minimap(game->window->window, game->player, game->mini_map);
     for (double i = 0; i < DEG(FOV); i += 0.25) {
         angle = (game->player->angle - DEG(FOV / 2) + i);
         prep_2d_ray(game->rect);
@@ -106,7 +106,9 @@ void tick_game(game_t *game)
         sfRenderWindow_drawRectangleShape(game->window->window,
             game->rect, NULL);
     }
-    player_fwd(game->player);
+    player_fwd(game->player, game);
+    sfRenderWindow_drawSprite(game->window->window,
+        game->player->shotgun->sprite, NULL);
     handle_exceptions(game);
 }
 

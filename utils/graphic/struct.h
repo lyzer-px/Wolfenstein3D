@@ -74,12 +74,21 @@ typedef struct scene_s {
     struct layer_s *layer;
 } scene_t;
 
+typedef struct asset_s {
+    sfSprite *sprite;
+    sfTexture *texture;
+    sfIntRect rect;
+    sfVector2f pos;
+} asset_t;
+
 typedef struct player_s {
     sfVector2f pos;
     float angle;
     sfRectangleShape *hitbox;
     sfRectangleShape *ray;
     sfCircleShape *bloom;
+    asset_t *shotgun;
+    sfClock *clock;
     bool flashlight_on;
 } player_t;
 
@@ -95,8 +104,11 @@ typedef struct settings_s {
 } settings_t;
 
 struct game_s {
+    // the player
     player_t *player;
-    sfRectangleShape **bounds;
+    // the mini map
+    sfRectangleShape **mini_map;
+    // the rectangle which will be used to draw both the rays and the walls
     sfRectangleShape *rect;
     // how many scene do we have (if you  want to change it we have an macro)
     int nb_scene;

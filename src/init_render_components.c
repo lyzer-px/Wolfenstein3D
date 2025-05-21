@@ -33,14 +33,30 @@ void init_hitbox(player_t *player)
 
 int init_player(player_t *player)
 {
-    if (player == NULL)
+    player->shotgun = calloc(1, sizeof(asset_t));
+
+    if (player == NULL || player->shotgun == NULL)
         return -1;
+    player->shotgun->rect = (sfIntRect){0, 0, 70, 90};
     player->hitbox = sfRectangleShape_create();
     if (player->hitbox == NULL)
     return -1;
     player->bloom = sfCircleShape_create();
     if (player->bloom == NULL)
         return -1;
+    player->shotgun->sprite = sfSprite_create();
+    if (player->shotgun->sprite == NULL)
+        return -1;
+    player->shotgun->texture = sfTexture_createFromFile("assets/weapons/shotgun.png", NULL);
+    if (player->shotgun->texture == NULL)
+        return -1;
+    player->clock = sfClock_create();
+    if (player->clock == NULL)
+        return -1;
+    sfSprite_setTexture(player->shotgun->sprite, player->shotgun->texture, sfFalse);
+    sfSprite_setScale(player->shotgun->sprite, (sfVector2f){2, 2});
+    sfSprite_setTextureRect(player->shotgun->sprite, player->shotgun->rect);
+    sfSprite_setPosition(player->shotgun->sprite, (sfVector2f){DIM_X / 2 - 90, DIM_Y - 170});
     init_hitbox(player);
     init_ray(player);
     player->angle = 0;
@@ -61,19 +77,19 @@ void init_tile(sfRectangleShape *tile, size_t i, size_t j)
 
 sfRectangleShape **init_map(void)
 {
-    sfRectangleShape **bounds = malloc(sizeof(sfRectangleShape *) *
+    sfRectangleShape **mini_map = malloc(sizeof(sfRectangleShape *) *
         ((MAP_HEIGHT + 1) * MAP_WIDTH) + 1);
     size_t k = 0;
 
-    if (bounds == NULL)
+    if (mini_map == NULL)
         return NULL;
     for (size_t i = 0; i < MAP_HEIGHT; i++) {
         for (size_t j = 0; j < MAP_WIDTH; j++) {
-            bounds[k] = sfRectangleShape_create();
-            init_tile(bounds[k], i, j);
+            mini_map[k] = sfRectangleShape_create();
+            init_tile(mini_map[k], i, j);
             k++;
         }
     }
-    bounds[k] = NULL;
-    return bounds;
+    mini_map[k] = NULL;
+    return mini_map;
 }

@@ -77,7 +77,7 @@ HEADER	=	libgraphic.h		\
           type_id.h				\
 		  my_encapsulation.h
 
-CFLAGS		=		-Wall -Wextra -Wpedantic -Werror
+CFLAGS		=		-Wall -Wextra -Wpedantic -Werror -g3
 
 CPPFLAGS	=		-iquote .
 
