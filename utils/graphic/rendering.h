@@ -64,7 +64,7 @@ sfRectangleShape *create_bg(sfVector2f size);
 
 sfBool is_wall(int x, int y);
 int launch_game(void); // Launches the game
-void player_fwd(player_t *player, game_t *game); // player angle and directional input
+void player_fwd(player_t *player, game_t *game);
 
 // function to negate movement when collision happens
 void player_repel(player_t *player, game_t *game);
@@ -83,4 +83,6 @@ sfRectangleShape **init_map(void); // Inits the map to be shown on the screen
 void tick_game(game_t *game); // the game tick function
 
 void shotgun_move(game_t *game); // shotgun walking animation
+void shotgun_fire(game_t *game); // shotgun firing animation
+
 #endif

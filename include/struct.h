@@ -88,6 +88,7 @@ typedef struct player_s {
     sfRectangleShape *ray;
     sfCircleShape *bloom;
     asset_t *shotgun;
+    asset_t *reticle;
     sfClock *clock;
     bool flashlight_on;
     bool firing;

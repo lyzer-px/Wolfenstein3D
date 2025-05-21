@@ -38,7 +38,7 @@ static void set_rect(float distance, sfRectangleShape *rect,
     rect_height = rect_height > SCREEN_HEIGHT ? SCREEN_HEIGHT : rect_height;
     if (rect_height < 0)
         rect_height = SCREEN_HEIGHT;
-    sfRectangleShape_setSize(rect, (sfVector2f){3, rect_height});
+    sfRectangleShape_setSize(rect, (sfVector2f){2.5, rect_height});
     sfRectangleShape_setFillColor(rect, sfGrey);
     sfRectangleShape_setPosition(rect, (sfVector2f){(ray_idx * RECT_SIZE) / 6,
         (SCREEN_HEIGHT - rect_height) / 2});
@@ -93,23 +93,22 @@ void tick_game(game_t *game)
 {
     float distance = 0;
     float angle;
+    sfRenderWindow *window = game->window->window;
 
-    if (game->player == NULL || game->window->window == NULL)
+    if (game->player == NULL || window == NULL)
         return;
-    draw_minimap(game->window->window, game->player, game->mini_map);
+    draw_minimap(window, game->player, game->mini_map);
     for (double i = 0; i < DEG(FOV); i += 0.25) {
         angle = (game->player->angle - DEG(FOV / 2) + i);
         prep_2d_ray(game->rect);
-        distance = cast_single_ray(game->player, angle,
-            game->rect, game->window->window);
+        distance = cast_single_ray(game->player, angle, game->rect, window);
         set_rect(distance, game->rect, i);
-        sfRenderWindow_drawRectangleShape(game->window->window,
-            game->rect, NULL);
+        sfRenderWindow_drawRectangleShape(window, game->rect, NULL);
     }
     player_fwd(game->player, game);
-    sfRenderWindow_drawSprite(game->window->window,
-        game->player->shotgun->sprite, NULL);
+    sfRenderWindow_drawSprite(window, game->player->shotgun->sprite, NULL);
     handle_exceptions(game);
+    sfRenderWindow_drawSprite(window, game->player->reticle->sprite, NULL);
 }
 
 int end_game(sfRenderWindow *window)
