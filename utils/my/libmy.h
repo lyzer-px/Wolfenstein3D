@@ -24,4 +24,8 @@ char *array_to_str(char *const *array);
 
 size_t write_in_file(char *filename, char *text);
 
+double round_number(double nb, int digits);
+
+int mini_dprintf(int std, const char *format, ...);
+
 #endif /* LIBMY_H */

@@ -26,6 +26,8 @@ SRC 		= 		arraylen.c								\
 					concat_array.c							\
 					print_error.c							\
 					write_in_file.c							\
+					mini_dprintf.c							\
+					round_number.c
 
 OBJ			=		$(SRC:.c=.o)
 

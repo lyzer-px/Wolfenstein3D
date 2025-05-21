@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include "macro.h"
 #include "error_str.h"
+#include "libmy.h"
 
 size_t write_in_file(char *filename, char *text)
 {
@@ -20,7 +21,7 @@ size_t write_in_file(char *filename, char *text)
         print_error(OPEN_ERR);
         return EXIT_FAILURE_EPITECH;
     }
-    dprintf(fd, text);
+    mini_dprintf(fd, text);
     (void)close(fd);
     return EXIT_SUCCESS;
 }
