@@ -9,6 +9,7 @@
     #define LIBMY_H
 
     #include <stdbool.h>
+    #include <stddef.h>
 
 char *del_last_char(char *str);
 
@@ -21,6 +22,14 @@ char **my_str_to_word_array(char const *str, char *delim);
 int my_strlen(char const *str);
 
 int my_strcmp(char const *s1, char const *s2);
+
+char *del_last_char(char *str);
+
+bool is_in(char const character, char const *str);
+
+char *my_strndup(char const *s, int len);
+
+char **my_str_to_word_array(char const *str, char *delim);
 
 int my_strsame(char const *s1, char const *s2);
 
@@ -36,6 +45,15 @@ char **libcat(char **tab, char *str);
 
 char **my_libdup(char **tab);
 
+char *file_to_str(const char *file_name);
+
+char *array_to_str(char *const *array);
+
+size_t write_in_file(char *filename, char *text);
+
+double round_number(double nb, int digits);
+
+int mini_dprintf(int std, const char *format, ...);
 char **parse_user_input(char *input, int *i, char *separator);
 
 char *my_strdup(char *str);
