@@ -5,6 +5,7 @@
 ** init_pause_menu.c
 */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include "libgraphic.h"
 #include "libmy.h"
@@ -19,12 +20,6 @@ static void print_save_result(game_t *g)
     } else {
         mini_dprintf(STDERR, "Save failed\n");
     }
-    mini_dprintf(STDOUT, "ATTENDU:\nplayer:\npos:%f,%f\nangle:%f",
-        g->player->pos.x, g->player->pos.y, g->player->angle);
-    mini_dprintf(STDOUT, "\nsettings:\nfxaudio_nb:%i\nfxaudio_played:%i\n",
-        g->settings->fxaudio_nb, g->settings->fxaudio_played);
-    mini_dprintf(STDOUT, "music_nb:%i\nmusic_played:%i\n",
-        g->settings->music_nb, g->settings->music_played);
 }
 
 void handle_pause_menu_event(game_t *g)
