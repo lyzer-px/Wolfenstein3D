@@ -40,14 +40,6 @@ enum name_scene {
 
     #define SCENE_START (MENU)
 
-    #define STDIN 0
-    #define STDOUT 1
-    #define STDERR 2
-
-    #define TRUE 1
-    #define FALSE 0
-    #define ERROR -1
-
 /*
 ** Main
 */
