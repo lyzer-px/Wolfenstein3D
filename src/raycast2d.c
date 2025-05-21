@@ -38,7 +38,7 @@ static void set_rect(float distance, sfRectangleShape *rect,
     rect_height = rect_height > SCREEN_HEIGHT ? SCREEN_HEIGHT : rect_height;
     if (rect_height < 0)
         rect_height = SCREEN_HEIGHT;
-    sfRectangleShape_setSize(rect, (sfVector2f){2.5, rect_height});
+    sfRectangleShape_setSize(rect, (sfVector2f){3, rect_height});
     sfRectangleShape_setFillColor(rect, sfGrey);
     sfRectangleShape_setPosition(rect, (sfVector2f){(ray_idx * RECT_SIZE) / 6,
         (SCREEN_HEIGHT - rect_height) / 2});

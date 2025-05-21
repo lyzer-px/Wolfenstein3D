@@ -36,7 +36,7 @@ static int set_positions(player_t *player)
     sfSprite_setPosition(player->shotgun->sprite,
         (sfVector2f){DIM_X / 2 - 90, DIM_Y - 170});
     sfSprite_setPosition(player->reticle->sprite,
-        (sfVector2f){DIM_X / 2, DIM_Y / 2 + 10});
+        (sfVector2f){DIM_X / 2, DIM_Y / 2 + 30});
     sfSprite_setOrigin(player->reticle->sprite,
         (sfVector2f){75 / 2, 75 / 2});
     init_hitbox(player);
