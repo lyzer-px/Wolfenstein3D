@@ -16,13 +16,13 @@ void handle_pause_menu_event(game_t *g)
         sfRenderWindow_close(g->window->window);
     if (is_button_clicked(&button_pause_menu[CONTINUE],
         sfMouse_getPositionRenderWindow(g->window->window), &g->window->event))
-        g->actual_scene = GAME;
+        change_scene(g, GAME);
     if (is_button_clicked(&button_pause_menu[SETTING_BUTTON],
         sfMouse_getPositionRenderWindow(g->window->window), &g->window->event))
-        g->actual_scene = SETTING;
+        change_scene(g, SETTING);
     if (is_button_clicked(&button_pause_menu[SETTING_BUTTON],
         sfMouse_getPositionRenderWindow(g->window->window), &g->window->event))
-        g->actual_scene = SAVE_SCENE;
+        change_scene(g, SAVE_SCENE);
 }
 
 void init_pause_menu(scene_t *scene)

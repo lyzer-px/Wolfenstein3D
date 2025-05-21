@@ -6,8 +6,8 @@
 */
 
 #include <stdlib.h>
-#include "../libgraphic.h"
-#include "../macro.h"
+#include "libgraphic.h"
+#include "macro.h"
 
 void set_button_pos(void *ressource, sfVector2f *pos)
 {

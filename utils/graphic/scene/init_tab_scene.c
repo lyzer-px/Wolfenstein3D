@@ -39,6 +39,7 @@ scene_t **init_tab_scene(size_t nb_scene)
         tab[i]->function_event = void_function;
         tab[i]->id_scene = i + 1;
         tab[i]->pause = true;
+        tab[i]->id_music = NULL;
     }
     tab[nb_scene - 1]->pause = false;
     return tab;

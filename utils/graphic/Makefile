@@ -21,6 +21,7 @@ SRC 		= 		component/create_component.c						    \
 					component/create_element.c						   		\
 					component/destroy_component.c						    \
 					component/rev_component.c								\
+					game/change_scene.c										\
 					game/clean_game.c							            \
 					game/destroy_game.c							          	\
 					game/init_game.c								       	\
@@ -33,6 +34,9 @@ SRC 		= 		component/create_component.c						    \
 					layer/clean_layer.c							            \
 					layer/create_layer.c					          		\
 					layer/destroy_layer.c							        \
+					music/music_loader.c									\
+					music/destroy_a_music.c									\
+					music/destroy_all_music.c								\
 					my_encapsulation/circle.c								\
 					my_encapsulation/font.c									\
 					my_encapsulation/image.c								\
@@ -65,21 +69,21 @@ SRC 		= 		component/create_component.c						    \
 					window/make_window.c									\
 					button/add_button_to_menu.c								\
 					button/manage_button.c									\
-					button/add_button_to_menu.c
+					button/add_button_to_menu.c								\
 
 OBJ			=		$(SRC:.c=.o)
 
 NAME		=		libgraphic.a
 
-HEADER	=	libgraphic.h		\
-          macro.h			  	\
-          struct.h		 	 	\
-          type_id.h				\
-		  my_encapsulation.h
+HEADER	=	include/libgraphic.h			\
+          	include/macro.h			  		\
+          	include/struct.h		 	 	\
+          	include/type_id.h				\
+		  	include/my_encapsulation.h
 
-CFLAGS		=		-Wall -Wextra -Wpedantic -Werror
+CFLAGS		=		-Wall -Wextra -Wpedantic -Werror -lcsfml-audio
 
-CPPFLAGS	=		-iquote .
+CPPFLAGS	=		-iquote include/.
 
 UT_SRC =	tests/graphics_test.c
 
@@ -111,4 +115,5 @@ debug:	re clean
 .PHONY: all				\
 		re			    \
 		fclean	  		\
+		debug			\
 		clean
