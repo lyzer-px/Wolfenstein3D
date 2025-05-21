@@ -40,13 +40,19 @@ void display_button(sfRenderWindow *win, void *element, sfRenderStates *states)
     sfRenderWindow_drawSprite(win, button->sprite, states);
 }
 
+
 void destroy_button(void *element)
 {
     button_t *button = (button_t *)element;
 
-    sfTexture_destroy(button->texture);
-    sfSprite_destroy(button->sprite);
-    free(button->pos);
+    if (!button)
+        return;
+    if (button->sprite)
+        sfSprite_destroy(button->sprite);
+    if (button->texture)
+        sfTexture_destroy(button->texture);
+    if (button->pos)
+        free(button->pos);
     free(button);
 }
 

@@ -11,10 +11,10 @@
 
 void destroy_component(component_t *component)
 {
-    if (component->pos != NULL)
+    if (component == NULL)
+        return;
+    if (component->pos)
         free(component->pos);
-    if (component->ressource != NULL)
-        destroy_ressource(&(component->ressource));
+    component->ressource = NULL;
     free(component);
-    return;
 }
