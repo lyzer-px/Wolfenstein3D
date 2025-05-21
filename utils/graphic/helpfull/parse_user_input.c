@@ -57,6 +57,10 @@ char **parse_user_input(char *input, int *i, char *separator)
         return NULL;
     }
     tab = my_str_to_word_array(copy, separator);
+    if (tab == NULL) {
+        free(copy);
+        return NULL;
+    }
     for (*i = 0; tab[*i] != NULL; *i += 1)
         reformat_user_input(tab[*i]);
     free(copy);

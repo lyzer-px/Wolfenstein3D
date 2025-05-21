@@ -22,8 +22,12 @@ scene_t **init_tab_scene(int nb_scene)
         return NULL;
     for (int i = 0; i < nb_scene; i++) {
         tab[i] = malloc(sizeof(scene_t));
-        if (tab[i] == NULL)
-            return NULL;
+        if (tab[i] == NULL) {
+        for (int j = 0; j < i; j++)
+            free(tab[j]);
+        free(tab);
+        return NULL;
+        }
         tab[i]->layer = NULL;
         tab[i]->function_event = void_function;
         tab[i]->id_scene = i + 1;

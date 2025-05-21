@@ -37,6 +37,8 @@ static void create_layer_scene_error(scene_t *scene, ressource_t *begin)
     create_layer(scene);
     scene->layer->component = create_component(cpy_middle,
         find_a_ressouce_from_id(begin, BG_ERROR));
+    free(middle);
+    free(cpy_middle);
 }
 
 void create_error_scene(game_t *game)
