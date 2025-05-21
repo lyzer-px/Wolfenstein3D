@@ -7,11 +7,14 @@
 
 #include <stdlib.h>
 #include "struct.h"
+#include "libgraphic.h"
 
 void destroy_component(component_t *component)
 {
-    if (component->pos != NULL)
+    if (component == NULL)
+        return;
+    if (component->pos)
         free(component->pos);
+    component->ressource = NULL;
     free(component);
-    return;
 }
