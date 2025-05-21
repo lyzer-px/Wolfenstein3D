@@ -34,7 +34,8 @@ SRC 		= 		main.c													\
 					src/project.c											\
 					src/raycast2d.c											\
 					src/creation_scene/menu/init_pause_menu.c				\
-					src/creation_scene/menu/init_start_menu.c
+					src/creation_scene/menu/init_start_menu.c				\
+					src/save_game.c
 
 OBJ			=		$(SRC:.c=.o)
 

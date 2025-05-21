@@ -17,7 +17,7 @@ static void void_function(game_t *game)
 static bool destroy_tab(scene_t **tab, size_t i)
 {
     if (tab[i] == NULL) {
-        for (int j = 0; j < i; j++)
+        for (size_t j = 0; j < i; j++)
             free(tab[j]);
         free(tab);
         return true;
@@ -25,13 +25,13 @@ static bool destroy_tab(scene_t **tab, size_t i)
     return false;
 }
 
-scene_t **init_tab_scene(int nb_scene)
+scene_t **init_tab_scene(size_t nb_scene)
 {
     scene_t **tab = malloc(sizeof(scene_t *) * (nb_scene + 1));
 
     if (tab == NULL)
         return NULL;
-    for (int i = 0; i < nb_scene; i++) {
+    for (size_t i = 0; i < nb_scene; i++) {
         tab[i] = malloc(sizeof(scene_t));
         if (destroy_tab(tab, i) == true)
             return NULL;

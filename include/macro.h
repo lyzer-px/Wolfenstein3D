@@ -21,6 +21,14 @@
     #define EPI_FAIL (84)
     #define EPI_SUCCESS (0)
 
+    #define STDIN (0)
+    #define STDOUT (1)
+    #define STDERR (2)
+
+    #define TRUE (1)
+    #define FALSE (0)
+    #define ERROR (-1)
+
 // Scene information
 
     // WARNING - When you want to add an scene you need to make a +1 in the

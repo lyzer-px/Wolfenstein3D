@@ -48,4 +48,7 @@ void init_pause_menu(scene_t *scene);
 // Initialise start menu
 void init_start_menu(scene_t *scene);
 
+// Save the game status
+int save_game(char *filename, game_t *game);
+
 #endif /* PROJECT_H */
