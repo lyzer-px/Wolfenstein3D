@@ -77,7 +77,7 @@ HEADER	=	libgraphic.h		\
           type_id.h				\
 		  my_encapsulation.h
 
-CFLAGS		=		-Wall -Wextra -Wpedantic -Werror -g3
+CFLAGS		=		-Wall -Wextra -Wpedantic -Werror
 
 CPPFLAGS	=		-iquote .
 
@@ -106,7 +106,7 @@ fclean: clean
 
 re:	fclean all
 
-debug:	re clean
+debug: re clean
 
 .PHONY: all				\
 		re			    \

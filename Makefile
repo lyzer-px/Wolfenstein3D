@@ -41,14 +41,14 @@ OBJ			=		$(SRC:.c=.o)
 
 NAME		=		wolf3d
 
-CFLAGS		=		-Wall -Wextra -Wpedantic -Werror -g3
+CFLAGS		=		-Wall -Wextra -Wpedantic -Werror
 
 
 CPPFLAGS	+=		-iquote include
 CPPFLAGS	+=		-lcsfml-audio -lcsfml-graphics
 CPPFLAGS	+=		-lcsfml-network -lcsfml-system -lcsfml-window -lm
 
-DEBUG		=	-g3
+DEBUG		=-g3
 
 LDLIBS +=	-lmy -lgraphic
 

@@ -42,7 +42,7 @@ NAME		=		libmy.a
 
 HEADER	=	libmy.h
 
-CFLAGS		=		-Wall -Wextra -Wpedantic -Werror -g3
+CFLAGS		=		-Wall -Wextra -Wpedantic -Werror
 
 UT_SRC =	tests/my_test.c		\
 			my_strlen.c
