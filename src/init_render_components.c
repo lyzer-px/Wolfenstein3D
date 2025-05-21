@@ -70,6 +70,18 @@ static bool destroy_bounds(sfRectangleShape **bounds, size_t k)
     return false;
 }
 
+static bool fill_bounds(sfRectangleShape **bounds, size_t i, size_t k)
+{
+    for (size_t j = 0; j < MAP_WIDTH; j++) {
+        bounds[k] = sfRectangleShape_create();
+        if (destroy_bounds(bounds, k))
+            return true;
+        init_tile(bounds[k], i, j);
+        k++;
+    }
+    return false;
+}
+
 sfRectangleShape **init_map(void)
 {
     sfRectangleShape **bounds = malloc(sizeof(sfRectangleShape *) *
@@ -79,13 +91,8 @@ sfRectangleShape **init_map(void)
     if (bounds == NULL)
         return NULL;
     for (size_t i = 0; i < MAP_HEIGHT; i++) {
-        for (size_t j = 0; j < MAP_WIDTH; j++) {
-            bounds[k] = sfRectangleShape_create();
-            if (destroy_bounds(bounds, k))
-                return NULL;
-            init_tile(bounds[k], i, j);
-            k++;
-        }
+        if (fill_bounds(bounds, i, k) == true)
+            return NULL;
     }
     bounds[k] = NULL;
     return bounds;

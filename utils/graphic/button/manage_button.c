@@ -40,7 +40,6 @@ void display_button(sfRenderWindow *win, void *element, sfRenderStates *states)
     sfRenderWindow_drawSprite(win, button->sprite, states);
 }
 
-
 void destroy_button(void *element)
 {
     button_t *button = (button_t *)element;
