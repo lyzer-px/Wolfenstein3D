@@ -90,6 +90,7 @@ enum name_scene {
 
 // Configuration file
 
+    #define PATH_CONIG_MUSIC ("assets/music_loader.config")
     #define PATH_FILE_CONIG ("assets/loader.config")
     #define SEPARATOR_CONFIG_FILE ("; \n\t")
     // each line need to be format like that:
@@ -99,6 +100,12 @@ enum FORMAT_FILE_INDEX {
     NAME,
     FILE_PATH,
     SIZE_LINE
+};
+
+enum MUSIC_INDEX {
+    NAME_MUSIC = 0,
+    MUSIC_PATH,
+    SIZE_LINE_MUSIC,
 };
 
     #define READ_FILE ("r")
