@@ -90,6 +90,8 @@ typedef struct player_s {
     asset_t *shotgun;
     sfClock *clock;
     bool flashlight_on;
+    bool firing;
+    bool running;
 } player_t;
 
 typedef struct settings_s {
