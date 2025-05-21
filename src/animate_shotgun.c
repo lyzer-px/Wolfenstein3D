@@ -22,12 +22,16 @@ void shotgun_move(game_t *game)
 
 void shotgun_fire(game_t *game)
 {
-    if (sfClock_getElapsedTime(game->player->clock).microseconds >= 200000) {
-        sfClock_restart(game->player->clock);
-        game->player->shotgun->rect.left += 90;
-        game->player->shotgun->rect.left %= 180;
-        sfSprite_setTextureRect(game->player->shotgun->sprite,
-            game->player->shotgun->rect);
-        printf("FORWARD\n");
+    game->player->shotgun->rect.left = 220;
+
+    for (size_t i = 0; i != 2; i++) {
+        if (sfClock_getElapsedTime(game->player->clock).microseconds >= 200000) {
+            sfClock_restart(game->player->clock);
+            game->player->shotgun->rect.left += 90;
+            game->player->shotgun->rect.left %= 450;
+            sfSprite_setTextureRect(game->player->shotgun->sprite,
+                game->player->shotgun->rect);
+            printf("FIRE!\n");
+        }
     }
 }
