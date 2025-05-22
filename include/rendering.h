@@ -56,15 +56,21 @@ static const int map[MAP_HEIGHT][MAP_WIDTH] = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 };
 
+
+// the minimap's tile structure
 typedef struct tile_s {
+    //the rectangle to be displayed
     sfRectangleShape *rect;
+    // boolaean to tell is the tile must be a wall
     bool wall;
 } tile_t;
-sfRectangleShape *create_bg(sfVector2f size);
 
-sfBool is_wall(int x, int y);
+sfRectangleShape *create_bg(sfVector2f size);  // creates a rectangle of size
+
+sfBool is_wall(int x, int y); // returns true if the coords are on a wall
+
 int launch_game(void); // Launches the game
-void player_fwd(player_t *player, game_t *game);
+void player_fwd(player_t *player, game_t *game); // player input detection
 
 // function to negate movement when collision happens
 void player_repel(player_t *player, game_t *game);
