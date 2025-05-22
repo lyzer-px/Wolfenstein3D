@@ -24,6 +24,7 @@ void handle_start_menu_event(game_t *g)
 
 void init_start_menu(scene_t *scene)
 {
+    scene->hide_cursor = true;
     create_layer(scene);
     for (int i = 0; button_start_menu[i].path_sprite != NULL; i++)
         add_button_to_menu(scene, button_start_menu[i]);

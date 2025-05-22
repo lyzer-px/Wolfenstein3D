@@ -73,6 +73,8 @@ typedef struct scene_s {
     void (*function_event)(struct game_s *);
     // id of the scene music
     char *id_music;
+    // do we hide the cursor
+    bool hide_cursor;
     // a linked list where all the layer are
     struct layer_s *layer;
 } scene_t;
