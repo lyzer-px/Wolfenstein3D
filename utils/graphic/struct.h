@@ -74,22 +74,38 @@ typedef struct scene_s {
     struct layer_s *layer;
 } scene_t;
 
+
+// the structure for assets, assets are things to be displayed on window
 typedef struct asset_s {
+    // logical entity
     sfSprite *sprite;
+    // the asset's appearance
     sfTexture *texture;
+    // the asset's area
     sfIntRect rect;
+    // the assets position
     sfVector2f pos;
 } asset_t;
 
+// the player structure, contains everything it needs
 typedef struct player_s {
+    // player position
     sfVector2f pos;
+    // player angle (0, 360)°
     float angle;
+    // the player's body
     sfRectangleShape *hitbox;
+    // a ray which will be both on minimap (blue) and on screen (white)
     sfRectangleShape *ray;
+    // the flashlight
     sfCircleShape *bloom;
+    // the shotgun
     asset_t *shotgun;
+    //the reticle
     asset_t *reticle;
+    // player internal animation clock
     sfClock *clock;
+    // states
     bool flashlight_on;
     bool firing;
     bool running;
