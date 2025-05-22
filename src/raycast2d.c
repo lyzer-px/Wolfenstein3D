@@ -13,17 +13,14 @@
 
 const sfColor sfGrey = {190, 190, 190, 255};
 
-float cast_single_ray(player_t *player, float angle, sfRectangleShape *rect,
-    sfRenderWindow *window)
+float cast_single_ray(player_t *player, float angle)
 {
     sfVector2f ray_direction = {- sinf(RAD(angle)), cosf(RAD(angle))};
     sfVector2f ray_pos = player->pos;
 
     while (!is_wall(ON_INT_MAP(ray_pos.x), ON_INT_MAP(ray_pos.y))) {
-        ray_pos.x += ray_direction.x * 0.25;
-        ray_pos.y += ray_direction.y * 0.25;
-        sfRectangleShape_setPosition(rect, ray_pos);
-        sfRenderWindow_drawRectangleShape(window, rect, NULL);
+        ray_pos.x += ray_direction.x * 0.05;
+        ray_pos.y += ray_direction.y * 0.05;
     }
     return (sqrtf(SQUARED(ray_pos.x - player->pos.x) +
         SQUARED(ray_pos.y - player->pos.y))) *
@@ -48,13 +45,6 @@ static void set_rect(float distance, sfRectangleShape *rect,
         ((float)SCREEN_HEIGHT - rect_height) / 2});
 }
 
-static void prep_2d_ray(sfRectangleShape *ray)
-{
-    sfRectangleShape_setFillColor(ray, sfBlue);
-    sfRectangleShape_setSize(ray, (sfVector2f){1, 1});
-    sfRectangleShape_setOrigin(ray, (sfVector2f){0.5, 0.5});
-}
-
 static void draw_minimap(sfRenderWindow *window, player_t *player,
     sfRectangleShape **mini_map)
 {
@@ -67,8 +57,8 @@ static void draw_minimap(sfRenderWindow *window, player_t *player,
 
 static void draw_bloom(sfRenderWindow *window, sfCircleShape *circle)
 {
-    float radius = 150;
-    sfColor sfLighted = {181, 144, 45, 100};
+    float radius = 500;
+    sfColor sfLighted = {181, 144, 45, 75};
 
     sfCircleShape_setFillColor(circle, sfLighted);
     for (size_t i = 1; i != 3; i++) {
@@ -103,16 +93,15 @@ void tick_game(game_t *game)
         return;
     for (double i = 0; i < DEG(FOV); i += 0.25) {
         angle = (game->player->angle - DEG(FOV / 2) + i);
-        prep_2d_ray(game->rect);
-        distance = cast_single_ray(game->player, angle, game->rect, window);
+        distance = cast_single_ray(game->player, angle);
         set_rect(distance, game->rect, i, game->player);
         sfRenderWindow_drawRectangleShape(window, game->rect, NULL);
     }
-    draw_minimap(window, game->player, game->mini_map);
     player_fwd(game->player, game);
     sfRenderWindow_drawSprite(window, game->player->shotgun->sprite, NULL);
     handle_exceptions(game);
     sfRenderWindow_drawSprite(window, game->player->reticle->sprite, NULL);
+    draw_minimap(window, game->player, game->mini_map);
 }
 
 int end_game(sfRenderWindow *window)
