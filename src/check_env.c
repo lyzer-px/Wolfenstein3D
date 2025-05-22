@@ -1,6 +1,6 @@
 /*
-** EPITECH PROJECT, 2024
-** lib_graph
+** EPITECH PROJECT, 2025
+** Wolf3D
 ** File description:
 ** check_env.c
 */

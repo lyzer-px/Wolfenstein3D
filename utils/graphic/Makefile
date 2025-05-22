@@ -70,6 +70,16 @@ SRC 		= 		component/create_component.c						    \
 					button/add_button_to_menu.c								\
 					button/manage_button.c									\
 					button/add_button_to_menu.c								\
+					create_button.c											\
+					del_tab_button.c										\
+					draw_button.c											\
+					make_a_new_style_window.c								\
+					get_pos.c												\
+					draw_shape.c											\
+					update_sprite_rect.c									\
+					create_object.c											\
+					get_movement.c											\
+					get_distance.c
 
 OBJ			=		$(SRC:.c=.o)
 
