@@ -108,6 +108,8 @@ typedef struct player_s {
     asset_t *shotgun;
     //the reticle
     asset_t *reticle;
+    // the HUD
+    asset_t *hud;
     // player internal animation clock
     sfClock *clock;
     // states

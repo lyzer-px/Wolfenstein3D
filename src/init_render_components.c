@@ -31,10 +31,26 @@ void init_hitbox(player_t *player)
     sfRectangleShape_setRotation(player->hitbox, player->angle);
 }
 
+void init_hud(player_t *player)
+{
+    player->hud = calloc(1, sizeof(asset_t));
+    if (player->hud == NULL)
+        return;
+    player->hud->rect = (sfIntRect){0, 0, 670, 77};
+    player->hud->sprite = sfSprite_create();
+    player->hud->texture = sfTexture_createFromFile("assets/HUD.png",
+        &player->hud->rect);
+    if (player->hud->sprite == NULL || player->hud->texture == NULL)
+        return;
+    sfSprite_setTexture(player->hud->sprite, player->hud->texture, sfFalse);
+    sfSprite_setScale(player->hud->sprite, (sfVector2f){1.25, 1.25});
+    sfSprite_setPosition(player->hud->sprite, (sfVector2f){80, DIM_Y - 90});
+}
+
 static int set_positions(player_t *player)
 {
     sfSprite_setPosition(player->shotgun->sprite,
-        (sfVector2f){DIM_X / 2 - 90, DIM_Y - 170});
+        (sfVector2f){DIM_X / 2 - 90, DIM_Y - 250});
     sfSprite_setPosition(player->reticle->sprite,
         (sfVector2f){DIM_X / 2, DIM_Y / 2 + 30});
     sfSprite_setOrigin(player->reticle->sprite,
@@ -64,6 +80,7 @@ static int set_propreties(player_t *player)
         player->shotgun->texture, sfFalse);
     sfSprite_setScale(player->shotgun->sprite, (sfVector2f){2, 2});
     sfSprite_setTextureRect(player->shotgun->sprite, player->shotgun->rect);
+    init_hud(player);
     return set_positions(player);
 }
 
