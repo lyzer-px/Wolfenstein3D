@@ -108,7 +108,7 @@ int init_player(player_t *player)
     return set_propreties(player);
 }
 
-void init_tile(sfRectangleShape *tile, size_t i, size_t j)
+static void init_tile(sfRectangleShape *tile, size_t i, size_t j)
 {
     sfRectangleShape_setFillColor(tile, map[i][j] ? sfWhite : sfBlack);
     sfRectangleShape_setOutlineColor(tile, (sfColor){125, 125, 125, 255});
