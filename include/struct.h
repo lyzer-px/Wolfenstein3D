@@ -9,6 +9,7 @@
     #define STRUCT_H
 
     #include <SFML/Graphics.h>
+    #include <SFML/Audio.h>
     #include <stdbool.h>
 
 typedef struct window_s {
@@ -70,6 +71,8 @@ typedef struct scene_s {
     bool pause : 1;
     // a function where each event of the scene is
     void (*function_event)(struct game_s *);
+    // id of the scene music
+    char *id_music;
     // a linked list where all the layer are
     struct layer_s *layer;
 } scene_t;
@@ -111,6 +114,12 @@ typedef struct player_s {
     bool running;
 } player_t;
 
+typedef struct music_s {
+    char *id;
+    sfMusic *music;
+    struct music_s *next;
+} music_t;
+
 typedef struct settings_s {
     // true if the music is playing
     bool music_played;
@@ -139,6 +148,10 @@ struct game_s {
     settings_t *settings;
     // stuct window where we have each window's information
     struct window_s *window;
+    // tab with all music in it
+    music_t *music;
+    // id of the actual music
+    char *id_music;
     // all ressource
     struct ressource_s *ressource;
 };

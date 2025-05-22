@@ -34,8 +34,7 @@ SRC 		= 		main.c													\
 					src/project.c											\
 					src/raycast2d.c											\
 					src/creation_scene/menu/init_pause_menu.c				\
-					src/creation_scene/menu/init_start_menu.c				\
-					src/animate_shotgun.c
+					src/creation_scene/menu/init_start_menu.c
 
 OBJ			=		$(SRC:.c=.o)
 
@@ -48,9 +47,10 @@ CPPFLAGS	+=		-iquote include
 CPPFLAGS	+=		-lcsfml-audio -lcsfml-graphics
 CPPFLAGS	+=		-lcsfml-network -lcsfml-system -lcsfml-window -lm
 
-DEBUG		=-g3
+DEBUG		=	-g3
 
-LDLIBS +=	-lmy -lgraphic
+LDLIBS +=	-lmy -lgraphic -lcsfml-audio -lcsfml-graphics -lcsfml-network
+LDLIBS +=	-lcsfml-system -lcsfml-window -lm
 
 LDFLAGS	+=	-L.
 
@@ -126,6 +126,8 @@ coding_style: fclean
 		re				\
 		fclean			\
 		clean			\
+		debug_comp		\
+		debug			\
 		tests_run 		\
 		coverage 		\
 		coding_style

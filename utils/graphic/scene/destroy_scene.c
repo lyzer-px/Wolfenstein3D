@@ -13,10 +13,15 @@ void destroy_scene(scene_t *scene)
 {
     layer_t *layer;
 
+    if (scene == NULL)
+        return;
     while (scene->layer != NULL) {
         layer = scene->layer;
         scene->layer = scene->layer->next;
         destroy_layer(layer);
+    }
+    if (scene->id_music != NULL) {
+        free(scene->id_music);
     }
     free(scene);
     return;

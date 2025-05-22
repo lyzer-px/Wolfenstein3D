@@ -59,6 +59,9 @@ game_t *init_game(void)
     if (game == NULL)
         return NULL;
     game->window = create_window();
+    game->ressource = NULL;
+    game->music = NULL;
+    game->id_music = NULL;
     if (game->window == NULL)
         return nfree(game);
     init_for_raycast(game);
