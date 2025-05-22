@@ -79,10 +79,6 @@ void player_repel(player_t *player, game_t *game);
 void init_ray(player_t *player); // Inits ray propreties
 int init_player(player_t *player); // Inits player stats
 
-// Creates a tile for the minimap
-void init_tile(sfRectangleShape *tile, size_t i, size_t j);
-//
-
 void init_hitbox(player_t *player); // Inits player hitbox on minimap
 sfRectangleShape **init_map(void); // Inits the map to be shown on the screen
 
