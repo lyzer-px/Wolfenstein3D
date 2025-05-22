@@ -14,8 +14,8 @@ void draw_buttons(sfRenderWindow *window, button_t **buttons)
     if (window == NULL || buttons == NULL)
         return;
     while (buttons[i] != NULL) {
-        sfSprite_setTextureRect(buttons[i]->sprite, buttons[i]->area);
-        sfRenderWindow_drawSprite(window, buttons[i]->sprite, NULL);
+        sfSprite_setTextureRect(buttons[i]->sprite[OFF], buttons[i]->area);
+        sfRenderWindow_drawSprite(window, buttons[i]->sprite[OFF], NULL);
         i++;
     }
 }

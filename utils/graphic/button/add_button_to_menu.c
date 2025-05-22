@@ -13,7 +13,7 @@ void set_button_pos(void *ressource, sfVector2f *pos)
 {
     button_t *button = (button_t *)ressource;
 
-    sfSprite_setPosition(button->sprite, *pos);
+    sfSprite_setPosition(button->sprite[OFF], *pos);
 }
 
 void add_button_to_menu(scene_t *scene, button_tab_t button_def)

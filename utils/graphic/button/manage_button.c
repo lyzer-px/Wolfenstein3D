@@ -8,6 +8,18 @@
 #include <stdlib.h>
 #include "struct.h"
 #include "libgraphic.h"
+#include "macro.h"
+
+static size_t set_button_texture(const button_tab_t *def,
+    button_t *button)
+{
+    button->texture[OFF] = sfTexture_createFromFile(def->path_sprite, NULL);
+    if (!button->texture[OFF]) {
+        free(button);
+        return EPI_FAIL;
+    }
+    return EPI_SUCCESS;
+}
 
 button_t *create_button(const button_tab_t *def)
 {
@@ -18,15 +30,13 @@ button_t *create_button(const button_tab_t *def)
         return NULL;
     pos->x = def->pos.x;
     pos->y = def->pos.y;
-    button->texture = sfTexture_createFromFile(def->path_sprite, NULL);
-    if (!button->texture) {
-        free(button);
+    if (set_button_texture(def, button) == EPI_FAIL)
         return NULL;
-    }
-    button->sprite = sfSprite_create();
-    sfSprite_setTexture(button->sprite, button->texture, sfTrue);
-    sfSprite_setTextureRect(button->sprite, def->rect);
-    sfSprite_setPosition(button->sprite, (sfVector2f){def->pos.x, def->pos.y});
+    button->sprite[OFF] = sfSprite_create();
+    sfSprite_setTexture(button->sprite[OFF], button->texture[OFF], sfTrue);
+    sfSprite_setTextureRect(button->sprite[OFF], def->rect);
+    sfSprite_setPosition(button->sprite[OFF],
+        (sfVector2f){def->pos.x, def->pos.y});
     button->area = def->rect;
     button->pos = pos;
     return button;
@@ -36,15 +46,19 @@ void display_button(sfRenderWindow *win, void *element, sfRenderStates *states)
 {
     button_t *button = (button_t *)element;
 
-    sfRenderWindow_drawSprite(win, button->sprite, states);
+    sfRenderWindow_drawSprite(win, button->sprite[OFF], states);
 }
 
 void destroy_button(void *element)
 {
     button_t *button = (button_t *)element;
 
-    sfTexture_destroy(button->texture);
-    sfSprite_destroy(button->sprite);
+    for (size_t i = 0; i < NB_STATE; i++) {
+        sfTexture_destroy(button->texture[i]);
+        sfSprite_destroy(button->sprite[i]);
+    }
+    free(button->texture);
+    //free(button->sprite);
     free(button);
 }
 

@@ -11,9 +11,17 @@
     #include <SFML/Graphics.h>
     #include "struct.h"
 
+typedef enum {
+    OFF,
+    HOVER,
+    ON,
+    NB_STATE
+}button_state_t;
 typedef struct button_s {
-    sfTexture *texture;
-    sfSprite *sprite;
+    sfTexture *texture[NB_STATE];
+    sfSprite *sprite[NB_STATE];
+    sfSprite *current_sprite;
+    button_state_t *current_state;
     sfIntRect area;
     sfVector2f *pos;
 } button_t;

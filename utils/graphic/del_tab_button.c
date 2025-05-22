@@ -12,8 +12,8 @@
 void free_tab_button(button_t **tab_button)
 {
     for (int i = 0; tab_button[i] != NULL; i++) {
-        sfSprite_destroy(tab_button[i]->sprite);
-        sfTexture_destroy(tab_button[i]->texture);
+        sfSprite_destroy(tab_button[i]->sprite[OFF]);
+        sfTexture_destroy(tab_button[i]->texture[OFF]);
         free(tab_button[i]);
     }
     free(tab_button);
