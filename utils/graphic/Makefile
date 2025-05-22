@@ -110,7 +110,7 @@ fclean: clean
 
 re:	fclean all
 
-debug:	re clean
+debug: re clean
 
 .PHONY: all				\
 		re			    \

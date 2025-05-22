@@ -42,8 +42,8 @@ static void init_settings(game_t *game)
 
 static void init_for_raycast(game_t *game)
 {
-    game->bounds = init_map();
-    if (game->bounds == NULL)
+    game->mini_map = init_map();
+    if (game->mini_map == NULL)
         return;
     game->player = calloc(1, sizeof(player_t));
     init_player(game->player);

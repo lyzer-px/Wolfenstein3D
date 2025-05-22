@@ -35,6 +35,7 @@ SRC 		= 		main.c													\
 					src/raycast2d.c											\
 					src/creation_scene/menu/init_pause_menu.c				\
 					src/creation_scene/menu/init_start_menu.c				\
+					src/animate_shotgun.c
 
 OBJ			=		$(SRC:.c=.o)
 
@@ -44,6 +45,9 @@ CFLAGS		=		-Wall -Wextra -Wpedantic -Werror
 
 
 CPPFLAGS	+=		-iquote include
+CPPFLAGS	+=		-lcsfml-audio -lcsfml-graphics
+CPPFLAGS	+=		-lcsfml-network -lcsfml-system -lcsfml-window -lm
+
 DEBUG		=	-g3
 
 LDLIBS +=	-lmy -lgraphic -lcsfml-audio -lcsfml-graphics -lcsfml-network

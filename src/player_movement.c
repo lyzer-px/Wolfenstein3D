@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <SFML/Graphics.h>
 #include "rendering.h"
 
@@ -16,17 +17,21 @@ sfBool is_wall(int x, int y)
     return map[y][x];
 }
 
-void player_fwd(player_t *player)
+void player_fwd(player_t *player, game_t *game)
 {
     sfVector2f direction = {- sinf(RAD(player->angle)),
         cosf(RAD(player->angle))};
 
     if (player == NULL)
         return;
+    if (sfMouse_isButtonPressed(sfMouseLeft) && !player->running)
+        shotgun_shoot(game);
     if (sfKeyboard_isKeyPressed(sfKeyZ)) {
+            shotgun_move(game);
         player->pos.x += direction.x * PLAYER_SPEED;
         player->pos.y += direction.y * PLAYER_SPEED;
     } else if (sfKeyboard_isKeyPressed(sfKeyS)) {
+            shotgun_move(game);
         player->pos.x -= direction.x * PLAYER_SPEED;
         player->pos.y -= direction.y * PLAYER_SPEED;
     }
@@ -36,7 +41,7 @@ void player_fwd(player_t *player)
     player->angle = player->angle < 0 ? 360 : player->angle;
 }
 
-void player_repel(player_t *player)
+void player_repel(player_t *player, game_t *game)
 {
     sfVector2f direction = {- sinf(RAD(player->angle)),
         cosf(RAD(player->angle))};
@@ -44,9 +49,11 @@ void player_repel(player_t *player)
     if (player == NULL)
         return;
     if (sfKeyboard_isKeyPressed(sfKeyZ)) {
+        shotgun_move(game);
         player->pos.x -= direction.x * PLAYER_SPEED;
         player->pos.y -= direction.y * PLAYER_SPEED;
     } else if (sfKeyboard_isKeyPressed(sfKeyS)) {
+        shotgun_move(game);
         player->pos.x += direction.x * PLAYER_SPEED;
         player->pos.y += direction.y * PLAYER_SPEED;
     }

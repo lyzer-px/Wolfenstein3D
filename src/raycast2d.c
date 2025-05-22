@@ -20,28 +20,32 @@ float cast_single_ray(player_t *player, float angle, sfRectangleShape *rect,
     sfVector2f ray_pos = player->pos;
 
     while (!is_wall(ON_INT_MAP(ray_pos.x), ON_INT_MAP(ray_pos.y))) {
-        ray_pos.x += ray_direction.x;
-        ray_pos.y += ray_direction.y;
+        ray_pos.x += ray_direction.x * 0.25;
+        ray_pos.y += ray_direction.y * 0.25;
         sfRectangleShape_setPosition(rect, ray_pos);
         sfRenderWindow_drawRectangleShape(window, rect, NULL);
     }
     return (sqrtf(SQUARED(ray_pos.x - player->pos.x) +
-    SQUARED(ray_pos.y - player->pos.y))) *
-        cosf(RAD(player->angle) - RAD(angle));
+        SQUARED(ray_pos.y - player->pos.y))) *
+        (cosf(RAD(player->angle) - RAD(angle)));
 }
 
 static void set_rect(float distance, sfRectangleShape *rect,
-    double ray_idx)
+    double ray_idx, player_t *player)
 {
-    float rect_height = (TILE_SIZE / distance) * (SCREEN_WIDTH / 2);
+    float rect_height = ((float)TILE_SIZE / distance) *
+        ((float)SCREEN_WIDTH / 2);
 
-    rect_height = rect_height > SCREEN_HEIGHT ? SCREEN_HEIGHT : rect_height;
+    rect_height = rect_height > (float)SCREEN_HEIGHT ? (float)SCREEN_HEIGHT :
+    rect_height;
     if (rect_height < 0)
         rect_height = SCREEN_HEIGHT;
-    sfRectangleShape_setSize(rect, (sfVector2f){3, rect_height});
-    sfRectangleShape_setFillColor(rect, sfGrey);
+    sfRectangleShape_setSize(rect, (sfVector2f){(SCREEN_WIDTH / 240),
+        rect_height});
+    sfRectangleShape_setFillColor(rect, player->flashlight_on ? sfWhite :
+        sfGrey);
     sfRectangleShape_setPosition(rect, (sfVector2f){(ray_idx * RECT_SIZE) / 6,
-        (SCREEN_HEIGHT - rect_height) / 2});
+        ((float)SCREEN_HEIGHT - rect_height) / 2});
 }
 
 static void prep_2d_ray(sfRectangleShape *ray)
@@ -52,10 +56,10 @@ static void prep_2d_ray(sfRectangleShape *ray)
 }
 
 static void draw_minimap(sfRenderWindow *window, player_t *player,
-    sfRectangleShape **bounds)
+    sfRectangleShape **mini_map)
 {
-    for (size_t i = 0; bounds[i] != NULL; i++)
-        sfRenderWindow_drawRectangleShape(window, bounds[i], NULL);
+    for (size_t i = 0; mini_map[i] != NULL; i++)
+        sfRenderWindow_drawRectangleShape(window, mini_map[i], NULL);
     sfRectangleShape_setPosition(player->hitbox, player->pos);
     sfRectangleShape_setRotation(player->hitbox, player->angle);
     sfRenderWindow_drawRectangleShape(window, player->hitbox, NULL);
@@ -84,7 +88,7 @@ static void handle_exceptions(game_t *game)
         game->player->flashlight_on = !game->player->flashlight_on;
     if (is_wall(ON_INT_MAP(game->player->pos.x),
         ON_INT_MAP(game->player->pos.y)))
-        player_repel(game->player);
+        player_repel(game->player, game);
     if (game->player->flashlight_on)
         draw_bloom(game->window->window, game->player->bloom);
 }
@@ -93,21 +97,22 @@ void tick_game(game_t *game)
 {
     float distance = 0;
     float angle;
+    sfRenderWindow *window = game->window->window;
 
-    if (game->player == NULL || game->window->window == NULL)
+    if (game->player == NULL || window == NULL)
         return;
-    draw_minimap(game->window->window, game->player, game->bounds);
     for (double i = 0; i < DEG(FOV); i += 0.25) {
         angle = (game->player->angle - DEG(FOV / 2) + i);
         prep_2d_ray(game->rect);
-        distance = cast_single_ray(game->player, angle,
-            game->rect, game->window->window);
-        set_rect(distance, game->rect, i);
-        sfRenderWindow_drawRectangleShape(game->window->window,
-            game->rect, NULL);
+        distance = cast_single_ray(game->player, angle, game->rect, window);
+        set_rect(distance, game->rect, i, game->player);
+        sfRenderWindow_drawRectangleShape(window, game->rect, NULL);
     }
-    player_fwd(game->player);
+    draw_minimap(window, game->player, game->mini_map);
+    player_fwd(game->player, game);
+    sfRenderWindow_drawSprite(window, game->player->shotgun->sprite, NULL);
     handle_exceptions(game);
+    sfRenderWindow_drawSprite(window, game->player->reticle->sprite, NULL);
 }
 
 int end_game(sfRenderWindow *window)
