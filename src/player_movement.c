@@ -25,7 +25,7 @@ void player_fwd(player_t *player, game_t *game)
     if (player == NULL)
         return;
     if (sfMouse_isButtonPressed(sfMouseLeft) && !player->running)
-        shotgun_fire(game);
+        shotgun_shoot(game);
     if (sfKeyboard_isKeyPressed(sfKeyZ)) {
             shotgun_move(game);
         player->pos.x += direction.x * PLAYER_SPEED;

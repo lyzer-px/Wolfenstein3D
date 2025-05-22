@@ -89,6 +89,6 @@ sfRectangleShape **init_map(void); // Inits the map to be shown on the screen
 void tick_game(game_t *game); // the game tick function
 
 void shotgun_move(game_t *game); // shotgun walking animation
-void shotgun_fire(game_t *game); // shotgun firing animation
+void shotgun_shoot(game_t *game); // shotgun firing animation
 
 #endif
