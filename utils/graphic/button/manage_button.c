@@ -20,7 +20,6 @@ button_t *create_button(const button_tab_t *def)
     pos->y = def->pos.y;
     button->texture = sfTexture_createFromFile(def->path_sprite, NULL);
     if (!button->texture) {
-        free(pos);
         free(button);
         return NULL;
     }
@@ -44,14 +43,8 @@ void destroy_button(void *element)
 {
     button_t *button = (button_t *)element;
 
-    if (!button)
-        return;
-    if (button->sprite)
-        sfSprite_destroy(button->sprite);
-    if (button->texture)
-        sfTexture_destroy(button->texture);
-    if (button->pos)
-        free(button->pos);
+    sfTexture_destroy(button->texture);
+    sfSprite_destroy(button->sprite);
     free(button);
 }
 
@@ -69,9 +62,9 @@ sfFloatRect get_button_hitbox(button_tab_t button)
 bool is_button_clicked(const button_tab_t *button, sfVector2i mouse,
     sfEvent *event)
 {
-    sfFloatRect bounds = get_button_hitbox(*button);
+    sfFloatRect mini_map = get_button_hitbox(*button);
 
-    return sfFloatRect_contains(&bounds, mouse.x, mouse.y) &&
+    return sfFloatRect_contains(&mini_map, mouse.x, mouse.y) &&
     (event->type == sfEvtMouseButtonPressed &&
     event->mouseButton.button == sfMouseLeft);
 }

@@ -31,22 +31,64 @@ void init_hitbox(player_t *player)
     sfRectangleShape_setRotation(player->hitbox, player->angle);
 }
 
-int init_player(player_t *player)
+static int set_positions(player_t *player)
 {
-    if (player == NULL)
-        return -1;
-    player->hitbox = sfRectangleShape_create();
-    if (player->hitbox == NULL)
-    return -1;
-    player->bloom = sfCircleShape_create();
-    if (player->bloom == NULL)
-        return -1;
+    sfSprite_setPosition(player->shotgun->sprite,
+        (sfVector2f){DIM_X / 2 - 90, DIM_Y - 170});
+    sfSprite_setPosition(player->reticle->sprite,
+        (sfVector2f){DIM_X / 2, DIM_Y / 2 + 30});
+    sfSprite_setOrigin(player->reticle->sprite,
+        (sfVector2f){75 / 2, 75 / 2});
     init_hitbox(player);
     init_ray(player);
     player->angle = 0;
     player->pos.x = 20;
     player->pos.y = 30;
     return EXIT_SUCCESS;
+}
+
+static int set_propreties(player_t *player)
+{
+    player->reticle = calloc(1, sizeof(asset_t));
+    if (player->reticle == NULL)
+        return -1;
+    player->reticle->sprite = sfSprite_create();
+    player->reticle->texture = sfTexture_createFromFile("assets/reticle.png",
+        NULL);
+    if (player->reticle->sprite == NULL || player->reticle->texture == NULL)
+        return -1;
+    player->shotgun->rect = (sfIntRect){0, 0, 70, 90};
+    sfSprite_setTexture(player->reticle->sprite, player->reticle->texture,
+        sfFalse);
+    sfSprite_setTexture(player->shotgun->sprite,
+        player->shotgun->texture, sfFalse);
+    sfSprite_setScale(player->shotgun->sprite, (sfVector2f){2, 2});
+    sfSprite_setTextureRect(player->shotgun->sprite, player->shotgun->rect);
+    return set_positions(player);
+}
+
+int init_player(player_t *player)
+{
+    player->shotgun = calloc(1, sizeof(asset_t));
+    if (player == NULL || player->shotgun == NULL)
+        return -1;
+    player->hitbox = sfRectangleShape_create();
+    if (player->hitbox == NULL)
+        return -1;
+    player->bloom = sfCircleShape_create();
+    if (player->bloom == NULL)
+        return -1;
+    player->shotgun->sprite = sfSprite_create();
+    if (player->shotgun->sprite == NULL)
+        return -1;
+    player->shotgun->texture =
+    sfTexture_createFromFile("assets/weapons/shotgun.png", NULL);
+    if (player->shotgun->texture == NULL)
+        return -1;
+    player->clock = sfClock_create();
+    if (player->clock == NULL)
+        return -1;
+    return set_propreties(player);
 }
 
 void init_tile(sfRectangleShape *tile, size_t i, size_t j)
@@ -59,41 +101,21 @@ void init_tile(sfRectangleShape *tile, size_t i, size_t j)
         (sfVector2f){j * TILE_SIZE, i * TILE_SIZE});
 }
 
-static bool destroy_bounds(sfRectangleShape **bounds, size_t k)
-{
-    if (bounds[k] == NULL) {
-        for (size_t j = 0; j < k; j++)
-            sfRectangleShape_destroy(bounds[j]);
-        free(bounds);
-        return true;
-    }
-    return false;
-}
-
-static bool fill_bounds(sfRectangleShape **bounds, size_t i, size_t k)
-{
-    for (size_t j = 0; j < MAP_WIDTH; j++) {
-        bounds[k] = sfRectangleShape_create();
-        if (destroy_bounds(bounds, k))
-            return true;
-        init_tile(bounds[k], i, j);
-        k++;
-    }
-    return false;
-}
-
 sfRectangleShape **init_map(void)
 {
-    sfRectangleShape **bounds = malloc(sizeof(sfRectangleShape *) *
+    sfRectangleShape **mini_map = malloc(sizeof(sfRectangleShape *) *
         ((MAP_HEIGHT + 1) * MAP_WIDTH) + 1);
     size_t k = 0;
 
-    if (bounds == NULL)
+    if (mini_map == NULL)
         return NULL;
     for (size_t i = 0; i < MAP_HEIGHT; i++) {
-        if (fill_bounds(bounds, i, k) == true)
-            return NULL;
+        for (size_t j = 0; j < MAP_WIDTH; j++) {
+            mini_map[k] = sfRectangleShape_create();
+            init_tile(mini_map[k], i, j);
+            k++;
+        }
     }
-    bounds[k] = NULL;
-    return bounds;
+    mini_map[k] = NULL;
+    return mini_map;
 }

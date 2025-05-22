@@ -16,10 +16,10 @@ void handle_start_menu_event(game_t *g)
         sfRenderWindow_close(g->window->window);
     if (is_button_clicked(&button_start_menu[START],
         sfMouse_getPositionRenderWindow(g->window->window), &g->window->event))
-        g->actual_scene = GAME;
+        change_scene(g, GAME);
     if (is_button_clicked(&button_start_menu[SETTING_BUTTON_FROM_MENU],
         sfMouse_getPositionRenderWindow(g->window->window), &g->window->event))
-        g->actual_scene = SETTING;
+        change_scene(g, SETTING);
 }
 
 void init_start_menu(scene_t *scene)
