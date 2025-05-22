@@ -26,8 +26,8 @@ static void create_texture(button_t **button, char *texture_path)
     }
 }
 
-static button_t *create_button(char *texture_path, sfIntRect rect,
-    sfVector2i pos)
+static button_t *create_a_button(char *texture_path, sfIntRect rect,
+    sfVector2f *pos)
 {
     button_t *button = malloc(sizeof(button_t));
 
@@ -40,11 +40,11 @@ static button_t *create_button(char *texture_path, sfIntRect rect,
     button->area = rect;
     sfSprite_setTextureRect(button->sprite, rect);
     button->pos = pos;
-    sfSprite_setPosition(button->sprite, (sfVector2f){pos.x, pos.y});
+    sfSprite_setPosition(button->sprite, (sfVector2f){pos->x, pos->y});
     return button;
 }
 
-button_t **create_button_tab(void)
+button_t **create_button_tab(button_tab_t *tab_button)
 {
     int len = SIZE_TAB_BUTTON;
     button_t **buttons = malloc(sizeof(button_t *) * (len + 1));
@@ -52,8 +52,8 @@ button_t **create_button_tab(void)
     if (buttons == NULL)
         return NULL;
     for (int i = 0; tab_button[i].path_sprite != NULL; i++)
-        buttons[i] = create_button(tab_button[i].path_sprite,
-            tab_button[i].rect, tab_button[i].pos);
+        buttons[i] = create_a_button(tab_button[i].path_sprite,
+            tab_button[i].rect, &tab_button[i].pos);
     buttons[len] = NULL;
     return buttons;
 }

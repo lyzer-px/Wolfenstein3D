@@ -1,6 +1,6 @@
 /*
-** EPITECH PROJECT, 2025
-** Wolf3D
+** EPITECH PROJECT, 2024
+** Wolf
 ** File description:
 ** libgraphic.h
 */
@@ -9,7 +9,6 @@
     #define LIBGRAPHIC_H
 
     #include <SFML/Graphics.h>
-    #include <SFML/Audio.h>
     #include "struct.h"
 
 typedef struct button_s {
@@ -225,12 +224,10 @@ bool is_button_clicked(const button_tab_t *button, sfVector2i mouse,
 // Add button to a menu
 void add_button_to_menu(scene_t *scene, button_tab_t button_def);
 
-void make_a_new_style_window(window_t *win);
-
 void draw_rectangle(sfRenderWindow *window, sfVector2f position,
     sfVector2f size);
 
-void draw_circle(sfRenderWindow *wind, sfVector2f center, float radius);
+void my_draw_circle(sfRenderWindow *wind, sfVector2f center, float radius);
 
 void update_sprite_rect(sfSprite *sprite, sprite_rect_t *sprite_rect,
     sfClock *clock, double nb_seconds);

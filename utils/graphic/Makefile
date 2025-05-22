@@ -73,8 +73,6 @@ SRC 		= 		component/create_component.c						    \
 					create_button.c											\
 					del_tab_button.c										\
 					draw_button.c											\
-					make_a_new_style_window.c								\
-					get_pos.c												\
 					draw_shape.c											\
 					update_sprite_rect.c									\
 					create_object.c											\

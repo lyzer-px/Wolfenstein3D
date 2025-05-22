@@ -1,6 +1,6 @@
 /*
-** EPITECH PROJECT, 2025
-** Wolf3D
+** EPITECH PROJECT, 2024
+** lib
 ** File description:
 ** macro.h
 */

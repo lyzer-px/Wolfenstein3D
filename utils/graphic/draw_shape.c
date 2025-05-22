@@ -19,7 +19,7 @@ void draw_rectangle(sfRenderWindow *window, sfVector2f position,
     sfRectangleShape_destroy(square);
 }
 
-void draw_circle(sfRenderWindow *wind, sfVector2f center, float radius)
+void my_draw_circle(sfRenderWindow *wind, sfVector2f center, float radius)
 {
     sfCircleShape *circle = sfCircleShape_create();
 

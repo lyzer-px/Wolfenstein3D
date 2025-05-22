@@ -56,6 +56,12 @@ static const button_tab_t button_start_menu[] = {
     {NULL, {0, 0, 0, 0}, {0, 0}}
 };
 
+typedef struct sprite_rect_s {
+    sfIntRect rect;
+    int offset;
+    int max_value;
+}sprite_rect_t;
+
 /*
 ** FUNCTION
 */
@@ -217,5 +223,23 @@ bool is_button_clicked(const button_tab_t *button, sfVector2i mouse,
 
 // Add button to a menu
 void add_button_to_menu(scene_t *scene, button_tab_t button_def);
+
+void draw_rectangle(sfRenderWindow *window, sfVector2f position,
+    sfVector2f size);
+
+void my_draw_circle(sfRenderWindow *wind, sfVector2f center, float radius);
+
+void update_sprite_rect(sfSprite *sprite, sprite_rect_t *sprite_rect,
+    sfClock *clock, double nb_seconds);
+
+sfSprite *create_sprite(char *texture_path);
+
+sfText *create_text(sfFont *font, char *string, int size);
+
+sfMusic *create_music(const char *music_path);
+
+sfVector2f *get_movement(sfVector2f *start, sfVector2f *end);
+
+float get_distance(sfVector2f *point_a, sfVector2f *point_b);
 
 #endif /* LIBGRAPHIC_H */
