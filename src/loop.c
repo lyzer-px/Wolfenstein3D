@@ -29,6 +29,7 @@ int loop(game_t *g)
         } else {
             sfRenderWindow_setMouseCursorVisible(g->window->window, sfFalse);
         }
+        *(g->window->mode) = sfRenderWindow_getSize(g->window->window);
         sfRenderWindow_clear(g->window->window, sfBlack);
         draw_component_of_scene(g->window->window,
             g->tab_scene[g->actual_scene]);

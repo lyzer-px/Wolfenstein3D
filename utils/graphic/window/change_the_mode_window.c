@@ -21,7 +21,7 @@ void change_the_mode_window(window_t *win)
     window = make_window(dimensions, BITS, NAME_WIN, style);
     if (window == NULL)
         return;
-    *(win->mode) = sfVideoMode_getDesktopMode();
+    *(win->mode) = sfRenderWindow_getSize(win->window);
     sfRenderWindow_destroy(win->window);
     win->full_screen = !win->full_screen;
     win->window = window;

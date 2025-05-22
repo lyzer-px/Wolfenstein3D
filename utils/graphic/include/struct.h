@@ -24,7 +24,7 @@ typedef struct window_s {
     // event on the window
     sfEvent event;
     // every information of the window in it
-    sfVideoMode *mode;
+    sfVector2u *mode;
 } window_t;
 
 typedef struct ressource_s {
