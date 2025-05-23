@@ -43,9 +43,9 @@ void create_backgound_error_ressource(game_t *game);
 void create_text_error_ressource(game_t *game);
 
 // Initialise pause menu
-void init_pause_menu(scene_t *scene);
+void init_pause_menu(game_t *game);
 
 // Initialise start menu
-void init_start_menu(scene_t *scene);
+void init_start_menu(game_t *game);
 
 #endif /* PROJECT_H */

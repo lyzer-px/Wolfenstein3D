@@ -25,9 +25,11 @@ void handle_pause_menu_event(game_t *g)
         change_scene(g, SAVE_SCENE);
 }
 
-void init_pause_menu(scene_t *scene)
+void init_pause_menu(game_t *game)
 {
     sfVector2f *pos = malloc(sizeof(sfVector2f));
+    scene_t *scene = game->tab_scene[PAUSE_MENU];
+    ressource_t *ressource;
 
     if (pos == NULL)
         return;
@@ -38,5 +40,9 @@ void init_pause_menu(scene_t *scene)
     create_layer(scene);
     pos->x = 0;
     pos->y = 0;
-    add_sprite_to_scene(pos, scene, wallpaper_pause, "bg_pause", 2);
+    if (create_ressource_for_sprite(game, wallpaper_pause, "bg_pause")
+        == EPI_SUCCESS) {
+        ressource = find_a_ressouce_from_id(game->ressource, "bg_pause");
+        add_sprite_to_scene(pos, scene, 2, ressource);
+    }
 }

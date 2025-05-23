@@ -10,7 +10,7 @@
 #include "macro.h"
 
 static sprite_rect_t *get_rect(int total_width, int total_height,
-    int sprite_height)
+    int sprite_height, sfSprite *sprite)
 {
     sprite_rect_t *sprite_rect = malloc(sizeof(sprite_rect_t));
     sfIntRect rect;
@@ -21,6 +21,7 @@ static sprite_rect_t *get_rect(int total_width, int total_height,
     rect.left = 0;
     rect.width = total_width;
     rect.height = sprite_height;
+    sfSprite_setTextureRect(sprite, rect);
     sprite_rect->offset = sprite_height;
     sprite_rect->max_value = total_height;
     sprite_rect->rect = rect;
@@ -31,8 +32,9 @@ void handle_start_menu_event(game_t *g)
 {
     ressource_t *fire_line = find_a_ressouce_from_id(g->ressource,
         "fire_line");
-    sprite_rect_t *rect = get_rect(FIRE_LINE_HEIGHT, FIRE_LINE_SPRITE_HEIGHT,
-        FIRE_LINE_WIDTH);
+    sprite_rect_t *rect = get_rect(FIRE_LINE_WIDTH,
+        FIRE_LINE_HEIGHT, FIRE_LINE_SPRITE_HEIGHT,
+        (sfSprite *)fire_line->element);
 
     if (is_button_clicked(&button_start_menu[EXIT_FROM_MENU],
         sfMouse_getPositionRenderWindow(g->window->window), &g->window->event))
@@ -50,9 +52,11 @@ void handle_start_menu_event(game_t *g)
 
 }
 
-void init_start_menu(scene_t *scene)
+void init_start_menu(game_t *game)
 {
     sfVector2f *pos = malloc(sizeof(sfVector2f));
+    scene_t *scene = game->tab_scene[MENU];
+    ressource_t *ressource;
 
     if (pos == NULL)
         return;
@@ -60,11 +64,19 @@ void init_start_menu(scene_t *scene)
     for (int i = 0; button_start_menu[i].path_sprite != NULL; i++)
         add_button_to_menu(scene, button_start_menu[i]);
     scene->function_event = handle_start_menu_event;
-    pos->x = DIM_X;
+    pos->x = 0;
     pos->y = DIM_Y;
-    add_sprite_to_scene(pos, scene, fire_line, "fire_line", 1);
+        if (create_ressource_for_sprite(game, fire_line, "fire_line")
+        == EPI_SUCCESS) {
+        ressource = find_a_ressouce_from_id(game->ressource, "fire_line");
+        add_sprite_to_scene(pos, scene, 1, ressource);
+    }
     create_layer(scene);
     pos->x = 0;
     pos->y = 0;
-    add_sprite_to_scene(pos, scene, wallpaper_start, "bg_start", 2);
+        if (create_ressource_for_sprite(game, wallpaper_start, "bg_start")
+        == EPI_SUCCESS) {
+        ressource = find_a_ressouce_from_id(game->ressource, "bg_start");
+        add_sprite_to_scene(pos, scene, 2, ressource);
+    }
 }

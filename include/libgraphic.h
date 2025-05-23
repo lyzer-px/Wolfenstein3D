@@ -258,7 +258,10 @@ sfVector2f *get_movement(sfVector2f *start, sfVector2f *end);
 float get_distance(sfVector2f *point_a, sfVector2f *point_b);
 
 // Add a wallpaper at first layer to a scene
-size_t add_sprite_to_scene(sfVector2f *pos, scene_t *scene,
-    const char *texture_path, char *id, int id_layer);
+size_t add_sprite_to_scene(sfVector2f *pos, scene_t *scene, int id_layer,
+    ressource_t *ressource);
+
+size_t create_ressource_for_sprite(game_t *game,
+    const char *texture_path, char *id);
 
 #endif /* LIBGRAPHIC_H */

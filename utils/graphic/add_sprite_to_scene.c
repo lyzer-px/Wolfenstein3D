@@ -10,25 +10,25 @@
 #include "macro.h"
 #include "type_id.h"
 
-size_t add_sprite_to_scene(sfVector2f *pos, scene_t *scene,
-    const char *texture_path, char *id, int id_layer)
+size_t create_ressource_for_sprite(game_t *game,
+    const char *texture_path, char *id)
 {
-    ressource_t *ressource;
-    component_t *wallpaper;
     sfTexture *texture = sfTexture_createFromFile(texture_path, NULL);
     sfSprite *sprite = create_sprite(texture);
 
     if (sprite == NULL)
         return EPI_FAIL;
-    ressource = create_ressource(id, sprite, SPRITE);
-    if (ressource == NULL) {
-        free(sprite);
-        return EPI_FAIL;
-    }
+    create_ressource_link(&(game->ressource), id, sprite, SPRITE);
+    return EPI_SUCCESS;
+}
+
+size_t add_sprite_to_scene(sfVector2f *pos, scene_t *scene, int id_layer,
+    ressource_t *ressource)
+{
+    component_t *wallpaper;
+
     wallpaper = create_component(pos, ressource);
     if (wallpaper == NULL) {
-        free(sprite);
-        free(ressource);
         return EPI_FAIL;
     }
     add_a_component_to_layer(wallpaper, scene, id_layer);
