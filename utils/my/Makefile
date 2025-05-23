@@ -44,7 +44,8 @@ SRC 		= 	my_strcmp.c											\
 				my_atoi.c											\
 				print_array.c										\
 				str_to_array.c										\
-				char_in_str.c
+				char_in_str.c										\
+				encrypt_file.c
 
 OBJ			=		$(SRC:.c=.o)
 

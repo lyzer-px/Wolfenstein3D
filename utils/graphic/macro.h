@@ -135,4 +135,11 @@ enum TYPE_INSTRUCTION {
 
     #define ER_ENV ("The environment does not allow the window to be opened\n")
 
+/*
+** Save crypt key
+*/
+
+    #define CRYPT_KEY 13
+    #define SIZE_ALPHABET 26
+
 #endif /* MACRO_H */

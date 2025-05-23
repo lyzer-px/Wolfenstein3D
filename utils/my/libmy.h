@@ -74,4 +74,6 @@ char **str_to_array(char *str, char *sep);
 
 unsigned int char_in_str(char c, char *str);
 
+size_t encrypt_file(const char *filename, int key);
+
 #endif /* LIBMY_H */

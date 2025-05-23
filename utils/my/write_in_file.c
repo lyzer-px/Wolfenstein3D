@@ -19,9 +19,9 @@ size_t write_in_file(char *filename, char *text)
 
     if (fd == ERROR) {
         print_error(OPEN_ERR);
-        return EXIT_FAILURE_EPITECH;
+        return EPI_FAIL;
     }
     mini_dprintf(fd, text);
     (void)close(fd);
-    return EXIT_SUCCESS;
+    return EPI_SUCCESS;
 }

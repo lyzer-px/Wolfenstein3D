@@ -17,9 +17,14 @@ size_t load_save(char *filename, game_t *game)
         mini_dprintf(STDERR, "Invalid file name\n");
         return EPI_FAIL;
     }
+    if (encrypt_file(filename, -CRYPT_KEY) == EPI_FAIL)
+        return EPI_FAIL;
     content = file_to_str(filename);
+    mini_dprintf(STDOUT, content);
     if (read_content(content, game)) {
         return EPI_FAIL;
     }
+    if (encrypt_file(filename, -CRYPT_KEY) == EPI_FAIL)
+        return EPI_FAIL;
     return EPI_SUCCESS;
 }
