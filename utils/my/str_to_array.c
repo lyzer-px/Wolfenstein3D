@@ -42,7 +42,7 @@ static char **write_tab(char *str, char **tab, char *sep, int len_tab)
             return write_tab(str, tab, sep, len_tab + 1);
         }
     }
-    tab[len_tab] = &str[0];
+    tab[len_tab] = NULL;
     return tab;
 }
 

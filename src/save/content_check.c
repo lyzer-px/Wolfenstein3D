@@ -47,9 +47,8 @@ static size_t read_line(char *file, game_t *game)
     char **content = str_to_array(file, "\n:,");
     int nb_line;
 
-    if (content == NULL) {
+    if (content == NULL)
         return EPI_FAIL;
-    }
     nb_line = arraylen(content);
     if (nb_line != 15) {
         mini_dprintf(STDERR, "Invalid content\n");
