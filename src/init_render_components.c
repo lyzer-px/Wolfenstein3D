@@ -142,29 +142,6 @@ void init_tile(sfRectangleShape *tile, size_t i, size_t j)
         (sfVector2f){j * TILE_SIZE, i * TILE_SIZE});
 }
 
-static bool destroy_bounds(sfRectangleShape **bounds, size_t k)
-{
-    if (bounds[k] == NULL) {
-        for (size_t j = 0; j < k; j++)
-            sfRectangleShape_destroy(bounds[j]);
-        free(bounds);
-        return true;
-    }
-    return false;
-}
-
-static bool fill_bounds(sfRectangleShape **bounds, size_t i, size_t k)
-{
-    for (size_t j = 0; j < MAP_WIDTH; j++) {
-        bounds[k] = sfRectangleShape_create();
-        if (destroy_bounds(bounds, k))
-            return true;
-        init_tile(bounds[k], i, j);
-        k++;
-    }
-    return false;
-}
-
 sfRectangleShape **init_map(void)
 {
     sfRectangleShape **mini_map = malloc(sizeof(sfRectangleShape *) *
@@ -174,8 +151,11 @@ sfRectangleShape **init_map(void)
     if (mini_map == NULL)
         return NULL;
     for (size_t i = 0; i < MAP_HEIGHT; i++) {
-        if (fill_bounds(mini_map, i, k) == true)
-            return NULL;
+        for (size_t j = 0; j < MAP_WIDTH; j++) {
+            mini_map[k] = sfRectangleShape_create();
+            init_tile(mini_map[k], i, j);
+            k++;
+        }
     }
     mini_map[k] = NULL;
     return mini_map;

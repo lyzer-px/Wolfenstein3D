@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include "struct.h"
 #include "macro.h"
 #include "rendering.h"
@@ -43,6 +44,8 @@ static void init_settings(game_t *game)
 static void init_for_raycast(game_t *game)
 {
     game->mini_map = init_map();
+    if (game->mini_map[0] == NULL)
+            printf("PRE LOOP\n");
     if (game->mini_map == NULL)
         return;
     game->player = calloc(1, sizeof(player_t));
