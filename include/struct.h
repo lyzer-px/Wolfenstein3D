@@ -24,7 +24,7 @@ typedef struct window_s {
     // event on the window
     sfEvent event;
     // every information of the window in it
-    sfVideoMode *mode;
+    sfVector2u *mode;
 } window_t;
 
 typedef struct ressource_s {
@@ -71,8 +71,12 @@ typedef struct scene_s {
     bool pause : 1;
     // a function where each event of the scene is
     void (*function_event)(struct game_s *);
+    // a function where we set the position of all composant of the scene
+    void (*set_positions)(struct game_s *);
     // id of the scene music
     char *id_music;
+    // do we hide the cursor
+    bool hide_cursor;
     // a linked list where all the layer are
     struct layer_s *layer;
 } scene_t;
@@ -102,8 +106,12 @@ typedef struct player_s {
     sfRectangleShape *ray;
     // the flashlight
     sfCircleShape *bloom;
+    // player info display
+    asset_t *hud;
     // the shotgun
     asset_t *shotgun;
+    // the shotgun impact
+    asset_t *impact;
     //the reticle
     asset_t *reticle;
     // player internal animation clock
@@ -122,9 +130,9 @@ typedef struct music_s {
 
 typedef struct settings_s {
     // true if the music is playing
-    bool music_played;
+    int music_played;
     // true if the audio effect is playing
-    bool fxaudio_played;
+    int fxaudio_played;
     // is a percentage (100 the music is at maximum)
     short music_nb;
     // is a percentage (100 the audio effect is at maximum)
@@ -141,7 +149,7 @@ struct game_s {
     // how many scene do we have (if you  want to change it we have an macro)
     int nb_scene;
     // which scene do we show
-    int actual_scene;
+    int actual;
     // an array with all scene in it (all texture are create before the loop)
     struct scene_s **tab_scene;
     // stuct which have all information of the setting of the game

@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include "project_funct.h"
 #include "libgraphic.h"
 #include "macro.h"
 
@@ -45,9 +46,17 @@ void handle_start_menu_event(game_t *g)
     if (is_button_clicked(&button_start_menu[SETTING_BUTTON_FROM_MENU],
         sfMouse_getPositionRenderWindow(g->window->window), &g->window->event))
         change_scene(g, SETTING);
-    if (fire_line != NULL) {
+    if (fire_line != NULL)
             update_sprite_rect((sfSprite *)fire_line->element, rect,
             g->window->clock, 1);
+    if (is_button_clicked(&button_start_menu[LOAD_SAVE],
+        sfMouse_getPositionRenderWindow(g->window->window),
+        &g->window->event)) {
+        if (load_save("1.save", g) == EPI_SUCCESS) {
+            change_scene(g, GAME);
+        } else {
+            change_scene(g, ERROR_SCENE);
+        }
     }
 }
 
@@ -95,6 +104,7 @@ void init_start_menu(game_t *game)
 {
     scene_t *scene = game->tab_scene[MENU];
 
+    scene->hide_cursor = true;
     create_layer(scene);
     for (int i = 0; button_start_menu[i].path_sprite != NULL; i++)
         add_button_to_menu(scene, button_start_menu[i]);

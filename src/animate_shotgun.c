@@ -6,6 +6,7 @@
 */
 
 #include <stdio.h>
+#include "rendering.h"
 #include "struct.h"
 
 void shotgun_move(game_t *game)
@@ -31,11 +32,19 @@ static void shotgun_update_frame(game_t *game)
 
 void shotgun_shoot(game_t *game)
 {
+    float distance = cast_single_ray(game->player, game->player->angle);
+    float scale = 1 / (distance / 1.5);
+
+    scale = scale > 1 ? 1 : scale;
     game->player->firing = true;
     game->player->shotgun->rect.left = 230;
     if (sfClock_getElapsedTime(game->player->clock).microseconds >= 200000) {
         sfClock_restart(game->player->clock);
         shotgun_update_frame(game);
+        sfSprite_setScale(game->player->impact->sprite,
+            (sfVector2f){scale, scale});
+        sfRenderWindow_drawSprite(game->window->window,
+            game->player->impact->sprite, NULL);
     }
     game->player->shotgun->rect.left = 0;
     game->player->firing = false;

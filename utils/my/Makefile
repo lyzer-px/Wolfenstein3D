@@ -34,7 +34,18 @@ SRC 		= 	my_strcmp.c											\
 				my_str_to_word_array.c								\
 				parse_user_input.c									\
 				del_last_char.c										\
-				my_strlen.c
+				my_strlen.c											\
+				concat_array.c										\
+				print_error.c										\
+				write_in_file.c										\
+				mini_dprintf.c										\
+				round_number.c										\
+				str_is_same.c										\
+				my_atoi.c											\
+				print_array.c										\
+				str_to_array.c										\
+				char_in_str.c										\
+				encrypt_file.c
 
 OBJ			=		$(SRC:.c=.o)
 

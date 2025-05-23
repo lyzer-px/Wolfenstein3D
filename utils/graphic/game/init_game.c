@@ -18,7 +18,7 @@ static void fill_fields(game_t *game)
         return;
     game->nb_scene = NB_SCENE;
     game->ressource = NULL;
-    game->actual_scene = SCENE_START;
+    game->actual = SCENE_START;
     game->tab_scene = init_tab_scene(game->nb_scene);
 }
 

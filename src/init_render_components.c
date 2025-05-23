@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <SFML/Graphics.h>
 #include "macro.h"
 #include "rendering.h"
@@ -18,6 +19,44 @@ void init_ray(player_t *player)
     sfRectangleShape_setSize(player->ray, (sfVector2f){1, 1});
     sfRectangleShape_setFillColor(player->ray, sfBlue);
     sfRectangleShape_setOrigin(player->ray, (sfVector2f){2, 2});
+}
+
+static void init_impact(player_t *player)
+{
+    player->impact = calloc(1, sizeof(asset_t));
+    if (player->impact == NULL)
+        return;
+    player->impact->rect = (sfIntRect){0, 0, 707, 353};
+    player->impact->sprite = sfSprite_create();
+    player->impact->texture =
+    sfTexture_createFromFile("assets/impact-frame.png", &player->impact->rect);
+    if (player->impact->sprite == NULL || player->impact->texture == NULL)
+        return;
+    sfSprite_setTexture(player->impact->sprite,
+        player->impact->texture, sfFalse);
+    sfSprite_setOrigin(player->impact->sprite,
+        (sfVector2f){707 / 2, 353 / 2});
+    sfSprite_setPosition(player->impact->sprite,
+        (sfVector2f){DIM_X / 2, DIM_Y / 2 + 30});
+}
+
+static void init_hud(player_t *player)
+{
+    player->hud = calloc(1, sizeof(asset_t));
+    if (player->hud == NULL)
+        return;
+    player->hud->rect = (sfIntRect){0, 0, 640, 77};
+    player->hud->sprite = sfSprite_create();
+    player->hud->texture = sfTexture_createFromFile("assets/HUD.png",
+        &player->hud->rect);
+    if (player->hud->sprite == NULL || player->hud->texture == NULL)
+        return;
+    sfSprite_setTexture(player->hud->sprite,
+        player->hud->texture, sfFalse);
+    sfSprite_setPosition(player->hud->sprite,
+        (sfVector2f){80, DIM_Y - 90});
+    sfSprite_setScale(player->hud->sprite,
+        (sfVector2f){1.25, 1.25});
 }
 
 void init_hitbox(player_t *player)
@@ -34,13 +73,15 @@ void init_hitbox(player_t *player)
 static int set_positions(player_t *player)
 {
     sfSprite_setPosition(player->shotgun->sprite,
-        (sfVector2f){DIM_X / 2 - 90, DIM_Y - 170});
+        (sfVector2f){DIM_X / 2 - 90, DIM_Y - 250});
     sfSprite_setPosition(player->reticle->sprite,
         (sfVector2f){DIM_X / 2, DIM_Y / 2 + 30});
     sfSprite_setOrigin(player->reticle->sprite,
         (sfVector2f){75 / 2, 75 / 2});
+    init_impact(player);
     init_hitbox(player);
     init_ray(player);
+    init_hud(player);
     player->angle = 0;
     player->pos.x = 20;
     player->pos.y = 30;
@@ -101,6 +142,29 @@ void init_tile(sfRectangleShape *tile, size_t i, size_t j)
         (sfVector2f){j * TILE_SIZE, i * TILE_SIZE});
 }
 
+static bool destroy_bounds(sfRectangleShape **bounds, size_t k)
+{
+    if (bounds[k] == NULL) {
+        for (size_t j = 0; j < k; j++)
+            sfRectangleShape_destroy(bounds[j]);
+        free(bounds);
+        return true;
+    }
+    return false;
+}
+
+static bool fill_bounds(sfRectangleShape **bounds, size_t i, size_t k)
+{
+    for (size_t j = 0; j < MAP_WIDTH; j++) {
+        bounds[k] = sfRectangleShape_create();
+        if (destroy_bounds(bounds, k))
+            return true;
+        init_tile(bounds[k], i, j);
+        k++;
+    }
+    return false;
+}
+
 sfRectangleShape **init_map(void)
 {
     sfRectangleShape **mini_map = malloc(sizeof(sfRectangleShape *) *
@@ -110,11 +174,8 @@ sfRectangleShape **init_map(void)
     if (mini_map == NULL)
         return NULL;
     for (size_t i = 0; i < MAP_HEIGHT; i++) {
-        for (size_t j = 0; j < MAP_WIDTH; j++) {
-            mini_map[k] = sfRectangleShape_create();
-            init_tile(mini_map[k], i, j);
-            k++;
-        }
+        if (fill_bounds(mini_map, i, k) == true)
+            return NULL;
     }
     mini_map[k] = NULL;
     return mini_map;

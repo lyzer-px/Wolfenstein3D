@@ -27,7 +27,7 @@ void change_scene(game_t *game, int new_scene)
 {
     music_t *tmp = NULL;
 
-    game->actual_scene = new_scene;
+    game->actual = new_scene;
     if (game->id_music != NULL && game->tab_scene[new_scene]->id_music != NULL
         && strcmp(game->id_music, game->tab_scene[new_scene]->id_music)) {
         tmp = find_music(game->music, game->tab_scene[new_scene]->id_music);

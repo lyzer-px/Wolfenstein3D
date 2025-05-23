@@ -1,5 +1,7 @@
 .vscode
 unit_test*
+wolf3d
+*.save
 *.gcno
 *.gcda
 *.o

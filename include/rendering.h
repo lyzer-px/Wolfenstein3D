@@ -91,4 +91,9 @@ void tick_game(game_t *game); // the game tick function
 void shotgun_move(game_t *game); // shotgun walking animation
 void shotgun_shoot(game_t *game); // shotgun firing animation
 
+// launches a ray from the player's position until a wall is met and returns
+// the distance from the wall to the player
+float cast_single_ray(player_t *player, float angle);
+
+
 #endif
