@@ -29,14 +29,8 @@ static sprite_rect_t *get_rect(int total_width, int total_height,
     return sprite_rect;
 }
 
-void handle_start_menu_event(game_t *g)
+static void check_button(game_t *g)
 {
-    ressource_t *fire_line = find_a_ressouce_from_id(g->ressource,
-        "fire_line");
-    sprite_rect_t *rect = get_rect(FIRE_LINE_WIDTH,
-        FIRE_LINE_HEIGHT, FIRE_LINE_SPRITE_HEIGHT,
-        (sfSprite *)fire_line->element);
-
     if (is_button_clicked(&button_start_menu[EXIT_FROM_MENU],
         sfMouse_getPositionRenderWindow(g->window->window), &g->window->event))
         sfRenderWindow_close(g->window->window);
@@ -46,9 +40,6 @@ void handle_start_menu_event(game_t *g)
     if (is_button_clicked(&button_start_menu[SETTING_BUTTON_FROM_MENU],
         sfMouse_getPositionRenderWindow(g->window->window), &g->window->event))
         change_scene(g, SETTING);
-    if (fire_line != NULL)
-            update_sprite_rect((sfSprite *)fire_line->element, rect,
-            g->window->clock, 1);
     if (is_button_clicked(&button_start_menu[LOAD_SAVE],
         sfMouse_getPositionRenderWindow(g->window->window),
         &g->window->event)) {
@@ -58,6 +49,20 @@ void handle_start_menu_event(game_t *g)
             change_scene(g, ERROR_SCENE);
         }
     }
+}
+
+void handle_start_menu_event(game_t *g)
+{
+    ressource_t *fire_line = find_a_ressouce_from_id(g->ressource,
+        "fire_line");
+    sprite_rect_t *rect = get_rect(FIRE_LINE_WIDTH,
+        FIRE_LINE_HEIGHT, FIRE_LINE_SPRITE_HEIGHT,
+        (sfSprite *)fire_line->element);
+
+    if (fire_line != NULL)
+            update_sprite_rect((sfSprite *)fire_line->element, rect,
+            g->window->clock, 1);
+    check_button(g);
 }
 
 static void set_fire_line(game_t *game, scene_t *scene)
