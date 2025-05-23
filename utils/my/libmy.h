@@ -68,4 +68,10 @@ int str_n_is_same(const char *str1, const char *str2, int n);
 
 int my_atoi(const char *str);
 
+void print_array(char **arg);
+
+char **str_to_array(char *str, char *sep);
+
+unsigned int char_in_str(char c, char *str);
+
 #endif /* LIBMY_H */

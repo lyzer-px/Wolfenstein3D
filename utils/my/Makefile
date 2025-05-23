@@ -41,7 +41,10 @@ SRC 		= 	my_strcmp.c											\
 				mini_dprintf.c										\
 				round_number.c										\
 				str_is_same.c										\
-				my_atoi.c
+				my_atoi.c											\
+				print_array.c										\
+				str_to_array.c										\
+				char_in_str.c
 
 OBJ			=		$(SRC:.c=.o)
 

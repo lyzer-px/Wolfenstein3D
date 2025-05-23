@@ -5,7 +5,7 @@
 ** error_handling
 */
 
-#include <stdlib.h> //Delete that after debug
+#include <stdlib.h>
 #include "struct.h"
 #include "macro.h"
 #include "libmy.h"
@@ -15,9 +15,9 @@ static size_t read_player(char **content, player_t *player)
     if ((str_is_same(content[0], "player") && str_is_same(content[1], "pos")
         && str_is_same(content[4], "angle")) == FALSE)
         return EPI_FAIL;
-    player->pos.x = atof(content[2]); //Need to be change to my_atof
-    player->pos.y = atof(content[3]); //Need to be change to my_atof
-    player->angle = my_atoi(content[5]);
+    player->pos.x = atof(content[2]);
+    player->pos.y = atof(content[3]);
+    player->angle = atof(content[5]);
     if (player->pos.x == ERROR || player->pos.x == ERROR ||
         player->angle == ERROR)
         return EPI_FAIL;
@@ -44,7 +44,7 @@ static size_t read_settings(char **content, settings_t *settings)
 
 static size_t read_line(char *file, game_t *game)
 {
-    char **content = my_str_to_word_array(file, "\n:,");
+    char **content = str_to_array(file, "\n:,");
     int nb_line;
 
     if (content == NULL) {
