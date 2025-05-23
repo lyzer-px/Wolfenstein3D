@@ -42,10 +42,10 @@ typedef enum {
 }button_pause_menu_id_t;
 
 static const button_tab_t button_pause_menu[] = {
-    {"assets/buttons/base/Continue 192x48.png", {0, 0, 192, 48}, {100, 100}},
-    {"assets/buttons/base/Save Game 192x48.png", {0, 0, 192, 48}, {100, 200}},
-    {"assets/buttons/base/Settings 192x48.png", {0, 0, 192, 48}, {100, 300}},
-    {"assets/buttons/base/Exit 192x48.png", {0, 0, 192, 48}, {100, 400}},
+    {"assets/buttons/base/Continue 192x48.png", {0, 0, 192, 48}, {32, 100}},
+    {"assets/buttons/base/Save Game 192x48.png", {0, 0, 192, 48}, {32, 200}},
+    {"assets/buttons/base/Settings 192x48.png", {0, 0, 192, 48}, {32, 300}},
+    {"assets/buttons/base/Exit 192x48.png", {0, 0, 192, 48}, {32, 400}},
     {NULL, {0, 0, 0, 0}, {0, 0}}
 };
 

@@ -54,29 +54,39 @@ void handle_start_menu_event(game_t *g)
 
 void init_start_menu(game_t *game)
 {
-    sfVector2f *pos = malloc(sizeof(sfVector2f));
+    sfVector2f *bg_pos = malloc(sizeof(sfVector2f));
+    sfVector2f *fire_pos = malloc(sizeof(sfVector2f));
+    sfVector2f bg_scale;
+    sfVector2f fire_scale;
     scene_t *scene = game->tab_scene[MENU];
     ressource_t *ressource;
 
-    if (pos == NULL)
-        return;
     create_layer(scene);
     for (int i = 0; button_start_menu[i].path_sprite != NULL; i++)
         add_button_to_menu(scene, button_start_menu[i]);
     scene->function_event = handle_start_menu_event;
-    pos->x = 0;
-    pos->y = DIM_Y;
+    if (bg_pos == NULL || fire_pos == NULL)
+        return;
+    create_layer(scene);
+    fire_pos->x = 0;
+    fire_pos->y = DIM_Y - (FIRE_LINE_SPRITE_HEIGHT * 2);
+    fire_scale.x = 2.3;
+    fire_scale.y = 2;
         if (create_ressource_for_sprite(game, fire_line, "fire_line")
         == EPI_SUCCESS) {
         ressource = find_a_ressouce_from_id(game->ressource, "fire_line");
-        add_sprite_to_scene(pos, scene, 1, ressource);
+        add_sprite_to_scene(fire_pos, scene, 2, ressource);
+        sfSprite_setScale((sfSprite *)ressource->element, fire_scale);
     }
     create_layer(scene);
-    pos->x = 0;
-    pos->y = 0;
+    bg_pos->x = 0;
+    bg_pos->y = 0;
+    bg_scale.x = 0.75;
+    bg_scale.y = 0.75;
         if (create_ressource_for_sprite(game, wallpaper_start, "bg_start")
         == EPI_SUCCESS) {
         ressource = find_a_ressouce_from_id(game->ressource, "bg_start");
-        add_sprite_to_scene(pos, scene, 2, ressource);
+        add_sprite_to_scene(bg_pos, scene, 3, ressource);
+        sfSprite_setScale((sfSprite *)ressource->element, bg_scale);
     }
 }

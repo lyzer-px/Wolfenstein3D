@@ -28,6 +28,7 @@ void handle_pause_menu_event(game_t *g)
 void init_pause_menu(game_t *game)
 {
     sfVector2f *pos = malloc(sizeof(sfVector2f));
+    sfVector2f scale;
     scene_t *scene = game->tab_scene[PAUSE_MENU];
     ressource_t *ressource;
 
@@ -40,9 +41,12 @@ void init_pause_menu(game_t *game)
     create_layer(scene);
     pos->x = 0;
     pos->y = 0;
+    scale.x = 0.65;
+    scale.y = 0.65;
     if (create_ressource_for_sprite(game, wallpaper_pause, "bg_pause")
         == EPI_SUCCESS) {
         ressource = find_a_ressouce_from_id(game->ressource, "bg_pause");
         add_sprite_to_scene(pos, scene, 2, ressource);
+        sfSprite_setScale((sfSprite *)ressource->element, scale);
     }
 }
