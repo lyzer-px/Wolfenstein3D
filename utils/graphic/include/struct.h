@@ -108,6 +108,8 @@ typedef struct player_s {
     sfCircleShape *bloom;
     // the shotgun
     asset_t *shotgun;
+    // the shotgun impact
+    asset_t *impact;
     //the reticle
     asset_t *reticle;
     // player internal animation clock

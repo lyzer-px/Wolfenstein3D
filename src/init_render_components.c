@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <SFML/Graphics.h>
 #include "macro.h"
 #include "rendering.h"
@@ -18,6 +19,23 @@ void init_ray(player_t *player)
     sfRectangleShape_setSize(player->ray, (sfVector2f){1, 1});
     sfRectangleShape_setFillColor(player->ray, sfBlue);
     sfRectangleShape_setOrigin(player->ray, (sfVector2f){2, 2});
+}
+
+static void init_impact(asset_t **impact)
+{
+    (*impact) = calloc(1, sizeof(asset_t));
+
+    if ((*impact) == NULL)
+        return;
+    (*impact)->rect = (sfIntRect){0, 0, 707, 353};
+    (*impact)->sprite = sfSprite_create();
+    (*impact)->texture = sfTexture_createFromFile("assets/impact-frame.png",
+        &(*impact)->rect);
+    if ((*impact)->sprite == NULL || (*impact)->texture == NULL)
+        return;
+    sfSprite_setTexture((*impact)->sprite, (*impact)->texture, sfFalse);
+    sfSprite_setOrigin((*impact)->sprite, (sfVector2f){707 / 2, 353 / 2});
+    sfSprite_setPosition((*impact)->sprite, (sfVector2f){DIM_X / 2, DIM_Y / 2 + 30});
 }
 
 void init_hitbox(player_t *player)
@@ -39,6 +57,7 @@ static int set_positions(player_t *player)
         (sfVector2f){DIM_X / 2, DIM_Y / 2 + 30});
     sfSprite_setOrigin(player->reticle->sprite,
         (sfVector2f){75 / 2, 75 / 2});
+    init_impact(&(player->impact));
     init_hitbox(player);
     init_ray(player);
     player->angle = 0;
