@@ -71,6 +71,8 @@ typedef struct scene_s {
     bool pause : 1;
     // a function where each event of the scene is
     void (*function_event)(struct game_s *);
+    // a function where we set the position of all composant of the scene
+    void (*set_positions)(struct game_s *);
     // id of the scene music
     char *id_music;
     // do we hide the cursor
@@ -143,7 +145,7 @@ struct game_s {
     // how many scene do we have (if you  want to change it we have an macro)
     int nb_scene;
     // which scene do we show
-    int actual_scene;
+    int actual;
     // an array with all scene in it (all texture are create before the loop)
     struct scene_s **tab_scene;
     // stuct which have all information of the setting of the game

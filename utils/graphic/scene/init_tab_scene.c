@@ -26,6 +26,7 @@ scene_t **init_tab_scene(int nb_scene)
             return NULL;
         tab[i]->layer = NULL;
         tab[i]->function_event = void_function;
+        tab[i]->set_positions = void_function;
         tab[i]->id_scene = i + 1;
         tab[i]->pause = true;
         tab[i]->id_music = NULL;

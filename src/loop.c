@@ -24,15 +24,13 @@ int loop(game_t *g)
         if (sfClock_getElapsedTime(g->window->clock).microseconds
             <= ELAPSED_TIME)
             continue;
-        if (g->tab_scene[g->actual_scene]->hide_cursor == true) {
-            sfRenderWindow_setMouseCursorVisible(g->window->window, sfTrue);
-        } else {
-            sfRenderWindow_setMouseCursorVisible(g->window->window, sfFalse);
-        }
+        sfRenderWindow_setMouseCursorVisible(g->window->window,
+            (g->tab_scene[g->actual]->hide_cursor));
+        g->tab_scene[g->actual]->set_positions(g);
         *(g->window->mode) = sfRenderWindow_getSize(g->window->window);
         sfRenderWindow_clear(g->window->window, sfBlack);
         draw_component_of_scene(g->window->window,
-            g->tab_scene[g->actual_scene]);
+            g->tab_scene[g->actual]);
         handle_event(g);
         sfRenderWindow_display(g->window->window);
         sfClock_restart(g->window->clock);
