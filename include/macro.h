@@ -76,6 +76,10 @@ enum name_scene {
     #define BG_ERROR ("background_error")
     #define TEXT_ERROR ("text_error")
 
+            // Music
+    #define ID_MUSIC_MENU ("music_menu")
+    #define ID_MUSIC_GAME ("music_game")
+
 /*
 ** Error on the window
 */

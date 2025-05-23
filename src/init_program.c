@@ -1,44 +1,16 @@
 /*
-** EPITECH PROJECT, 2025
+** EPITECH PROJECT, 2024
 ** wolf3d
 ** File description:
 ** init_program.c
 */
 
 #include <stdlib.h>
+#include <string.h>
 #include "macro.h"
 #include "struct.h"
 #include "project_funct.h"
 #include "libgraphic.h"
-/*
-static sfRectangleShape *create_rect(sfVector2f pos,
-    sfVector2f size, sfColor *color)
-{
-    sfRectangleShape *rect = sfRectangleShape_create();
-
-    sfRectangleShape_setFillColor(rect, *color);
-    sfRectangleShape_setPosition(rect, pos);
-    sfRectangleShape_setSize(rect, size);
-    sfRectangleShape_setOutlineColor(rect, (sfColor){200, 150, 0, 255});
-    sfRectangleShape_setOutlineThickness(rect, 10);
-    return rect;
-}
-
-static void init_menu(scene_t *scene, sfColor *color)
-{
-    component_t *tmp;
-    sfRectangleShape *rect_tmp = NULL;
-
-    for (int y = 1; y < 4; y++) {
-        create_layer(scene);
-        for (int i = 0; i < 3; i++) {
-            rect_tmp = create_rect((sfVector2f){50 * (i + y), 50 * (i + y)},
-                (sfVector2f){40 * (i + y), 40 * (i + y)}, color);
-            add_element_to_scene(rect_tmp, sfRenderWindow_drawRectangleShape,
-                sfRectangleShape_destroy, &scene->layer->component);
-        }
-    }
-}*/
 
 static void create_scenes(game_t *game)
 {
@@ -46,6 +18,9 @@ static void create_scenes(game_t *game)
     create_error_scene(game);
     init_pause_menu(game);
     init_start_menu(game);
+    for (size_t i = 0; i < NB_SCENE; i++)
+        if (game->tab_scene[i]->id_music == NULL)
+            game->tab_scene[i]->id_music = strdup(ID_MUSIC_MENU);
 }
 
 int init_scene(game_t *game)

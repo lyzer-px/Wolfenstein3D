@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <string.h>
 #include "type_id.h"
 #include "libgraphic.h"
 #include "rendering.h"
@@ -42,6 +43,7 @@ void create_game_scene(game_t *game)
     sfVector2f *pos_top = calloc(1, sizeof(sfVector2f));
     sfVector2f *pos_bottom = calloc(1, sizeof(sfVector2f));
 
+    game->tab_scene[GAME]->id_music = strdup(ID_MUSIC_MENU);
     if (pos_bottom == NULL || pos_top == NULL || size == NULL)
         return;
     size->x = DIM_X;

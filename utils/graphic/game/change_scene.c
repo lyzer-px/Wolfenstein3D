@@ -28,8 +28,8 @@ void change_scene(game_t *game, int new_scene)
     music_t *tmp = NULL;
 
     game->actual = new_scene;
-    if (game->id_music != NULL && game->tab_scene[new_scene]->id_music != NULL
-        && strcmp(game->id_music, game->tab_scene[new_scene]->id_music)) {
+    if (game->id_music == NULL || game->tab_scene[new_scene]->id_music == NULL
+        || strcmp(game->id_music, game->tab_scene[new_scene]->id_music)) {
         tmp = find_music(game->music, game->tab_scene[new_scene]->id_music);
         if (tmp == NULL) {
             dprintf(STDERR_FILENO, "Error: didn't find %s\n",
@@ -40,7 +40,7 @@ void change_scene(game_t *game, int new_scene)
             sfMusic_pause(game->music->music);
             free(game->id_music);
         }
-        if (tmp != NULL && tmp->music != NULL) {
+        if (tmp != NULL && tmp->id != NULL) {
             sfMusic_play(tmp->music);
             game->id_music = strdup(tmp->id);
         }
