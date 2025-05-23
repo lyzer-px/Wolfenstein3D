@@ -38,5 +38,5 @@ void init_pause_menu(scene_t *scene)
     create_layer(scene);
     pos->x = 0;
     pos->y = 0;
-    add_sprite_to_scene(pos, scene, wallpaper_pause, "bg_pause");
+    add_sprite_to_scene(pos, scene, wallpaper_pause, "bg_pause", 2);
 }

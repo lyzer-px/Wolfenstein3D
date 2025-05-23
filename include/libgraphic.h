@@ -68,6 +68,9 @@ static const char wallpaper_start[] = "assets/menu/background_menu.png";
 static const char wallpaper_pause[] = "assets/menu/background_menu_pause.jpg";
 static const char fire_line[] = "assets/menu/Fire_line.png";
 
+    #define FIRE_LINE_HEIGHT 599
+    #define FIRE_LINE_WIDTH 417
+    #define FIRE_LINE_SPRITE_HEIGHT 105
 typedef struct sprite_rect_s {
     sfIntRect rect;
     int offset;
@@ -256,6 +259,6 @@ float get_distance(sfVector2f *point_a, sfVector2f *point_b);
 
 // Add a wallpaper at first layer to a scene
 size_t add_sprite_to_scene(sfVector2f *pos, scene_t *scene,
-    const char *texture_path, char *id);
+    const char *texture_path, char *id, int id_layer);
 
 #endif /* LIBGRAPHIC_H */

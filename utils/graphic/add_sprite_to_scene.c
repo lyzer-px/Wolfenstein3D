@@ -11,7 +11,7 @@
 #include "type_id.h"
 
 size_t add_sprite_to_scene(sfVector2f *pos, scene_t *scene,
-    const char *texture_path, char *id)
+    const char *texture_path, char *id, int id_layer)
 {
     ressource_t *ressource;
     component_t *wallpaper;
@@ -31,6 +31,6 @@ size_t add_sprite_to_scene(sfVector2f *pos, scene_t *scene,
         free(ressource);
         return EPI_FAIL;
     }
-    add_a_component_to_layer(wallpaper, scene, 2);
+    add_a_component_to_layer(wallpaper, scene, id_layer);
     return EPI_SUCCESS;
 }
