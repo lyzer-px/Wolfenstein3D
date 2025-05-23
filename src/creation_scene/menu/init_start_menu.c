@@ -49,25 +49,16 @@ void handle_start_menu_event(game_t *g)
             update_sprite_rect((sfSprite *)fire_line->element, rect,
             g->window->clock, 1);
     }
-
 }
 
-void init_start_menu(game_t *game)
+static void set_fire_line(game_t *game, scene_t *scene)
 {
-    sfVector2f *bg_pos = malloc(sizeof(sfVector2f));
     sfVector2f *fire_pos = malloc(sizeof(sfVector2f));
-    sfVector2f bg_scale;
     sfVector2f fire_scale;
-    scene_t *scene = game->tab_scene[MENU];
     ressource_t *ressource;
 
-    create_layer(scene);
-    for (int i = 0; button_start_menu[i].path_sprite != NULL; i++)
-        add_button_to_menu(scene, button_start_menu[i]);
-    scene->function_event = handle_start_menu_event;
-    if (bg_pos == NULL || fire_pos == NULL)
+    if (fire_pos == NULL)
         return;
-    create_layer(scene);
     fire_pos->x = 0;
     fire_pos->y = DIM_Y - (FIRE_LINE_SPRITE_HEIGHT * 2);
     fire_scale.x = 2.3;
@@ -78,7 +69,16 @@ void init_start_menu(game_t *game)
         add_sprite_to_scene(fire_pos, scene, 2, ressource);
         sfSprite_setScale((sfSprite *)ressource->element, fire_scale);
     }
-    create_layer(scene);
+}
+
+static void set_background(game_t *game, scene_t *scene)
+{
+    sfVector2f *bg_pos = malloc(sizeof(sfVector2f));
+    sfVector2f bg_scale;
+    ressource_t *ressource;
+
+    if (bg_pos == NULL)
+        return;
     bg_pos->x = 0;
     bg_pos->y = 0;
     bg_scale.x = 0.75;
@@ -89,4 +89,18 @@ void init_start_menu(game_t *game)
         add_sprite_to_scene(bg_pos, scene, 3, ressource);
         sfSprite_setScale((sfSprite *)ressource->element, bg_scale);
     }
+}
+
+void init_start_menu(game_t *game)
+{
+    scene_t *scene = game->tab_scene[MENU];
+
+    create_layer(scene);
+    for (int i = 0; button_start_menu[i].path_sprite != NULL; i++)
+        add_button_to_menu(scene, button_start_menu[i]);
+    scene->function_event = handle_start_menu_event;
+    create_layer(scene);
+    set_fire_line(game, scene);
+    create_layer(scene);
+    set_background(game, scene);
 }

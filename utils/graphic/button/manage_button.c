@@ -58,7 +58,6 @@ void destroy_button(void *element)
         sfSprite_destroy(button->sprite[i]);
     }
     free(button->texture);
-    //free(button->sprite);
     free(button);
 }
 
