@@ -85,9 +85,9 @@ typedef struct player_s {
 
 typedef struct settings_s {
     // true if the music is playing
-    bool music_played;
+    int music_played;
     // true if the audio effect is playing
-    bool fxaudio_played;
+    int fxaudio_played;
     // is a percentage (100 the music is at maximum)
     short music_nb;
     // is a percentage (100 the audio effect is at maximum)

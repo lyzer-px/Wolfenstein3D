@@ -27,7 +27,8 @@ void handle_start_menu_event(game_t *g)
         if (load_save("1.save", g) == EPI_SUCCESS) {
             g->actual_scene = GAME;
         } else {
-            g->actual_scene = ERROR_SCENE;
+            //g->actual_scene = ERROR_SCENE;
+            g->actual_scene = GAME;
         }
         }
 }
