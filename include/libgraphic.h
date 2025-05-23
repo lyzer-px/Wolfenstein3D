@@ -93,6 +93,18 @@ window_t *create_window(void);
 // Destroy a struct window_t
 void destroy_window(window_t *window);
 
+        // MUSIC
+
+// Create all music by the config file
+void load_config_music(game_t *game);
+
+// Destroy a music
+void destroy_a_music(music_t *music);
+
+// Destroy all music
+void destroy_all_music(game_t *game);
+
+
         // RESSOURCES
 
 // Find a type by a str formated
@@ -133,6 +145,9 @@ scene_t **init_tab_scene(int nb_scene);
 // Add an element to a scene (begin_scene is the begin of components in scene)
 void add_element_to_scene(sfVector2f *pos, ressource_t *ressource,
     component_t **begin);
+
+// Change the scene
+void change_scene(game_t *game, int new_scene);
 
 // Clean a scene
 void clean_scene(scene_t *scene);

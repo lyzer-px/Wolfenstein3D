@@ -38,7 +38,8 @@ SRC 		= 		main.c													\
 					src/save/save_game.c									\
 					src/save/content_check.c								\
 					src/save/name_check.c									\
-					src/save/load_save.c
+					src/save/load_save.c									\
+					src/animate_shotgun.c
 
 OBJ			=		$(SRC:.c=.o)
 
@@ -53,7 +54,8 @@ CPPFLAGS	+=		-lcsfml-network -lcsfml-system -lcsfml-window -lm
 
 DEBUG		=	-g3
 
-LDLIBS +=	-lmy -lgraphic
+LDLIBS +=	-lmy -lgraphic -lcsfml-audio -lcsfml-graphics -lcsfml-network
+LDLIBS +=	-lcsfml-system -lcsfml-window -lm
 
 LDFLAGS	+=	-L.
 
@@ -129,6 +131,8 @@ coding_style: fclean
 		re				\
 		fclean			\
 		clean			\
+		debug_comp		\
+		debug			\
 		tests_run 		\
 		coverage 		\
 		coding_style

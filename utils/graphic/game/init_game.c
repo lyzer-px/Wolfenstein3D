@@ -18,7 +18,7 @@ static void fill_fields(game_t *game)
         return;
     game->nb_scene = NB_SCENE;
     game->ressource = NULL;
-    game->actual_scene = SCENE_START;
+    game->actual = SCENE_START;
     game->tab_scene = init_tab_scene(game->nb_scene);
 }
 
@@ -42,8 +42,8 @@ static void init_settings(game_t *game)
 
 static void init_for_raycast(game_t *game)
 {
-    game->bounds = init_map();
-    if (game->bounds == NULL)
+    game->mini_map = init_map();
+    if (game->mini_map == NULL)
         return;
     game->player = calloc(1, sizeof(player_t));
     init_player(game->player);
@@ -59,6 +59,9 @@ game_t *init_game(void)
     if (game == NULL)
         return NULL;
     game->window = create_window();
+    game->ressource = NULL;
+    game->music = NULL;
+    game->id_music = NULL;
     if (game->window == NULL)
         return nfree(game);
     init_for_raycast(game);

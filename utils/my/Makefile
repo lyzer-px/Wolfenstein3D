@@ -69,7 +69,7 @@ $(NAME):	$(OBJ)
 	@cp $(NAME) ../..
 	@cp $(HEADER) ../../include/
 	@cp $(NAME) ../graphic/
-	@cp $(HEADER) ../graphic/
+	@cp $(HEADER) ../graphic/include/
 #	@ranlib $(LIB_NAME)
 
 clean:
@@ -88,4 +88,5 @@ debug:	re clean
 .PHONY: all				\
 		re				\
 		fclean			\
+		debug			\
 		clean

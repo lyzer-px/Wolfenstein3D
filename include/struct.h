@@ -9,6 +9,7 @@
     #define STRUCT_H
 
     #include <SFML/Graphics.h>
+    #include <SFML/Audio.h>
     #include <stdbool.h>
 
 typedef struct window_s {
@@ -70,18 +71,58 @@ typedef struct scene_s {
     bool pause : 1;
     // a function where each event of the scene is
     void (*function_event)(struct game_s *);
+    // a function where we set the position of all composant of the scene
+    void (*set_positions)(struct game_s *);
+    // id of the scene music
+    char *id_music;
+    // do we hide the cursor
+    bool hide_cursor;
     // a linked list where all the layer are
     struct layer_s *layer;
 } scene_t;
 
-typedef struct player_s {
+
+// the structure for assets, assets are things to be displayed on window
+typedef struct asset_s {
+    // logical entity
+    sfSprite *sprite;
+    // the asset's appearance
+    sfTexture *texture;
+    // the asset's area
+    sfIntRect rect;
+    // the assets position
     sfVector2f pos;
+} asset_t;
+
+// the player structure, contains everything it needs
+typedef struct player_s {
+    // player position
+    sfVector2f pos;
+    // player angle (0, 360)°
     float angle;
+    // the player's body
     sfRectangleShape *hitbox;
+    // a ray which will be both on minimap (blue) and on screen (white)
     sfRectangleShape *ray;
+    // the flashlight
     sfCircleShape *bloom;
+    // the shotgun
+    asset_t *shotgun;
+    //the reticle
+    asset_t *reticle;
+    // player internal animation clock
+    sfClock *clock;
+    // states
     bool flashlight_on;
+    bool firing;
+    bool running;
 } player_t;
+
+typedef struct music_s {
+    char *id;
+    sfMusic *music;
+    struct music_s *next;
+} music_t;
 
 typedef struct settings_s {
     // true if the music is playing
@@ -95,19 +136,26 @@ typedef struct settings_s {
 } settings_t;
 
 struct game_s {
+    // the player
     player_t *player;
-    sfRectangleShape **bounds;
+    // the mini map
+    sfRectangleShape **mini_map;
+    // the rectangle which will be used to draw both the rays and the walls
     sfRectangleShape *rect;
     // how many scene do we have (if you  want to change it we have an macro)
     int nb_scene;
     // which scene do we show
-    int actual_scene;
+    int actual;
     // an array with all scene in it (all texture are create before the loop)
     struct scene_s **tab_scene;
     // stuct which have all information of the setting of the game
     settings_t *settings;
     // stuct window where we have each window's information
     struct window_s *window;
+    // tab with all music in it
+    music_t *music;
+    // id of the actual music
+    char *id_music;
     // all ressource
     struct ressource_s *ressource;
 };

@@ -37,8 +37,11 @@ scene_t **init_tab_scene(size_t nb_scene)
             return NULL;
         tab[i]->layer = NULL;
         tab[i]->function_event = void_function;
+        tab[i]->set_positions = void_function;
         tab[i]->id_scene = i + 1;
         tab[i]->pause = true;
+        tab[i]->id_music = NULL;
+        tab[i]->hide_cursor = false;
     }
     tab[nb_scene - 1]->pause = false;
     return tab;

@@ -6,6 +6,7 @@
 */
 
 #include <stdio.h>
+#include <unistd.h>
 #include "type_id.h"
 #include "macro.h"
 
@@ -17,6 +18,7 @@ void *create_element(int type, char *filename)
         return sfTexture_createFromFile(filename, NULL);
     if (functions_by_type[type].creation_fromfile != NULL)
         return functions_by_type[type].creation_fromfile(filename);
-    dprintf(2, "Error: Cannot create the element \"%s\"", filename);
+    dprintf(STDERR_FILENO, "Error: Cannot create the element \"%s\"",
+        filename);
     return NULL;
 }

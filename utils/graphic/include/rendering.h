@@ -21,14 +21,14 @@
 
 
     #define TILE_SIZE 10 // the size of tiles in the minimap
-    #define PLAYER_SIZE 10 // the size of the player's rectangle on minimap
+    #define PLAYER_SIZE 5 // the size of the player's rectangle on minimap
     #define RECT_SIZE 64 // the size of the rectangles used to make walls
     #define MAP_WIDTH 16
     #define MAP_HEIGHT 16
     #define TILE_THICKNESS 10 // The thickness of tile outlines
 
-    #define PLAYER_SPEED 0.1
-    #define ROTATION_SPEED 0.2
+    #define PLAYER_SPEED 0.7
+    #define ROTATION_SPEED 1.5
 
     // Transposes real coords on the int map
     #define ON_INT_MAP(a) (((int)(a) / TILE_SIZE))
@@ -56,18 +56,24 @@ static const int map[MAP_HEIGHT][MAP_WIDTH] = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 };
 
+
+// the minimap's tile structure
 typedef struct tile_s {
+    //the rectangle to be displayed
     sfRectangleShape *rect;
+    // boolaean to tell is the tile must be a wall
     bool wall;
 } tile_t;
-sfRectangleShape *create_bg(sfVector2f size);
 
-sfBool is_wall(int x, int y);
+sfRectangleShape *create_bg(sfVector2f size);  // creates a rectangle of size
+
+sfBool is_wall(int x, int y); // returns true if the coords are on a wall
+
 int launch_game(void); // Launches the game
-void player_fwd(player_t *player); // player angle and directional input
+void player_fwd(player_t *player, game_t *game); // player input detection
 
 // function to negate movement when collision happens
-void player_repel(player_t *player);
+void player_repel(player_t *player, game_t *game);
 //
 
 void init_ray(player_t *player); // Inits ray propreties
@@ -80,6 +86,9 @@ void init_tile(sfRectangleShape *tile, size_t i, size_t j);
 void init_hitbox(player_t *player); // Inits player hitbox on minimap
 sfRectangleShape **init_map(void); // Inits the map to be shown on the screen
 
-void tick_game(game_t *game);
+void tick_game(game_t *game); // the game tick function
+
+void shotgun_move(game_t *game); // shotgun walking animation
+void shotgun_shoot(game_t *game); // shotgun firing animation
 
 #endif

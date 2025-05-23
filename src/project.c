@@ -19,6 +19,7 @@ int wolf3d(void)
     game_t *game = init_game();
     int status = EPI_SUCCESS;
 
+    load_config_music(game);
     load_config_file(game);
     status = init_scene(game);
     destroy_game(game);

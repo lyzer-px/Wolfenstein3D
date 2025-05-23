@@ -16,7 +16,10 @@ void destroy_game(game_t *game)
     destroy_window(game->window);
     free(game->settings);
     free_tab_scene(game);
+    destroy_all_music(game);
     destroy_all_ressource(&(game->ressource));
+    if (game->id_music != NULL)
+        free(game->id_music);
     free(game);
     return;
 }
