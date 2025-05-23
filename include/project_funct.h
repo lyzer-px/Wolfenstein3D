@@ -51,4 +51,10 @@ void init_start_menu(scene_t *scene);
 // Save the game status
 int save_game(char *filename, game_t *game);
 
+size_t wrong_name(char *name);
+
+size_t read_content(char *file, game_t *game);
+
+size_t load_save(char *filename, game_t *game);
+
 #endif /* PROJECT_H */

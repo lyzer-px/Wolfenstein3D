@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include "project_funct.h"
 #include "libgraphic.h"
 #include "macro.h"
 
@@ -20,6 +21,15 @@ void handle_start_menu_event(game_t *g)
     if (is_button_clicked(&button_start_menu[SETTING_BUTTON_FROM_MENU],
         sfMouse_getPositionRenderWindow(g->window->window), &g->window->event))
         g->actual_scene = SETTING;
+    if (is_button_clicked(&button_start_menu[LOAD_SAVE],
+        sfMouse_getPositionRenderWindow(g->window->window),
+        &g->window->event)) {
+        if (load_save("1.save", g) == EPI_SUCCESS) {
+            g->actual_scene = GAME;
+        } else {
+            g->actual_scene = ERROR_SCENE;
+        }
+        }
 }
 
 void init_start_menu(scene_t *scene)

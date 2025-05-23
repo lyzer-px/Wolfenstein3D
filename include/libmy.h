@@ -62,4 +62,10 @@ int my_getnbr(char const *str);
 
 int my_strncmp(char const *s1, char const *s2, int n);
 
+int str_is_same(const char *str1, const char *str2);
+
+int str_n_is_same(const char *str1, const char *str2, int n);
+
+int my_atoi(const char *str);
+
 #endif /* LIBMY_H */
