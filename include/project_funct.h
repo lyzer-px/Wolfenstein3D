@@ -1,6 +1,6 @@
 /*
-** EPITECH PROJECT, 2024
-** lib
+** EPITECH PROJECT, 2025
+** Wolf3D
 ** File description:
 ** project_funct.h
 */
@@ -43,10 +43,10 @@ void create_backgound_error_ressource(game_t *game);
 void create_text_error_ressource(game_t *game);
 
 // Initialise pause menu
-void init_pause_menu(scene_t *scene);
+void init_pause_menu(game_t *game);
 
 // Initialise start menu
-void init_start_menu(scene_t *scene);
+void init_start_menu(game_t *game);
 
 // Save the game status
 int save_game(char *filename, game_t *game);

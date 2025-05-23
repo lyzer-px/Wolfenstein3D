@@ -11,9 +11,17 @@
     #include <SFML/Graphics.h>
     #include "struct.h"
 
+typedef enum {
+    OFF,
+    HOVER,
+    ON,
+    NB_STATE
+}button_state_t;
 typedef struct button_s {
-    sfTexture *texture;
-    sfSprite *sprite;
+    sfTexture *texture[NB_STATE];
+    sfSprite *sprite[NB_STATE];
+    sfSprite *current_sprite;
+    button_state_t *current_state;
     sfIntRect area;
     sfVector2f *pos;
 } button_t;
@@ -34,10 +42,10 @@ typedef enum {
 }button_pause_menu_id_t;
 
 static const button_tab_t button_pause_menu[] = {
-    {"assets/buttons/Continue 192x48.png", {0, 0, 192, 48}, {100, 100}},
-    {"assets/buttons/Save Game 192x48.png", {0, 0, 192, 48}, {100, 200}},
-    {"assets/buttons/Settings 192x48.png", {0, 0, 192, 48}, {100, 300}},
-    {"assets/buttons/Exit 192x48.png", {0, 0, 192, 48}, {100, 400}},
+    {"assets/buttons/base/Continue 192x48.png", {0, 0, 192, 48}, {32, 100}},
+    {"assets/buttons/base/Save Game 192x48.png", {0, 0, 192, 48}, {32, 200}},
+    {"assets/buttons/base/Settings 192x48.png", {0, 0, 192, 48}, {32, 300}},
+    {"assets/buttons/base/Exit 192x48.png", {0, 0, 192, 48}, {32, 400}},
     {NULL, {0, 0, 0, 0}, {0, 0}}
 };
 
@@ -49,12 +57,25 @@ typedef enum {
 }button_start_menu_id_t;
 
 static const button_tab_t button_start_menu[] = {
-    {"assets/buttons/Start 192x48.png", {0, 0, 192, 48}, {380, 100}},
-    {"assets/buttons/Save 192x48.png", {0, 0, 192, 48}, {380, 200}},
-    {"assets/buttons/Settings 192x48.png", {0, 0, 192, 48}, {380, 300}},
-    {"assets/buttons/Exit 192x48.png", {0, 0, 192, 48}, {380, 400}},
+    {"assets/buttons/base/Start 192x48.png", {0, 0, 192, 48}, {380, 100}},
+    {"assets/buttons/base/Save 192x48.png", {0, 0, 192, 48}, {380, 200}},
+    {"assets/buttons/base/Settings 192x48.png", {0, 0, 192, 48}, {380, 300}},
+    {"assets/buttons/base/Exit 192x48.png", {0, 0, 192, 48}, {380, 400}},
     {NULL, {0, 0, 0, 0}, {0, 0}}
 };
+
+static const char wallpaper_start[] = "assets/menu/background_menu.png";
+static const char wallpaper_pause[] = "assets/menu/background_menu_pause.jpg";
+static const char fire_line[] = "assets/menu/Fire_line.png";
+
+    #define FIRE_LINE_HEIGHT 599
+    #define FIRE_LINE_WIDTH 417
+    #define FIRE_LINE_SPRITE_HEIGHT 105
+typedef struct sprite_rect_s {
+    sfIntRect rect;
+    int offset;
+    int max_value;
+}sprite_rect_t;
 
 /*
 ** FUNCTION
@@ -217,5 +238,30 @@ bool is_button_clicked(const button_tab_t *button, sfVector2i mouse,
 
 // Add button to a menu
 void add_button_to_menu(scene_t *scene, button_tab_t button_def);
+
+void draw_rectangle(sfRenderWindow *window, sfVector2f position,
+    sfVector2f size);
+
+void my_draw_circle(sfRenderWindow *wind, sfVector2f center, float radius);
+
+void update_sprite_rect(sfSprite *sprite, sprite_rect_t *sprite_rect,
+    sfClock *clock, double nb_seconds);
+
+sfSprite *create_sprite(sfTexture *texture);
+
+sfText *create_text(sfFont *font, char *string, int size);
+
+sfMusic *create_music(const char *music_path);
+
+sfVector2f *get_movement(sfVector2f *start, sfVector2f *end);
+
+float get_distance(sfVector2f *point_a, sfVector2f *point_b);
+
+// Add a wallpaper at first layer to a scene
+size_t add_sprite_to_scene(sfVector2f *pos, scene_t *scene, int id_layer,
+    ressource_t *ressource);
+
+size_t create_ressource_for_sprite(game_t *game,
+    const char *texture_path, char *id);
 
 #endif /* LIBGRAPHIC_H */
