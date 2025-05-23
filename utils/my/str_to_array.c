@@ -15,7 +15,7 @@
 static char **create_tab(char *str, char *sep)
 {
     char **tab;
-    int count = 2;
+    int count = 1;
 
     for (int i = 0; str[i] != '\0'; i++) {
         if (char_in_str(str[i], sep)) {

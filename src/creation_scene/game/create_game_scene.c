@@ -54,6 +54,4 @@ void create_game_scene(game_t *game)
     game->tab_scene[GAME]->function_event = tick_game;
     create_game_retangles(game, size, pos_bottom, pos_top);
     free(size);
-    free(pos_top);
-    free(pos_bottom);
 }
