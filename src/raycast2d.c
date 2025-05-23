@@ -101,6 +101,7 @@ void tick_game(game_t *game)
     sfRenderWindow_drawSprite(window, game->player->shotgun->sprite, NULL);
     handle_exceptions(game);
     sfRenderWindow_drawSprite(window, game->player->reticle->sprite, NULL);
+    sfRenderWindow_drawSprite(window, game->player->hud->sprite, NULL);
     draw_minimap(window, game->player, game->mini_map);
 }
 
