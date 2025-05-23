@@ -10,10 +10,10 @@
 
 static void move_rect(sprite_rect_t *sprite_rect)
 {
-    if (sprite_rect->rect.left >= sprite_rect->max_value) {
-        sprite_rect->rect.left = 0;
+    if (sprite_rect->rect.top >= sprite_rect->max_value) {
+        sprite_rect->rect.top = 0;
     } else {
-        sprite_rect->rect.left += sprite_rect->offset;
+        sprite_rect->rect.top += sprite_rect->offset;
     }
 }
 

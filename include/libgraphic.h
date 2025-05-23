@@ -66,6 +66,7 @@ static const button_tab_t button_start_menu[] = {
 
 static const char wallpaper_start[] = "assets/menu/background_menu.png";
 static const char wallpaper_pause[] = "assets/menu/background_menu_pause.jpg";
+static const char fire_line[] = "assets/menu/Fire_line.png";
 
 typedef struct sprite_rect_s {
     sfIntRect rect;
@@ -254,7 +255,7 @@ sfVector2f *get_movement(sfVector2f *start, sfVector2f *end);
 float get_distance(sfVector2f *point_a, sfVector2f *point_b);
 
 // Add a wallpaper at first layer to a scene
-size_t add_wallpaper_to_scene(scene_t *scene, const char *texture_path,
-    char *id);
+size_t add_sprite_to_scene(sfVector2f *pos, scene_t *scene,
+    const char *texture_path, char *id);
 
 #endif /* LIBGRAPHIC_H */

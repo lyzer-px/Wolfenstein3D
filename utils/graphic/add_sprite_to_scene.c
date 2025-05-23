@@ -10,10 +10,9 @@
 #include "macro.h"
 #include "type_id.h"
 
-size_t add_wallpaper_to_scene(scene_t *scene, const char *texture_path,
-    char *id)
+size_t add_sprite_to_scene(sfVector2f *pos, scene_t *scene,
+    const char *texture_path, char *id)
 {
-    sfVector2f *pos = malloc(sizeof(sfVector2f));
     ressource_t *ressource;
     component_t *wallpaper;
     sfTexture *texture = sfTexture_createFromFile(texture_path, NULL);
@@ -22,15 +21,16 @@ size_t add_wallpaper_to_scene(scene_t *scene, const char *texture_path,
     if (sprite == NULL)
         return EPI_FAIL;
     ressource = create_ressource(id, sprite, SPRITE);
-    if (ressource == NULL)
+    if (ressource == NULL) {
+        free(sprite);
         return EPI_FAIL;
-    if (pos == NULL)
-        return EPI_FAIL;
-    pos->x = 0;
-    pos->y = 0;
+    }
     wallpaper = create_component(pos, ressource);
-    if (wallpaper == NULL)
+    if (wallpaper == NULL) {
+        free(sprite);
+        free(ressource);
         return EPI_FAIL;
+    }
     add_a_component_to_layer(wallpaper, scene, 2);
     return EPI_SUCCESS;
 }
