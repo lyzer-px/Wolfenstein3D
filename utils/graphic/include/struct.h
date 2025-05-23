@@ -106,6 +106,8 @@ typedef struct player_s {
     sfRectangleShape *ray;
     // the flashlight
     sfCircleShape *bloom;
+    // player info display
+    asset_t *hud;
     // the shotgun
     asset_t *shotgun;
     // the shotgun impact

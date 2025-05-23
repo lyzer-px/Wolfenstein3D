@@ -24,13 +24,12 @@ void init_ray(player_t *player)
 static void init_impact(player_t *player)
 {
     player->impact = calloc(1, sizeof(asset_t));
-
     if (player->impact == NULL)
         return;
     player->impact->rect = (sfIntRect){0, 0, 707, 353};
     player->impact->sprite = sfSprite_create();
-    player->impact->texture = sfTexture_createFromFile("assets/impact-frame.png",
-        &player->impact->rect);
+    player->impact->texture =
+    sfTexture_createFromFile("assets/impact-frame.png", &player->impact->rect);
     if (player->impact->sprite == NULL || player->impact->texture == NULL)
         return;
     sfSprite_setTexture(player->impact->sprite,
@@ -44,7 +43,6 @@ static void init_impact(player_t *player)
 static void init_hud(player_t *player)
 {
     player->hud = calloc(1, sizeof(asset_t));
-
     if (player->hud == NULL)
         return;
     player->hud->rect = (sfIntRect){0, 0, 640, 77};
@@ -56,7 +54,9 @@ static void init_hud(player_t *player)
     sfSprite_setTexture(player->hud->sprite,
         player->hud->texture, sfFalse);
     sfSprite_setPosition(player->hud->sprite,
-        (sfVector2f){0, DIM_Y - 100});
+        (sfVector2f){80, DIM_Y - 90});
+    sfSprite_setScale(player->hud->sprite,
+        (sfVector2f){1.25, 1.25});
 }
 
 void init_hitbox(player_t *player)
@@ -73,12 +73,12 @@ void init_hitbox(player_t *player)
 static int set_positions(player_t *player)
 {
     sfSprite_setPosition(player->shotgun->sprite,
-        (sfVector2f){DIM_X / 2 - 90, DIM_Y - 170});
+        (sfVector2f){DIM_X / 2 - 90, DIM_Y - 250});
     sfSprite_setPosition(player->reticle->sprite,
         (sfVector2f){DIM_X / 2, DIM_Y / 2 + 30});
     sfSprite_setOrigin(player->reticle->sprite,
         (sfVector2f){75 / 2, 75 / 2});
-    init_impact(&(player->impact));
+    init_impact(player);
     init_hitbox(player);
     init_ray(player);
     init_hud(player);
