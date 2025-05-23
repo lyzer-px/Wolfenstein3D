@@ -8,12 +8,10 @@
 #include <SFML/Audio.h>
 #include <SFML/Graphics.h>
 
-sfSprite *create_sprite(char *texture_path)
+sfSprite *create_sprite(sfTexture* texture)
 {
-    sfTexture* texture;
     sfSprite *sprite;
 
-    texture = sfTexture_createFromFile(texture_path, NULL);
     if (!texture)
         return NULL;
     sprite = sfSprite_create();

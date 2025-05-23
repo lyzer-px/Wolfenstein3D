@@ -28,4 +28,6 @@ void init_start_menu(scene_t *scene)
     for (int i = 0; button_start_menu[i].path_sprite != NULL; i++)
         add_button_to_menu(scene, button_start_menu[i]);
     scene->function_event = handle_start_menu_event;
+    create_layer(scene);
+    add_wallpaper_to_scene(scene, wallpaper_start, "bg_start");
 }

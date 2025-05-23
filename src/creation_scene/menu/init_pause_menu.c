@@ -31,4 +31,6 @@ void init_pause_menu(scene_t *scene)
     for (int i = 0; button_pause_menu[i].path_sprite != NULL; i++)
         add_button_to_menu(scene, button_pause_menu[i]);
     scene->function_event = handle_pause_menu_event;
+    create_layer(scene);
+    add_wallpaper_to_scene(scene, wallpaper_pause, "bg_pause");
 }

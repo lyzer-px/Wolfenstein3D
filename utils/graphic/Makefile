@@ -77,7 +77,8 @@ SRC 		= 		component/create_component.c						    \
 					update_sprite_rect.c									\
 					create_object.c											\
 					get_movement.c											\
-					get_distance.c
+					get_distance.c											\
+					add_wallpaper.c
 
 OBJ			=		$(SRC:.c=.o)
 
