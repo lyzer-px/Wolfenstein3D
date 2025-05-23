@@ -21,21 +21,42 @@ void init_ray(player_t *player)
     sfRectangleShape_setOrigin(player->ray, (sfVector2f){2, 2});
 }
 
-static void init_impact(asset_t **impact)
+static void init_impact(player_t *player)
 {
-    (*impact) = calloc(1, sizeof(asset_t));
+    player->impact = calloc(1, sizeof(asset_t));
 
-    if ((*impact) == NULL)
+    if (player->impact == NULL)
         return;
-    (*impact)->rect = (sfIntRect){0, 0, 707, 353};
-    (*impact)->sprite = sfSprite_create();
-    (*impact)->texture = sfTexture_createFromFile("assets/impact-frame.png",
-        &(*impact)->rect);
-    if ((*impact)->sprite == NULL || (*impact)->texture == NULL)
+    player->impact->rect = (sfIntRect){0, 0, 707, 353};
+    player->impact->sprite = sfSprite_create();
+    player->impact->texture = sfTexture_createFromFile("assets/impact-frame.png",
+        &player->impact->rect);
+    if (player->impact->sprite == NULL || player->impact->texture == NULL)
         return;
-    sfSprite_setTexture((*impact)->sprite, (*impact)->texture, sfFalse);
-    sfSprite_setOrigin((*impact)->sprite, (sfVector2f){707 / 2, 353 / 2});
-    sfSprite_setPosition((*impact)->sprite, (sfVector2f){DIM_X / 2, DIM_Y / 2 + 30});
+    sfSprite_setTexture(player->impact->sprite,
+        player->impact->texture, sfFalse);
+    sfSprite_setOrigin(player->impact->sprite,
+        (sfVector2f){707 / 2, 353 / 2});
+    sfSprite_setPosition(player->impact->sprite,
+        (sfVector2f){DIM_X / 2, DIM_Y / 2 + 30});
+}
+
+static void init_hud(player_t *player)
+{
+    player->hud = calloc(1, sizeof(asset_t));
+
+    if (player->hud == NULL)
+        return;
+    player->hud->rect = (sfIntRect){0, 0, 640, 77};
+    player->hud->sprite = sfSprite_create();
+    player->hud->texture = sfTexture_createFromFile("assets/HUD.png",
+        &player->hud->rect);
+    if (player->hud->sprite == NULL || player->hud->texture == NULL)
+        return;
+    sfSprite_setTexture(player->hud->sprite,
+        player->hud->texture, sfFalse);
+    sfSprite_setPosition(player->hud->sprite,
+        (sfVector2f){0, DIM_Y - 100});
 }
 
 void init_hitbox(player_t *player)
@@ -60,6 +81,7 @@ static int set_positions(player_t *player)
     init_impact(&(player->impact));
     init_hitbox(player);
     init_ray(player);
+    init_hud(player);
     player->angle = 0;
     player->pos.x = 20;
     player->pos.y = 30;
