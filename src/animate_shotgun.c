@@ -36,7 +36,6 @@ void shotgun_shoot(game_t *game)
     float scale = 1 / (distance / 1.5);
 
     scale = scale > 1 ? 1 : scale;
-    printf("scale : %f\n", scale);
     game->player->firing = true;
     game->player->shotgun->rect.left = 230;
     if (sfClock_getElapsedTime(game->player->clock).microseconds >= 200000) {
