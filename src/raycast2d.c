@@ -15,16 +15,9 @@ const sfColor sfGrey = {190, 190, 190, 255};
 
 float cast_single_ray(player_t *player, float angle)
 {
-    sfVector2f ray_direction = {- sinf(RAD(angle)), cosf(RAD(angle))};
-    sfVector2f ray_pos = player->pos;
+    sfVector2f ray_dir = {sinf(RAD(angle)), cosf(RAD(angle))};
+    sfVector2f ray_start = player->pos;
 
-    while (!is_wall(ON_INT_MAP(ray_pos.x), ON_INT_MAP(ray_pos.y))) {
-        ray_pos.x += ray_direction.x * 0.05;
-        ray_pos.y += ray_direction.y * 0.05;
-    }
-    return (sqrtf(SQUARED(ray_pos.x - player->pos.x) +
-        SQUARED(ray_pos.y - player->pos.y))) *
-        (cosf(RAD(player->angle) - RAD(angle)));
 }
 
 static void set_rect(float distance, sfRectangleShape *rect,

@@ -105,6 +105,7 @@ static int set_propreties(player_t *player)
         player->shotgun->texture, sfFalse);
     sfSprite_setScale(player->shotgun->sprite, (sfVector2f){2, 2});
     sfSprite_setTextureRect(player->shotgun->sprite, player->shotgun->rect);
+    player->camera_plane = (sfVector2f){0, 0.66};
     return set_positions(player);
 }
 
