@@ -37,7 +37,7 @@ static void set_rect(float distance, sfRectangleShape *rect,
     rect_height;
     if (rect_height < 0)
         rect_height = SCREEN_HEIGHT;
-    sfRectangleShape_setSize(rect, (sfVector2f){(SCREEN_WIDTH / 240),
+    sfRectangleShape_setSize(rect, (sfVector2f){(SCREEN_WIDTH / 200),
         rect_height});
     sfRectangleShape_setFillColor(rect, player->flashlight_on ? sfWhite :
         sfGrey);
