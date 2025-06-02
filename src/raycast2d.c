@@ -41,7 +41,7 @@ static void set_rect(float distance, sfRectangleShape *rect,
         rect_height});
     sfRectangleShape_setFillColor(rect, player->flashlight_on ? sfWhite :
         sfGrey);
-    sfRectangleShape_setPosition(rect, (sfVector2f){(ray_idx * RECT_SIZE) / 6,
+    sfRectangleShape_setPosition(rect, (sfVector2f){(ray_idx * RECT_SIZE),
         ((float)SCREEN_HEIGHT - rect_height) / 2});
 }
 
