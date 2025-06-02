@@ -34,8 +34,8 @@
     #define ON_INT_MAP(a) (((int)(a) / TILE_SIZE))
     //
 
-    #define SCREEN_WIDTH 800
-    #define SCREEN_HEIGHT 600
+    #define SCREEN_WIDTH (1920)
+    #define SCREEN_HEIGHT (1080)
 
 static const int map[MAP_HEIGHT][MAP_WIDTH] = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
