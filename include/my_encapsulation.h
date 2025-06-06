@@ -10,46 +10,36 @@
 
     #include <SFML/Graphics.h>
 
-    // CIRCLE
 void set_position_circle(void *circle, sfVector2f * position);
 void draw_circle(sfRenderWindow *window, void *circle, sfRenderStates *states);
 void destroy_circle(void *circle);
 
-    // FONT
 void destroy_font(void *font);
 
-    // IMAGE
 void destroy_image(void *image);
 
-    // RECTANGLESHAPE
 void set_position_rectangleshape(void *rectangle, sfVector2f * position);
 void draw_rectangleshape(sfRenderWindow *window, void *rectangle,
     sfRenderStates *states);
 void destroy_rectangleshape(void *rectangle);
 
-    // SPRITE
 void set_position_sprite(void *sprite, sfVector2f * position);
 void draw_sprite(sfRenderWindow *window, void *sprite, sfRenderStates *states);
 void destroy_sprite(void *sprite);
 
-    // TEXT
 void set_position_text(void *text, sfVector2f * position);
 void draw_text(sfRenderWindow *window, void *text, sfRenderStates *states);
 void destroy_text(void *text);
 
-    // TEXTURE
 void destroy_texture(void *texture);
 
-    // TRANSFORMABLE
 void set_position_transformable(void *obj, sfVector2f * position);
 void destroy_transformable(void *obj);
 
-    // VERTEX ARRAY
 void draw_vertexarray(sfRenderWindow *window,
     void *vertexarray, sfRenderStates *states);
 void destroy_vertexarray(void *vertexarray);
 
-    // View
 void destroy_view(void *view);
 
 #endif /* MY_ENCAPSULATION_H */
