@@ -100,10 +100,6 @@ typedef struct player_s {
     sfVector2f pos;
     // player angle (0, 360)°
     float angle;
-    // player direction
-    sfVector2f dir;
-    // camera plane
-    sfVector2f camera_plane;
     // the player's body
     sfRectangleShape *hitbox;
     // a ray which will be both on minimap (blue) and on screen (white)
