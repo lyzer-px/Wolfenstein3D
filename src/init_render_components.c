@@ -5,6 +5,7 @@
 ** inits.c
 */
 
+#include <SFML/System/Vector2.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <SFML/Graphics.h>
@@ -105,6 +106,8 @@ static int set_propreties(player_t *player)
         player->shotgun->texture, sfFalse);
     sfSprite_setScale(player->shotgun->sprite, (sfVector2f){2, 2});
     sfSprite_setTextureRect(player->shotgun->sprite, player->shotgun->rect);
+    player->direction = (sfVector2f){.x = -1, .y = 0};
+    player->cam_plane = (sfVector2f){.x = 0, 0.66};
     return set_positions(player);
 }
 

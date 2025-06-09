@@ -9,22 +9,14 @@
 #include <stdio.h>
 #include <SFML/Graphics.h>
 #include "rendering.h"
+#include "struct.h"
 #include "macro.h"
 
 const sfColor sfGrey = {190, 190, 190, 255};
 
 float cast_single_ray(player_t *player, float angle)
 {
-    sfVector2f ray_direction = {- sinf(RAD(angle)), cosf(RAD(angle))};
-    sfVector2f ray_pos = player->pos;
-
-    while (!is_wall(ON_INT_MAP(ray_pos.x), ON_INT_MAP(ray_pos.y))) {
-        ray_pos.x += ray_direction.x * 0.05;
-        ray_pos.y += ray_direction.y * 0.05;
-    }
-    return (sqrtf(SQUARED(ray_pos.x - player->pos.x) +
-        SQUARED(ray_pos.y - player->pos.y))) *
-        (cosf(RAD(player->angle) - RAD(angle)));
+    return 0.0f;
 }
 
 static void set_rect(float distance, sfRectangleShape *rect,
@@ -65,8 +57,8 @@ static void draw_bloom(sfRenderWindow *window, sfCircleShape *circle)
         sfCircleShape_setRadius(circle, radius * i);
         sfCircleShape_setOrigin(circle, (sfVector2f){(radius * i),
             (radius * i)});
-        sfCircleShape_setPosition(circle, (sfVector2f){(DIM_X / 2),
-            (DIM_Y / 2) + 25});
+        sfCircleShape_setPosition(circle, (sfVector2f){((float)DIM_X / 2),
+            ((float)DIM_Y / 2) + 25});
         sfLighted.a -= 30;
         sfRenderWindow_drawCircleShape(window, circle, NULL);
     }
@@ -85,17 +77,26 @@ static void handle_exceptions(game_t *game)
 
 void tick_game(game_t *game)
 {
-    float distance = 0;
-    float angle;
+    double camera_x = 0;
+    sfVector2f ray_dir = {};
     sfRenderWindow *window = game->window->window;
+    sfVector2i map = {};
+    sfVector2d side_dist = {};
+    sfVector2d delta_dist = {};
+    double perp_wall_dist = 0;
+    sfVector2i step = {0};
+
 
     if (game->player == NULL || window == NULL)
         return;
-    for (double i = 0; i < DEG(FOV); i += 0.25) {
-        angle = (game->player->angle - DEG(FOV / 2) + i);
-        distance = cast_single_ray(game->player, angle);
-        set_rect(distance, game->rect, i, game->player);
-        sfRenderWindow_drawRectangleShape(window, game->rect, NULL);
+    for (double x = 0; x < SCREEN_WIDTH; x++) {
+        camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
+        ray_dir.x = game->player->direction.x;
+        ray_dir.y = game->player->direction.y;
+        map.x = ON_INT_MAP(game->player->pos.x);
+        map.y = ON_INT_MAP(game->player->pos.y);
+        delta_dist.x = (ray_dir.x == 0) ? 1e30 : abs(1 / ray_dir.x);
+        delta_dist.x = (ray_dir.x == 0) ? 1e30 : abs(1 / ray_dir.x);
     }
     player_fwd(game->player, game);
     sfRenderWindow_drawSprite(window, game->player->shotgun->sprite, NULL);
@@ -111,12 +112,3 @@ int end_game(sfRenderWindow *window)
     return EXIT_SUCCESS;
 }
 
-sfRectangleShape *create_bg(sfVector2f size)
-{
-    sfRectangleShape *bg = sfRectangleShape_create();
-
-    if (bg == NULL)
-        return NULL;
-    sfRectangleShape_setSize(bg, size);
-    return bg;
-}

@@ -17,6 +17,12 @@ sfBool is_wall(int x, int y)
     return map[y][x];
 }
 
+static void rotate_vector(sfVector2f *v, float angle)
+{
+    v->x = ((v->x * cosf(angle)) - (v->y * sin(angle)));
+    v->y = ((v->x * sinf(angle)) + (cosf(angle) * v->y));
+}
+
 void player_fwd(player_t *player, game_t *game)
 {
     sfVector2f direction = {- sinf(RAD(player->angle)),
@@ -37,6 +43,8 @@ void player_fwd(player_t *player, game_t *game)
     }
     player->angle -= sfKeyboard_isKeyPressed(sfKeyQ) * ROTATION_SPEED;
     player->angle += sfKeyboard_isKeyPressed(sfKeyD) * ROTATION_SPEED;
+    rotate_vector(player->direction, player->angle);
+    rotate_vector(player->cam_plane, player->angle);
     player->angle = player->angle > 360 ? 0 : player->angle;
     player->angle = player->angle < 0 ? 360 : player->angle;
 }

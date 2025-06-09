@@ -12,6 +12,11 @@
     #include <SFML/Audio.h>
     #include <stdbool.h>
 
+typedef struct sfVector2d_s {
+    double x;
+    double y;
+} sfVector2d;
+
 typedef struct window_s {
     bool full_screen : 1;
     int frame;
@@ -65,8 +70,6 @@ typedef struct asset_s {
 typedef struct player_s {
     sfVector2f pos;
     sfVector2f direction;
-    sfVector2f cam_plane;
-    float angle;
     sfRectangleShape *hitbox;
     sfRectangleShape *ray;
     sfCircleShape *bloom;
