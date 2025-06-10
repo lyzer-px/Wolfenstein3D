@@ -66,6 +66,7 @@ typedef struct player_s {
     sfVector2f pos;
     sfVector2f direction;
     sfVector2f cam_plane;
+    float angle;
     sfRectangleShape *hitbox;
     sfRectangleShape *ray;
     sfCircleShape *bloom;
@@ -74,7 +75,6 @@ typedef struct player_s {
     asset_t *impact;
     asset_t *reticle;
     sfClock *clock;
-    float angle;
     bool flashlight_on;
     bool firing;
     bool running;

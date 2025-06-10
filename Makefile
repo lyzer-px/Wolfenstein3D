@@ -45,7 +45,8 @@ OBJ			=		$(SRC:.c=.o)
 
 NAME		=		wolf3d
 
-CFLAGS		=		-Wall -Wextra -Wpedantic -Werror
+CFLAGS		=		-Wall -Wextra -Wpedantic -std=c2x \
+	-D_POSIX_C_SOURCE=202311L
 
 
 CPPFLAGS	+=		-iquote include

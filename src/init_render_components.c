@@ -83,9 +83,10 @@ static int set_positions(player_t *player)
     init_hitbox(player);
     init_ray(player);
     init_hud(player);
+    player->cam_plane = (sfVector2f){.x = 0, .y = 0.66};
     player->angle = 0;
-    player->pos.x = 20;
-    player->pos.y = 30;
+    player->pos.x = 2 * TILE_SIZE;
+    player->pos.y = 3 * TILE_SIZE;
     return EXIT_SUCCESS;
 }
 

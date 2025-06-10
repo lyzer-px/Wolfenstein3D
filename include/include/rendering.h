@@ -62,7 +62,7 @@ typedef struct tile_s {
 
 sfRectangleShape *create_bg(sfVector2f size);
 
-bool is_wall(int x, int y);
+boolis_wall(int x, int y);
 
 int launch_game(void);
 void player_fwd(player_t *player, game_t *game);
@@ -82,8 +82,7 @@ void tick_game(game_t *game);
 void shotgun_move(game_t *game);
 void shotgun_shoot(game_t *game);
 
-float cast_single_ray(game_t *game, size_t x);
-
+float cast_single_ray(player_t *player, float angle);
 
 
 #endif

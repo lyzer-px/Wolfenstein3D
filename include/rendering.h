@@ -18,22 +18,22 @@
     #define RAD(i) (i * (M_PI / 180))
     #define DEG(i) (i * (180 / M_PI))
     #define SQUARED(a) ((a) * (a))
-
+    #define ABS(a) ((a) < 0 ? -(a) : (a))
 
     #define TILE_SIZE 10
     #define PLAYER_SIZE 5
-    #define RECT_SIZE 64
+    #define RECT_SIZE 1
     #define MAP_WIDTH 16
     #define MAP_HEIGHT 16
     #define TILE_THICKNESS 10
 
     #define PLAYER_SPEED 0.7
-    #define ROTATION_SPEED 1.5
+    #define ROTATION_SPEED 0.5
 
     #define ON_INT_MAP(a) (((int)(a) / TILE_SIZE))
 
-    #define SCREEN_WIDTH 1080
-    #define SCREEN_HEIGHT 1920
+    #define SCREEN_WIDTH 1920
+    #define SCREEN_HEIGHT 1080
 
 static const int map[MAP_HEIGHT][MAP_WIDTH] = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -62,7 +62,7 @@ typedef struct tile_s {
 
 sfRectangleShape *create_bg(sfVector2f size);
 
-sfBool is_wall(int x, int y);
+bool is_wall(int x, int y);
 
 int launch_game(void);
 void player_fwd(player_t *player, game_t *game);
@@ -82,7 +82,8 @@ void tick_game(game_t *game);
 void shotgun_move(game_t *game);
 void shotgun_shoot(game_t *game);
 
-float cast_single_ray(player_t *player, float angle);
+float cast_single_ray(game_t *game, double camera_x);
+
 
 
 #endif
