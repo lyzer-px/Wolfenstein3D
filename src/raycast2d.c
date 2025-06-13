@@ -76,7 +76,7 @@ static void draw_stripe(game_t *game, double perp_dist, double x)
 
     sfRectangleShape_setFillColor(game->player->ray, sfWhite);
     sfRectangleShape_setPosition(game->player->ray, (sfVector2f){x, drawStart});
-    sfRectangleShape_setSize(game->player->ray, (sfVector2f){SCREEN_WIDTH / SCREEN_HEIGHT,
+    sfRectangleShape_setSize(game->player->ray, (sfVector2f){1,
         stripe_height});
     sfRenderWindow_drawRectangleShape(window, game->player->ray, NULL);
 }
@@ -112,9 +112,6 @@ static void handle_exceptions(game_t *game)
 {
     if (sfKeyboard_isKeyPressed(sfKeyF))
         game->player->flashlight_on = !game->player->flashlight_on;
-    if (is_wall(ON_INT_MAP(game->player->pos.x),
-        ON_INT_MAP(game->player->pos.y)))
-        player_repel(game->player, game);
     if (game->player->flashlight_on)
         draw_bloom(game->window->window, game->player->bloom);
 }

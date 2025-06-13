@@ -30,7 +30,7 @@
     #define TILE_THICKNESS 10
 
     #define PLAYER_SPEED 0.7
-    #define ROTATION_SPEED 0.5
+    #define  ROTATION_SPEED 0.05
 
     #define ON_INT_MAP(a) (((int)(a) / TILE_SIZE))
 

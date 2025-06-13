@@ -84,7 +84,7 @@ static int set_positions(player_t *player)
     init_ray(player);
     init_hud(player);
     player->cam_plane = (sfVector2f){.x = 0, .y = 0.66};
-    player->angle = 0;
+    player->angle = RAD(M_PI);
     player->pos.x = 2 * MAP_TILE_SIZE;
     player->pos.y = 3 * MAP_TILE_SIZE;
     return EXIT_SUCCESS;
