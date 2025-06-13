@@ -1,0 +1,7 @@
+-Iinclude
+-Wall
+-Wextra
+-pedantic
+-std=c2x
+-D_POSIX_C_SOURCE=202311L
+-D_USE_MATH_DEFINES
