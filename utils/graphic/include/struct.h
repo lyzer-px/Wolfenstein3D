@@ -65,7 +65,7 @@ typedef struct asset_s {
 typedef struct player_s {
     sfVector2f pos;
     sfVector2f dir;
-    sfVector2f cam_plane;
+    sfVector2f plane;
     float angle;
     sfRectangleShape *hitbox;
     sfRectangleShape *ray;

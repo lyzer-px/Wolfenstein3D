@@ -36,18 +36,18 @@ void player_fwd(player_t *player, game_t *game)
     }
     if (sfKeyboard_isKeyPressed(sfKeyD)) {
         double oldDirx = player->dir.x;
-        double oldPlanex = player->cam_plane.x;
+        double oldPlanex = player->plane.x;
         player->dir.x = player->dir.x * cos(-ROTATION_SPEED) - player->dir.y * sin(-ROTATION_SPEED);
         player->dir.y = oldDirx * sin(-ROTATION_SPEED) + player->dir.y * cos(-ROTATION_SPEED);
-        player->cam_plane.x = player->cam_plane.x * cos(-ROTATION_SPEED) - player->cam_plane.y * sin(-ROTATION_SPEED);
-        player->cam_plane.y = oldPlanex * sin(-ROTATION_SPEED) + player->cam_plane.y * cos(-ROTATION_SPEED);
+        player->plane.x = player->plane.x * cos(-ROTATION_SPEED) - player->plane.y * sin(-ROTATION_SPEED);
+        player->plane.y = oldPlanex * sin(-ROTATION_SPEED) + player->plane.y * cos(-ROTATION_SPEED);
     }
     if (sfKeyboard_isKeyPressed(sfKeyQ)) {
         double oldDirx = player->dir.x;
-        double oldPlanex = player->cam_plane.x;
+        double oldPlanex = player->plane.x;
         player->dir.x = player->dir.x * cos(ROTATION_SPEED) - player->dir.y * sin(ROTATION_SPEED);
         player->dir.y = oldDirx * sin(ROTATION_SPEED) + player->dir.y * cos(ROTATION_SPEED);
-        player->cam_plane.x = player->cam_plane.x * cos(ROTATION_SPEED) - player->cam_plane.y * sin(ROTATION_SPEED);
-        player->cam_plane.y = oldPlanex * sin(ROTATION_SPEED) + player->cam_plane.y * cos(ROTATION_SPEED);
+        player->plane.x = player->plane.x * cos(ROTATION_SPEED) - player->plane.y * sin(ROTATION_SPEED);
+        player->plane.y = oldPlanex * sin(ROTATION_SPEED) + player->plane.y * cos(ROTATION_SPEED);
     }
 }

@@ -15,56 +15,54 @@
 
 const sfColor sfGrey = {190, 190, 190, 255};
 
-float cast_single_ray(game_t *game, double camera_x)
+static double dda_ray_cast(sfVector2i *map_pos, sfVector2f *side_dist,
+        sfVector2f *delta_dist, sfVector2i *step)
 {
-    sfVector2f ray_dir = {};
-    sfVector2i map_pos = {};
-    sfVector2f side_dist = {};
-    sfVector2f delta_dist = {};
-    sfVector2i step = {};
-    double perp_wall_dist = 0;
     int side = 0;
 
-    ray_dir.x = game->player->dir.x + game->player->cam_plane.x * camera_x;
-    ray_dir.y = game->player->dir.y + game->player->cam_plane.y * camera_x;
-    map_pos.x = ON_INT_MAP(game->player->pos.x);
-    map_pos.y = ON_INT_MAP(game->player->pos.y);
-    delta_dist.x = fabs((TILE_SIZE / ray_dir.x));
-    delta_dist.y = fabs((TILE_SIZE / ray_dir.y));
-
-
-    if (ray_dir.x < 0) {
-        step.x = -1;
-        side_dist.x = (game->player->pos.x / TILE_SIZE - map_pos.x) * delta_dist.x;
-    } else {
-        step.x = 1;
-        side_dist.x = (map_pos.x + 1.0 - game->player->pos.x / TILE_SIZE) * delta_dist.x;
-    }
-    if (ray_dir.y < 0) {
-        step.y = -1;
-        side_dist.y = (game->player->pos.y / TILE_SIZE - map_pos.y) * delta_dist.y;
-    } else {
-        step.y = 1;
-        side_dist.y = (map_pos.y + 1.0 - game->player->pos.y / TILE_SIZE) * delta_dist.y;
-    }
-    while (map[map_pos.y][map_pos.x] != 1) {
-        if (side_dist.x < side_dist.y) {
-            side_dist.x += delta_dist.x;
-            map_pos.x += step.x;
+     while (map[map_pos->y][map_pos->x] != 1) {
+        if (side_dist->x < side_dist->y) {
+            side_dist->x += delta_dist->x;
+            map_pos->x += step->x;
             side = 0;
         } else {
-            side_dist.y += delta_dist.y;
-            map_pos.y += step.y;
+            side_dist->y += delta_dist->y;
+            map_pos->y += step->y;
             side = 1;
         }
     }
-    perp_wall_dist = side == 0 ? side_dist.x - delta_dist.x : side_dist.y - delta_dist.y;
-    sfRectangleShape_setSize(game->player->ray, (sfVector2f){2, 2});
-    sfRectangleShape_setOrigin(game->player->ray, (sfVector2f){1, 1});
-    sfRectangleShape_setPosition(game->player->ray, (sfVector2f){game->player->pos.x + (perp_wall_dist * ray_dir.x), game->player->pos.y + (perp_wall_dist * ray_dir.y)});
-    sfRectangleShape_setFillColor(game->player->ray, sfYellow);
-    sfRenderWindow_drawRectangleShape(game->window->window, game->player->ray, NULL);
-    return perp_wall_dist;
+    return side == 0 ? side_dist->x - delta_dist->x :
+        side_dist->y - delta_dist->y;
+}
+
+float cast_single_ray(game_t *g, double camera_x)
+{
+    sfVector2f ray_dir = {.x = ray_dir.x = g->player->dir.x +
+        g->player->plane.x * camera_x,
+        .y = g->player->dir.y + g->player->plane.y * camera_x};
+    sfVector2i map_pos = {.x = ON_INT_MAP(g->player->pos.x),
+        .y = ON_INT_MAP(g->player->pos.y)};
+    sfVector2f side_dist = {};
+    sfVector2f delta_dist = {.x = fabs((TILE_SIZE / ray_dir.x)),
+        .y = fabs((TILE_SIZE / ray_dir.y))};
+    sfVector2i step = {};
+    double perp_wall_dist = 0;
+
+    if (ray_dir.x < 0) {
+        step.x = -1;
+        side_dist.x = (g->player->pos.x / TILE_SIZE - map_pos.x) * delta_dist.x;
+    } else {
+        step.x = 1;
+        side_dist.x = (map_pos.x + 1.0 - g->player->pos.x / TILE_SIZE) * delta_dist.x;
+    }
+    if (ray_dir.y < 0) {
+        step.y = -1;
+        side_dist.y = (g->player->pos.y / TILE_SIZE - map_pos.y) * delta_dist.y;
+    } else {
+        step.y = 1;
+        side_dist.y = (map_pos.y + 1.0 - g->player->pos.y / TILE_SIZE) * delta_dist.y;
+    }
+    return dda_ray_cast(&map_pos, &side_dist, &delta_dist, &step);
 }
 
 
