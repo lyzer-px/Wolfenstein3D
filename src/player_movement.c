@@ -25,11 +25,11 @@ void player_fwd(player_t *player, game_t *game)
         return;
     if (sfMouse_isButtonPressed(sfMouseLeft) && !player->running)
         shotgun_shoot(game);
-    if (sfKeyboard_isKeyPressed(sfKeyZ) && !map[(int)(player->pos.y + dir.y * PLAYER_SPEED) / TILE_SIZE][(int)(player->pos.x + (dir.x * PLAYER_SPEED)) / TILE_SIZE]) {
+    if (sfKeyboard_isKeyPressed(sfKeyZ) && DIR_COLLIDE(y, +, x, +)) {
             shotgun_move(game);
         player->pos.x += (dir.x * PLAYER_SPEED);
         player->pos.y += (dir.y * PLAYER_SPEED);
-    } else if (sfKeyboard_isKeyPressed(sfKeyS)) {
+    } else if (sfKeyboard_isKeyPressed(sfKeyS && DIR_COLLIDE(y, -, x, +))) {
             shotgun_move(game);
         player->pos.x -= dir.x * PLAYER_SPEED;
         player->pos.y -= dir.y * PLAYER_SPEED;
