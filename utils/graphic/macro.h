@@ -37,8 +37,8 @@ enum name_scene {
     #define SCENE_START (MENU)
 
     #define NAME_WIN ("Wolf3d")
-    #define DIM_X (1920 / 2)
-    #define DIM_Y (1080 / 2)
+    #define DIM_X (1920)
+    #define DIM_Y (1080)
     #define FPS (60)
     #define BITS (32)
 

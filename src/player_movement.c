@@ -17,12 +17,6 @@ bool is_wall(int x, int y)
     return map[y][x];
 }
 
-static void rotate_vector_left(sfVector2f *v, float angle)
-{
-    v->x = ((v->x * cosf(angle)) - (v->y * sinf(angle)));
-    v->y = ((v->x * sinf(angle)) + (cosf(angle) * v->y));
-}
-
 void player_fwd(player_t *player, game_t *game)
 {
     sfVector2f direction = {- sinf(RAD(player->angle)),
@@ -45,19 +39,19 @@ void player_fwd(player_t *player, game_t *game)
         double oldDirx = player->direction.x;
         double oldPlanex = player->cam_plane.x;
         player->angle -= ROTATION_SPEED;
-        player->direction.x = player->direction.x * cos(-ROTATION_SPEED) - player->direction.y * sin(-ROTATION_SPEED);
-        player->direction.y = oldDirx * sin(-ROTATION_SPEED) + player->direction.y * cos(-ROTATION_SPEED);
-        player->cam_plane.x = player->cam_plane.x * cos(-ROTATION_SPEED) - player->cam_plane.y * sin(-ROTATION_SPEED);
-        player->cam_plane.y = oldPlanex * sin(-ROTATION_SPEED) + player->cam_plane.y * cos(-ROTATION_SPEED);
+        player->direction.x = player->direction.x * cos(-ROTATION_SPEED / 30) - player->direction.y * sin(-ROTATION_SPEED / 30);
+        player->direction.y = oldDirx * sin(-ROTATION_SPEED / 30) + player->direction.y * cos(-ROTATION_SPEED / 30);
+        player->cam_plane.x = player->cam_plane.x * cos(-ROTATION_SPEED / 30) - player->cam_plane.y * sin(-ROTATION_SPEED / 30);
+        player->cam_plane.y = oldPlanex * sin(-ROTATION_SPEED / 30) + player->cam_plane.y * cos(-ROTATION_SPEED / 30);
     }
     if (sfKeyboard_isKeyPressed(sfKeyD)) {
         double oldDirx = player->direction.x;
         double oldPlanex = player->cam_plane.x;
         player->angle += ROTATION_SPEED;
-        player->direction.x = player->direction.x * cos(ROTATION_SPEED) - player->direction.y * sin(ROTATION_SPEED);
-        player->direction.y = oldDirx * sin(ROTATION_SPEED) + player->direction.y * cos(ROTATION_SPEED);
-        player->cam_plane.x = player->cam_plane.x * cos(ROTATION_SPEED) - player->cam_plane.y * sin(ROTATION_SPEED);
-        player->cam_plane.y = oldPlanex * sin(ROTATION_SPEED) + player->cam_plane.y * cos(ROTATION_SPEED);
+        player->direction.x = player->direction.x * cos(ROTATION_SPEED / 30) - player->direction.y * sin(ROTATION_SPEED / 30);
+        player->direction.y = oldDirx * sin(ROTATION_SPEED / 30) + player->direction.y * cos(ROTATION_SPEED / 30);
+        player->cam_plane.x = player->cam_plane.x * cos(ROTATION_SPEED / 30) - player->cam_plane.y * sin(ROTATION_SPEED / 30);
+        player->cam_plane.y = oldPlanex * sin(ROTATION_SPEED / 30) + player->cam_plane.y * cos(ROTATION_SPEED / 30);
     }
     player->angle = player->angle > 360 ? 0 : player->angle;
     player->angle = player->angle < 0 ? 360 : player->angle;
