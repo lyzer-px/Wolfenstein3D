@@ -17,6 +17,12 @@ bool is_wall(int x, int y)
     return map[y][x];
 }
 
+static void rotate_vect(sfVector2f *v, float old_x)
+{
+    v->x = v->x * cos(-ROTATION_SPEED) - v->y * sin(-ROTATION_SPEED);
+    v->y = old_x * sin(-ROTATION_SPEED) + v->y * cos(-ROTATION_SPEED);
+}
+
 void player_fwd(player_t *player, game_t *game)
 {
     sfVector2f dir = player->dir;
@@ -37,8 +43,7 @@ void player_fwd(player_t *player, game_t *game)
     if (sfKeyboard_isKeyPressed(sfKeyD)) {
         double oldDirx = player->dir.x;
         double oldPlanex = player->plane.x;
-        player->dir.x = player->dir.x * cos(-ROTATION_SPEED) - player->dir.y * sin(-ROTATION_SPEED);
-        player->dir.y = oldDirx * sin(-ROTATION_SPEED) + player->dir.y * cos(-ROTATION_SPEED);
+        rotate_vect(&player->dir, player->dir.x);
         player->plane.x = player->plane.x * cos(-ROTATION_SPEED) - player->plane.y * sin(-ROTATION_SPEED);
         player->plane.y = oldPlanex * sin(-ROTATION_SPEED) + player->plane.y * cos(-ROTATION_SPEED);
     }
