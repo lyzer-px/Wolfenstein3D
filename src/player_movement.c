@@ -27,24 +27,21 @@ void player_fwd(player_t *player, game_t *game)
 {
     sfVector2f dir = player->dir;
 
-    if (player == NULL)
-        return;
     if (sfMouse_isButtonPressed(sfMouseLeft) && !player->running)
         shotgun_shoot(game);
     if (sfKeyboard_isKeyPressed(sfKeyZ) && DIR_COLLIDE(y, +, x, +)) {
-            shotgun_move(game);
+        shotgun_move(game);
         player->pos.x += (dir.x * PLAYER_SPEED);
         player->pos.y += (dir.y * PLAYER_SPEED);
     } else if (sfKeyboard_isKeyPressed(sfKeyS && DIR_COLLIDE(y, -, x, +))) {
-            shotgun_move(game);
+        shotgun_move(game);
         player->pos.x -= dir.x * PLAYER_SPEED;
         player->pos.y -= dir.y * PLAYER_SPEED;
     }
     if (sfKeyboard_isKeyPressed(sfKeyD)) {
         rotate_vect(&player->dir, player->dir.x, -ROTATION_SPEED);
         rotate_vect(&player->plane, player->plane.x, -ROTATION_SPEED);
-    }
-    if (sfKeyboard_isKeyPressed(sfKeyQ)) {
+    } else if (sfKeyboard_isKeyPressed(sfKeyQ)) {
         rotate_vect(&player->dir, player->dir.x, ROTATION_SPEED);
         rotate_vect(&player->plane, player->plane.x, ROTATION_SPEED);
     }
