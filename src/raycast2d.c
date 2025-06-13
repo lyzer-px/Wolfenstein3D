@@ -16,11 +16,11 @@
 const sfColor sfGrey = {190, 190, 190, 255};
 
 static double dda_ray_cast(sfVector2i *map_pos, sfVector2f *side_dist,
-        sfVector2f *delta_dist, sfVector2i *step)
+    sfVector2f *delta_dist, sfVector2i *step)
 {
     int side = 0;
 
-     while (map[map_pos->y][map_pos->x] != 1) {
+    while (map[map_pos->y][map_pos->x] != 1) {
         if (side_dist->x < side_dist->y) {
             side_dist->x += delta_dist->x;
             map_pos->x += step->x;
@@ -50,13 +50,12 @@ float cast_single_ray(game_t *g, double camera_x)
     step.x = ray_dir.x < 0 ? -1 : 1;
     step.y = ray_dir.y < 0 ? -1 : 1;
     side_dist.x = ray_dir.x < 0 ?
-    (PLAYER-> pos.x / TILE_SIZE - map_pos.x) * delta_dist.x :
-    (map_pos.x + 1 - PLAYER->pos.x / TILE_SIZE) * delta_dist.x;
+    (PLAYER->pos.x / TILE_SIZE - map_pos.x) * delta_dist.x : (map_pos.x + 1
+    - PLAYER->pos.x / TILE_SIZE) * delta_dist.x;
     side_dist.y = ray_dir.y < 0 ? (PLAYER->pos.y / TILE_SIZE - map_pos.y) *
     delta_dist.y : (map_pos.y + 1 - PLAYER->pos.y / TILE_SIZE) * delta_dist.y;
     return dda_ray_cast(&map_pos, &side_dist, &delta_dist, &step);
 }
-
 
 static void draw_stripe(game_t *game, double perp_dist, double x)
 {
@@ -126,7 +125,6 @@ void tick_game(game_t *game)
     handle_exceptions(game);
     sfRenderWindow_drawSprite(window, game->player->reticle->sprite, NULL);
     sfRenderWindow_drawSprite(window, game->player->hud->sprite, NULL);
-    draw_stripe(game, 1, (2 * (SCREEN_HEIGHT / 2))  / (double)SCREEN_WIDTH - 1);
 }
 
 int end_game(sfRenderWindow *window)
@@ -134,4 +132,3 @@ int end_game(sfRenderWindow *window)
     sfRenderWindow_destroy(window);
     return EXIT_SUCCESS;
 }
-
