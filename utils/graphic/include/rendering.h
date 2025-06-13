@@ -33,9 +33,11 @@
     #define  ROTATION_SPEED 0.05
 
     #define ON_INT_MAP(a) (((int)(a) / TILE_SIZE))
+    #define MAP_DIR(b, s) (ON_INT_MAP((player->pos.b s dir.b * PLAYER_SPEED)))
+    #define DIR_COLLIDE(c, d, e, f) (!map[MAP_DIR(c, d)][MAP_DIR(e, f)])
 
-    #define SCREEN_WIDTH 1080
-    #define SCREEN_HEIGHT 1920
+    #define SCREEN_WIDTH 1920
+    #define SCREEN_HEIGHT 1080
 
     #define PLAYER (g->player)
 
