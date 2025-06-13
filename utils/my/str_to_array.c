@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** Corewar
 ** File description:
 ** You must find the largest possible square

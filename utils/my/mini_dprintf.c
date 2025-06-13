@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** mini_printf
 ** File description:
 ** A function has to print all the characters in the string format

@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** Woof3D
 ** File description:
 ** animate_shotgun.c

@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** my_str_to_word_array.c
 ** File description:
 ** splits a string into words with non alpha chars as separators

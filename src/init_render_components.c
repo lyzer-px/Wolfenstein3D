@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** bootstrap
 ** File description:
 ** inits.c
@@ -74,11 +74,11 @@ void init_hitbox(player_t *player)
 static int set_positions(player_t *player)
 {
     sfSprite_setPosition(player->shotgun->sprite,
-        (sfVector2f){DIM_X / 2 - 90, DIM_Y - 250});
+        (sfVector2f){DIM_X / 2 - 180, DIM_Y - 500});
     sfSprite_setPosition(player->reticle->sprite,
         (sfVector2f){DIM_X / 2, DIM_Y / 2 + 30});
     sfSprite_setOrigin(player->reticle->sprite,
-        (sfVector2f){75 / 2, 75 / 2});
+        (sfVector2f){(75 * 1.5) / 2, (75 * 1.5) / 2});
     init_impact(player);
     init_hitbox(player);
     init_ray(player);
@@ -105,7 +105,8 @@ static int set_propreties(player_t *player)
         sfFalse);
     sfSprite_setTexture(player->shotgun->sprite,
         player->shotgun->texture, sfFalse);
-    sfSprite_setScale(player->shotgun->sprite, (sfVector2f){2, 2});
+    sfSprite_setScale(player->shotgun->sprite, (sfVector2f){3, 3});
+    sfSprite_setScale(player->reticle->sprite, (sfVector2f){1.5, 1.5});
     sfSprite_setTextureRect(player->shotgun->sprite, player->shotgun->rect);
     player->dir = (sfVector2f){.x = -1, .y = 0};
     player->plane = (sfVector2f){.x = 0, 0.66};

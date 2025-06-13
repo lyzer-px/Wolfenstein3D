@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** Wolfenstein3D
 ** File description:
 ** clean_scene.c
