@@ -20,7 +20,8 @@
     #define SQUARED(a) ((a) * (a))
 
 
-    #define TILE_SIZE 10
+    #define TILE_SIZE 1
+    #define MAP_TILE_SIZE 10
     #define PLAYER_SIZE 5
     #define RECT_SIZE 1
     #define MAP_WIDTH 16

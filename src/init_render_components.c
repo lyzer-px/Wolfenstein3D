@@ -85,8 +85,8 @@ static int set_positions(player_t *player)
     init_hud(player);
     player->cam_plane = (sfVector2f){.x = 0, .y = 0.66};
     player->angle = 0;
-    player->pos.x = 2 * TILE_SIZE;
-    player->pos.y = 3 * TILE_SIZE;
+    player->pos.x = 2 * MAP_TILE_SIZE;
+    player->pos.y = 3 * MAP_TILE_SIZE;
     return EXIT_SUCCESS;
 }
 
@@ -141,9 +141,9 @@ void init_tile(sfRectangleShape *tile, size_t i, size_t j)
     sfRectangleShape_setFillColor(tile, map[i][j] ? sfWhite : sfBlack);
     sfRectangleShape_setOutlineColor(tile, (sfColor){125, 125, 125, 255});
     sfRectangleShape_setOutlineThickness(tile, 1);
-    sfRectangleShape_setSize(tile, (sfVector2f){TILE_SIZE, TILE_SIZE});
+    sfRectangleShape_setSize(tile, (sfVector2f){MAP_TILE_SIZE, MAP_TILE_SIZE});
     sfRectangleShape_setPosition(tile,
-        (sfVector2f){j * TILE_SIZE, i * TILE_SIZE});
+        (sfVector2f){j * MAP_TILE_SIZE, i * MAP_TILE_SIZE});
 }
 
 sfRectangleShape **init_map(void)
