@@ -71,10 +71,11 @@ float cast_single_ray(game_t *game, double camera_x)
 static void draw_stripe(game_t *game, double perp_dist, double x)
 {
     sfRenderWindow *window = game->window->window;
-    float stripe_height = (MAP_TILE_SIZE / perp_dist) * 300;
+    float stripe_height = (SCREEN_HEIGHT / perp_dist) * 5;
+    int drawStart = -stripe_height / 2 + SCREEN_HEIGHT / 2;
 
     sfRectangleShape_setFillColor(game->player->ray, sfWhite);
-    sfRectangleShape_setPosition(game->player->ray, (sfVector2f){x, SCREEN_HEIGHT / 3});
+    sfRectangleShape_setPosition(game->player->ray, (sfVector2f){x, drawStart});
     sfRectangleShape_setSize(game->player->ray, (sfVector2f){SCREEN_WIDTH / SCREEN_HEIGHT,
         stripe_height});
     sfRenderWindow_drawRectangleShape(window, game->player->ray, NULL);
