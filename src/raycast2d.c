@@ -47,20 +47,13 @@ float cast_single_ray(game_t *g, double camera_x)
         .y = fabs((TILE_SIZE / ray_dir.y))};
     sfVector2i step = {};
 
-    if (ray_dir.x < 0) {
-        step.x = -1;
-        side_dist.x = (PLAYER->pos.x / TILE_SIZE - map_pos.x) * delta_dist.x;
-    } else {
-        step.x = 1;
-        side_dist.x = (map_pos.x + 1.0 - PLAYER->pos.x / TILE_SIZE) * delta_dist.x;
-    }
-    if (ray_dir.y < 0) {
-        step.y = -1;
-        side_dist.y = (PLAYER->pos.y / TILE_SIZE - map_pos.y) * delta_dist.y;
-    } else {
-        step.y = 1;
-        side_dist.y = (map_pos.y + 1.0 - PLAYER->pos.y / TILE_SIZE) * delta_dist.y;
-    }
+    step.x = ray_dir.x < 0 ? -1 : 1;
+    step.y = ray_dir.y < 0 ? -1 : 1;
+    side_dist.x = ray_dir.x < 0 ?
+    (PLAYER-> pos.x / TILE_SIZE - map_pos.x) * delta_dist.x :
+    (map_pos.x + 1 - PLAYER->pos.x / TILE_SIZE) * delta_dist.x;
+    side_dist.y = ray_dir.y < 0 ? (PLAYER->pos.y / TILE_SIZE - map_pos.y) *
+    delta_dist.y : (map_pos.y + 1 - PLAYER->pos.y / TILE_SIZE) * delta_dist.y;
     return dda_ray_cast(&map_pos, &side_dist, &delta_dist, &step);
 }
 
