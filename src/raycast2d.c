@@ -25,8 +25,8 @@ float cast_single_ray(game_t *game, double camera_x)
     double perp_wall_dist = 0;
     int side = 0;
 
-    ray_dir.x = game->player->direction.x + game->player->cam_plane.x * camera_x;
-    ray_dir.y = game->player->direction.y + game->player->cam_plane.y * camera_x;
+    ray_dir.x = game->player->dir.x + game->player->cam_plane.x * camera_x;
+    ray_dir.y = game->player->dir.y + game->player->cam_plane.y * camera_x;
     map_pos.x = ON_INT_MAP(game->player->pos.x);
     map_pos.y = ON_INT_MAP(game->player->pos.y);
     delta_dist.x = fabs((TILE_SIZE / ray_dir.x));
