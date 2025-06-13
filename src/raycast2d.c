@@ -25,12 +25,15 @@ float cast_single_ray(game_t *game, double camera_x)
     double perp_wall_dist = 0;
     int side = 0;
 
+    printf("player direction = {%f, %f}\n\n", game->player->direction.x, game->player->direction.y);
     ray_dir.x = game->player->direction.x + game->player->cam_plane.x * camera_x;
     ray_dir.y = game->player->direction.y + game->player->cam_plane.y * camera_x;
     map_pos.x = ON_INT_MAP(game->player->pos.x);
     map_pos.y = ON_INT_MAP(game->player->pos.y);
     delta_dist.x = fabs((TILE_SIZE / ray_dir.x));
     delta_dist.y = fabs((TILE_SIZE / ray_dir.y));
+
+    fprintf(stdout, "DUMP\n\tray_dir {%f, %f}; map {%d, %d}; delta_dist {%f, %f}\n", ray_dir.x, ray_dir.y, map_pos.x, map_pos.y, delta_dist.x, delta_dist.y);
 
     if (ray_dir.x < 0) {
         step.x = -1;
@@ -46,7 +49,7 @@ float cast_single_ray(game_t *game, double camera_x)
         step.y = 1;
         side_dist.y = (map_pos.y + 1.0 - game->player->pos.y / TILE_SIZE) * delta_dist.y;
     }
-    while (map[map_pos.y][map_pos.x] != 1) {
+    while (/* !is_wall(ON_INT_MAP(map_pos.x), ON_INT_MAP(map_pos.y)) */map[map_pos.y][map_pos.x] != 1) {
         if (side_dist.x < side_dist.y) {
             side_dist.x += delta_dist.x;
             map_pos.x += step.x;
@@ -56,18 +59,31 @@ float cast_single_ray(game_t *game, double camera_x)
             map_pos.y += step.y;
             side = 1;
         }
+            sfRectangleShape_setSize(game->player->ray, (sfVector2f){2, 2});
+        sfRectangleShape_setOrigin(game->player->ray, (sfVector2f){1, 1});
+        sfRectangleShape_setFillColor(game->player->ray, sfBlue);
+        sfRectangleShape_setPosition(game->player->ray, (sfVector2f){game->player->pos.x + (side_dist.x * ray_dir.x), game->player->pos.y + (side_dist.x * ray_dir.y)});
+        sfRenderWindow_drawRectangleShape(game->window->window, game->player->ray, NULL);
     }
     perp_wall_dist = side == 0 ? side_dist.x - delta_dist.x : side_dist.y - delta_dist.y;
-    return perp_wall_dist;
+    sfRectangleShape_setPosition(game->player->ray, (sfVector2f){game->player->pos.x + (perp_wall_dist * ray_dir.x), game->player->pos.y + (perp_wall_dist * ray_dir.y)});
+    sfRectangleShape_setFillColor(game->player->ray, sfYellow);
+    sfRenderWindow_drawRectangleShape(game->window->window, game->player->ray, NULL);
+    return ABS(perp_wall_dist);
 }
 
 static void draw_stripe(game_t *game, double perp_dist, double x)
 {
     sfRenderWindow *window = game->window->window;
     float stripe_height = (1 / perp_dist);
+    int draw_start = -stripe_height / 2 + RECT_SIZE / 2;
+    int draw_end = stripe_height / 2 + RECT_SIZE / 2;
+
+    draw_start = draw_start < 0 ? 0 : draw_start;
+    draw_end = draw_end >= RECT_SIZE ? RECT_SIZE - 1 : draw_end;
 
     sfRectangleShape_setFillColor(game->player->ray, sfWhite);
-    sfRectangleShape_setPosition(game->player->ray, (sfVector2f){x, SCREEN_HEIGHT / 4});
+    sfRectangleShape_setPosition(game->player->ray, (sfVector2f){x, draw_end - draw_start});
     sfRectangleShape_setSize(game->player->ray, (sfVector2f){1,
         stripe_height});
     sfRenderWindow_drawRectangleShape(window, game->player->ray, NULL);
