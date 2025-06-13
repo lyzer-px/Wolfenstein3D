@@ -36,6 +36,8 @@
     #define SCREEN_WIDTH 1080
     #define SCREEN_HEIGHT 1920
 
+    #define PLAYER (g->player)
+
 static const int map[MAP_HEIGHT][MAP_WIDTH] = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
