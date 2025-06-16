@@ -33,7 +33,8 @@ void player_fwd(player_t *player, game_t *game)
         shotgun_move(game);
         player->pos.x += (dir.x * PLAYER_SPEED);
         player->pos.y += (dir.y * PLAYER_SPEED);
-    } else if (sfKeyboard_isKeyPressed(sfKeyS) && DIR_COLLIDE(y, -, x, +)) {
+    }
+    if (sfKeyboard_isKeyPressed(sfKeyS) && DIR_COLLIDE(y, -, x, +)) {
         shotgun_move(game);
         player->pos.x -= dir.x * PLAYER_SPEED;
         player->pos.y -= dir.y * PLAYER_SPEED;
@@ -41,7 +42,8 @@ void player_fwd(player_t *player, game_t *game)
     if (sfKeyboard_isKeyPressed(sfKeyD)) {
         rotate_vect(&player->dir, player->dir.x, -ROTATION_SPEED);
         rotate_vect(&player->plane, player->plane.x, -ROTATION_SPEED);
-    } else if (sfKeyboard_isKeyPressed(sfKeyQ)) {
+    }
+    if (sfKeyboard_isKeyPressed(sfKeyQ)) {
         rotate_vect(&player->dir, player->dir.x, ROTATION_SPEED);
         rotate_vect(&player->plane, player->plane.x, ROTATION_SPEED);
     }
