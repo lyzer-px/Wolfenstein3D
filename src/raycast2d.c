@@ -118,13 +118,13 @@ void tick_game(game_t *game)
     sfRenderWindow *window = game->window->window;
     double camera_x = 0;
 
-    draw_minimap(window, game->player, game->mini_map);
     if (game->player == NULL || window == NULL)
         return;
     for (size_t x = 0; x < SCREEN_WIDTH; x++) {
         camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
         cast_single_ray(game, camera_x, x);
     }
+    draw_minimap(window, game->player, game->mini_map);
     player_fwd(game->player, game);
     sfRenderWindow_drawSprite(window, game->player->shotgun->sprite, NULL);
     handle_exceptions(game);

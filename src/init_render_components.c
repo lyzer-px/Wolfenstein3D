@@ -58,9 +58,9 @@ static void init_hud(player_t *player)
     sfSprite_setTexture(player->hud->sprite,
         player->hud->texture, sfFalse);
     sfSprite_setPosition(player->hud->sprite,
-        (sfVector2f){80, DIM_Y - 90});
+        (sfVector2f){400, DIM_Y - 200});
     sfSprite_setScale(player->hud->sprite,
-        (sfVector2f){1.25, 1.25});
+        (sfVector2f){1.5, 1.5});
 }
 
 void init_hitbox(player_t *player)
@@ -79,7 +79,7 @@ static int set_positions(player_t *player)
     sfSprite_setPosition(player->shotgun->sprite,
         (sfVector2f){DIM_X / 2 - 180, DIM_Y - 500});
     sfSprite_setPosition(player->reticle->sprite,
-        (sfVector2f){DIM_X / 2, DIM_Y / 2 + 30});
+        (sfVector2f){DIM_X / 2 - 30, DIM_Y / 2 + 30});
     sfSprite_setOrigin(player->reticle->sprite,
         (sfVector2f){(75 * 1.5) / 2, (75 * 1.5) / 2});
     init_impact(player);
