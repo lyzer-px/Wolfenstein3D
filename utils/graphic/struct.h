@@ -21,6 +21,24 @@ typedef struct window_s {
     sfVector2u *mode;
 } window_t;
 
+typedef struct coords_s {
+    double wall_x;
+    size_t x;
+} coords_t;
+
+typedef struct ray_info_s {
+    int side;
+    sfVector2f ray_dir;
+}ray_info_t;
+
+typedef struct vect_s {
+    sfVector2i *map_pos;
+    sfVector2f *side_dist;
+    sfVector2f *delta_dist;
+    sfVector2i *step;
+    sfVector2f *ray_dir;
+} vect_t;
+
 typedef struct ressource_s {
     char *id;
     void *element;
