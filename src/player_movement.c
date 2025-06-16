@@ -45,10 +45,8 @@ void player_fwd(player_t *player, game_t *game)
         player->pos.x -= dir.x * PLAYER_SPEED;
         player->pos.y -= dir.y * PLAYER_SPEED;
     }
-    if (sfKeyboard_isKeyPressed(sfKeyD)) {
-       double_rotate(&player->dir, &player->plane, -ROTATION_SPEED);
-    }
-    if (sfKeyboard_isKeyPressed(sfKeyQ)) {
-       double_rotate(&player->dir, &player->plane, ROTATION_SPEED);
-    }
+    if (sfKeyboard_isKeyPressed(sfKeyD))
+        double_rotate(&player->dir, &player->plane, -ROTATION_SPEED);
+    if (sfKeyboard_isKeyPressed(sfKeyQ))
+        double_rotate(&player->dir, &player->plane, ROTATION_SPEED);
 }
