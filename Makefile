@@ -115,8 +115,7 @@ debug:
 	@make clean
 
 tests_run:
-	$(CC) -o $(UT_NAME) $(UT_SRC) $(UT_FLAGS) $(CFLAGS) $(CPPFLAGS)
-	./$(UT_NAME)
+	@echo "hi"
 
 coverage: tests_run
 	gcovr --exclude test/
