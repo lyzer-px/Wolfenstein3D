@@ -20,7 +20,7 @@ static void draw_stripe(game_t *game, double perp_dist, coords_t c)
     sfRenderWindow *window = game->window->window;
     float stripe_height = (SCREEN_HEIGHT / perp_dist) * 5;
     int drawStart = -stripe_height / 2 + SCREEN_HEIGHT / 2;
-    int tex_x = (int)(c.wall_x * 32) - 1;
+    int tex_x = (int)(c.wall_x * 31) - 1;
 
     sfRectangleShape_setPosition(game->player->ray, (sfVector2f){c.x, drawStart});
     sfRectangleShape_setTextureRect(game->player->ray, (sfIntRect){tex_x, 0, 64, 62});
