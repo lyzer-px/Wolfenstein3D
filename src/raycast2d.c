@@ -63,9 +63,11 @@ static void draw_stripe(game_t *game, double perp_dist, double x)
     float stripe_height = (SCREEN_HEIGHT / perp_dist) * 5;
     int drawStart = -stripe_height / 2 + SCREEN_HEIGHT / 2;
 
-    sfRectangleShape_setFillColor(game->player->ray, sfWhite);
     sfRectangleShape_setPosition(game->player->ray,
         (sfVector2f){x, drawStart});
+    int left = (((1300 / 20) * (int)x) % 1300);
+    printf("left = %i\n", left);
+    sfRectangleShape_setTextureRect(game->player->ray, (sfIntRect){left, 1300, 1300, 1300});
     sfRectangleShape_setSize(game->player->ray, (sfVector2f){1,
         stripe_height});
     sfRenderWindow_drawRectangleShape(window, game->player->ray, NULL);

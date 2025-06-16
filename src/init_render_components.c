@@ -14,11 +14,14 @@
 
 void init_ray(player_t *player)
 {
+    sfTexture *wall_texture = sfTexture_createFromFile
+    ("assets/wall_texture.jpg", nullptr);
+
     player->ray = sfRectangleShape_create();
-    if (player->ray == NULL)
+    if (player->ray == nullptr || wall_texture == nullptr)
         return;
+    sfRectangleShape_setTexture(player->ray, wall_texture, sfFalse);
     sfRectangleShape_setSize(player->ray, (sfVector2f){1, 1});
-    sfRectangleShape_setFillColor(player->ray, sfBlue);
     sfRectangleShape_setOrigin(player->ray, (sfVector2f){2, 2});
 }
 
