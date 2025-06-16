@@ -18,9 +18,9 @@
     #define RAD(i) (i * (M_PI / 180))
     #define DEG(i) (i * (180 / M_PI))
     #define SQUARED(a) ((a) * (a))
-    #define ABS(a) ((a) < 0 ? -(a) : (a))
+    #define ABS(x) ((x) < 0 ? -1 * (x) : (x))
 
-    #define RECT_MODIF 5
+
     #define TILE_SIZE 10
     #define MAP_TILE_SIZE 10
     #define PLAYER_SIZE 5
@@ -68,7 +68,7 @@ typedef struct tile_s {
 
 sfRectangleShape *create_bg(sfVector2f size);
 
-bool is_wall(int x, int y);
+boolis_wall(int x, int y);
 
 int launch_game(void);
 void player_fwd(player_t *player, game_t *game);
@@ -88,8 +88,5 @@ void tick_game(game_t *game);
 void shotgun_move(game_t *game);
 void shotgun_shoot(game_t *game);
 
-float cast_single_ray(game_t *game, double camera_x);
-
-
-
+float cast_single_ray(game_t *game, size_t x);
 #endif

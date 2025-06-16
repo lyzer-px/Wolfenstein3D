@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** Wolfenstein3D
 ** File description:
 ** create_a_ressource_in_the_game.c

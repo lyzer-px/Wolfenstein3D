@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** bstrapwoof
 ** File description:
 ** main.c
@@ -7,42 +7,68 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #include <SFML/Graphics.h>
 #include "rendering.h"
+#include "struct.h"
 #include "macro.h"
 
 const sfColor sfGrey = {190, 190, 190, 255};
 
-float cast_single_ray(player_t *player, float angle)
+static double dda_ray_cast(sfVector2i *map_pos, sfVector2f *side_dist,
+    sfVector2f *delta_dist, sfVector2i *step)
 {
-    sfVector2f ray_direction = {- sinf(RAD(angle)), cosf(RAD(angle))};
-    sfVector2f ray_pos = player->pos;
+    int side = 0;
 
-    while (!is_wall(ON_INT_MAP(ray_pos.x), ON_INT_MAP(ray_pos.y))) {
-        ray_pos.x += ray_direction.x * 0.05;
-        ray_pos.y += ray_direction.y * 0.05;
+    while (map[map_pos->y][map_pos->x] != 1) {
+        if (side_dist->x < side_dist->y) {
+            side_dist->x += delta_dist->x;
+            map_pos->x += step->x;
+            side = 0;
+        } else {
+            side_dist->y += delta_dist->y;
+            map_pos->y += step->y;
+            side = 1;
+        }
     }
-    return (sqrtf(SQUARED(ray_pos.x - player->pos.x) +
-        SQUARED(ray_pos.y - player->pos.y))) *
-        (cosf(RAD(player->angle) - RAD(angle)));
+    return side == 0 ? side_dist->x - delta_dist->x :
+        side_dist->y - delta_dist->y;
 }
 
-static void set_rect(float distance, sfRectangleShape *rect,
-    double ray_idx, player_t *player)
+float cast_single_ray(game_t *g, double camera_x)
 {
-    float rect_height = ((float)TILE_SIZE / distance) *
-        ((float)SCREEN_WIDTH / 2);
+    sfVector2f ray_dir = {.x = ray_dir.x = PLAYER->dir.x +
+        PLAYER->plane.x * camera_x,
+        .y = PLAYER->dir.y + PLAYER->plane.y * camera_x};
+    sfVector2i map_pos = {.x = ON_INT_MAP(PLAYER->pos.x),
+        .y = ON_INT_MAP(PLAYER->pos.y)};
+    sfVector2f side_dist = {};
+    sfVector2f delta_dist = {.x = fabs((TILE_SIZE / ray_dir.x)),
+        .y = fabs((TILE_SIZE / ray_dir.y))};
+    sfVector2i step = {};
 
-    rect_height = rect_height > (float)SCREEN_HEIGHT ? (float)SCREEN_HEIGHT :
-    rect_height;
-    if (rect_height < 0)
-        rect_height = SCREEN_HEIGHT;
-    sfRectangleShape_setSize(rect, (sfVector2f){(SCREEN_WIDTH / 240),
-        rect_height});
-    sfRectangleShape_setFillColor(rect, player->flashlight_on ? sfWhite :
-        sfGrey);
-    sfRectangleShape_setPosition(rect, (sfVector2f){(ray_idx * RECT_SIZE) / 6,
-        ((float)SCREEN_HEIGHT - rect_height) / 2});
+    step.x = ray_dir.x < 0 ? -1 : 1;
+    step.y = ray_dir.y < 0 ? -1 : 1;
+    side_dist.x = ray_dir.x < 0 ?
+    (PLAYER->pos.x / TILE_SIZE - map_pos.x) * delta_dist.x : (map_pos.x + 1
+    - PLAYER->pos.x / TILE_SIZE) * delta_dist.x;
+    side_dist.y = ray_dir.y < 0 ? (PLAYER->pos.y / TILE_SIZE - map_pos.y) *
+    delta_dist.y : (map_pos.y + 1 - PLAYER->pos.y / TILE_SIZE) * delta_dist.y;
+    return dda_ray_cast(&map_pos, &side_dist, &delta_dist, &step);
+}
+
+static void draw_stripe(game_t *game, double perp_dist, double x)
+{
+    sfRenderWindow *window = game->window->window;
+    float stripe_height = (SCREEN_HEIGHT / perp_dist) * 5;
+    int drawStart = -stripe_height / 2 + SCREEN_HEIGHT / 2;
+
+    sfRectangleShape_setFillColor(game->player->ray, sfWhite);
+    sfRectangleShape_setPosition(game->player->ray,
+        (sfVector2f){x, drawStart});
+    sfRectangleShape_setSize(game->player->ray, (sfVector2f){1,
+        stripe_height});
+    sfRenderWindow_drawRectangleShape(window, game->player->ray, NULL);
 }
 
 static void draw_minimap(sfRenderWindow *window, player_t *player,
@@ -65,8 +91,8 @@ static void draw_bloom(sfRenderWindow *window, sfCircleShape *circle)
         sfCircleShape_setRadius(circle, radius * i);
         sfCircleShape_setOrigin(circle, (sfVector2f){(radius * i),
             (radius * i)});
-        sfCircleShape_setPosition(circle, (sfVector2f){(DIM_X / 2),
-            (DIM_Y / 2) + 25});
+        sfCircleShape_setPosition(circle, (sfVector2f){((float)DIM_X / 2),
+            ((float)DIM_Y / 2) + 25});
         sfLighted.a -= 30;
         sfRenderWindow_drawCircleShape(window, circle, NULL);
     }
@@ -76,47 +102,33 @@ static void handle_exceptions(game_t *game)
 {
     if (sfKeyboard_isKeyPressed(sfKeyF))
         game->player->flashlight_on = !game->player->flashlight_on;
-    if (is_wall(ON_INT_MAP(game->player->pos.x),
-        ON_INT_MAP(game->player->pos.y)))
-        player_repel(game->player, game);
     if (game->player->flashlight_on)
         draw_bloom(game->window->window, game->player->bloom);
 }
 
 void tick_game(game_t *game)
 {
-    float distance = 0;
-    float angle;
     sfRenderWindow *window = game->window->window;
+    double perp_wall_dist = 0;
+    double camera_x = 0;
 
+    draw_minimap(window, game->player, game->mini_map);
     if (game->player == NULL || window == NULL)
         return;
-    for (double i = 0; i < DEG(FOV); i += 0.25) {
-        angle = (game->player->angle - DEG(FOV / 2) + i);
-        distance = cast_single_ray(game->player, angle);
-        set_rect(distance, game->rect, i, game->player);
-        sfRenderWindow_drawRectangleShape(window, game->rect, NULL);
+    for (size_t x = 0; x < SCREEN_WIDTH; x++) {
+        camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
+        perp_wall_dist = cast_single_ray(game, camera_x);
+        draw_stripe(game, perp_wall_dist, x);
     }
     player_fwd(game->player, game);
     sfRenderWindow_drawSprite(window, game->player->shotgun->sprite, NULL);
     handle_exceptions(game);
     sfRenderWindow_drawSprite(window, game->player->reticle->sprite, NULL);
     sfRenderWindow_drawSprite(window, game->player->hud->sprite, NULL);
-    draw_minimap(window, game->player, game->mini_map);
 }
 
 int end_game(sfRenderWindow *window)
 {
     sfRenderWindow_destroy(window);
     return EXIT_SUCCESS;
-}
-
-sfRectangleShape *create_bg(sfVector2f size)
-{
-    sfRectangleShape *bg = sfRectangleShape_create();
-
-    if (bg == NULL)
-        return NULL;
-    sfRectangleShape_setSize(bg, size);
-    return bg;
 }

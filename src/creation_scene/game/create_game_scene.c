@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** Woof3D
 ** File description:
 ** create_game_scene.c
@@ -51,7 +51,7 @@ void create_game_scene(game_t *game)
     pos_top->x = 0;
     pos_top->y = 0;
     pos_bottom->x = 0;
-    pos_bottom->y = DIM_Y / 2 + 30;
+    pos_bottom->y = DIM_Y / 2 - 30;
     create_layer(game->tab_scene[GAME]);
     game->tab_scene[GAME]->function_event = tick_game;
     create_game_retangles(game, size, pos_bottom, pos_top);

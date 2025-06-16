@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** lib
 ** File description:
 ** macro.h
@@ -8,15 +8,7 @@
 #ifndef MACRO_H
     #define MACRO_H
 
-/*
-** INCLUDE
-*/
-
     #include <SFML/Graphics.h>
-
-/*
-** Always usefull
-*/
 
     #define EPI_FAIL (84)
     #define EPI_SUCCESS (0)
@@ -29,10 +21,6 @@
     #define FALSE (0)
     #define ERROR (-1)
 
-// Scene information
-
-    // WARNING - When you want to add an scene you need to make a +1 in the
-    // include/macro.h and utils/graphic/macro.h
 
 enum name_scene {
     ERROR_SCENE = 0,
@@ -48,15 +36,9 @@ enum name_scene {
 
     #define SCENE_START (MENU)
 
-/*
-** Main
-*/
-
-// Window information
-
     #define NAME_WIN ("Wolf3d")
-    #define DIM_X (1920 / 2)
-    #define DIM_Y (1080 / 2)
+    #define DIM_X (1920)
+    #define DIM_Y (1080)
     #define FPS (60)
     #define BITS (32)
 
@@ -64,49 +46,27 @@ enum name_scene {
     #define STYLE_FULL ((sfUint32)sfResize | sfClose | sfFullscreen)
 
     #define ELAPSED_TIME (1000)
-
-/*
-** ID of element in the game
-*/
-
-        // Font
     #define FONT_HORROR ("Font horror")
 
-        // Scene error
     #define BG_ERROR ("background_error")
     #define TEXT_ERROR ("text_error")
 
-            // Music
     #define ID_MUSIC_MENU ("music_menu")
     #define ID_MUSIC_GAME ("music_game")
-
-/*
-** Error on the window
-*/
 
     #define ERROR_TEXT_404 ("Error: We found a problem. (Error 404)")
 
 
-
-/*
-** Libs
-*/
-
-// Env information
-
     #define DISPLAY_CHECK ("DISPLAY=:")
 
-// Text information
 
     #define END_STR ('\0')
 
-// Configuration file
 
     #define PATH_CONIG_MUSIC ("assets/music_loader.config")
     #define PATH_FILE_CONIG ("assets/loader.config")
     #define SEPARATOR_CONFIG_FILE ("; \n\t")
-    // each line need to be format like that:
-    //TYPE; "NAME"; "FILE_PATH";
+
 enum FORMAT_FILE_INDEX {
     TYPE = 0,
     NAME,
@@ -140,15 +100,8 @@ enum TYPE_INSTRUCTION {
     NB_ARG_CONFIG,
 };
 
-/*
-** Error Print For User
-*/
-
     #define ER_ENV ("The environment does not allow the window to be opened\n")
 
-/*
-** Save crypt key
-*/
 
     #define CRYPT_KEY 13
     #define SIZE_ALPHABET 26

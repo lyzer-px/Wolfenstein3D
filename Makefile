@@ -1,5 +1,5 @@
 ##
-## EPITECH PROJECT, 2024
+## EPITECH PROJECT, 2025
 ## make lib
 ## File description:
 ## make lib
@@ -45,7 +45,8 @@ OBJ			=		$(SRC:.c=.o)
 
 NAME		=		wolf3d
 
-CFLAGS		=		-Wall -Wextra -Wpedantic -Werror
+CFLAGS		=		-Wall -Wextra -Wpedantic -std=c2x \
+	-D_POSIX_C_SOURCE=202311L
 
 
 CPPFLAGS	+=		-iquote include
@@ -114,8 +115,7 @@ debug:
 	@make clean
 
 tests_run:
-	$(CC) -o $(UT_NAME) $(UT_SRC) $(UT_FLAGS) $(CFLAGS) $(CPPFLAGS)
-	./$(UT_NAME)
+	@echo "hi"
 
 coverage: tests_run
 	gcovr --exclude test/

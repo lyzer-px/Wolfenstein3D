@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** Wolfenstein3D
 ** File description:
 ** init_game.c
@@ -44,9 +44,7 @@ static void init_settings(game_t *game)
 static void init_for_raycast(game_t *game)
 {
     game->mini_map = init_map();
-    if (game->mini_map[0] == NULL)
-            printf("PRE LOOP\n");
-    if (game->mini_map == NULL)
+    if (game->mini_map == NULL || game->mini_map[0] == NULL)
         return;
     game->player = calloc(1, sizeof(player_t));
     init_player(game->player);

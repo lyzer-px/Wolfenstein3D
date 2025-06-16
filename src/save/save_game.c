@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** wolf3d
 ** File description:
 ** wolf3d.c
@@ -13,6 +13,7 @@
 #include "struct.h"
 #include "libmy.h"
 #include "error_str.h"
+#include <sys/stat.h>
 
 static void fill_file(int fd, game_t *game)
 {

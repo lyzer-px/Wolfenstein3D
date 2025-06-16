@@ -18,9 +18,8 @@
     #define RAD(i) (i * (M_PI / 180))
     #define DEG(i) (i * (180 / M_PI))
     #define SQUARED(a) ((a) * (a))
-    #define ABS(a) ((a) < 0 ? -(a) : (a))
 
-    #define RECT_MODIF 5
+
     #define TILE_SIZE 10
     #define MAP_TILE_SIZE 10
     #define PLAYER_SIZE 5
@@ -36,8 +35,8 @@
     #define MAP_DIR(b, s) (ON_INT_MAP((player->pos.b s dir.b * PLAYER_SPEED)))
     #define DIR_COLLIDE(c, d, e, f) (!map[MAP_DIR(c, d)][MAP_DIR(e, f)])
 
-    #define SCREEN_WIDTH 1920
-    #define SCREEN_HEIGHT 1080
+    #define SCREEN_WIDTH 1080
+    #define SCREEN_HEIGHT 1920
 
     #define PLAYER (g->player)
 
@@ -68,7 +67,7 @@ typedef struct tile_s {
 
 sfRectangleShape *create_bg(sfVector2f size);
 
-bool is_wall(int x, int y);
+boolis_wall(int x, int y);
 
 int launch_game(void);
 void player_fwd(player_t *player, game_t *game);
@@ -88,8 +87,7 @@ void tick_game(game_t *game);
 void shotgun_move(game_t *game);
 void shotgun_shoot(game_t *game);
 
-float cast_single_ray(game_t *game, double camera_x);
-
+float cast_single_ray(player_t *player, float angle);
 
 
 #endif

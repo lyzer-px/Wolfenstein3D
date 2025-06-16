@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** bstrapwoof
 ** File description:
 ** bs.c
@@ -10,51 +10,39 @@
 #include <SFML/Graphics.h>
 #include "rendering.h"
 
-sfBool is_wall(int x, int y)
+bool is_wall(int x, int y)
 {
     if ((x < 0 || y < 0) || (x > MAP_WIDTH || y > MAP_HEIGHT))
         return sfFalse;
     return map[y][x];
 }
 
-void player_fwd(player_t *player, game_t *game)
+static void rotate_vect(sfVector2f *v, float old_x, float angle)
 {
-    sfVector2f direction = {- sinf(RAD(player->angle)),
-        cosf(RAD(player->angle))};
-
-    if (player == NULL)
-        return;
-    if (sfMouse_isButtonPressed(sfMouseLeft) && !player->running)
-        shotgun_shoot(game);
-    if (sfKeyboard_isKeyPressed(sfKeyZ)) {
-            shotgun_move(game);
-        player->pos.x += direction.x * PLAYER_SPEED;
-        player->pos.y += direction.y * PLAYER_SPEED;
-    } else if (sfKeyboard_isKeyPressed(sfKeyS)) {
-            shotgun_move(game);
-        player->pos.x -= direction.x * PLAYER_SPEED;
-        player->pos.y -= direction.y * PLAYER_SPEED;
-    }
-    player->angle -= sfKeyboard_isKeyPressed(sfKeyQ) * ROTATION_SPEED;
-    player->angle += sfKeyboard_isKeyPressed(sfKeyD) * ROTATION_SPEED;
-    player->angle = player->angle > 360 ? 0 : player->angle;
-    player->angle = player->angle < 0 ? 360 : player->angle;
+    v->x = v->x * cos(angle) - v->y * sin(angle);
+    v->y = old_x * sin(angle) + v->y * cos(angle);
 }
 
-void player_repel(player_t *player, game_t *game)
+void player_fwd(player_t *player, game_t *game)
 {
-    sfVector2f direction = {- sinf(RAD(player->angle)),
-        cosf(RAD(player->angle))};
+    sfVector2f dir = player->dir;
 
-    if (player == NULL)
-        return;
-    if (sfKeyboard_isKeyPressed(sfKeyZ)) {
+    if (sfMouse_isButtonPressed(sfMouseLeft) && !player->running)
+        shotgun_shoot(game);
+    if (sfKeyboard_isKeyPressed(sfKeyZ) && DIR_COLLIDE(y, +, x, +)) {
         shotgun_move(game);
-        player->pos.x -= direction.x * PLAYER_SPEED;
-        player->pos.y -= direction.y * PLAYER_SPEED;
-    } else if (sfKeyboard_isKeyPressed(sfKeyS)) {
+        player->pos.x += (dir.x * PLAYER_SPEED);
+        player->pos.y += (dir.y * PLAYER_SPEED);
+    } else if (sfKeyboard_isKeyPressed(sfKeyS) && DIR_COLLIDE(y, -, x, +)) {
         shotgun_move(game);
-        player->pos.x += direction.x * PLAYER_SPEED;
-        player->pos.y += direction.y * PLAYER_SPEED;
+        player->pos.x -= dir.x * PLAYER_SPEED;
+        player->pos.y -= dir.y * PLAYER_SPEED;
+    }
+    if (sfKeyboard_isKeyPressed(sfKeyD)) {
+        rotate_vect(&player->dir, player->dir.x, -ROTATION_SPEED);
+        rotate_vect(&player->plane, player->plane.x, -ROTATION_SPEED);
+    } else if (sfKeyboard_isKeyPressed(sfKeyQ)) {
+        rotate_vect(&player->dir, player->dir.x, ROTATION_SPEED);
+        rotate_vect(&player->plane, player->plane.x, ROTATION_SPEED);
     }
 }

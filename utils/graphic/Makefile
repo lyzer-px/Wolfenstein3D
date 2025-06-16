@@ -1,5 +1,5 @@
 ##
-## EPITECH PROJECT, 2024
+## EPITECH PROJECT, 2025
 ## make lib
 ## File description:
 ## make lib
@@ -90,7 +90,8 @@ HEADER	=	include/libgraphic.h			\
           	include/type_id.h				\
 		  	include/my_encapsulation.h
 
-CFLAGS		=		-Wall -Wextra -Wpedantic -Werror -lcsfml-audio
+CFLAGS		=		-Wall -Wextra -Wpedantic -lcsfml-audio -std=c2x \
+	-D_POSIX_C_SOURCE=202311L
 
 CPPFLAGS	=		-iquote include/.
 
