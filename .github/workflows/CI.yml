@@ -38,7 +38,7 @@ jobs:
         run: for binary in "${{ vars.EXECUTABLES }}"; do if [ ! -x $binary ]; then exit 1; fi; done
 
   push_to_mirror:
-    needs: [check_coding_style]
+    needs: [check_coding_style, check_program_compilation]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
