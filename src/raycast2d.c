@@ -55,7 +55,7 @@ static void dda_ray_cast(vect_t v, game_t *game, size_t x)
     draw_stripe(game, perp_wall, (coords_t){wall_x - floor(wall_x), x});
 }
 
-float cast_single_ray(game_t *g, double camera_x, size_t x)
+void cast_single_ray(game_t *g, double camera_x, size_t x)
 {
     sfVector2f ray_dir = {.x = ray_dir.x = PLAYER->dir.x +
         PLAYER->plane.x * camera_x,

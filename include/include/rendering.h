@@ -87,7 +87,7 @@ void tick_game(game_t *game);
 void shotgun_move(game_t *game);
 void shotgun_shoot(game_t *game);
 
-float cast_single_ray(player_t *player, float angle);
+void cast_single_ray(player_t *player, float angle);
 
 
 #endif
