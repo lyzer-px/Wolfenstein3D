@@ -130,6 +130,7 @@ void tick_game(game_t *game)
     handle_exceptions(game);
     sfRenderWindow_drawSprite(window, game->player->reticle->sprite, NULL);
     sfRenderWindow_drawSprite(window, game->player->hud->sprite, NULL);
+    sfRenderWindow_drawSprite(window, game->player->shell->sprite, NULL);
 }
 
 int end_game(sfRenderWindow *window)

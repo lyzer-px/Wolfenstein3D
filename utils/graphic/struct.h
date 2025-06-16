@@ -84,15 +84,16 @@ typedef struct player_s {
     sfVector2f pos;
     sfVector2f dir;
     sfVector2f plane;
+    float angle;
     sfRectangleShape *hitbox;
     sfRectangleShape *ray;
     sfCircleShape *bloom;
     asset_t *hud;
     asset_t *shotgun;
     asset_t *impact;
+    asset_t *shell;
     asset_t *reticle;
     sfClock *clock;
-    float angle;
     bool flashlight_on;
     bool firing;
     bool running;

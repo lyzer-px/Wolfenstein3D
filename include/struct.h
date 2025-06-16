@@ -91,6 +91,7 @@ typedef struct player_s {
     asset_t *hud;
     asset_t *shotgun;
     asset_t *impact;
+    asset_t *shell;
     asset_t *reticle;
     sfClock *clock;
     bool flashlight_on;
