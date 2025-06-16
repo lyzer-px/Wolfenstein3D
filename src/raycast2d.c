@@ -15,27 +15,47 @@
 
 const sfColor sfGrey = {190, 190, 190, 255};
 
-static double dda_ray_cast(sfVector2i *map_pos, sfVector2f *side_dist,
-    sfVector2f *delta_dist, sfVector2i *step)
+static void draw_stripe(game_t *game, double perp_dist, coords_t c)
+{
+    sfRenderWindow *window = game->window->window;
+    float stripe_height = (SCREEN_HEIGHT / perp_dist) * 5;
+    int drawStart = -stripe_height / 2 + SCREEN_HEIGHT / 2;
+    int tex_x = (int)(c.wall_x * 31) - 1;
+
+    sfRectangleShape_setPosition(game->player->ray,
+        (sfVector2f){c.x, drawStart});
+    sfRectangleShape_setTextureRect(game->player->ray,
+        (sfIntRect){tex_x, 0, 64, 62});
+    sfRectangleShape_setSize(game->player->ray,
+        (sfVector2f){1, stripe_height});
+    sfRenderWindow_drawRectangleShape(window, game->player->ray, NULL);
+}
+
+static void dda_ray_cast(vect_t v, game_t *game, size_t x)
 {
     int side = 0;
+    double perp_wall = 0;
+    double wall_x = 0;
 
-    while (map[map_pos->y][map_pos->x] != 1) {
-        if (side_dist->x < side_dist->y) {
-            side_dist->x += delta_dist->x;
-            map_pos->x += step->x;
+    while (map[v.map_pos->y][v.map_pos->x] != 1) {
+        if (v.side_dist->x < v.side_dist->y) {
+            v.side_dist->x += v.delta_dist->x;
+            v.map_pos->x += v.step->x;
             side = 0;
         } else {
-            side_dist->y += delta_dist->y;
-            map_pos->y += step->y;
+            v.side_dist->y += v.delta_dist->y;
+            v.map_pos->y += v.step->y;
             side = 1;
         }
     }
-    return side == 0 ? side_dist->x - delta_dist->x :
-        side_dist->y - delta_dist->y;
+    perp_wall = side == 0 ? v.side_dist->x - v.delta_dist->x :
+        v.side_dist->y - v.delta_dist->y;
+    wall_x = side == 0 ? game->player->pos.y +perp_wall * v.ray_dir->y :
+        game->player->pos.x + perp_wall * v.ray_dir->x;
+    draw_stripe(game, perp_wall, (coords_t){wall_x - floor(wall_x), x});
 }
 
-float cast_single_ray(game_t *g, double camera_x)
+float cast_single_ray(game_t *g, double camera_x, size_t x)
 {
     sfVector2f ray_dir = {.x = ray_dir.x = PLAYER->dir.x +
         PLAYER->plane.x * camera_x,
@@ -54,21 +74,8 @@ float cast_single_ray(game_t *g, double camera_x)
     - PLAYER->pos.x / TILE_SIZE) * delta_dist.x;
     side_dist.y = ray_dir.y < 0 ? (PLAYER->pos.y / TILE_SIZE - map_pos.y) *
     delta_dist.y : (map_pos.y + 1 - PLAYER->pos.y / TILE_SIZE) * delta_dist.y;
-    return dda_ray_cast(&map_pos, &side_dist, &delta_dist, &step);
-}
-
-static void draw_stripe(game_t *game, double perp_dist, double x)
-{
-    sfRenderWindow *window = game->window->window;
-    float stripe_height = (SCREEN_HEIGHT / perp_dist) * 5;
-    int drawStart = -stripe_height / 2 + SCREEN_HEIGHT / 2;
-
-    sfRectangleShape_setFillColor(game->player->ray, sfWhite);
-    sfRectangleShape_setPosition(game->player->ray,
-        (sfVector2f){x, drawStart});
-    sfRectangleShape_setSize(game->player->ray, (sfVector2f){1,
-        stripe_height});
-    sfRenderWindow_drawRectangleShape(window, game->player->ray, NULL);
+    dda_ray_cast((vect_t){&map_pos,
+        &side_dist, &delta_dist, &step, &ray_dir}, g, x);
 }
 
 static void draw_minimap(sfRenderWindow *window, player_t *player,
@@ -109,7 +116,6 @@ static void handle_exceptions(game_t *game)
 void tick_game(game_t *game)
 {
     sfRenderWindow *window = game->window->window;
-    double perp_wall_dist = 0;
     double camera_x = 0;
 
     draw_minimap(window, game->player, game->mini_map);
@@ -117,8 +123,7 @@ void tick_game(game_t *game)
         return;
     for (size_t x = 0; x < SCREEN_WIDTH; x++) {
         camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
-        perp_wall_dist = cast_single_ray(game, camera_x);
-        draw_stripe(game, perp_wall_dist, x);
+        cast_single_ray(game, camera_x, x);
     }
     player_fwd(game->player, game);
     sfRenderWindow_drawSprite(window, game->player->shotgun->sprite, NULL);

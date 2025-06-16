@@ -23,6 +23,12 @@ static void rotate_vect(sfVector2f *v, float old_x, float angle)
     v->y = old_x * sin(angle) + v->y * cos(angle);
 }
 
+static void double_rotate(sfVector2f *dir, sfVector2f *plane, float angle)
+{
+    rotate_vect(dir, dir->x, angle);
+    rotate_vect(plane, plane->x, angle);
+}
+
 void player_fwd(player_t *player, game_t *game)
 {
     sfVector2f dir = player->dir;
@@ -33,16 +39,14 @@ void player_fwd(player_t *player, game_t *game)
         shotgun_move(game);
         player->pos.x += (dir.x * PLAYER_SPEED);
         player->pos.y += (dir.y * PLAYER_SPEED);
-    } else if (sfKeyboard_isKeyPressed(sfKeyS) && DIR_COLLIDE(y, -, x, +)) {
+    }
+    if (sfKeyboard_isKeyPressed(sfKeyS) && DIR_COLLIDE(y, -, x, +)) {
         shotgun_move(game);
         player->pos.x -= dir.x * PLAYER_SPEED;
         player->pos.y -= dir.y * PLAYER_SPEED;
     }
-    if (sfKeyboard_isKeyPressed(sfKeyD)) {
-        rotate_vect(&player->dir, player->dir.x, -ROTATION_SPEED);
-        rotate_vect(&player->plane, player->plane.x, -ROTATION_SPEED);
-    } else if (sfKeyboard_isKeyPressed(sfKeyQ)) {
-        rotate_vect(&player->dir, player->dir.x, ROTATION_SPEED);
-        rotate_vect(&player->plane, player->plane.x, ROTATION_SPEED);
-    }
+    if (sfKeyboard_isKeyPressed(sfKeyD))
+        double_rotate(&player->dir, &player->plane, -ROTATION_SPEED);
+    if (sfKeyboard_isKeyPressed(sfKeyQ))
+        double_rotate(&player->dir, &player->plane, ROTATION_SPEED);
 }
