@@ -85,9 +85,11 @@ static int create_shell(player_t *player)
     player->shell->texture = sfTexture_createFromFile
     ("assets/shotgun_shell.png", &player->shell->rect);
     sfSprite_setScale(player->shell->sprite, (sfVector2f){0.2, 0.2});
-    player->shell->pos = (sfVector2f){SCREEN_WIDTH / 2 + 175, SCREEN_HEIGHT / 2 + 350};
+    player->shell->pos = (sfVector2f){SCREEN_WIDTH / 2 + 175,
+        SCREEN_HEIGHT / 2 + 360};
     sfSprite_setPosition(player->shell->sprite, player->shell->pos);
-    sfSprite_setTexture(player->shell->sprite, player->shell->texture, sfFalse);
+    sfSprite_setTexture(player->shell->sprite,
+        player->shell->texture, sfFalse);
     return EXIT_SUCCESS;
 }
 

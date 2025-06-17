@@ -91,4 +91,7 @@ void shotgun_shoot(game_t *game);
 void cast_single_ray(game_t *g, double camera_x, size_t x);
 
 
+void create_heart(game_t *game);
+
+void init_text(game_t *game, char *str);
 #endif

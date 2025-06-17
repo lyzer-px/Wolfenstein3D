@@ -55,5 +55,7 @@ void create_game_scene(game_t *game)
     create_layer(game->tab_scene[GAME]);
     game->tab_scene[GAME]->function_event = tick_game;
     create_game_retangles(game, size, pos_bottom, pos_top);
+    create_heart(game);
+    init_text(game, "100% 6");
     free(size);
 }

@@ -92,6 +92,7 @@ typedef struct player_s {
     asset_t *shotgun;
     asset_t *impact;
     asset_t *shell;
+    asset_t *heart;
     asset_t *reticle;
     sfClock *clock;
     bool flashlight_on;
@@ -114,6 +115,7 @@ typedef struct settings_s {
 
 struct game_s {
     player_t *player;
+    sfText *player_info;
     sfRectangleShape **mini_map;
     sfRectangleShape *rect;
     int nb_scene;
