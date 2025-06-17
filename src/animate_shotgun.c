@@ -32,10 +32,12 @@ static void shotgun_update_frame(game_t *game)
 
 void shotgun_shoot(game_t *game)
 {
+    game->player->firing = true;
     game->player->shotgun->rect.left = 230;
     if (sfClock_getElapsedTime(game->player->clock).microseconds >= 200000) {
         sfClock_restart(game->player->clock);
         shotgun_update_frame(game);
     }
     game->player->shotgun->rect.left = 0;
+    game->player->firing = false;
 }

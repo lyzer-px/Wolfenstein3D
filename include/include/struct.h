@@ -81,8 +81,6 @@ typedef struct asset_s {
 } asset_t;
 
 typedef struct player_s {
-    unsigned short hp;
-    unsigned short ammo;
     sfVector2f pos;
     sfVector2f dir;
     sfVector2f plane;
@@ -96,6 +94,8 @@ typedef struct player_s {
     asset_t *reticle;
     sfClock *clock;
     bool flashlight_on;
+    bool firing;
+    bool running;
 } player_t;
 
 typedef struct music_s {
@@ -113,7 +113,6 @@ typedef struct settings_s {
 
 struct game_s {
     player_t *player;
-    sfText *player_info;
     sfRectangleShape **mini_map;
     sfRectangleShape *rect;
     int nb_scene;

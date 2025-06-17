@@ -107,8 +107,6 @@ static int set_positions(player_t *player)
     player->angle = RAD(M_PI);
     player->pos.x = 2 * MAP_TILE_SIZE;
     player->pos.y = 3 * MAP_TILE_SIZE;
-    player->hp = 100;
-    player->ammo = 6;
     return create_shell(player);
 }
 
