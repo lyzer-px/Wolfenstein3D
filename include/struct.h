@@ -81,6 +81,8 @@ typedef struct asset_s {
 } asset_t;
 
 typedef struct player_s {
+    unsigned short hp;
+    unsigned short ammo;
     sfVector2f pos;
     sfVector2f dir;
     sfVector2f plane;

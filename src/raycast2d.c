@@ -117,6 +117,7 @@ void tick_game(game_t *game)
 {
     sfRenderWindow *window = game->window->window;
     double camera_x = 0;
+    char *infos = calloc(60, sizeof(char));
 
     if (game->player == NULL || window == NULL)
         return;
@@ -130,6 +131,8 @@ void tick_game(game_t *game)
     handle_exceptions(game);
     sfRenderWindow_drawSprite(window, game->player->reticle->sprite, NULL);
     sfRenderWindow_drawSprite(window, game->player->hud->sprite, NULL);
+    sprintf(infos, "%i%%                                        %i", game->player->hp, game->player->ammo);
+    sfText_setString(game->player_info, infos);
     sfRenderWindow_drawText(window, game->player_info, NULL);
     sfRenderWindow_drawSprite(window, game->player->shell->sprite, NULL);
     sfRenderWindow_drawSprite(window, game->player->heart->sprite, NULL);
