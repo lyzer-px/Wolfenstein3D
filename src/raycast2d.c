@@ -131,6 +131,7 @@ void tick_game(game_t *game)
     sfRenderWindow_drawSprite(window, game->player->reticle->sprite, NULL);
     sfRenderWindow_drawSprite(window, game->player->hud->sprite, NULL);
     sfRenderWindow_drawSprite(window, game->player->shell->sprite, NULL);
+    sfRenderWindow_drawText(window, game->player_info, nullptr;)
 }
 
 int end_game(sfRenderWindow *window)
