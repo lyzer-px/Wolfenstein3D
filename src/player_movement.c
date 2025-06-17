@@ -40,7 +40,7 @@ static void player_rotate(player_t *player)
 static void player_reload(player_t *player)
 {
     if (sfKeyboard_isKeyPressed(sfKeyR))
-        player->ammo = 6;
+        player->ammo = 1;
 }
 
 static void player_hurt(player_t *player)
