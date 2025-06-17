@@ -38,7 +38,7 @@ void init_text(game_t *game, char *str)
     sfText_setFont(game->player_info,
         sfFont_createFromFile("assets/Font/arial.ttf"));
     sfText_setCharacterSize(game->player_info, 50);
-    sfText_setPosition(game->player_info, (sfVector2f){SCREEN_HEIGHT - 300,
-        SCREEN_WIDTH / 5});
+    sfText_setPosition(game->player_info, (sfVector2f){SCREEN_WIDTH / 4 + 80,
+        SCREEN_WIDTH / 2 - 55});
     sfText_setString(game->player_info, str);
 }
