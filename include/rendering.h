@@ -38,6 +38,7 @@
 
     #define SCREEN_WIDTH 1920
     #define SCREEN_HEIGHT 1080
+    #define INFO_FORMAT "%i%%                                        %i"
 
     #define PLAYER (g->player)
 

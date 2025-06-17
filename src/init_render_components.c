@@ -77,7 +77,6 @@ void init_hitbox(player_t *player)
 static int create_shell(player_t *player)
 {
     player->shell = calloc(1, sizeof(asset_t));
-
     if (player->shell == nullptr)
         return EXIT_FAILURE;
     player->shell->sprite = sfSprite_create();

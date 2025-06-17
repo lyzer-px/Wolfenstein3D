@@ -13,7 +13,6 @@
 void create_heart(game_t *game)
 {
     game->player->heart = calloc(1, sizeof(game_t));
-
     if (game->player->heart == nullptr)
         return;
     game->player->heart->sprite = sfSprite_create();
@@ -32,7 +31,6 @@ void create_heart(game_t *game)
 void init_text(game_t *game, char *str)
 {
     game->player_info = sfText_create();
-
     if (game->player_info == nullptr)
         return;
     sfText_setFont(game->player_info,
