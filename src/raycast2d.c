@@ -31,7 +31,7 @@ static void draw_stripe(game_t *game, double perp_dist, coords_t c)
     sfRenderWindow_drawRectangleShape(window, game->player->ray, NULL);
 }
 
-static void dda_ray_cast(vect_t v, game_t *game, size_t x)
+static double dda_ray_cast(vect_t v, game_t *game, size_t x, bool draw)
 {
     int side = 0;
     double perp_wall = 0;
@@ -52,10 +52,12 @@ static void dda_ray_cast(vect_t v, game_t *game, size_t x)
         v.side_dist->y - v.delta_dist->y;
     wall_x = side == 0 ? game->player->pos.y +perp_wall * v.ray_dir->y :
         game->player->pos.x + perp_wall * v.ray_dir->x;
-    draw_stripe(game, perp_wall, (coords_t){wall_x - floor(wall_x), x});
+    if (draw)
+        draw_stripe(game, perp_wall, (coords_t){wall_x - floor(wall_x), x});
+    return perp_wall;
 }
 
-void cast_single_ray(game_t *g, double camera_x, size_t x)
+double cast_single_ray(game_t *g, double camera_x, size_t x, bool draw)
 {
     sfVector2f ray_dir = {.x = ray_dir.x = PLAYER->dir.x +
         PLAYER->plane.x * camera_x,
@@ -74,8 +76,8 @@ void cast_single_ray(game_t *g, double camera_x, size_t x)
     - PLAYER->pos.x / TILE_SIZE) * delta_dist.x;
     side_dist.y = ray_dir.y < 0 ? (PLAYER->pos.y / TILE_SIZE - map_pos.y) *
     delta_dist.y : (map_pos.y + 1 - PLAYER->pos.y / TILE_SIZE) * delta_dist.y;
-    dda_ray_cast((vect_t){&map_pos,
-        &side_dist, &delta_dist, &step, &ray_dir}, g, x);
+    return dda_ray_cast((vect_t){&map_pos,
+        &side_dist, &delta_dist, &step, &ray_dir}, g, x, draw);
 }
 
 static void draw_minimap(sfRenderWindow *window, player_t *player,
@@ -123,7 +125,7 @@ void tick_game(game_t *game)
         return;
     for (size_t x = 0; x < SCREEN_WIDTH; x++) {
         camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
-        cast_single_ray(game, camera_x, x);
+        cast_single_ray(game, camera_x, x, true);
     }
     draw_minimap(window, game->player, game->mini_map);
     player_fwd(game->player, game);

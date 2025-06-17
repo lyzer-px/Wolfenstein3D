@@ -88,8 +88,7 @@ void tick_game(game_t *game);
 void shotgun_move(game_t *game);
 void shotgun_shoot(game_t *game);
 
-void cast_single_ray(game_t *g, double camera_x, size_t x);
-
+double cast_single_ray(game_t *g, double camera_x, size_t x, bool draw);
 
 void create_heart(game_t *game);
 

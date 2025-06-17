@@ -20,7 +20,7 @@ void shotgun_move(game_t *game)
     }
 }
 
-static void shotgun_update_frame(game_t *game)
+static void shotgun_update_frame(game_t *game, double scale)
 {
     game->player->shotgun->rect.left += 70;
     game->player->shotgun->rect.left %= 500;
@@ -28,15 +28,21 @@ static void shotgun_update_frame(game_t *game)
         game->player->shotgun->rect);
     sfRenderWindow_drawSprite(game->window->window,
         game->player->shotgun->sprite, NULL);
+    sfSprite_setScale(game->player->impact->sprite, (sfVector2f){scale, scale});
+    sfRenderWindow_drawSprite(game->window->window, game->player->impact->sprite, NULL);
 }
 
 void shotgun_shoot(game_t *game)
 {
+    double cam_x = 2 * ((double)SCREEN_WIDTH / 2) / (double)SCREEN_WIDTH - 1;
+    double distance = cast_single_ray(game, cam_x, SCREEN_WIDTH / 2, false);
+    float scale = 1 / distance;
+
     game->player->firing = true;
     game->player->shotgun->rect.left = 230;
     if (sfClock_getElapsedTime(game->player->clock).microseconds >= 200000) {
         sfClock_restart(game->player->clock);
-        shotgun_update_frame(game);
+        shotgun_update_frame(game, scale);
     }
     game->player->shotgun->rect.left = 0;
     game->player->firing = false;
