@@ -15,28 +15,31 @@
 
 const sfColor sfGrey = {190, 190, 190, 255};
 
-static void draw_stripe(game_t *game, double perp_dist, coords_t c)
+static double draw_stripe(game_t *game,
+    double perp_dist, coords_t c, bool draw)
 {
     sfRenderWindow *window = game->window->window;
     float stripe_height = (SCREEN_HEIGHT / perp_dist) * 5;
     int drawStart = -stripe_height / 2 + SCREEN_HEIGHT / 2;
     int tex_x = (int)(c.wall_x * 31) - 1;
 
-    sfRectangleShape_setPosition(game->player->ray,
-        (sfVector2f){c.x, drawStart});
-    sfRectangleShape_setTextureRect(game->player->ray,
-        (sfIntRect){tex_x, 0, 64, 62});
-    sfRectangleShape_setSize(game->player->ray,
-        (sfVector2f){1, stripe_height});
-    sfRenderWindow_drawRectangleShape(window, game->player->ray, NULL);
+    if (draw) {
+        sfRectangleShape_setPosition(game->player->ray,
+            (sfVector2f){c.x, drawStart});
+        sfRectangleShape_setTextureRect(game->player->ray,
+            (sfIntRect){tex_x, 0, 64, 62});
+        sfRectangleShape_setSize(game->player->ray,
+            (sfVector2f){1, stripe_height});
+        sfRenderWindow_drawRectangleShape(window, game->player->ray, NULL);
+    }
     return perp_dist;
 }
 
 static double dda_ray_cast(vect_t v, game_t *game, size_t x, bool draw)
 {
     int side = 0;
-    double perp_wall = 0;
-    double wall_x = 0;
+    double p_dist = 0;
+    double wl_x = 0;
 
     while (map[v.map_pos->y][v.map_pos->x] != 1) {
         if (v.side_dist->x < v.side_dist->y) {
@@ -49,13 +52,11 @@ static double dda_ray_cast(vect_t v, game_t *game, size_t x, bool draw)
             side = 1;
         }
     }
-    perp_wall = side == 0 ? v.side_dist->x - v.delta_dist->x :
+    p_dist = side == 0 ? v.side_dist->x - v.delta_dist->x :
         v.side_dist->y - v.delta_dist->y;
-    wall_x = side == 0 ? game->player->pos.y + perp_wall * v.ray_dir->y :
-        game->player->pos.x + perp_wall * v.ray_dir->x;
-    if (draw)
-        draw_stripe(game, perp_wall, (coords_t){wall_x - floor(wall_x), x});
-    return perp_wall;
+    wl_x = side == 0 ? game->player->pos.y + p_dist * v.ray_dir->y :
+        game->player->pos.x + p_dist * v.ray_dir->x;
+    return draw_stripe(game, p_dist, (coords_t){wl_x - floor(wl_x), x}, draw);
 }
 
 double cast_single_ray(game_t *g, double camera_x, size_t x, bool draw)
@@ -116,7 +117,7 @@ static void handle_exceptions(game_t *game)
         draw_bloom(game->window->window, game->player->bloom);
 }
 
-static void end_tick(game_t *game, sfRenderWindow *window)
+static void end_tick(game_t *game, sfRenderWindow *window, char *infos)
 {
     draw_minimap(window, game->player, game->mini_map);
     player_fwd(game->player, game);
@@ -143,7 +144,7 @@ void tick_game(game_t *game)
         camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
         cast_single_ray(game, camera_x, x, true);
     }
-    end_tick(game, window);
+    end_tick(game, window, infos);
 }
 
 int end_game(sfRenderWindow *window)
