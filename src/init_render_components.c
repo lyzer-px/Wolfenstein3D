@@ -58,9 +58,9 @@ static void init_hud(player_t *player)
     sfSprite_setTexture(player->hud->sprite,
         player->hud->texture, sfFalse);
     sfSprite_setPosition(player->hud->sprite,
-        (sfVector2f){80, DIM_Y - 90});
+        (sfVector2f){400, DIM_Y - 200});
     sfSprite_setScale(player->hud->sprite,
-        (sfVector2f){1.25, 1.25});
+        (sfVector2f){1.5, 1.5});
 }
 
 void init_hitbox(player_t *player)
@@ -74,12 +74,30 @@ void init_hitbox(player_t *player)
     sfRectangleShape_setRotation(player->hitbox, player->angle);
 }
 
+static int create_shell(player_t *player)
+{
+    player->shell = calloc(1, sizeof(asset_t));
+    if (player->shell == nullptr)
+        return EXIT_FAILURE;
+    player->shell->sprite = sfSprite_create();
+    player->shell->rect = (sfIntRect){0, 0, 360, 360};
+    player->shell->texture = sfTexture_createFromFile
+    ("assets/shotgun_shell.png", &player->shell->rect);
+    sfSprite_setScale(player->shell->sprite, (sfVector2f){0.2, 0.2});
+    player->shell->pos = (sfVector2f){SCREEN_WIDTH / 2 + 175,
+        SCREEN_HEIGHT / 2 + 360};
+    sfSprite_setPosition(player->shell->sprite, player->shell->pos);
+    sfSprite_setTexture(player->shell->sprite,
+        player->shell->texture, sfFalse);
+    return EXIT_SUCCESS;
+}
+
 static int set_positions(player_t *player)
 {
     sfSprite_setPosition(player->shotgun->sprite,
-        (sfVector2f){DIM_X / 2 - 180, DIM_Y - 500});
+        (sfVector2f){DIM_X / 2 - 180, DIM_Y - 450});
     sfSprite_setPosition(player->reticle->sprite,
-        (sfVector2f){DIM_X / 2, DIM_Y / 2 + 30});
+        (sfVector2f){DIM_X / 2 - 30, DIM_Y / 2 + 30});
     sfSprite_setOrigin(player->reticle->sprite,
         (sfVector2f){(75 * 1.5) / 2, (75 * 1.5) / 2});
     init_impact(player);
@@ -90,7 +108,9 @@ static int set_positions(player_t *player)
     player->angle = RAD(M_PI);
     player->pos.x = 2 * MAP_TILE_SIZE;
     player->pos.y = 3 * MAP_TILE_SIZE;
-    return EXIT_SUCCESS;
+    player->hp = 100;
+    player->ammo = 1;
+    return create_shell(player);
 }
 
 static int set_propreties(player_t *player)

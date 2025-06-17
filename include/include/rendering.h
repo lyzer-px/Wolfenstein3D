@@ -37,6 +37,7 @@
 
     #define SCREEN_WIDTH 1080
     #define SCREEN_HEIGHT 1920
+    #define INFO_FORMAT "%i%%                                        %i"
 
     #define PLAYER (g->player)
 
@@ -87,7 +88,8 @@ void tick_game(game_t *game);
 void shotgun_move(game_t *game);
 void shotgun_shoot(game_t *game);
 
-void cast_single_ray(player_t *player, float angle);
+double cast_single_ray(game_t *g, double camera_x, size_t x, bool draw);
+
 
 
 #endif

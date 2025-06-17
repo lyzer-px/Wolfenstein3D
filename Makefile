@@ -39,7 +39,8 @@ SRC 		= 		main.c													\
 					src/save/content_check.c								\
 					src/save/name_check.c									\
 					src/save/load_save.c									\
-					src/animate_shotgun.c
+					src/animate_shotgun.c									\
+					src/ui.c
 
 OBJ			=		$(SRC:.c=.o)
 
