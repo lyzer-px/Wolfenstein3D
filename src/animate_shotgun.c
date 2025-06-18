@@ -38,14 +38,16 @@ void shotgun_shoot(game_t *game)
 {
     double cam_x = 2 * ((double)SCREEN_WIDTH / 2) / (double)SCREEN_WIDTH - 1;
     double distance = cast_single_ray(game, cam_x, SCREEN_WIDTH / 2, false);
-    float scale = 1 / distance;
+    float scale = (1 / distance) * 2.5 > 1 ? 1 : (1 / distance) * 2.5;
 
     game->player->firing = true;
     game->player->shotgun->rect.left = 230;
     if (sfClock_getElapsedTime(game->player->clock).microseconds >= 200000) {
-        sfClock_restart(game->player->clock);
         shotgun_update_frame(game, scale);
+        sfClock_restart(game->player->clock);
     }
     game->player->shotgun->rect.left = 0;
+    sfSprite_setTextureRect(game->player->shotgun->sprite,
+        game->player->shotgun->rect);
     game->player->firing = false;
 }
