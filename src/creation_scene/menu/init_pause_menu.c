@@ -52,8 +52,8 @@ static void set_background(game_t *game, scene_t *scene)
         return;
     pos->x = 0;
     pos->y = 0;
-    scale.x = 0.65;
-    scale.y = 0.65;
+    scale.x = 1.3;
+    scale.y = 1.3;
     if (create_ressource_for_sprite(game, wallpaper_pause, "bg_pause")
         == EPI_SUCCESS) {
         ressource = find_a_ressouce_from_id(game->ressource, "bg_pause");

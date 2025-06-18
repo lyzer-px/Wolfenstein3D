@@ -94,8 +94,11 @@ static void draw_minimap(sfRenderWindow *window, player_t *player,
 
 static void handle_exceptions(game_t *game)
 {
-    if (sfKeyboard_isKeyPressed(sfKeyF))
+    if (sfKeyboard_isKeyPressed(sfKeyF) &&
+        sfClock_getElapsedTime(game->player->clock).microseconds >= 100000) {
         game->player->flashlight_on = !game->player->flashlight_on;
+        sfClock_restart(game->player->clock);
+    }
     if (game->player->flashlight_on == false)
         sfRenderWindow_drawSprite(game->window->window,
             game->player->bloom->sprite, NULL);
