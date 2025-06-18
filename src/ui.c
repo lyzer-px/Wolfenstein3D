@@ -40,3 +40,24 @@ void init_text(game_t *game, char *str)
         SCREEN_WIDTH / 2 - 55});
     sfText_setString(game->player_info, str);
 }
+
+void init_bloom(player_t *player)
+{
+    player->bloom = calloc(1, sizeof(asset_t));
+    if (player->bloom == nullptr)
+        return;
+    player->bloom->sprite = sfSprite_create();
+    if (player->bloom->sprite == nullptr)
+        return;
+    player->bloom->rect = (sfIntRect){0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
+    player->bloom->texture = sfTexture_createFromFile(
+        "assets/flash_effect.png", &player->bloom->rect);
+    player->bloom->pos = (sfVector2f){0, 0};
+    if (player->bloom->texture == nullptr)
+        return;
+    printf("bite\n");
+    sfSprite_setTexture(player->bloom->sprite,
+        player->bloom->texture, sfFalse);
+    sfSprite_setScale(player->bloom->sprite, (sfVector2f){4.777, 2.673});
+    player->flashlight_on = false;
+}

@@ -92,4 +92,6 @@ void shotgun_shoot(game_t *game);
 double cast_single_ray(game_t *g, double camera_x, size_t x, bool draw);
 
 void create_heart(game_t *game);
+
+void init_bloom(player_t *player);
 #endif

@@ -94,4 +94,6 @@ double cast_single_ray(game_t *g, double camera_x, size_t x, bool draw);
 void create_heart(game_t *game);
 
 void init_text(game_t *game, char *str);
+
+void init_bloom(player_t *player);
 #endif

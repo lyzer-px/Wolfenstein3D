@@ -82,7 +82,7 @@ static int create_shell(player_t *player)
     player->shell->sprite = sfSprite_create();
     player->shell->rect = (sfIntRect){0, 0, 360, 360};
     player->shell->texture = sfTexture_createFromFile
-    ("assets/shotgun_shell.png", &player->shell->rect);
+    ("assets/hud.png", &player->shell->rect);
     sfSprite_setScale(player->shell->sprite, (sfVector2f){0.2, 0.2});
     player->shell->pos = (sfVector2f){SCREEN_WIDTH / 2 + 175,
         SCREEN_HEIGHT / 2 + 360};
@@ -144,7 +144,7 @@ int init_player(player_t *player)
     player->hitbox = sfRectangleShape_create();
     if (player->hitbox == NULL)
         return -1;
-    player->bloom = sfCircleShape_create();
+    init_bloom(player);
     if (player->bloom == NULL)
         return -1;
     player->shotgun->sprite = sfSprite_create();

@@ -92,37 +92,21 @@ static void draw_minimap(sfRenderWindow *window, player_t *player,
     sfRenderWindow_drawRectangleShape(window, player->hitbox, NULL);
 }
 
-static void draw_bloom(sfRenderWindow *window, sfCircleShape *circle)
-{
-    float radius = 500;
-    sfColor sfLighted = {181, 144, 45, 75};
-
-    sfCircleShape_setFillColor(circle, sfLighted);
-    for (size_t i = 1; i != 3; i++) {
-        sfCircleShape_setRadius(circle, radius * i);
-        sfCircleShape_setOrigin(circle, (sfVector2f){(radius * i),
-            (radius * i)});
-        sfCircleShape_setPosition(circle, (sfVector2f){((float)DIM_X / 2),
-            ((float)DIM_Y / 2) + 25});
-        sfLighted.a -= 30;
-        sfRenderWindow_drawCircleShape(window, circle, NULL);
-    }
-}
-
 static void handle_exceptions(game_t *game)
 {
     if (sfKeyboard_isKeyPressed(sfKeyF))
         game->player->flashlight_on = !game->player->flashlight_on;
-    if (game->player->flashlight_on)
-        draw_bloom(game->window->window, game->player->bloom);
+    if (game->player->flashlight_on == false)
+        sfRenderWindow_drawSprite(game->window->window,
+            game->player->bloom->sprite, NULL);
 }
 
 static void end_tick(game_t *game, sfRenderWindow *window, char *infos)
 {
-    draw_minimap(window, game->player, game->mini_map);
     player_fwd(game->player, game);
-    sfRenderWindow_drawSprite(window, game->player->shotgun->sprite, NULL);
     handle_exceptions(game);
+    draw_minimap(window, game->player, game->mini_map);
+    sfRenderWindow_drawSprite(window, game->player->shotgun->sprite, NULL);
     sfRenderWindow_drawSprite(window, game->player->reticle->sprite, NULL);
     sfRenderWindow_drawSprite(window, game->player->hud->sprite, NULL);
     sprintf(infos, INFO_FORMAT, game->player->hp, game->player->ammo);

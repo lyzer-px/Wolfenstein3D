@@ -89,7 +89,7 @@ typedef struct player_s {
     float angle;
     sfRectangleShape *hitbox;
     sfRectangleShape *ray;
-    sfCircleShape *bloom;
+    asset_t *bloom;
     asset_t *hud;
     asset_t *shotgun;
     asset_t *impact;
