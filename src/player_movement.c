@@ -56,7 +56,7 @@ void player_fwd(player_t *player, game_t *game)
     if (sfMouse_isButtonPressed(sfMouseLeft) && player->ammo > 0 &&
         sfClock_getElapsedTime(player->clock).microseconds > 20000) {
         shotgun_shoot(game);
-        player->ammo--;
+        player->ammo -= !!sfClock_restart(player->clock).microseconds;
     }
     if (sfKeyboard_isKeyPressed(sfKeyZ) && DIR_COLLIDE(y, +, x, +)) {
         shotgun_move(game);
