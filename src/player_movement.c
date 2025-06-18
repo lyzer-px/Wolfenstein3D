@@ -53,7 +53,8 @@ void player_fwd(player_t *player, game_t *game)
 {
     sfVector2f dir = player->dir;
 
-    if (sfMouse_isButtonPressed(sfMouseLeft) && player->ammo > 0) {
+    if (sfMouse_isButtonPressed(sfMouseLeft) && player->ammo > 0 &&
+        sfClock_getElapsedTime(player->clock).microseconds > 20000) {
         shotgun_shoot(game);
         player->ammo--;
     }

@@ -41,7 +41,7 @@ static void init_impact(player_t *player)
     sfSprite_setOrigin(player->impact->sprite,
         (sfVector2f){707 / 2, 353 / 2});
     sfSprite_setPosition(player->impact->sprite,
-        (sfVector2f){DIM_X / 2, DIM_Y / 2 + 30});
+        (sfVector2f){DIM_X / 2 - 50, DIM_Y / 2});
 }
 
 static void init_hud(player_t *player)

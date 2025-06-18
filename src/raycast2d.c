@@ -125,6 +125,7 @@ void tick_game(game_t *game)
     double camera_x = 0;
     char *infos = calloc(60, sizeof(char));
 
+    sfClock_restart(game->player->clock);
     if (game->player == NULL || window == NULL)
         return;
     for (size_t x = 0; x < SCREEN_WIDTH; x++) {

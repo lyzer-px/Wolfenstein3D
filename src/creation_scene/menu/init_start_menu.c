@@ -74,9 +74,9 @@ static void set_fire_line(game_t *game, scene_t *scene)
     if (fire_pos == NULL)
         return;
     fire_pos->x = 0;
-    fire_pos->y = DIM_Y - (FIRE_LINE_SPRITE_HEIGHT * 2);
+    fire_pos->y = DIM_Y - (FIRE_LINE_SPRITE_HEIGHT * 3) + 500;
     fire_scale.x = 2.3;
-    fire_scale.y = 2;
+    fire_scale.y = 2.3;
         if (create_ressource_for_sprite(game, fire_line, "fire_line")
         == EPI_SUCCESS) {
         ressource = find_a_ressouce_from_id(game->ressource, "fire_line");
@@ -95,8 +95,8 @@ static void set_background(game_t *game, scene_t *scene)
         return;
     bg_pos->x = 0;
     bg_pos->y = 0;
-    bg_scale.x = 0.75;
-    bg_scale.y = 0.75;
+    bg_scale.x = 1.3;
+    bg_scale.y = 1.3;
         if (create_ressource_for_sprite(game, wallpaper_start, "bg_start")
         == EPI_SUCCESS) {
         ressource = find_a_ressouce_from_id(game->ressource, "bg_start");
