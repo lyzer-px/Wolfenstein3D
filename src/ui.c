@@ -55,7 +55,6 @@ void init_bloom(player_t *player)
     player->bloom->pos = (sfVector2f){0, 0};
     if (player->bloom->texture == nullptr)
         return;
-    printf("bite\n");
     sfSprite_setTexture(player->bloom->sprite,
         player->bloom->texture, sfFalse);
     sfSprite_setScale(player->bloom->sprite, (sfVector2f){4.777, 2.673});
