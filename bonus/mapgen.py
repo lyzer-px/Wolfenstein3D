@@ -30,8 +30,8 @@ class mapper:
                 map.write("\n")
 
 if __name__ == '__main__':
-    if len(sys.argv) != 4:
-        print(f"{sys.argv[0]}: bad arguments\nusage {sys.argv[0]} [map_height] [map_width] [map_density]")
+    if len(sys.argv) != 4 or int(sys.argv[1]) <= 0 or int(sys.argv[2]) <= 0 or int(sys.argv[3]) <= 0:
+        print(f"{sys.argv[0]}: bad arguments\nusage {sys.argv[0]} [+map_height] [+map_width] [+map_density]")
         sys.exit(84)
     new_file = mapper(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]))
     new_file.new_map()

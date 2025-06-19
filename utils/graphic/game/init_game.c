@@ -65,7 +65,8 @@ game_t *init_game(char **argv)
     game->id_music = NULL;
     if (game->window == NULL)
         return nfree(game);
-    map_load(argv[1], game);
+    if (map_load(argv[1], game) == -1)
+        return nullptr;
     init_for_raycast(game);
     init_settings(game);
     if (game->tab_scene == NULL) {

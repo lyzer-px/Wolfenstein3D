@@ -19,6 +19,8 @@ int wolf3d(char **argv)
     game_t *game = init_game(argv);
     int status = EPI_SUCCESS;
 
+    if (game == nullptr)
+        return 84;
     load_config_music(game);
     load_config_file(game);
     status = init_scene(game);

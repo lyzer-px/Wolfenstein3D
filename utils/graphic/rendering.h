@@ -96,5 +96,5 @@ void create_heart(game_t *game);
 
 void init_bloom(player_t *player);
 
-void map_load(char const *filepath, game_t *game);
+int map_load(char const *filepath, game_t *game);
 #endif

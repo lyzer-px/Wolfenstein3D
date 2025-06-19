@@ -91,5 +91,5 @@ void shotgun_shoot(game_t *game);
 
 double cast_single_ray(game_t *g, double camera_x, size_t x, bool draw);
 
-void map_load(char const *filepath, game_t *game);
+int map_load(char const *filepath, game_t *game);
 #endif

@@ -98,5 +98,5 @@ void init_text(game_t *game, char *str);
 
 void init_bloom(player_t *player);
 
-void map_load(char const *filepath, game_t *game);
+int map_load(char const *filepath, game_t *game);
 #endif
