@@ -15,13 +15,22 @@ static void fill_int_map(game_t *game, char *buf, FILE *fp)
 {
     size_t k = 0;
 
-    for (size_t i = 0; i < game->map->height; i++) {
-        game->map->map[i] = calloc(game->map->width, sizeof(int));
-        for (size_t j = 0; j < game->map->width; j++) {
-            game->map->map[i][j] = buf[k] == '1' ? !!printf("%li\n", k) : 0;
+    for (size_t i = 0; i <= game->map->height; i++) {
+        game->map->map[i] = calloc(game->map->width + 1, sizeof(int));
+        for (size_t j = 0; j <= game->map->width; j++) {
+            game->map->map[i][j] = (buf[k] == '1' ? 1 : 0);
             k++;
         }
     }
+    for (size_t i = 0; i < game->map->height; i++) {
+        for (size_t j = 0; j < game->map->width; j++) {
+            printf("%d", game->map->map[i][j]);
+        }
+        putchar('\n');
+    }
+    //
+    //exit(0);
+    //
     free(buf);
     fclose(fp);
 }
