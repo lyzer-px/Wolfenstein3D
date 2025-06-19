@@ -16,8 +16,6 @@ int main(int argc, char **argv, char **env)
         print_help();
         return EPI_SUCCESS;
     }
-    if (argc != 1)
-        return EPI_FAIL;
     if (check_env(env) == EPI_FAIL)
         return EPI_FAIL;
     return wolf3d(argv);

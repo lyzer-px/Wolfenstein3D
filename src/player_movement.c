@@ -63,7 +63,7 @@ void player_fwd(player_t *player, game_t *game)
         player->pos.x += (dir.x * PLAYER_SPEED);
         player->pos.y += (dir.y * PLAYER_SPEED);
     }
-    if (sfKeyboard_isKeyPressed(sfKeyS) && DIR_COLLIDE(y, -, x, +)) {
+    if (sfKeyboard_isKeyPressed(sfKeyS) && DIR_COLLIDE(y, -, x, -)) {
         shotgun_move(game);
         player->pos.x -= dir.x * PLAYER_SPEED;
         player->pos.y -= dir.y * PLAYER_SPEED;
