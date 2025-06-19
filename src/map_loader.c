@@ -15,13 +15,12 @@ static void fill_int_map(game_t *game, char *buf, FILE *fp)
 {
     size_t k = 0;
 
-    game->map->map = calloc(game->map->height, sizeof(int));
-    if (game->map->map == nullptr)
-        return;
     for (size_t i = 0; i < game->map->height; i++) {
-        for (size_t j = 0; i < game->map->width; j++)
-            game->map->map[i][j] = buf[k] - '0';
-        k++;
+        game->map->map[i] = calloc(game->map->width, sizeof(int));
+        for (size_t j = 0; j < game->map->width; j++) {
+            game->map->map[i][j] = buf[k] == '1' ? !!printf("%li\n", k) : 0;
+            k++;
+        }
     }
     free(buf);
     fclose(fp);
@@ -50,7 +49,7 @@ void map_load(char const *filepath, game_t *game)
     fseek(fp, stat_buffer.st_size - map_size, SEEK_SET);
     game->map->map = calloc(game->map->height, sizeof(int *));
     buf = calloc(map_size, sizeof(char));
-    if (buf == nullptr || fread(buf, map_size, map_size, fp) != map_size
+    if (buf == nullptr || fread(buf, map_size, map_size, fp) <= 0
         || game->map->map == nullptr)
         return;
     fill_int_map(game, buf, fp);
