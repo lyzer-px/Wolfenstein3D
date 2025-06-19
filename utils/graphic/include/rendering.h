@@ -33,8 +33,9 @@
     #define  ROTATION_SPEED 0.05
 
     #define ON_INT_MAP(a) (((int)(a) / TILE_SIZE))
+    #define MAP game->map->map
     #define MAP_DIR(b, s) (ON_INT_MAP((player->pos.b s dir.b * PLAYER_SPEED)))
-    #define DIR_COLLIDE(c, d, e, f) (!map[MAP_DIR(c, d)][MAP_DIR(e, f)])
+    #define DIR_COLLIDE(c, d, e, f) (!MAP[MAP_DIR(c, d)][MAP_DIR(e, f)])
 
     #define SCREEN_WIDTH 1920
     #define SCREEN_HEIGHT 1080
@@ -42,7 +43,7 @@
 
     #define PLAYER (g->player)
 
-static const int map[MAP_HEIGHT][MAP_WIDTH] = {
+static const int base_map[MAP_HEIGHT][MAP_WIDTH] = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -69,7 +70,7 @@ typedef struct tile_s {
 
 sfRectangleShape *create_bg(sfVector2f size);
 
-bool is_wall(int x, int y);
+bool is_wall(int x, int y, game_t *game);
 
 int launch_game(void);
 void player_fwd(player_t *player, game_t *game);
@@ -79,10 +80,10 @@ void player_repel(player_t *player, game_t *game);
 void init_ray(player_t *player);
 int init_player(player_t *player);
 
-void init_tile(sfRectangleShape *tile, size_t i, size_t j);
+void init_tile(sfRectangleShape *tile, size_t i, size_t j, game_t *game);
 
 void init_hitbox(player_t *player);
-sfRectangleShape **init_map(void);
+sfRectangleShape **init_map(game_t *game);
 
 void tick_game(game_t *game);
 
@@ -91,4 +92,6 @@ void shotgun_shoot(game_t *game);
 
 double cast_single_ray(game_t *g, double camera_x, size_t x, bool draw);
 
+
+void map_load(char const *filepath, game_t *game);
 #endif

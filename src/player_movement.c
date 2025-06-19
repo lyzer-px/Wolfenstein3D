@@ -10,11 +10,11 @@
 #include <SFML/Graphics.h>
 #include "rendering.h"
 
-bool is_wall(int x, int y)
+bool is_wall(int x, int y, game_t *game)
 {
     if ((x < 0 || y < 0) || (x > MAP_WIDTH || y > MAP_HEIGHT))
         return sfFalse;
-    return map[y][x];
+    return game->map->map[y][x];
 }
 
 static void rotate_vect(sfVector2f *v, float old_x, float angle)

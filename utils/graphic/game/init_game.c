@@ -43,7 +43,7 @@ static void init_settings(game_t *game)
 
 static void init_for_raycast(game_t *game)
 {
-    game->mini_map = init_map();
+    game->mini_map = init_map(game);
     if (game->mini_map == NULL || game->mini_map[0] == NULL)
         return;
     game->player = calloc(1, sizeof(player_t));
@@ -53,7 +53,7 @@ static void init_for_raycast(game_t *game)
     return;
 }
 
-game_t *init_game(void)
+game_t *init_game(char **argv)
 {
     game_t *game = malloc(sizeof(game_t));
 
@@ -67,6 +67,7 @@ game_t *init_game(void)
         return nfree(game);
     init_for_raycast(game);
     init_settings(game);
+    map_load(argv[1], game);
     if (game->tab_scene == NULL) {
         destroy_window(game->window);
         return nfree(game);

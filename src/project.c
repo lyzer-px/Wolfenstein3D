@@ -14,9 +14,9 @@
 #include "project_funct.h"
 #include "libgraphic.h"
 
-int wolf3d(void)
+int wolf3d(char **argv)
 {
-    game_t *game = init_game();
+    game_t *game = init_game(argv);
     int status = EPI_SUCCESS;
 
     load_config_music(game);

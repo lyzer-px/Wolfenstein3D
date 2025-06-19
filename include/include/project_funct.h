@@ -17,7 +17,7 @@ void handle_event(game_t *g);
 
 int loop(game_t *game);
 
-int wolf3d(void);
+int wolf3d(char *argv);
 
 void print_help(void);
 

@@ -41,7 +41,7 @@ static double dda_ray_cast(vect_t v, game_t *game, size_t x, bool draw)
     double p_dist = 0;
     double wl_x = 0;
 
-    while (map[v.map_pos->y][v.map_pos->x] != 1) {
+    while (game->map->map[v.map_pos->y][v.map_pos->x] != 1) {
         if (v.side_dist->x < v.side_dist->y) {
             v.side_dist->x += v.delta_dist->x;
             v.map_pos->x += v.step->x;

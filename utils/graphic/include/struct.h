@@ -80,6 +80,12 @@ typedef struct asset_s {
     sfVector2f pos;
 } asset_t;
 
+typedef struct map_s {
+    int **map;
+    size_t width;
+    size_t height;
+} map_t;
+
 typedef struct player_s {
     unsigned short hp;
     unsigned short ammo;
@@ -118,6 +124,7 @@ typedef struct settings_s {
 struct game_s {
     player_t *player;
     sfText *player_info;
+    map_t *map;
     sfRectangleShape **mini_map;
     sfRectangleShape *rect;
     int nb_scene;

@@ -160,9 +160,9 @@ int init_player(player_t *player)
     return set_propreties(player);
 }
 
-void init_tile(sfRectangleShape *tile, size_t i, size_t j)
+void init_tile(sfRectangleShape *tile, size_t i, size_t j, game_t *game)
 {
-    sfRectangleShape_setFillColor(tile, map[i][j] ? sfWhite : sfBlack);
+    sfRectangleShape_setFillColor(tile, MAP[i][j] ? sfWhite : sfBlack);
     sfRectangleShape_setOutlineColor(tile, (sfColor){125, 125, 125, 255});
     sfRectangleShape_setOutlineThickness(tile, 1);
     sfRectangleShape_setSize(tile, (sfVector2f){MAP_TILE_SIZE, MAP_TILE_SIZE});
@@ -170,7 +170,7 @@ void init_tile(sfRectangleShape *tile, size_t i, size_t j)
         (sfVector2f){j * MAP_TILE_SIZE, i * MAP_TILE_SIZE});
 }
 
-sfRectangleShape **init_map(void)
+sfRectangleShape **init_map(game_t *game)
 {
     sfRectangleShape **mini_map = malloc(sizeof(sfRectangleShape *) *
         ((MAP_HEIGHT + 1) * MAP_WIDTH) + 1);
@@ -181,7 +181,7 @@ sfRectangleShape **init_map(void)
     for (size_t i = 0; i < MAP_HEIGHT; i++) {
         for (size_t j = 0; j < MAP_WIDTH; j++) {
             mini_map[k] = sfRectangleShape_create();
-            init_tile(mini_map[k], i, j);
+            init_tile(mini_map[k], i, j, game);
             k++;
         }
     }
