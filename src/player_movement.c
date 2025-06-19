@@ -12,7 +12,7 @@
 
 bool is_wall(int x, int y, game_t *game)
 {
-    if ((x < 0 || y < 0) || (x > game->map->width || y > game->map->height))
+    if ((x < 0 || y < 0) || ((size_t)x > game->map->width || (size_t)y > game->map->height))
         return sfFalse;
     return game->map->map[y][x];
 }
