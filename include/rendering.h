@@ -44,6 +44,10 @@
     #define PLAYER (g->player)
     #define BASE_MAP "assets/maps/base_map.txt"
 
+    #define D_SIDE(a) &v.side_dist->a, v.delta_dist->a
+    #define M_STEP(a) &v.map_pos->a, v.step->a
+    #define POS_ARGS(a) D_SIDE(a), M_STEP(a)
+
 typedef struct tile_s {
     sfRectangleShape *rect;
     bool wall;

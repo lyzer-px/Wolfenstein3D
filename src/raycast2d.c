@@ -50,10 +50,10 @@ static hit_info_t dda_ray_cast(vect_t v, game_t *game, size_t x, bool draw)
 
     while (!game->map->map[v.map_pos->y][v.map_pos->x]) {
         if (v.side_dist->x < v.side_dist->y) {
-            increment_pos(&v.side_dist->x, v.delta_dist->x, &v.map_pos->x, v.step->x);
+            increment_pos(POS_ARGS(x));
             side = 0;
         } else {
-            increment_pos(&v.side_dist->y, v.delta_dist->y, &v.map_pos->y, v.step->y);
+            increment_pos(POS_ARGS(y));
             side = 1;
         }
     }
@@ -61,7 +61,8 @@ static hit_info_t dda_ray_cast(vect_t v, game_t *game, size_t x, bool draw)
         v.side_dist->y - v.delta_dist->y;
     wl_x = side == 0 ? game->player->pos.y + p_dist * v.ray_dir->y :
         game->player->pos.x + p_dist * v.ray_dir->x;
-    return (hit_info_t){v.map_pos->x, v.map_pos->y, draw_stripe(game, p_dist, (coords_t){wl_x - floor(wl_x), x}, draw)};
+    return (hit_info_t){v.map_pos->x, v.map_pos->y,
+        draw_stripe(game, p_dist, (coords_t){wl_x - floor(wl_x), x}, draw)};
 }
 
 hit_info_t cast_single_ray(game_t *g, double camera_x, size_t x, bool draw)
