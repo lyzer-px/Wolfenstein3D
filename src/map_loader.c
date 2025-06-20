@@ -18,7 +18,7 @@ static void fill_int_map(game_t *game, char *buf, FILE *fp)
     for (size_t i = 0; i <= game->map->height; i++) {
         game->map->map[i] = calloc(game->map->width + 1, sizeof(int));
         for (size_t j = 0; j <= game->map->width; j++) {
-            game->map->map[i][j] = (buf[k] == '1' ? 1 : 0);
+            game->map->map[i][j] = (buf[k] - '0');
             k++;
         }
     }
@@ -43,20 +43,14 @@ static int set_map(game_t *game, FILE *fp, struct stat *stat_buffer, char *buf)
 
 int map_load(char const *filepath, game_t *game)
 {
-    FILE *fp = fopen(filepath, "r");
+    FILE *fp = nullptr;
     struct stat stat_buffer = {};
     char *buf = nullptr;
+    char const *abs_path = filepath == nullptr ? BASE_MAP : filepath;
 
     game->map = calloc(1, sizeof(map_t));
-    if (filepath == nullptr) {
-        game->map->map = calloc(MAP_HEIGHT, sizeof(int *));
-        for (int i = 0; i < MAP_HEIGHT; i++)
-            game->map->map[i] = (int *)&base_map[i];
-        game->map->height = MAP_HEIGHT;
-        game->map->width = MAP_WIDTH;
-        return 0;
-    }
-    if (fp == nullptr || stat(filepath, &stat_buffer)
+    fp = fopen(abs_path, "r");
+    if (fp == nullptr || stat(abs_path, &stat_buffer)
         || stat_buffer.st_size < 16)
         return -1;
     fscanf(fp, "%lu;%lu\n", &game->map->height, &game->map->width);

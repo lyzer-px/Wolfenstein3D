@@ -37,11 +37,14 @@ static void shotgun_update_frame(game_t *game, double scale)
 void shotgun_shoot(game_t *game)
 {
     double cam_x = 2 * ((double)SCREEN_WIDTH / 2) / (double)SCREEN_WIDTH - 1;
-    double distance = cast_single_ray(game, cam_x, SCREEN_WIDTH / 2, false);
+    hit_info_t hit = cast_single_ray(game, cam_x, SCREEN_WIDTH / 2, false);
+    double distance = hit.p_dist;
     float scale = (1 / distance) * 2.5 > 1 ? 1 : (1 / distance) * 2.5;
 
     game->player->firing = true;
     game->player->shotgun->rect.left = 230;
+    game->map->map[hit.y][hit.x] = game->map->map[hit.y][hit.x] == 2 ?
+        0 : game->map->map[hit.y][hit.x];
     if (sfClock_getElapsedTime(game->player->clock).microseconds >= 200000) {
         shotgun_update_frame(game, scale);
         sfClock_restart(game->player->clock);

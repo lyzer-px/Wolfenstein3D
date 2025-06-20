@@ -35,20 +35,25 @@ static double draw_stripe(game_t *game,
     return perp_dist;
 }
 
-static double dda_ray_cast(vect_t v, game_t *game, size_t x, bool draw)
+static void increment_pos(float *side_dist, float delta_dist,
+    int *map_pos, int step)
+{
+    *side_dist += delta_dist;
+    *map_pos += step;
+}
+
+static hit_info_t dda_ray_cast(vect_t v, game_t *game, size_t x, bool draw)
 {
     int side = 0;
     double p_dist = 0;
     double wl_x = 0;
 
-    while (game->map->map[v.map_pos->y][v.map_pos->x] != 1) {
+    while (!game->map->map[v.map_pos->y][v.map_pos->x]) {
         if (v.side_dist->x < v.side_dist->y) {
-            v.side_dist->x += v.delta_dist->x;
-            v.map_pos->x += v.step->x;
+            increment_pos(POS_ARGS(x));
             side = 0;
         } else {
-            v.side_dist->y += v.delta_dist->y;
-            v.map_pos->y += v.step->y;
+            increment_pos(POS_ARGS(y));
             side = 1;
         }
     }
@@ -56,10 +61,11 @@ static double dda_ray_cast(vect_t v, game_t *game, size_t x, bool draw)
         v.side_dist->y - v.delta_dist->y;
     wl_x = side == 0 ? game->player->pos.y + p_dist * v.ray_dir->y :
         game->player->pos.x + p_dist * v.ray_dir->x;
-    return draw_stripe(game, p_dist, (coords_t){wl_x - floor(wl_x), x}, draw);
+    return (hit_info_t){v.map_pos->x, v.map_pos->y,
+        draw_stripe(game, p_dist, (coords_t){wl_x - floor(wl_x), x}, draw)};
 }
 
-double cast_single_ray(game_t *g, double camera_x, size_t x, bool draw)
+hit_info_t cast_single_ray(game_t *g, double camera_x, size_t x, bool draw)
 {
     sfVector2f ray_dir = {.x = ray_dir.x = PLAYER->dir.x +
         PLAYER->plane.x * camera_x,

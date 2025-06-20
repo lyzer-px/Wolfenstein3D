@@ -162,8 +162,20 @@ int init_player(player_t *player)
 
 void init_tile(sfRectangleShape *tile, size_t i, size_t j, game_t *game)
 {
-    sfRectangleShape_setFillColor(tile,
-        game->map->map[i][j] ? sfWhite : sfBlack);
+    sfColor tile_color = {};
+
+    switch (game->map->map[i][j]) {
+        case 1:
+            tile_color = sfWhite;
+            break;
+        case 2:
+            tile_color = sfGreen;
+            break;
+        case 0:
+            tile_color = sfBlack;
+            break;
+    }
+    sfRectangleShape_setFillColor(tile, tile_color);
     sfRectangleShape_setOutlineColor(tile, (sfColor){125, 125, 125, 255});
     sfRectangleShape_setOutlineThickness(tile, 1);
     sfRectangleShape_setSize(tile, (sfVector2f){MAP_TILE_SIZE, MAP_TILE_SIZE});
