@@ -137,4 +137,10 @@ struct game_s {
     struct ressource_s *ressource;
 };
 
+typedef struct hit_info_s {
+    int x;
+    int y;
+    double p_dist;
+} hit_info_t;
+
 #endif /* STRUCT_H */
