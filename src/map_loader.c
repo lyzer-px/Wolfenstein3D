@@ -38,6 +38,7 @@ static int set_map(game_t *game, FILE *fp, struct stat *stat_buffer, char *buf)
         || game->map->map == nullptr)
         return -1;
     fill_int_map(game, buf, fp);
+    return EXIT_SUCCESS;
 }
 
 int map_load(char const *filepath, game_t *game)
@@ -45,7 +46,6 @@ int map_load(char const *filepath, game_t *game)
     FILE *fp = fopen(filepath, "r");
     struct stat stat_buffer = {};
     char *buf = nullptr;
-    size_t map_size = 0;
 
     game->map = calloc(1, sizeof(map_t));
     if (filepath == nullptr) {
