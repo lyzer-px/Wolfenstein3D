@@ -77,7 +77,7 @@ typedef struct sprite_rect_s {
     int max_value;
 }sprite_rect_t;
 
-game_t *init_game(void);
+game_t *init_game(char **argv);
 
 void clean_game(game_t *game);
 

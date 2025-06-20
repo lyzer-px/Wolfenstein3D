@@ -115,6 +115,12 @@ typedef struct settings_s {
     short fxaudio_nb;
 } settings_t;
 
+typedef struct map_s {
+    int **map;
+    size_t width;
+    size_t height;
+} map_t;
+
 struct game_s {
     player_t *player;
     sfText *player_info;

@@ -10,11 +10,12 @@
 #include <SFML/Graphics.h>
 #include "rendering.h"
 
-bool is_wall(int x, int y)
+bool is_wall(int x, int y, game_t *game)
 {
-    if ((x < 0 || y < 0) || (x > MAP_WIDTH || y > MAP_HEIGHT))
+    if ((x < 0 || y < 0) ||
+        ((size_t)x > game->map->width || (size_t)y > game->map->height))
         return sfFalse;
-    return map[y][x];
+    return game->map->map[y][x];
 }
 
 static void rotate_vect(sfVector2f *v, float old_x, float angle)
@@ -63,7 +64,7 @@ void player_fwd(player_t *player, game_t *game)
         player->pos.x += (dir.x * PLAYER_SPEED);
         player->pos.y += (dir.y * PLAYER_SPEED);
     }
-    if (sfKeyboard_isKeyPressed(sfKeyS) && DIR_COLLIDE(y, -, x, +)) {
+    if (sfKeyboard_isKeyPressed(sfKeyS) && DIR_COLLIDE(y, -, x, -)) {
         shotgun_move(game);
         player->pos.x -= dir.x * PLAYER_SPEED;
         player->pos.y -= dir.y * PLAYER_SPEED;

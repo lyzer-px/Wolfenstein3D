@@ -40,7 +40,8 @@ SRC 		= 		main.c													\
 					src/save/name_check.c									\
 					src/save/load_save.c									\
 					src/animate_shotgun.c									\
-					src/ui.c
+					src/ui.c												\
+					src/map_loader.c
 
 OBJ			=		$(SRC:.c=.o)
 
