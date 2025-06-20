@@ -26,6 +26,20 @@ static void fill_int_map(game_t *game, char *buf, FILE *fp)
     fclose(fp);
 }
 
+static int set_map(game_t *game, FILE *fp, struct stat *stat_buffer, char *buf)
+{
+    size_t map_size = game->map->height * (game->map->width + 1);
+
+    fseek(fp, stat_buffer->st_size - map_size, SEEK_SET);
+    game->map->map = calloc(game->map->height, sizeof(int *));
+    buf = calloc(map_size, sizeof(char));
+    if (game == nullptr || game->map->height & 1 || game->map->width & 1
+        || fread(buf, map_size, map_size, fp) <= 0
+        || game->map->map == nullptr)
+        return -1;
+    fill_int_map(game, buf, fp);
+}
+
 int map_load(char const *filepath, game_t *game)
 {
     FILE *fp = fopen(filepath, "r");
@@ -46,13 +60,5 @@ int map_load(char const *filepath, game_t *game)
         || stat_buffer.st_size < 16)
         return -1;
     fscanf(fp, "%lu;%lu\n", &game->map->height, &game->map->width);
-    map_size = game->map->height * (game->map->width + 1);
-    fseek(fp, stat_buffer.st_size - map_size, SEEK_SET);
-    game->map->map = calloc(game->map->height, sizeof(int *));
-    buf = calloc(map_size, sizeof(char));
-    if (game == nullptr || game->map->height & 1 || game->map->width
-        || fread(buf, map_size, map_size, fp) <= 0
-        || game->map->map == nullptr)
-        return -1;
-    fill_int_map(game, buf, fp);
+    return set_map(game, fp, &stat_buffer, buf);
 }
