@@ -43,7 +43,8 @@ void shotgun_shoot(game_t *game)
 
     game->player->firing = true;
     game->player->shotgun->rect.left = 230;
-    game->map->map[hit.y][hit.x] = game->map->map[hit.y][hit.x] == 2 ? 0 : game->map->map[hit.y][hit.x];
+    game->map->map[hit.y][hit.x] = game->map->map[hit.y][hit.x] == 2 ?
+        0 : game->map->map[hit.y][hit.x];
     if (sfClock_getElapsedTime(game->player->clock).microseconds >= 200000) {
         shotgun_update_frame(game, scale);
         sfClock_restart(game->player->clock);

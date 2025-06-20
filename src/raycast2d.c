@@ -35,6 +35,13 @@ static double draw_stripe(game_t *game,
     return perp_dist;
 }
 
+static void increment_pos(float *side_dist, float delta_dist,
+    int *map_pos, int step)
+{
+    *side_dist += delta_dist;
+    *map_pos += step;
+}
+
 static hit_info_t dda_ray_cast(vect_t v, game_t *game, size_t x, bool draw)
 {
     int side = 0;
@@ -43,12 +50,10 @@ static hit_info_t dda_ray_cast(vect_t v, game_t *game, size_t x, bool draw)
 
     while (!game->map->map[v.map_pos->y][v.map_pos->x]) {
         if (v.side_dist->x < v.side_dist->y) {
-            v.side_dist->x += v.delta_dist->x;
-            v.map_pos->x += v.step->x;
+            increment_pos(&v.side_dist->x, v.delta_dist->x, &v.map_pos->x, v.step->x);
             side = 0;
         } else {
-            v.side_dist->y += v.delta_dist->y;
-            v.map_pos->y += v.step->y;
+            increment_pos(&v.side_dist->y, v.delta_dist->y, &v.map_pos->y, v.step->y);
             side = 1;
         }
     }
