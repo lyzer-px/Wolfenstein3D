@@ -50,7 +50,7 @@ int map_load(char const *filepath, game_t *game)
 
     game->map = calloc(1, sizeof(map_t));
     fp = fopen(abs_path, "r");
-    if (fp == nullptr || stat(filepath, &stat_buffer)
+    if (fp == nullptr || stat(abs_path, &stat_buffer)
         || stat_buffer.st_size < 16)
         return -1;
     fscanf(fp, "%lu;%lu\n", &game->map->height, &game->map->width);
